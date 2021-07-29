@@ -18,7 +18,7 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun onLocationClick() {
-        TODO()
+        router.navigateTo(Screens.getLocationSelectionScreen())
     }
 
     fun onDateClick() {

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.calendar.CalendarViewModel" />
+            type="com.example.lifediary.ui.location.selection.LocationSelectionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             app:layout_constraintVertical_chainStyle="packed"
             android:textAlignment="center"
             android:textSize="32sp"
-            android:text="Calendar Screen" />
+            android:text="Location Selection Screen" />
 
         <TextView
             android:id="@+id/subTitle"
@@ -47,6 +47,5 @@
             app:layout_constraintEnd_toEndOf="@id/subTitle"
             android:layout_marginTop="16dp"
             android:src="@drawable/icon_hourglass_black_25" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

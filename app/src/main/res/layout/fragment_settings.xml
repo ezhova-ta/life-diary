@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
+            android:textAlignment="center"
             android:textSize="32sp"
             android:text="Settings Screen" />
 
@@ -32,6 +33,7 @@
             app:layout_constraintBottom_toTopOf="@id/hourglassIcon"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintEnd_toEndOf="@id/title"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:text="Not yet implemented" />
 
