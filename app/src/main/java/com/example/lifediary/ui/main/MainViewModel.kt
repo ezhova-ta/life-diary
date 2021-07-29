@@ -13,7 +13,15 @@ class MainViewModel : BaseViewModel() {
         bindAppScope()
     }
 
-    fun onCalendarClick() {
+    fun onSettingsClick() {
+
+    }
+
+    fun onLocationClick() {
+
+    }
+
+    fun onDateClick() {
         router.navigateTo(Screens.getCalendarScreen())
     }
 

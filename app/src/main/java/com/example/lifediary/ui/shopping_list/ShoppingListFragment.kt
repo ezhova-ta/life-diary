@@ -64,7 +64,7 @@ class ShoppingListFragment : BaseFragment() {
 
     private fun AlertDialog.setButtonsStyle() {
         getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(
-            resources.getColor(R.color.color_link, requireContext().theme)
+            resources.getColor(R.color.app_blue, requireContext().theme)
         )
 
         getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
