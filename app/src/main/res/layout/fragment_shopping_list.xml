@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.lifediary.ui.shopping_list.ShoppingListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/ScreenContainer">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Text.ScreenTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/clearAllButton"
+            app:layout_constraintBottom_toBottomOf="@id/clearAllButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/clearAllButton"
+            android:layout_marginEnd="16dp"
+            android:text="@string/shopping_list" />
+
+        <ImageView
+            android:id="@+id/clearAllButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.onClearShoppingListClick()}"
+            android:src="@drawable/icon_delete_sweep_color_link" />
+
+        <EditText
+            android:id="@+id/addShoppingListItemInput"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/addShoppingListItemButton"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:inputType="text"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:maxLength="70"
+            android:text="@={viewModel.newShoppingListItemText}"
+            android:hint="@string/what_do_you_want_to_buy" />
+
+        <ImageView
+            android:id="@+id/addShoppingListItemButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="@id/addShoppingListItemInput"
+            app:layout_constraintBottom_toBottomOf="@id/addShoppingListItemInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/icon_plus_green"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.onAddShoppingListItemClick()}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shoppingListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/addShoppingListItemInput"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/shopping_list_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

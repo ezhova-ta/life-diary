@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Text">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.ScreenTitle">
+        <item name="android:ellipsize">marquee</item>
+        <item name="singleLine">true</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="ScreenContainer">
+        <item name="android:padding">16dp</item>
+    </style>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.lifediary.ui.main.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/ScreenContainer">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dateContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/calendarView"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:padding="8dp"
+            android:background="@drawable/background_view_substrate">
+            <TextClock
+                android:id="@+id/dayOfMonthView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="2dp"
+                android:format12Hour="dd"
+                android:format24Hour="dd"
+                android:textSize="48sp"
+                android:includeFontPadding="false"
+                android:background="@drawable/background_view_substrate"
+                tools:text="20" />
+
+            <TextClock
+                android:id="@+id/monthView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dayOfMonthView"
+                app:layout_constraintStart_toStartOf="@id/dayOfMonthView"
+                app:layout_constraintEnd_toEndOf="@id/dayOfMonthView"
+                android:format12Hour="MMMM"
+                android:format24Hour="MMMM"
+                android:textSize="20sp"
+                android:includeFontPadding="false"
+                tools:text="July" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/calendarView"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:layout_constraintTop_toTopOf="@id/dateContainer"
+            app:layout_constraintBottom_toBottomOf="@id/dateContainer"
+            app:layout_constraintStart_toEndOf="@id/dateContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/icon_calendar_logo"
+            android:onClick="@{() -> viewModel.onCalendarClick()}" />
+
+        <TextView
+            android:id="@+id/shoppingListsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/dateContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="40dp"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:background="@drawable/background_sticker"
+            android:text="@string/shopping_list"
+            android:onClick="@{() -> viewModel.onShoppingListClick()}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

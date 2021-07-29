@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shopping_list">Shopping list</string>
+    <string name="clear_all">Clear all</string>
+    <string name="clear_shopping_list">Clear shopping list</string>
+    <string name="clear_shopping_list_confirmation">Are you sure you want to clear your shopping list?</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
+    <string name="what_do_you_want_to_buy">What to buy?</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shopping_list">Список покупок</string>
+    <string name="clear_all">Очистить всё</string>
+    <string name="clear_shopping_list">Очистить списко покупок</string>
+    <string name="clear_shopping_list_confirmation">Вы уверены, что хотите очистить список покупок?</string>
+    <string name="cancel">Закрыть</string>
+    <string name="clear">Очистить</string>
+    <string name="what_do_you_want_to_buy">Что купить?</string>
+</resources>
