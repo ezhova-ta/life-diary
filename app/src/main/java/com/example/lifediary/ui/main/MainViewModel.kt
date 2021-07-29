@@ -14,11 +14,11 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun onSettingsClick() {
-
+        router.navigateTo(Screens.getSettingsScreen())
     }
 
     fun onLocationClick() {
-
+        TODO()
     }
 
     fun onDateClick() {
