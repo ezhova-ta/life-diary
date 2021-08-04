@@ -6,12 +6,14 @@ import com.example.lifediary.ui.BaseViewModel
 
 class LocationSelectionViewModel : BaseViewModel() {
     val cityName = MutableLiveData("")
+    val searchCityInputNeedsFocus = MutableLiveData(true)
 
     init {
         bindAppScope()
     }
 
     fun onSearchCityClick() {
+        searchCityInputNeedsFocus.value = false
         val enteredCityName = cityName.value ?: return
         Log.d("LocationSelectionDebugging", enteredCityName)
         // TODO Search cities by entered name
