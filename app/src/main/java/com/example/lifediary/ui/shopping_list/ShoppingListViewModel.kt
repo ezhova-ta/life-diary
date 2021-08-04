@@ -15,7 +15,7 @@ class ShoppingListViewModel: BaseViewModel() {
     lateinit var repository: ShoppingListRepository
 
     var shoppingList: LiveData<List<ShoppingListItem>>
-    val showClearShoppingListConfirmationDialog = MutableLiveData<Boolean>()
+    val showClearShoppingListConfirmationDialog = MutableLiveData(false)
     val newShoppingListItemText = MutableLiveData("")
 
     init {
