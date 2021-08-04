@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.lifediary.utils.InsetsStyle
-import com.example.lifediary.utils.InsetsUtil.setInsetsStyle
+import com.example.lifediary.utils.setInsetsStyle
 
 open class BaseFragment : Fragment() {
     // TODO Nullable return type?
