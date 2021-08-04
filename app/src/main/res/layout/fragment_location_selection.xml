@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
@@ -13,39 +14,52 @@
         style="@style/ScreenContainer">
 
         <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:id="@+id/searchCityInputHint"
+            style="@style/Text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/subTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:textAlignment="center"
-            android:textSize="32sp"
-            android:text="Location Selection Screen" />
+            android:textSize="14sp"
+            android:text="@string/enter_ful_name_your_city" />
 
-        <TextView
-            android:id="@+id/subTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintBottom_toTopOf="@id/hourglassIcon"
-            app:layout_constraintStart_toStartOf="@id/title"
-            app:layout_constraintEnd_toEndOf="@id/title"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:text="Not yet implemented" />
+        <EditText
+            android:id="@+id/searchCityInput"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toBottomOf="@id/searchCityInputHint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/searchCityButton"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:inputType="text"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:maxLength="70"
+            android:text="@={viewModel.cityName}"
+            android:hint="@string/for_example_st_petersburg" />
 
         <ImageView
-            android:id="@+id/hourglassIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintTop_toBottomOf="@id/subTitle"
+            android:id="@+id/searchCityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="@id/searchCityInput"
+            app:layout_constraintBottom_toBottomOf="@id/searchCityInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/icon_check_green"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.onSearchCityClick()}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cityListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/searchCityInput"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/subTitle"
-            app:layout_constraintEnd_toEndOf="@id/subTitle"
             android:layout_marginTop="16dp"
-            android:src="@drawable/icon_hourglass_black_25" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/city_list_item" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

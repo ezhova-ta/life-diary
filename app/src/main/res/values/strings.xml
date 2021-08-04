@@ -7,4 +7,6 @@
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="what_do_you_want_to_buy">What to buy?</string>
+    <string name="enter_ful_name_your_city">Enter the full name of your city:</string>
+    <string name="for_example_st_petersburg">For example, St. Petersburg</string>
 </resources>
