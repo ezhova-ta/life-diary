@@ -14,8 +14,13 @@ class LocationSelectionViewModel : BaseViewModel() {
 
     fun onSearchCityClick() {
         searchCityInputNeedsFocus.value = false
-        val enteredCityName = cityName.value ?: return
+        val enteredCityName = formatCityName(cityName.value) ?: return
+        if(enteredCityName.isBlank()) return
+
         Log.d("LocationSelectionDebugging", enteredCityName)
         // TODO Search cities by entered name
     }
+
+    private fun formatCityName(name: String?) =
+            name?.trim()
 }
