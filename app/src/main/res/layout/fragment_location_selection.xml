@@ -14,7 +14,7 @@
         style="@style/ScreenContainer">
 
         <TextView
-            android:id="@+id/searchCityInputHint"
+            android:id="@+id/searchLocationInputHint"
             style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,44 +22,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="14sp"
-            android:text="@string/enter_ful_name_your_city" />
+            android:text="@string/enter_ful_name_your_location" />
 
         <EditText
-            android:id="@+id/searchCityInput"
+            android:id="@+id/searchLocationInput"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@id/searchCityInputHint"
+            app:layout_constraintTop_toBottomOf="@id/searchLocationInputHint"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/searchCityButton"
+            app:layout_constraintEnd_toStartOf="@id/searchLocationButton"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:inputType="text"
             android:includeFontPadding="false"
             android:singleLine="true"
             android:maxLength="70"
-            android:text="@={viewModel.cityName}"
+            android:text="@={viewModel.locationName}"
             android:hint="@string/for_example_st_petersburg" />
 
         <ImageView
-            android:id="@+id/searchCityButton"
+            android:id="@+id/searchLocationButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            app:layout_constraintTop_toTopOf="@id/searchCityInput"
-            app:layout_constraintBottom_toBottomOf="@id/searchCityInput"
+            app:layout_constraintTop_toTopOf="@id/searchLocationInput"
+            app:layout_constraintBottom_toBottomOf="@id/searchLocationInput"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/icon_check_green"
             android:clickable="true"
-            android:onClick="@{() -> viewModel.onSearchCityClick()}"/>
+            android:onClick="@{() -> viewModel.onSearchLocationClick()}"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cityListView"
+            android:id="@+id/locationListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/searchCityInput"
+            app:layout_constraintTop_toBottomOf="@id/searchLocationInput"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/city_list_item" />
+            tools:listitem="@layout/location_list_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

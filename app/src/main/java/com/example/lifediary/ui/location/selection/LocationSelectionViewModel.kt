@@ -3,42 +3,52 @@ package com.example.lifediary.ui.location.selection
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.lifediary.data.domain.City
+import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.ui.BaseViewModel
+import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LocationSelectionViewModel : BaseViewModel() {
     @Inject
     lateinit var repository: WeatherRepository
+    @Inject
+    lateinit var router: Router
 
-    val cityName = MutableLiveData("")
-    val cities = MutableLiveData<List<City>>()
-    val searchCityInputNeedsFocus = MutableLiveData(true)
+    val locationName = MutableLiveData("")
+    val locations = MutableLiveData<List<Location>>()
+    val searchLocationInputNeedsFocus = MutableLiveData(true)
 
     init {
         bindAppScope()
     }
 
-    fun onSearchCityClick() {
-        searchCityInputNeedsFocus.value = false
-        val enteredCityName = formatCityName(cityName.value) ?: return
-        if(enteredCityName.isBlank()) return
+    fun onSearchLocationClick() {
+        searchLocationInputNeedsFocus.value = false
+        val enteredLocationName = formatLocationName(locationName.value) ?: return
+        if(enteredLocationName.isBlank()) return
 
-        Log.d("LocationSelectionDebugging", "input: $enteredCityName")
+        Log.d("LocationSelectionDebugging", "input: $enteredLocationName")
 
         viewModelScope.launch(Dispatchers.IO) {
-            val foundCities = repository.findCity(enteredCityName)
-            cities.postValue(foundCities)
+            val foundLocations = repository.findLocation(enteredLocationName)
+            locations.postValue(foundLocations)
         }
     }
 
-    private fun formatCityName(name: String?) =
+    private fun formatLocationName(name: String?) =
             name?.trim()
 
-    fun onCityListItemClick(city: City) {
-        Log.d("LocationSelectionDebugging", "click: ${city.name}")
+    fun onLocationListItemClick(location: Location) {
+        Log.d("LocationSelectionDebugging", "click: ${location.name}")
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.saveLocation(location)
+            withContext(Dispatchers.Main) {
+                router.exit()
+            }
+        }
     }
 }

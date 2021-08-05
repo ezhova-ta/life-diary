@@ -7,10 +7,10 @@ import retrofit2.http.Query
 
 interface WeatherService {
     @GET("find")
-    suspend fun findCity(
+    suspend fun findLocation(
         @Query("q") name: String,
         @Query("lang") lang: String = "ru", // TODO Support other langs
         @Header("x-rapidapi-key") rapidApiKey: String = BuildConfig.WEATHER_API_KEY,
         @Header("x-rapidapi-host") rapidApiHost: String = BuildConfig.WEATHER_API_HOST
-    ): CitiesResponse
+    ): LocationsResponse
 }

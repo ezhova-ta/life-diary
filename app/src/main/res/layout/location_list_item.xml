@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.adapters.CityListAdapter.CityListItemViewModel" />
+            type="com.example.lifediary.adapters.LocationListAdapter.LocationListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
             android:singleLine="true"
             android:textSize="20sp"
             tools:text="Санкт-Петербург"
-            android:text="@{viewModel.city.name}" />
+            android:text="@{viewModel.location.name}" />
 
         <ImageView
             android:id="@+id/locationIcon"
@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="12sp"
             tools:text="59.8944, 30.2642"
-            android:text="@{viewModel.city.formattedCoordinatesString}" />
+            android:text="@{viewModel.location.formattedCoordinatesString}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

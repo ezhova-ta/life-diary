@@ -1,26 +1,26 @@
 package com.example.lifediary.data.api
 
-import com.example.lifediary.data.domain.City
+import com.example.lifediary.data.domain.Location
 import com.google.gson.annotations.SerializedName
 
-data class CityDto(
+data class LocationDto(
     val id: Long?,
     val name: String,
     @SerializedName("coord")
     val coordinates: CoordinatesDto
 ) {
     companion object {
-        fun fromDomain(city: City): CityDto {
-            return CityDto(
-                id = city.id,
-                name = city.name,
-                coordinates = CoordinatesDto(city.lat, city.lon)
+        fun fromDomain(location: Location): LocationDto {
+            return LocationDto(
+                id = location.id,
+                name = location.name,
+                coordinates = CoordinatesDto(location.lat, location.lon)
             )
         }
     }
 
-    fun toDomain(): City {
-        return City(
+    fun toDomain(): Location {
+        return Location(
             id = id,
             name = name,
             lat = coordinates.lat,

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.lifediary.adapters.CityListAdapter
-import com.example.lifediary.adapters.OnCityListItemClickListener
+import com.example.lifediary.adapters.LocationListAdapter
+import com.example.lifediary.adapters.OnLocationListItemClickListener
 import com.example.lifediary.databinding.FragmentLocationSelectionBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.clearFocusWithKeyboard
@@ -25,28 +25,28 @@ class LocationSelectionFragment : BaseFragment() {
         _binding = FragmentLocationSelectionBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        setupSearchCityInput()
-        setupCityListRecycler()
+        setupSearchLocationInput()
+        setupLocationListRecycler()
         return binding.root
     }
 
-    private fun setupSearchCityInput() {
-        viewModel.searchCityInputNeedsFocus.observe(viewLifecycleOwner) { needFocus ->
+    private fun setupSearchLocationInput() {
+        viewModel.searchLocationInputNeedsFocus.observe(viewLifecycleOwner) { needFocus ->
             if(needFocus) {
-                binding.searchCityInput.requestFocusWithKeyboard()
+                binding.searchLocationInput.requestFocusWithKeyboard()
             } else {
-                binding.searchCityInput.clearFocusWithKeyboard(activity)
+                binding.searchLocationInput.clearFocusWithKeyboard(activity)
             }
         }
     }
 
-    private fun setupCityListRecycler() {
-        val cityListAdapter = CityListAdapter(
-            OnCityListItemClickListener { viewModel.onCityListItemClick(it) }
+    private fun setupLocationListRecycler() {
+        val locationListAdapter = LocationListAdapter(
+            OnLocationListItemClickListener { viewModel.onLocationListItemClick(it) }
         )
-        binding.cityListView.adapter = cityListAdapter
-        viewModel.cities.observe(viewLifecycleOwner) { cities ->
-            cityListAdapter.submitList(cities)
+        binding.locationListView.adapter = locationListAdapter
+        viewModel.locations.observe(viewLifecycleOwner) { locations ->
+            locationListAdapter.submitList(locations)
         }
     }
 

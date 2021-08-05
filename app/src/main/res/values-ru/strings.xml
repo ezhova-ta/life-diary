@@ -7,6 +7,6 @@
     <string name="cancel">Закрыть</string>
     <string name="clear">Очистить</string>
     <string name="what_do_you_want_to_buy">Что купить?</string>
-    <string name="enter_ful_name_your_city">Введите полное название вашего города:</string>
+    <string name="enter_ful_name_your_location">Введите полное название вашего местоположения:</string>
     <string name="for_example_st_petersburg">Например, Санкт-Петербург</string>
 </resources>

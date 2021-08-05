@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.data.domain.City
-import com.example.lifediary.databinding.CityListItemBinding
+import com.example.lifediary.data.domain.Location
+import com.example.lifediary.databinding.LocationListItemBinding
 
-class CityListAdapter(private val onItemClickListener: OnCityListItemClickListener) :
-        ListAdapter<City, CityListAdapter.ViewHolder>(CityListItemDiffCallBack()) {
+class LocationListAdapter(private val onItemClickListener: OnLocationListItemClickListener) :
+        ListAdapter<Location, LocationListAdapter.ViewHolder>(LocationListItemDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder.getInstance(parent)
@@ -19,23 +19,23 @@ class CityListAdapter(private val onItemClickListener: OnCityListItemClickListen
         holder.bind(item, onItemClickListener)
     }
 
-    class CityListItemViewModel(val city: City) {
+    class LocationListItemViewModel(val location: Location) {
         // TODO Converted data if it needed
     }
 
     class ViewHolder private constructor(
-        private val binding: CityListItemBinding
+        private val binding: LocationListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         companion object {
             fun getInstance(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = CityListItemBinding.inflate(layoutInflater, parent, false)
+                val binding = LocationListItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
 
-        fun bind(item: City, onItemClickListener: OnCityListItemClickListener) {
-            binding.viewModel = CityListItemViewModel(item)
+        fun bind(item: Location, onItemClickListener: OnLocationListItemClickListener) {
+            binding.viewModel = LocationListItemViewModel(item)
             binding.executePendingBindings()
             binding.container.setOnClickListener {
                 onItemClickListener.onClick(item)
@@ -44,14 +44,14 @@ class CityListAdapter(private val onItemClickListener: OnCityListItemClickListen
     }
 }
 
-class CityListItemDiffCallBack : DiffUtil.ItemCallback<City>() {
-    override fun areItemsTheSame(oldItem: City, newItem: City) =
+class LocationListItemDiffCallBack : DiffUtil.ItemCallback<Location>() {
+    override fun areItemsTheSame(oldItem: Location, newItem: Location) =
         oldItem.name == newItem.name
 
-    override fun areContentsTheSame(oldItem: City, newItem: City) =
+    override fun areContentsTheSame(oldItem: Location, newItem: Location) =
         oldItem == newItem
 }
 
-class OnCityListItemClickListener(val clickListener: (City) -> Unit) {
-    fun onClick(city: City) = clickListener(city)
+class OnLocationListItemClickListener(val clickListener: (Location) -> Unit) {
+    fun onClick(location: Location) = clickListener(location)
 }

@@ -1,6 +1,6 @@
 package com.example.lifediary.data.domain
 
-data class City(
+data class Location(
     val id: Long? = null,
     val name: String,
     val lat: Double,
