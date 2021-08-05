@@ -44,56 +44,14 @@
                 android:text="@{viewModel.locationName ?? @string/location_not_selected}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dateContainer"
+        <com.example.lifediary.ui.common.CommonDateView
+            android:id="@+id/calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/settingsButton"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"
-            android:padding="8dp"
-            android:background="@drawable/icon_calendar_logo"
-            android:onClick="@{() -> viewModel.onDateClick()}">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/white_opacity_45" />
-
-            <TextClock
-                android:id="@+id/dayOfMonthView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:paddingTop="20dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:includeFontPadding="false"
-                android:format12Hour="dd"
-                android:format24Hour="dd"
-                android:textSize="48sp"
-                tools:text="20" />
-
-            <TextClock
-                android:id="@+id/monthView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/dayOfMonthView"
-                app:layout_constraintStart_toStartOf="@id/dayOfMonthView"
-                app:layout_constraintEnd_toEndOf="@id/dayOfMonthView"
-                android:paddingBottom="8dp"
-                android:includeFontPadding="false"
-                android:format12Hour="MMMM"
-                android:format24Hour="MMMM"
-                android:textSize="20sp"
-                tools:text="July" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:onClick="@{() -> viewModel.onDateClick()}" />
 
         <ImageView
             android:id="@+id/settingsButton"
@@ -109,7 +67,7 @@
             android:id="@+id/shoppingListsView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/dateContainer"
+            app:layout_constraintTop_toBottomOf="@id/calendar"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
             android:padding="16dp"
