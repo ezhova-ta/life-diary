@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.ShoppingListLocalDataSource
 import com.example.lifediary.data.domain.ShoppingListItem
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ShoppingListRepository @Inject constructor(
     private val localDataSource: ShoppingListLocalDataSource
 ) {

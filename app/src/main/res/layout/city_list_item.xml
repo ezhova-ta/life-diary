@@ -13,8 +13,9 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:clickable="true">
 
         <TextView
             android:id="@+id/name"
@@ -28,9 +29,9 @@
             android:layout_marginEnd="10dp"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:textSize="18sp"
+            android:textSize="20sp"
             tools:text="Санкт-Петербург"
-            android:text="@{viewModel.cityListItem.name}" />
+            android:text="@{viewModel.city.name}" />
 
         <ImageView
             android:id="@+id/locationIcon"
@@ -50,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="12sp"
             tools:text="59.8944, 30.2642"
-            android:text="@{viewModel.cityListItem.coordinatedString}" />
+            android:text="@{viewModel.city.formattedCoordinatesString}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

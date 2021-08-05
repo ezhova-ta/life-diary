@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.data.domain.CityListItem
+import com.example.lifediary.data.domain.City
 import com.example.lifediary.databinding.CityListItemBinding
 
 class CityListAdapter(private val onItemClickListener: OnCityListItemClickListener) :
-        ListAdapter<CityListItem, CityListAdapter.ViewHolder>(CityListItemDiffCallBack()) {
+        ListAdapter<City, CityListAdapter.ViewHolder>(CityListItemDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder.getInstance(parent)
@@ -19,7 +19,7 @@ class CityListAdapter(private val onItemClickListener: OnCityListItemClickListen
         holder.bind(item, onItemClickListener)
     }
 
-    class CityListItemViewModel(val cityListItem: CityListItem) {
+    class CityListItemViewModel(val city: City) {
         // TODO Converted data if it needed
     }
 
@@ -34,7 +34,7 @@ class CityListAdapter(private val onItemClickListener: OnCityListItemClickListen
             }
         }
 
-        fun bind(item: CityListItem, onItemClickListener: OnCityListItemClickListener) {
+        fun bind(item: City, onItemClickListener: OnCityListItemClickListener) {
             binding.viewModel = CityListItemViewModel(item)
             binding.executePendingBindings()
             binding.container.setOnClickListener {
@@ -44,14 +44,14 @@ class CityListAdapter(private val onItemClickListener: OnCityListItemClickListen
     }
 }
 
-class CityListItemDiffCallBack : DiffUtil.ItemCallback<CityListItem>() {
-    override fun areItemsTheSame(oldItem: CityListItem, newItem: CityListItem) =
+class CityListItemDiffCallBack : DiffUtil.ItemCallback<City>() {
+    override fun areItemsTheSame(oldItem: City, newItem: City) =
         oldItem.name == newItem.name
 
-    override fun areContentsTheSame(oldItem: CityListItem, newItem: CityListItem) =
+    override fun areContentsTheSame(oldItem: City, newItem: City) =
         oldItem == newItem
 }
 
-class OnCityListItemClickListener(val clickListener: (CityListItem) -> Unit) {
-    fun onClick(cityListItem: CityListItem) = clickListener(cityListItem)
+class OnCityListItemClickListener(val clickListener: (City) -> Unit) {
+    fun onClick(city: City) = clickListener(city)
 }

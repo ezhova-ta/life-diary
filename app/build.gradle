@@ -40,6 +40,9 @@ android {
             applicationIdSuffix '.dev'
             versionNameSuffix ' DEV'
             resValue "string", "app_name", "Life Diary DEV"
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
+            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
         }
 
         demo {
@@ -48,6 +51,9 @@ android {
             versionNameSuffix ' DEMO'
             resValue "string", "app_name", "Life Diary DEMO"
             signingConfig signingConfigs.demo
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
+            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
         }
 
         release {
@@ -56,6 +62,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue "string", "app_name", "Life Diary"
             signingConfig signingConfigs.release
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
+            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
         }
     }
 
@@ -98,6 +107,10 @@ dependencies {
     implementation "androidx.room:room-runtime:2.3.0"
     implementation "androidx.room:room-ktx:2.3.0"
     kapt "androidx.room:room-compiler:2.3.0"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
     implementation 'net.danlew:android.joda:2.10.9.1'
 }

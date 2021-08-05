@@ -18,6 +18,18 @@ data class ShoppingListItemEntity(
     @ColumnInfo(name = "created_timestamp")
     val createdTimestamp: Long
 ) {
+    companion object {
+        fun fromDomain(shoppingListItem: ShoppingListItem): ShoppingListItemEntity {
+            return ShoppingListItemEntity(
+                id = shoppingListItem.id,
+                text = shoppingListItem.text,
+                isHighPriority = shoppingListItem.isHighPriority,
+                isCrossedOut = shoppingListItem.isCrossedOut,
+                createdTimestamp = shoppingListItem.createdTimestamp
+            )
+        }
+    }
+
     fun toDomain(): ShoppingListItem {
         return ShoppingListItem(
             id = id,
@@ -26,17 +38,5 @@ data class ShoppingListItemEntity(
             isCrossedOut = isCrossedOut,
             createdTimestamp = createdTimestamp
         )
-    }
-
-    companion object {
-        fun fromDomain(shoppingListItem: ShoppingListItem): ShoppingListItemEntity {
-            return ShoppingListItemEntity(
-                shoppingListItem.id,
-                shoppingListItem.text,
-                shoppingListItem.isHighPriority,
-                shoppingListItem.isCrossedOut,
-                shoppingListItem.createdTimestamp
-            )
-        }
     }
 }

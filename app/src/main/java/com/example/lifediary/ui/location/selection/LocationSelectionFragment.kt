@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.example.lifediary.adapters.CityListAdapter
+import com.example.lifediary.adapters.OnCityListItemClickListener
 import com.example.lifediary.databinding.FragmentLocationSelectionBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.clearFocusWithKeyboard
@@ -24,6 +26,7 @@ class LocationSelectionFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupSearchCityInput()
+        setupCityListRecycler()
         return binding.root
     }
 
@@ -34,6 +37,16 @@ class LocationSelectionFragment : BaseFragment() {
             } else {
                 binding.searchCityInput.clearFocusWithKeyboard(activity)
             }
+        }
+    }
+
+    private fun setupCityListRecycler() {
+        val cityListAdapter = CityListAdapter(
+            OnCityListItemClickListener { viewModel.onCityListItemClick(it) }
+        )
+        binding.cityListView.adapter = cityListAdapter
+        viewModel.cities.observe(viewLifecycleOwner) { cities ->
+            cityListAdapter.submitList(cities)
         }
     }
 

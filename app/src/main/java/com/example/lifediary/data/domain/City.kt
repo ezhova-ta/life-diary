@@ -1,12 +1,11 @@
 package com.example.lifediary.data.domain
 
-data class CityListItem(
+data class City(
     val id: Long? = null,
     val name: String,
     val lat: Double,
-    val lon: Double,
-    val countryCode: String
+    val lon: Double
 ) {
-    fun getCoordinatedString() =
+    fun getFormattedCoordinatesString() =
             "$lat, $lon"
 }
