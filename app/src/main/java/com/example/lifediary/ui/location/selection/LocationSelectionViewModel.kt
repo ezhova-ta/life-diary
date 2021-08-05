@@ -1,15 +1,14 @@
 package com.example.lifediary.ui.location.selection
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LocationSelectionViewModel : BaseViewModel() {
@@ -31,8 +30,6 @@ class LocationSelectionViewModel : BaseViewModel() {
         val enteredLocationName = formatLocationName(locationName.value) ?: return
         if(enteredLocationName.isBlank()) return
 
-        Log.d("LocationSelectionDebugging", "input: $enteredLocationName")
-
         viewModelScope.launch(Dispatchers.IO) {
             val foundLocations = repository.findLocation(enteredLocationName)
             locations.postValue(foundLocations)
@@ -43,12 +40,9 @@ class LocationSelectionViewModel : BaseViewModel() {
             name?.trim()
 
     fun onLocationListItemClick(location: Location) {
-        Log.d("LocationSelectionDebugging", "click: ${location.name}")
-        viewModelScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             repository.saveLocation(location)
-            withContext(Dispatchers.Main) {
-                router.exit()
-            }
         }
+        router.exit()
     }
 }

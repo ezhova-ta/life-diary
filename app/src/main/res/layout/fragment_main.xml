@@ -40,7 +40,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/locationIcon"
                 app:layout_constraintStart_toEndOf="@id/locationIcon"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="Санкт-Петербург" />
+                tools:text="Санкт-Петербург"
+                android:text="@{viewModel.locationName ?? @string/location_not_selected}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

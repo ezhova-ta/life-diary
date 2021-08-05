@@ -1,9 +1,9 @@
 package com.example.lifediary.data.repositories
 
+import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.WeatherLocalDataSource
 import com.example.lifediary.data.datasources.WeatherRemoteDataSource
 import com.example.lifediary.data.domain.Location
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,8 +16,8 @@ class WeatherRepository @Inject constructor(
         return remoteDataSource.findLocation(name)
     }
 
-    fun getLocationFlow(): Flow<Location?> {
-        return localDataSource.getLocationFlow()
+    fun getLocation(): LiveData<Location?> {
+        return localDataSource.getLocation()
     }
 
     suspend fun saveLocation(location: Location) {
