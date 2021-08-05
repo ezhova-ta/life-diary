@@ -65,10 +65,10 @@
         <ProgressBar
             android:id="@+id/progressView"
             style="@style/CommonProgressBar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/locationListView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="56dp"
             android:indeterminateTint="@color/app_green"
             android:visibility="@{viewModel.isProgressVisible() ? View.VISIBLE : View.GONE}" />
 
