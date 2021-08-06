@@ -27,10 +27,10 @@
                 android:id="@+id/locationIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/icon_location_blue"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/icon_location_blue" />
 
             <TextView
                 android:id="@+id/locationView"
@@ -45,42 +45,51 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.example.lifediary.ui.common.CommonDateView
-            android:id="@+id/calendar"
+            android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/settingsButton"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"
             android:onClick="@{() -> viewModel.onDateClick()}" />
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <com.example.lifediary.ui.common.CommonCurrentWeatherView
             android:id="@+id/weatherView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/settingsButton"
-            app:layout_constraintStart_toEndOf="@id/calendar"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp">
+            app:layout_constraintTop_toTopOf="@id/calendarView"
+            app:layout_constraintBottom_toBottomOf="@id/calendarView"
+            app:layout_constraintStart_toEndOf="@id/calendarView"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/temperatureView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text='@{String.format("%s°C", viewModel.currentWeather.temperature)}'
-                tools:text="+20.24°C" />
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/settingsButton"-->
+<!--            app:layout_constraintStart_toEndOf="@id/calendarView"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="8dp">-->
 
-            <TextView
-                android:id="@+id/weatherDescriptionView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/temperatureView"
-                app:layout_constraintStart_toStartOf="@id/temperatureView"
-                app:layout_constraintEnd_toEndOf="@id/temperatureView"
-                android:text="@{viewModel.currentWeather.description}"
-                tools:text="сильный дождь" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/temperatureView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:text='@{String.format("%s°C", viewModel.currentWeather.temperature)}'-->
+<!--                tools:text="+20.24°C" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/weatherDescriptionView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/temperatureView"-->
+<!--                app:layout_constraintStart_toStartOf="@id/temperatureView"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/temperatureView"-->
+<!--                android:text="@{viewModel.currentWeather.description}"-->
+<!--                tools:text="сильный дождь" />-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         <ImageView
             android:id="@+id/settingsButton"
@@ -96,7 +105,7 @@
             android:id="@+id/shoppingListsView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/calendar"
+            app:layout_constraintTop_toBottomOf="@id/calendarView"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
             android:padding="16dp"
