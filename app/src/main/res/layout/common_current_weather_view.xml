@@ -90,10 +90,10 @@
         android:id="@+id/humidityContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/feelsLikeView"
         app:layout_constraintStart_toEndOf="@id/windContainer"
-        app:layout_constraintTop_toTopOf="@id/windContainer"
-        app:layout_constraintBottom_toBottomOf="@id/windContainer"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp">
         <ImageView
             android:id="@+id/humidityIcon"
             android:layout_width="16dp"

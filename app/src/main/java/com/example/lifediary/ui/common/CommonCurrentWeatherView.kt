@@ -4,11 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import com.example.lifediary.databinding.CommonCurrentWeatherViewBinding
 
 class CommonCurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
     private var binding = CommonCurrentWeatherViewBinding.inflate(LayoutInflater.from(context))
-
     var temperature: String = "???"
         set(value) {
             field = value
@@ -24,26 +24,49 @@ class CommonCurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLay
     var description: String? = null
         set(value) {
             field = value
-            val text = value ?: "???"
-            binding.descriptionView.text = text
+
+            if(value == null) {
+                binding.descriptionView.isVisible = false
+            } else {
+                binding.descriptionView.text = value
+                binding.descriptionView.isVisible = true
+            }
         }
 
-    var temperatureFeelsLike: String = "???"
+    var temperatureFeelsLike: String? = null
         set(value) {
             field = value
-            binding.feelsLikeView.text = value
+
+            if(value == null) {
+                binding.feelsLikeView.isVisible = false
+            } else {
+                binding.feelsLikeView.isVisible = true
+                binding.feelsLikeView.text = value
+            }
         }
 
-    var windSpeed: String = "???"
+    var windSpeed: String? = null
         set(value) {
             field = value
-            binding.windView.text = value
+
+            if(value == null) {
+                binding.windContainer.isVisible = false
+            } else {
+                binding.windContainer.isVisible = true
+                binding.windView.text = value
+            }
         }
 
-    var humidity: String = "???"
+    var humidity: String? = null
         set(value) {
             field = value
-            binding.humidityView.text = value
+
+            if(value == null) {
+                binding.humidityContainer.isVisible = false
+            } else {
+                binding.humidityContainer.isVisible = true
+                binding.humidityView.text = value
+            }
         }
 
     init {
