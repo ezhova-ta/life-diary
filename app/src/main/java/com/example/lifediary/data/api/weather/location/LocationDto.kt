@@ -9,16 +9,6 @@ data class LocationDto(
     @SerializedName("coord")
     val coordinates: CoordinatesDto
 ) {
-    companion object {
-        fun fromDomain(location: Location): LocationDto {
-            return LocationDto(
-                id = location.id,
-                name = location.name,
-                coordinates = CoordinatesDto(location.lat, location.lon)
-            )
-        }
-    }
-
     fun toDomain(): Location {
         return Location(
             id = id,

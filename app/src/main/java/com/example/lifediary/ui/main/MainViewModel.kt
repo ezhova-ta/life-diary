@@ -19,7 +19,7 @@ class MainViewModel : BaseViewModel() {
 
     private var location: LiveData<Location?>
     var locationName: LiveData<String?>
-    var currentWeather = MutableLiveData<Weather?>()
+    var currentWeather = MutableLiveData<Weather>()
 
     // TODO Temp solution!
     private val locationObserver = Observer<Location?> {

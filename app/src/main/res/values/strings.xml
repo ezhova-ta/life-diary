@@ -10,4 +10,6 @@
     <string name="enter_ful_name_your_location">Enter the full name of your location:</string>
     <string name="for_example_st_petersburg">For example, St. Petersburg</string>
     <string name="location_not_selected">Location not selected</string>
+    <string name="feels_like">feels like</string>
+    <string name="meters_per_second">m/s</string>
 </resources>
