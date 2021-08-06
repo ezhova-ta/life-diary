@@ -2,14 +2,13 @@ package com.example.lifediary.di
 
 import android.content.Context
 import com.example.lifediary.LifeDiaryApplication
-import com.example.lifediary.data.api.WeatherService
+import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
 import com.example.lifediary.data.db.dao.LocationDao
 import com.example.lifediary.data.db.dao.ShoppingListDao
 import com.example.lifediary.di.providers.*
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
-import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,7 +1,7 @@
 package com.example.lifediary.di.providers
 
 import com.example.lifediary.data.WeatherApiRetrofitBuilder
-import com.example.lifediary.data.api.WeatherService
+import com.example.lifediary.data.api.weather.WeatherService
 import javax.inject.Inject
 import javax.inject.Provider
 

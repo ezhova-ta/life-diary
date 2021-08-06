@@ -33,7 +33,7 @@ class LocationSelectionViewModel : BaseViewModel() {
         isProgressVisible.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
-            val foundLocations = repository.findLocation(enteredLocationName)
+            val foundLocations = repository.findLocations(enteredLocationName)
             isProgressVisible.postValue(false)
             locations.postValue(foundLocations)
         }

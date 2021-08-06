@@ -1,4 +1,4 @@
-package com.example.lifediary.data.api
+package com.example.lifediary.data.api.weather.location
 
 import com.example.lifediary.data.domain.Location
 import com.google.gson.annotations.SerializedName
