@@ -5,6 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.lifediary.databinding.CommonCurrentWeatherViewBinding
 
 class CommonCurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
@@ -18,7 +20,14 @@ class CommonCurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLay
     var weatherIconUrl: String? = null
         set(value) {
             field = value
-            // TODO
+
+            if(value == null) {
+                binding.weatherIcon.setImageURI(null)
+            } else {
+                Glide.with(context)
+                    .load(value)
+                    .into(binding.weatherIcon)
+            }
         }
 
     var description: String? = null

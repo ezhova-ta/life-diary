@@ -62,6 +62,7 @@
             app:layout_constraintStart_toEndOf="@id/calendarView"
             app:layout_constraintEnd_toEndOf="parent"
             app:temperature='@{String.format("%d°C", viewModel.currentWeather.temperature)}'
+            app:weatherIconUrl="@{viewModel.currentWeather.iconUrl}"
             app:description="@{viewModel.currentWeather.description}"
             app:temperatureFeelsLike='@{String.format("%s %d°C", @string/feels_like, viewModel.currentWeather.temperatureFeelsLike)}'
             app:windSpeed='@{String.format("%.1f%s", viewModel.currentWeather.windSpeed, @string/meters_per_second)}'
