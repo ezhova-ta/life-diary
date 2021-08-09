@@ -24,7 +24,13 @@ class ShoppingListViewModel: BaseViewModel() {
     }
 
     fun onAddShoppingListItemClick() {
-        val text = newShoppingListItemText.value ?: return
+        val text = newShoppingListItemText.value?.trim()
+
+        if(text.isNullOrBlank()) {
+            newShoppingListItemText.value = ""
+            return
+        }
+
         val item = ShoppingListItem(text = text)
 
         CoroutineScope(Dispatchers.IO).launch {
