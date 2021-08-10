@@ -3,14 +3,23 @@ package com.example.lifediary.ui.common
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.lifediary.databinding.CommonCurrentWeatherViewBinding
 
 class CommonCurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
     private var binding = CommonCurrentWeatherViewBinding.inflate(LayoutInflater.from(context))
+
+    var progressIsVisible: Boolean
+        get() = binding.progressView.isVisible
+        set(value) {
+            binding.progressView.isVisible = value
+        }
+
+    // TODO Correct default value
     var temperature: String = "???"
         set(value) {
             field = value

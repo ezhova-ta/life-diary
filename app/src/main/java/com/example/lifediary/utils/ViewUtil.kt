@@ -5,6 +5,8 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.databinding.BindingAdapter
+import com.example.lifediary.ui.common.CommonCurrentWeatherView
 
 // TODO Correct fun name
 fun EditText.requestFocusWithKeyboard() {
@@ -28,4 +30,9 @@ fun EditText.clearFocusWithKeyboard(activity: Activity?) {
 private fun Activity.hideKeyboard() {
     val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+}
+
+@BindingAdapter("progressVisibility")
+fun CommonCurrentWeatherView.setProgressVisibility(visibility: Boolean) {
+    progressIsVisible = visibility
 }

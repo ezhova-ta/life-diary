@@ -66,7 +66,8 @@
             app:description="@{viewModel.currentWeather.description}"
             app:temperatureFeelsLike='@{String.format("%s %d°C", @string/feels_like, viewModel.currentWeather.temperatureFeelsLike)}'
             app:windSpeed='@{String.format("%.1f%s", viewModel.currentWeather.windSpeed, @string/meters_per_second)}'
-            app:humidity='@{String.format("%d%s", viewModel.currentWeather.humidity, "%")}' />
+            app:humidity='@{String.format("%d%s", viewModel.currentWeather.humidity, "%")}'
+            app:progressVisibility="@{viewModel.isCurrentWeatherProgressVisible()}" />
 
         <ImageView
             android:id="@+id/settingsButton"
