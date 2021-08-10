@@ -21,7 +21,10 @@ class MainViewModel : BaseViewModel() {
     var locationName: LiveData<String?>
     var currentWeather: LiveData<Weather?>
     var isCurrentWeatherViewVisible: LiveData<Boolean>
-    val isCurrentWeatherProgressVisible = MutableLiveData(false)
+
+    private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
+    val isCurrentWeatherProgressVisible: LiveData<Boolean>
+        get() = _isCurrentWeatherProgressVisible
 
     // TODO Temp solution!
     private val locationObserver = Observer<Location?> {
@@ -48,11 +51,11 @@ class MainViewModel : BaseViewModel() {
     }
 
     private fun updateCurrentWeather(locationId: Long) {
-        isCurrentWeatherProgressVisible.value = true
+        _isCurrentWeatherProgressVisible.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateCurrentWeather(locationId)
-            isCurrentWeatherProgressVisible.postValue(false)
+            _isCurrentWeatherProgressVisible.postValue(false)
         }
     }
 

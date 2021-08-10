@@ -15,8 +15,14 @@ class ShoppingListViewModel: BaseViewModel() {
     lateinit var repository: ShoppingListRepository
 
     var shoppingList: LiveData<List<ShoppingListItem>>
-    val showClearShoppingListConfirmationDialog = MutableLiveData(false)
-    val newShoppingListItemText = MutableLiveData("")
+
+    private val _showClearShoppingListConfirmationDialog = MutableLiveData(false)
+    val showClearShoppingListConfirmationDialog: LiveData<Boolean>
+        get() = _showClearShoppingListConfirmationDialog
+
+    private val _newShoppingListItemText = MutableLiveData("")
+    val newShoppingListItemText: LiveData<String>
+        get() = _newShoppingListItemText
 
     init {
         bindAppScope()
@@ -24,10 +30,10 @@ class ShoppingListViewModel: BaseViewModel() {
     }
 
     fun onAddShoppingListItemClick() {
-        val text = newShoppingListItemText.value?.trim()
+        val text = _newShoppingListItemText.value?.trim()
 
         if(text.isNullOrBlank()) {
-            newShoppingListItemText.value = ""
+            _newShoppingListItemText.value = ""
             return
         }
 
@@ -35,24 +41,24 @@ class ShoppingListViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             repository.saveShoppingListItem(item)
-            newShoppingListItemText.postValue("")
+            _newShoppingListItemText.postValue("")
         }
     }
 
     fun onClearShoppingListClick() {
         if(shoppingList.value.isNullOrEmpty()) return
-        showClearShoppingListConfirmationDialog.value = true
+        _showClearShoppingListConfirmationDialog.value = true
     }
 
     fun onClearShoppingListConfirmed() {
-        showClearShoppingListConfirmationDialog.value = false
+        _showClearShoppingListConfirmationDialog.value = false
         CoroutineScope(Dispatchers.IO).launch {
             repository.clearShoppingList()
         }
     }
 
     fun onClearShoppingListCancelled() {
-        showClearShoppingListConfirmationDialog.value = false
+        _showClearShoppingListConfirmationDialog.value = false
     }
 
     fun onShoppingListItemClick(item: ShoppingListItem) {
