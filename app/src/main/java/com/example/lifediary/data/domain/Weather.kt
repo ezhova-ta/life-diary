@@ -3,6 +3,7 @@ package com.example.lifediary.data.domain
 import com.example.lifediary.BuildConfig
 
 data class Weather(
+    val id: Long? = null,
     val shortDescription: String?,
     val description: String?,
     val icon: String?,

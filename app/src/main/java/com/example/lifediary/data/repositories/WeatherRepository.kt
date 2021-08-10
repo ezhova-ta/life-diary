@@ -25,7 +25,12 @@ class WeatherRepository @Inject constructor(
         localDataSource.saveLocation(location)
     }
 
-    suspend fun getCurrentWeather(locationId: Long): Weather {
-        return remoteDataSource.getCurrentWeather(locationId)
+    fun getCurrentWeather(): LiveData<Weather?> {
+        return localDataSource.getCurrentWeather()
+    }
+
+    suspend fun updateCurrentWeather(locationId: Long) {
+        val currentWeather = remoteDataSource.getCurrentWeather(locationId)
+        localDataSource.saveCurrentWeather(currentWeather)
     }
 }

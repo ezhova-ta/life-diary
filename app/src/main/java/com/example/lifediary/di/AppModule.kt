@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.lifediary.LifeDiaryApplication
 import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
+import com.example.lifediary.data.db.dao.CurrentWeatherDao
 import com.example.lifediary.data.db.dao.LocationDao
 import com.example.lifediary.data.db.dao.ShoppingListDao
 import com.example.lifediary.di.providers.*
@@ -19,11 +20,15 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(NavigatorHolder::class.java).toInstance(application.navigationHolder)
         bind(Router::class.java).toInstance(application.router)
         bind(Context::class.java).toInstance(application.applicationContext)
+
         bind(MainDataBase::class.java).toProvider(MainDatabaseProvider::class.java).singleton()
         bind(ShoppingListDao::class.java).toProvider(ShoppingListDaoProvider::class.java)
         bind(LocationDao::class.java).toProvider(LocationDaoProvider::class.java)
+        bind(CurrentWeatherDao::class.java).toProvider(CurrentWeatherDaoProvider::class.java)
+
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())
+
         bind(WeatherService::class.java).toProvider(WeatherServiceProvider::class.java).singleton()
         bind(WeatherService::class.java).toProvider(WeatherServiceProvider::class.java).singleton()
     }
