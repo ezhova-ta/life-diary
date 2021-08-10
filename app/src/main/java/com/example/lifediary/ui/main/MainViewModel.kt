@@ -20,6 +20,7 @@ class MainViewModel : BaseViewModel() {
     private var location: LiveData<Location?>
     var locationName: LiveData<String?>
     var currentWeather: LiveData<Weather?>
+    var isCurrentWeatherViewVisible: LiveData<Boolean>
     val isCurrentWeatherProgressVisible = MutableLiveData(false)
 
     // TODO Temp solution!
@@ -33,6 +34,7 @@ class MainViewModel : BaseViewModel() {
         location = repository.getLocation()
         locationName = location.map { it?.name }
         currentWeather = repository.getCurrentWeather()
+        isCurrentWeatherViewVisible = location.map { it != null }
 
         // TODO Temp solution!
         location.observeForever(locationObserver)

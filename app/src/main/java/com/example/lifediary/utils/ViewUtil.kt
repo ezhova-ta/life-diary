@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.example.lifediary.ui.common.CommonCurrentWeatherView
 
@@ -30,6 +31,11 @@ fun EditText.clearFocusWithKeyboard(activity: Activity?) {
 private fun Activity.hideKeyboard() {
     val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+}
+
+@BindingAdapter("booleanVisibility")
+fun View.setBooleanVisibility(isVisible: Boolean) {
+    this.isVisible = isVisible
 }
 
 @BindingAdapter("progressVisibility")

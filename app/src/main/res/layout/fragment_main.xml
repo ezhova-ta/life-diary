@@ -61,6 +61,7 @@
             app:layout_constraintBottom_toBottomOf="@id/calendarView"
             app:layout_constraintStart_toEndOf="@id/calendarView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:booleanVisibility="@{viewModel.isCurrentWeatherViewVisible()}"
             app:temperature='@{String.format("%s°C", viewModel.currentWeather.temperatureString)}'
             app:weatherIconUrl="@{viewModel.currentWeather.iconUrl}"
             app:description="@{viewModel.currentWeather.description}"
