@@ -15,4 +15,17 @@ data class Weather(
 ) {
     fun getIconUrl() =
         String.format("%s%s@2x.png", BuildConfig.WEATHER_API_ICON_URL, icon)
+
+    fun getTemperatureString(): String {
+        return temperature.createStringWithPlusOrMinusSign()
+    }
+
+    fun getTemperatureFeelsLikeString(): String {
+        return temperatureFeelsLike.createStringWithPlusOrMinusSign()
+    }
+
+    private fun Int.createStringWithPlusOrMinusSign(): String {
+        if(this < 0) return toString()
+        return String.format("+%d", this)
+    }
 }
