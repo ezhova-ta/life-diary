@@ -15,7 +15,7 @@ class WeatherLocalDataSource @Inject constructor(
     private val currentWeatherDao: CurrentWeatherDao
 ) {
     fun getLocation(): LiveData<Location?> {
-        return locationDao.getLocation().map { it?.toDomain() }
+        return locationDao.get().map { it?.toDomain() }
     }
 
     suspend fun saveLocation(location: Location) {

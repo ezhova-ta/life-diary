@@ -7,7 +7,7 @@ import com.example.lifediary.data.db.entities.LocationEntity
 @Dao
 interface LocationDao {
     @Query("SELECT * FROM location LIMIT 1")
-    fun getLocation(): LiveData<LocationEntity?>
+    fun get(): LiveData<LocationEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(location: LocationEntity)
