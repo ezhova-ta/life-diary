@@ -25,13 +25,7 @@ class MainViewModel : BaseViewModel() {
     // TODO Temp solution!
     private val locationObserver = Observer<Location?> {
         val locationId = it?.id ?: return@Observer
-        isCurrentWeatherProgressVisible.value = true
-
-        viewModelScope.launch(Dispatchers.IO) {
-            val weather = repository.getCurrentWeather(locationId)
-            currentWeather.postValue(weather)
-            isCurrentWeatherProgressVisible.postValue(false)
-        }
+        updateCurrentWeather(locationId)
     }
 
     init {
@@ -41,6 +35,23 @@ class MainViewModel : BaseViewModel() {
 
         // TODO Temp solution!
         location.observeForever(locationObserver)
+    }
+
+    // TODO True solution?
+    fun onScreenResumed() {
+        location.value?.id?.let {
+            updateCurrentWeather(it)
+        }
+    }
+
+    private fun updateCurrentWeather(locationId: Long) {
+        isCurrentWeatherProgressVisible.value = true
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val weather = repository.getCurrentWeather(locationId)
+            currentWeather.postValue(weather)
+            isCurrentWeatherProgressVisible.postValue(false)
+        }
     }
 
     fun onSettingsClick() {
