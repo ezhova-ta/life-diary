@@ -9,7 +9,7 @@ import com.example.lifediary.databinding.FragmentSettingsBinding
 import com.example.lifediary.ui.BaseFragment
 
 class SettingsFragment : BaseFragment() {
-    private val viewModel: SettingsViewModel by viewModels()
+    override val viewModel: SettingsViewModel by viewModels()
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 

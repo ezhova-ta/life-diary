@@ -9,7 +9,7 @@ import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 
 class CalendarFragment : BaseFragment() {
-    private val viewModel: CalendarViewModel  by viewModels()
+    override val viewModel: CalendarViewModel  by viewModels()
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
 

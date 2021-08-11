@@ -1,15 +1,14 @@
 package com.example.lifediary.utils
 
-open class OneTimeEvent {
-	var hasBeenHandled = false
-	private set
+open class OneTimeEvent<T>(private val data: T) {
+	private var hasBeenHandled = false
 
-	fun shouldBeHandled(): Boolean {
+	fun getData(): T? {
 		return if(hasBeenHandled) {
-			false
+			null
 		} else {
 			hasBeenHandled = true
-			true
+			data
 		}
 	}
 }

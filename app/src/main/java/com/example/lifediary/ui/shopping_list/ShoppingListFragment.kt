@@ -14,7 +14,7 @@ import com.example.lifediary.databinding.FragmentShoppingListBinding
 import com.example.lifediary.ui.BaseFragment
 
 class ShoppingListFragment : BaseFragment() {
-    private val viewModel: ShoppingListViewModel by viewModels()
+    override val viewModel: ShoppingListViewModel by viewModels()
     private var _binding: FragmentShoppingListBinding? = null
     private val binding get() = _binding!!
 

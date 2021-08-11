@@ -14,7 +14,7 @@ import com.example.lifediary.utils.clearFocusWithKeyboard
 import com.example.lifediary.utils.requestFocusWithKeyboard
 
 class LocationSelectionFragment : BaseFragment() {
-    private val viewModel: LocationSelectionViewModel by viewModels()
+    override val viewModel: LocationSelectionViewModel by viewModels()
     private var _binding: FragmentLocationSelectionBinding? = null
     private val binding get() = _binding!!
 

@@ -1,13 +1,14 @@
 package com.example.lifediary.ui.main
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.example.lifediary.R
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.domain.Weather
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.OneTimeEvent
+import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,11 +28,6 @@ class MainViewModel : BaseViewModel() {
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
         get() = _isCurrentWeatherProgressVisible
-
-    // TODO Send text message from view model (!)
-    private val _showCurrentWeatherUpdatingErrorEvent = MutableLiveData<OneTimeEvent>()
-    val showCurrentWeatherUpdatingErrorEvent: LiveData<OneTimeEvent>
-        get() = _showCurrentWeatherUpdatingErrorEvent
 
     // TODO Temp solution!
     private val locationObserver = Observer<Location?> {
@@ -64,7 +60,8 @@ class MainViewModel : BaseViewModel() {
             try {
                 repository.updateCurrentWeather(locationId)
             } catch(e: Exception) {
-                _showCurrentWeatherUpdatingErrorEvent.postValue(OneTimeEvent())
+                val messageRes = R.string.failed_to_update_weather_data
+                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
             } finally {
                 _isCurrentWeatherProgressVisible.postValue(false)
             }

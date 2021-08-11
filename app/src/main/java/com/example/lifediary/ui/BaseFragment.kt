@@ -5,9 +5,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.lifediary.utils.InsetsStyle
+import com.example.lifediary.utils.Text
 import com.example.lifediary.utils.setInsetsStyle
 
-open class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
+    protected abstract val viewModel: BaseViewModel
+
     // TODO Nullable return type?
     protected open fun getInsetsStyle(): InsetsStyle? =
         InsetsStyle.defaultStyle
@@ -15,6 +18,7 @@ open class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setInsetsStyle()
+        setupMessageShowing()
     }
 
     private fun setInsetsStyle() {
@@ -25,16 +29,19 @@ open class BaseFragment : Fragment() {
         activity.setInsetsStyle(insetsStyle.insetsColor, isInsetsLight)
     }
 
-    protected fun showLongPopupMessage(resId: Int) {
-        showPopupMessage(resources.getText(resId), true)
+    private fun setupMessageShowing() {
+        viewModel.popupMessageEvent.observe(viewLifecycleOwner) { event ->
+            event.getData()?.let { message ->
+                showPopupMessage(message)
+            }
+        }
     }
 
-    protected fun showShortPopupMessage(resId: Int) {
-        showPopupMessage(resources.getText(resId), false)
-    }
-
-    private fun showPopupMessage(text: CharSequence, isLong: Boolean) {
-        val duration = if(isLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT
-        Toast.makeText(requireActivity(), text, duration).show()
+    private fun showPopupMessage(text: Text) {
+        Toast.makeText(
+            requireActivity(),
+            text.getText(requireContext()),
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
