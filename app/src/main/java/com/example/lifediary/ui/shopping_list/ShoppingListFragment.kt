@@ -1,10 +1,10 @@
 package com.example.lifediary.ui.shopping_list
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
@@ -26,14 +26,23 @@ class ShoppingListFragment : BaseFragment() {
         _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        addShoppingListItemInputView()
+        setupAddShoppingListItemInputView()
         setupShoppingListRecycler()
         setupClearShoppingListConfirmationDialog()
         return binding.root
     }
 
-    private fun addShoppingListItemInputView() {
-        binding.addShoppingListItemInput.setImeActionLabel("Готово", KeyEvent.KEYCODE_ENTER)
+    private fun setupAddShoppingListItemInputView() {
+        binding.addShoppingListItemInput.imeOptions = EditorInfo.IME_ACTION_DONE
+
+        binding.addShoppingListItemInput.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.onAddShoppingListItemInputDone()
+                return@setOnEditorActionListener true
+            }
+
+            return@setOnEditorActionListener false
+        }
     }
 
     private fun setupShoppingListRecycler() {

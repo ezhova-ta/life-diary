@@ -35,6 +35,10 @@ class LocationSelectionViewModel : BaseViewModel() {
     }
 
     fun onSearchLocationClick() {
+        onSearchLocationInputDone()
+    }
+
+    fun onSearchLocationInputDone() {
         _searchLocationInputNeedsFocus.value = false
         val enteredLocationName = formatLocationName(locationName.value) ?: return
         if(enteredLocationName.isBlank()) return

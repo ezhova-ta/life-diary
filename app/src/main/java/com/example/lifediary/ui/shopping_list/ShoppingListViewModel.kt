@@ -28,6 +28,10 @@ class ShoppingListViewModel: BaseViewModel() {
     }
 
     fun onAddShoppingListItemClick() {
+        onAddShoppingListItemInputDone()
+    }
+
+    fun onAddShoppingListItemInputDone() {
         val text = newShoppingListItemText.value?.trim()
 
         if(text.isNullOrBlank()) {

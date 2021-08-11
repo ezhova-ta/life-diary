@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import com.example.lifediary.adapters.LocationListAdapter
 import com.example.lifediary.adapters.OnLocationListItemClickListener
@@ -37,6 +38,17 @@ class LocationSelectionFragment : BaseFragment() {
             } else {
                 binding.searchLocationInput.clearFocusWithKeyboard(activity)
             }
+        }
+
+        binding.searchLocationInput.imeOptions = EditorInfo.IME_ACTION_DONE
+
+        binding.searchLocationInput.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.onSearchLocationInputDone()
+                return@setOnEditorActionListener true
+            }
+
+            return@setOnEditorActionListener false
         }
     }
 
