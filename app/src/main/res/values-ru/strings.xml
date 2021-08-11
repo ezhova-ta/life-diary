@@ -12,4 +12,5 @@
     <string name="location_not_selected">Местоположение не выбрано</string>
     <string name="feels_like">ощущается как</string>
     <string name="meters_per_second">м/с</string>
+    <string name="failed_to_update_weather_data">Не удалось обновить погодные данные</string>
 </resources>

@@ -12,4 +12,5 @@
     <string name="location_not_selected">Location not selected</string>
     <string name="feels_like">feels like</string>
     <string name="meters_per_second">m/s</string>
+    <string name="failed_to_update_weather_data">Failed to update weather data</string>
 </resources>
