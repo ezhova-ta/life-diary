@@ -64,7 +64,6 @@ class MainViewModel : BaseViewModel() {
             try {
                 repository.updateCurrentWeather(locationId)
             } catch(e: Exception) {
-                Log.d("OkHttp", e.toString())
                 _showCurrentWeatherUpdatingErrorEvent.postValue(OneTimeEvent())
             } finally {
                 _isCurrentWeatherProgressVisible.postValue(false)

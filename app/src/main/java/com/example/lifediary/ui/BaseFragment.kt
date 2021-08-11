@@ -2,6 +2,7 @@ package com.example.lifediary.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.lifediary.utils.InsetsStyle
 import com.example.lifediary.utils.setInsetsStyle
@@ -22,5 +23,18 @@ open class BaseFragment : Fragment() {
 
         val isInsetsLight = insetsStyle is InsetsStyle.Light
         activity.setInsetsStyle(insetsStyle.insetsColor, isInsetsLight)
+    }
+
+    protected fun showLongPopupMessage(resId: Int) {
+        showPopupMessage(resources.getText(resId), true)
+    }
+
+    protected fun showShortPopupMessage(resId: Int) {
+        showPopupMessage(resources.getText(resId), false)
+    }
+
+    private fun showPopupMessage(text: CharSequence, isLong: Boolean) {
+        val duration = if(isLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT
+        Toast.makeText(requireActivity(), text, duration).show()
     }
 }
