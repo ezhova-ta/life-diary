@@ -18,9 +18,7 @@ class LocationSelectionViewModel : BaseViewModel() {
     @Inject
     lateinit var router: Router
 
-    private val _locationName = MutableLiveData("")
-    val locationName: LiveData<String>
-        get() = _locationName
+    val locationName = MutableLiveData("")
 
     private val _locations = MutableLiveData<List<Location>>()
     val locations: LiveData<List<Location>>
@@ -38,7 +36,7 @@ class LocationSelectionViewModel : BaseViewModel() {
 
     fun onSearchLocationClick() {
         _searchLocationInputNeedsFocus.value = false
-        val enteredLocationName = formatLocationName(_locationName.value) ?: return
+        val enteredLocationName = formatLocationName(locationName.value) ?: return
         if(enteredLocationName.isBlank()) return
         isProgressVisible.value = true
 

@@ -1,6 +1,7 @@
 package com.example.lifediary.ui.shopping_list
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,14 @@ class ShoppingListFragment : BaseFragment() {
         _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        addShoppingListItemInputView()
         setupShoppingListRecycler()
         setupClearShoppingListConfirmationDialog()
         return binding.root
+    }
+
+    private fun addShoppingListItemInputView() {
+        binding.addShoppingListItemInput.setImeActionLabel("Готово", KeyEvent.KEYCODE_ENTER)
     }
 
     private fun setupShoppingListRecycler() {

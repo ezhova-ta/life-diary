@@ -20,9 +20,7 @@ class ShoppingListViewModel: BaseViewModel() {
     val showClearShoppingListConfirmationDialog: LiveData<Boolean>
         get() = _showClearShoppingListConfirmationDialog
 
-    private val _newShoppingListItemText = MutableLiveData("")
-    val newShoppingListItemText: LiveData<String>
-        get() = _newShoppingListItemText
+    val newShoppingListItemText = MutableLiveData("")
 
     init {
         bindAppScope()
@@ -30,10 +28,10 @@ class ShoppingListViewModel: BaseViewModel() {
     }
 
     fun onAddShoppingListItemClick() {
-        val text = _newShoppingListItemText.value?.trim()
+        val text = newShoppingListItemText.value?.trim()
 
         if(text.isNullOrBlank()) {
-            _newShoppingListItemText.value = ""
+            newShoppingListItemText.value = ""
             return
         }
 
@@ -41,7 +39,7 @@ class ShoppingListViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             repository.saveShoppingListItem(item)
-            _newShoppingListItemText.postValue("")
+            newShoppingListItemText.postValue("")
         }
     }
 
