@@ -13,5 +13,10 @@
     <string name="feels_like">ощущается как</string>
     <string name="meters_per_second">м/с</string>
     <string name="failed_to_update_weather_data">Не удалось обновить погодные данные</string>
-    <string name="location_search_error">Ошибка при поиске местоположений</string>
+    <string name="search_location_error">Ошибка при поиске местоположений</string>
+    <string name="saving_location_error">"Ошибка при сохранении местоположения "</string>
+    <string name="failed_to_save">Не удалось сохранить. Повторите попытку позже</string>
+    <string name="failed_to_clear_list">Не удалось очистить список. Повторите попытку позже</string>
+    <string name="error">Ошибка</string>
+    <string name="deleting_item_error">Ошибка при удалении элемента</string>
 </resources>

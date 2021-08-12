@@ -52,7 +52,7 @@ class LocationSelectionViewModel : BaseViewModel() {
                 val foundLocations = repository.findLocations(enteredLocationName)
                 _locations.postValue(foundLocations)
             } catch(e: Exception) {
-                val messageRes = R.string.location_search_error
+                val messageRes = R.string.search_location_error
                 popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
             } finally {
                 isProgressVisible.postValue(false)
@@ -65,7 +65,12 @@ class LocationSelectionViewModel : BaseViewModel() {
 
     fun onLocationListItemClick(location: Location) {
         CoroutineScope(Dispatchers.IO).launch {
-            repository.saveLocation(location)
+            try {
+                repository.saveLocation(location)
+            } catch(e: Exception) {
+                val messageRes = R.string.saving_location_error
+                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+            }
         }
         router.exit()
     }
