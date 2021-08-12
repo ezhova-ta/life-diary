@@ -13,8 +13,8 @@
     <string name="feels_like">feels like</string>
     <string name="meters_per_second">m/s</string>
     <string name="failed_to_update_weather_data">Failed to update weather data</string>
-    <string name="search_location_error">Location search error</string>
-    <string name="saving_location_error">Error saving location</string>
+    <string name="search_location_error">Search location error</string>
+    <string name="saving_location_error">Saving location error</string>
     <string name="failed_to_save">Failed to save. Try again later</string>
     <string name="failed_to_clear_list">Failed to clear the list. Try again later</string>
     <string name="error">Error</string>
