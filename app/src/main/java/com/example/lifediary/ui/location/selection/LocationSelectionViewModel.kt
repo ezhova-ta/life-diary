@@ -3,9 +3,12 @@ package com.example.lifediary.ui.location.selection
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.lifediary.R
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.OneTimeEvent
+import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,9 +48,15 @@ class LocationSelectionViewModel : BaseViewModel() {
         isProgressVisible.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
-            val foundLocations = repository.findLocations(enteredLocationName)
-            _locations.postValue(foundLocations)
-            isProgressVisible.postValue(false)
+            try {
+                val foundLocations = repository.findLocations(enteredLocationName)
+                _locations.postValue(foundLocations)
+            } catch(e: Exception) {
+                val messageRes = R.string.location_search_error
+                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+            } finally {
+                isProgressVisible.postValue(false)
+            }
         }
     }
 
