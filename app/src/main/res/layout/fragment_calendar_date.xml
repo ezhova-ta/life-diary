@@ -4,20 +4,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.calendar.CalendarViewModel" />
+            type="com.example.lifediary.ui.calendar.CalendarDateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         style="@style/ScreenContainer">
-
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
