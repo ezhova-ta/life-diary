@@ -1,12 +1,12 @@
 package com.example.lifediary.data.db.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.lifediary.data.db.converters.CalendarConverter
 import com.example.lifediary.data.domain.ShoppingListItem
+import java.util.*
 
 @Entity(tableName = "shopping_list", indices = [Index(value = ["text"], unique = true)])
+@TypeConverters(CalendarConverter::class)
 data class ShoppingListItemEntity(
     @PrimaryKey
     val id: Long?,
@@ -15,8 +15,8 @@ data class ShoppingListItemEntity(
     var isHighPriority: Boolean,
     @ColumnInfo(name = "is_crossed_out")
     var isCrossedOut: Boolean,
-    @ColumnInfo(name = "created_timestamp")
-    val createdTimestamp: Long
+    @ColumnInfo(name = "created_at")
+    val createdAt: Calendar
 ) {
     companion object {
         fun fromDomain(shoppingListItem: ShoppingListItem): ShoppingListItemEntity {
@@ -25,7 +25,7 @@ data class ShoppingListItemEntity(
                 text = shoppingListItem.text,
                 isHighPriority = shoppingListItem.isHighPriority,
                 isCrossedOut = shoppingListItem.isCrossedOut,
-                createdTimestamp = shoppingListItem.createdTimestamp
+                createdAt = shoppingListItem.createdAt
             )
         }
     }
@@ -36,7 +36,7 @@ data class ShoppingListItemEntity(
             text = text,
             isHighPriority = isHighPriority,
             isCrossedOut = isCrossedOut,
-            createdTimestamp = createdTimestamp
+            createdAt = createdAt
         )
     }
 }

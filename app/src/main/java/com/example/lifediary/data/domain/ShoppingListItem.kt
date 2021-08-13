@@ -7,5 +7,5 @@ data class ShoppingListItem(
     var text: String,
     var isHighPriority: Boolean = false,
     var isCrossedOut: Boolean = false,
-    val createdTimestamp: Long = Calendar.getInstance().timeInMillis
+    val createdAt: Calendar = Calendar.getInstance()
 )

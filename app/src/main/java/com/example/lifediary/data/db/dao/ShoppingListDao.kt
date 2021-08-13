@@ -6,7 +6,7 @@ import com.example.lifediary.data.db.entities.ShoppingListItemEntity
 
 @Dao
 interface ShoppingListDao {
-    @Query("SELECT * FROM shopping_list ORDER BY created_timestamp DESC")
+    @Query("SELECT * FROM shopping_list ORDER BY created_at DESC")
     fun getAll(): LiveData<List<ShoppingListItemEntity>>
 
     @Query("SELECT * FROM shopping_list WHERE id = :id")
