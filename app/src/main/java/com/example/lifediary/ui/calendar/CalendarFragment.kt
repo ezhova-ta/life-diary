@@ -1,15 +1,12 @@
 package com.example.lifediary.ui.calendar
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
-import org.joda.time.DateTime
-import java.util.*
 
 class CalendarFragment : BaseFragment() {
     override val viewModel: CalendarViewModel  by viewModels()
