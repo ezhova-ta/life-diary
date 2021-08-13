@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.adapters.OnShoppingListItemClickListener
@@ -17,6 +18,12 @@ class ShoppingListFragment : BaseFragment() {
     override val viewModel: ShoppingListViewModel by viewModels()
     private var _binding: FragmentShoppingListBinding? = null
     private val binding get() = _binding!!
+
+    companion object {
+        fun getInstance(): Fragment {
+            return ShoppingListFragment()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

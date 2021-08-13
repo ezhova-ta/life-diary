@@ -14,7 +14,7 @@ class CalendarViewModel : BaseViewModel() {
 		bindAppScope()
 	}
 
-	fun onDateClick() {
-		router.navigateTo(Screens.getFragmentScreenDateScreen())
+	fun onDateClick(date: Calendar) {
+		router.navigateTo(Screens.getCalendarDateScreen(date.timeInMillis))
 	}
 }

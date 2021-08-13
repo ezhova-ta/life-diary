@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.adapters.LocationListAdapter
 import com.example.lifediary.adapters.OnLocationListItemClickListener
@@ -17,6 +18,12 @@ class LocationSelectionFragment : BaseFragment() {
     override val viewModel: LocationSelectionViewModel by viewModels()
     private var _binding: FragmentLocationSelectionBinding? = null
     private val binding get() = _binding!!
+
+    companion object {
+        fun getInstance(): Fragment {
+            return LocationSelectionFragment()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
