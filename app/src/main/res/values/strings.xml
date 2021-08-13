@@ -19,4 +19,5 @@
     <string name="failed_to_clear_list">Failed to clear the list. Try again later</string>
     <string name="error">Error</string>
     <string name="deleting_item_error">Deleting item error</string>
+    <string name="write_note">Write a note</string>
 </resources>
