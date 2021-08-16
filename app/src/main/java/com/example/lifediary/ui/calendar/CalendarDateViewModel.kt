@@ -1,6 +1,5 @@
 package com.example.lifediary.ui.calendar
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
@@ -28,14 +27,13 @@ class CalendarDateViewModel : BaseViewModel() {
 	val title: String by lazy { date.toDateString() }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
-	private val weatherForecastForDate = weatherForecast.map { forecast ->
+	val weatherForecastForDate = weatherForecast.map { forecast ->
 		forecast.items.find { date.isSameDay(it.dateInSeconds) }
 	}
 
 	val isWeatherForecastContainerVisible = weatherForecastForDate.map { it != null }
-
-	val dayTemperatureForDate = weatherForecastForDate.map { it?.temperature?.dayString }
-	val nightTemperatureForDate = weatherForecastForDate.map { it?.temperature?.nightString }
+	val weatherForecastIconUrl = weatherForecastForDate.map { it?.weather?.firstOrNull()?.iconUrl }
+	val weatherForecastDescription = weatherForecastForDate.map { it?.weather?.firstOrNull()?.description }
 
 	init {
 		bindAppScope()

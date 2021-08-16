@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/temperatureContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/weatherIcon"
+        app:layout_constraintBottom_toBottomOf="@id/weatherIcon"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/dayIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/icon_day_gray" />
+
+        <TextView
+            android:id="@+id/dayTemperatureView"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/dayIcon"
+            app:layout_constraintBottom_toBottomOf="@id/dayIcon"
+            app:layout_constraintStart_toEndOf="@id/dayIcon"
+            android:layout_marginStart="2dp"
+            tools:text="+25°C"
+            android:text='@{String.format("%s°C", viewModel.dayTemperatureForDate)}' />
+
+        <ImageView
+            android:id="@+id/nightIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toBottomOf="@id/dayIcon"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/icon_night_gray" />
+
+        <TextView
+            android:id="@+id/nightTemperatureView"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/nightIcon"
+            app:layout_constraintBottom_toBottomOf="@id/nightIcon"
+            app:layout_constraintStart_toEndOf="@id/nightIcon"
+            android:layout_marginStart="2dp"
+            tools:text="+16°C"
+            android:text='@{String.format("%s°C", viewModel.nightTemperatureForDate)}' />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/weatherIcon"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/temperatureContainer"
+        android:layout_marginStart="16dp"
+        tools:src="@drawable/icon_cloud_gray" />
+
+    <TextView
+        android:id="@+id/descriptionView"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/weatherIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="14sp"
+        tools:text="облачно с прояснениями" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/windContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/descriptionView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/humidityContainer"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        android:layout_marginTop="4dp">
+        <ImageView
+            android:id="@+id/windIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/icon_wind_gray" />
+
+        <TextView
+            android:id="@+id/windView"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/windIcon"
+            app:layout_constraintBottom_toBottomOf="@id/windIcon"
+            app:layout_constraintStart_toEndOf="@id/windIcon"
+            android:layout_marginStart="1dp"
+            android:textSize="12sp"
+            tools:text="3.5м/с" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/humidityContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/descriptionView"
+        app:layout_constraintStart_toEndOf="@id/windContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp">
+        <ImageView
+            android:id="@+id/humidityIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/icon_humidity_gray" />
+
+        <TextView
+            android:id="@+id/humidityView"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/humidityIcon"
+            app:layout_constraintBottom_toBottomOf="@id/humidityIcon"
+            app:layout_constraintStart_toEndOf="@id/humidityIcon"
+            android:layout_marginStart="1dp"
+            android:textSize="12sp"
+            tools:text="58%" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toTopOf="@id/weatherIcon"
+        app:layout_constraintBottom_toBottomOf="@id/weatherIcon"
+        app:layout_constraintStart_toStartOf="@id/temperatureContainer"
+        app:layout_constraintEnd_toEndOf="@id/weatherIcon"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/app_blue"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,6 @@ fun Calendar.isSameDay(dateInSeconds: Long): Boolean {
     date.timeInMillis = dateInMillis
 
     return get(Calendar.DATE) == date.get(Calendar.DATE) &&
-           get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
-           get(Calendar.YEAR) == date.get(Calendar.YEAR)
+        get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
+        get(Calendar.YEAR) == date.get(Calendar.YEAR)
 }
