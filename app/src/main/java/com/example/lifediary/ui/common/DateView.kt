@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import com.example.lifediary.databinding.CommonDateViewBinding
+import com.example.lifediary.databinding.DateViewBinding
 
-class CommonDateView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
-    private var binding = CommonDateViewBinding.inflate(LayoutInflater.from(context))
+class DateView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+    private var binding = DateViewBinding.inflate(LayoutInflater.from(context))
 
     init {
         addView(binding.root)

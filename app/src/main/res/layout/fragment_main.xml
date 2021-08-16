@@ -44,7 +44,7 @@
                 android:text="@{viewModel.locationName ?? @string/location_not_selected}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.example.lifediary.ui.common.CommonDateView
+        <com.example.lifediary.ui.common.DateView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_marginTop="8dp"
             android:onClick="@{() -> viewModel.onDateClick()}" />
 
-        <com.example.lifediary.ui.common.CommonCurrentWeatherView
+        <com.example.lifediary.ui.common.CurrentWeatherView
             android:id="@+id/weatherView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

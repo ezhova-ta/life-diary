@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import com.example.lifediary.ui.common.CommonCurrentWeatherView
+import com.example.lifediary.ui.common.CurrentWeatherView
 
 // TODO Correct fun name
 fun EditText.requestFocusWithKeyboard() {
@@ -39,6 +39,6 @@ fun View.setBooleanVisibility(isVisible: Boolean) {
 }
 
 @BindingAdapter("progressVisibility")
-fun CommonCurrentWeatherView.setProgressVisibility(visibility: Boolean) {
+fun CurrentWeatherView.setProgressVisibility(visibility: Boolean) {
     progressIsVisible = visibility
 }

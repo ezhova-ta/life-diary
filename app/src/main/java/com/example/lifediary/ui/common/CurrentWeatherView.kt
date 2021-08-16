@@ -3,15 +3,13 @@ package com.example.lifediary.ui.common
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
-import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.example.lifediary.databinding.CommonCurrentWeatherViewBinding
+import com.example.lifediary.databinding.CurrentWeatherViewBinding
 
-class CommonCurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
-    private var binding = CommonCurrentWeatherViewBinding.inflate(LayoutInflater.from(context))
+class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+    private var binding = CurrentWeatherViewBinding.inflate(LayoutInflater.from(context))
 
     var progressIsVisible: Boolean
         get() = binding.progressView.isVisible
