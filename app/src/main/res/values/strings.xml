@@ -20,4 +20,5 @@
     <string name="error">Error</string>
     <string name="deleting_item_error">Deleting item error</string>
     <string name="write_note">Write a note</string>
+    <string name="failed_to_get_forecast">Failed to get weather forecast</string>
 </resources>

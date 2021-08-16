@@ -1,6 +1,7 @@
 package com.example.lifediary.data.domain
 
 import com.example.lifediary.BuildConfig
+import com.example.lifediary.utils.createStringWithPlusOrMinusSign
 
 data class Weather(
     val id: Long? = null,
@@ -14,19 +15,7 @@ data class Weather(
     val windSpeed: Double,
     val gustSpeed: Double
 ) {
-    fun getIconUrl() =
-        String.format("%s%s@2x.png", BuildConfig.WEATHER_API_ICON_URL, icon)
-
-    fun getTemperatureString(): String {
-        return temperature.createStringWithPlusOrMinusSign()
-    }
-
-    fun getTemperatureFeelsLikeString(): String {
-        return temperatureFeelsLike.createStringWithPlusOrMinusSign()
-    }
-
-    private fun Int.createStringWithPlusOrMinusSign(): String {
-        if(this < 0) return toString()
-        return String.format("+%d", this)
-    }
+    val iconUrl = String.format("%s%s@2x.png", BuildConfig.WEATHER_API_ICON_URL, icon)
+    val temperatureString = temperature.createStringWithPlusOrMinusSign()
+    val temperatureFeelsLikeString = temperatureFeelsLike.createStringWithPlusOrMinusSign()
 }

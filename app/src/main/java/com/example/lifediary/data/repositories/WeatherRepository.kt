@@ -5,6 +5,7 @@ import com.example.lifediary.data.datasources.WeatherLocalDataSource
 import com.example.lifediary.data.datasources.WeatherRemoteDataSource
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.domain.Weather
+import com.example.lifediary.data.domain.WeatherForecast
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,7 +18,11 @@ class WeatherRepository @Inject constructor(
         return remoteDataSource.findLocations(name)
     }
 
-    fun getLocation(): LiveData<Location?> {
+    fun getLocationLiveData(): LiveData<Location?> {
+        return localDataSource.getLocationLiveData()
+    }
+
+    fun getLocation(): Location? {
         return localDataSource.getLocation()
     }
 
@@ -32,5 +37,9 @@ class WeatherRepository @Inject constructor(
     suspend fun updateCurrentWeather(locationId: Long) {
         val currentWeather = remoteDataSource.getCurrentWeather(locationId)
         localDataSource.saveCurrentWeather(currentWeather)
+    }
+
+    suspend fun getForecast(locationId: Long): WeatherForecast {
+        return remoteDataSource.getForecast(locationId)
     }
 }

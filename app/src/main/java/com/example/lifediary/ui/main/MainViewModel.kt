@@ -37,7 +37,7 @@ class MainViewModel : BaseViewModel() {
 
     init {
         bindAppScope()
-        location = repository.getLocation()
+        location = repository.getLocationLiveData()
         locationName = location.map { it?.name }
         currentWeather = repository.getCurrentWeather()
         isCurrentWeatherViewVisible = location.map { it != null }

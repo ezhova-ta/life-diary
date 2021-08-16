@@ -13,3 +13,13 @@ fun Calendar.toDateTimeString(withMilliseconds: Boolean = false): String {
     val format = SimpleDateFormat(pattern, Locale.getDefault())
     return format.format(time)
 }
+
+fun Calendar.isSameDay(dateInSeconds: Long): Boolean {
+    val dateInMillis = dateInSeconds * 1000
+    val date = Calendar.getInstance()
+    date.timeInMillis = dateInMillis
+
+    return get(Calendar.DATE) == date.get(Calendar.DATE) &&
+           get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
+           get(Calendar.YEAR) == date.get(Calendar.YEAR)
+}
