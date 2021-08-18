@@ -10,10 +10,13 @@ import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
+import com.example.lifediary.ui.common.CalendarMonthViewContainer
 import com.example.lifediary.utils.toCalendar
 import com.kizitonwose.calendarview.model.CalendarDay
+import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
+import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.ZoneId
@@ -45,6 +48,7 @@ class CalendarFragment : BaseFragment() {
 
     private fun setupCalendarView() {
         binding.calendarView.dayBinder = createCalendarDayBinder()
+        binding.calendarView.monthHeaderBinder = createCalendarMonthBinder()
         val currentMonth = YearMonth.now()
         val firstMonth = currentMonth.minusMonths(10)
         val lastMonth = currentMonth.plusMonths(10)
@@ -58,16 +62,26 @@ class CalendarFragment : BaseFragment() {
 
         override fun bind(container: CalendarDayViewContainer, day: CalendarDay) {
             container.day = day
-            container.textView.text = day.getDayNumber()
-            container.textView.setTextColor(day.getTextColor())
+            container.dayTextView.text = day.getDayNumber()
+            container.dayTextView.setTextColor(day.getTextColor())
 
             if(day.isToday()) {
                 container.setSelectedStyle()
+            } else {
+                container.setNormalStyle()
             }
 
             container.setOnClickListener {
                 viewModel.onDateClick(it.date.toCalendar())
             }
+        }
+    }
+
+    private fun createCalendarMonthBinder() = object : MonthHeaderFooterBinder<CalendarMonthViewContainer> {
+        override fun create(view: View) = CalendarMonthViewContainer(view)
+
+        override fun bind(container: CalendarMonthViewContainer, month: CalendarMonth) {
+            container.monthTextView.text = String.format("%s %d", month.yearMonth.month.name, month.year)
         }
     }
 

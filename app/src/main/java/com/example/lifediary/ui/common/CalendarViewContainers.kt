@@ -2,12 +2,13 @@ package com.example.lifediary.ui.common
 
 import android.view.View
 import com.example.lifediary.databinding.CalendarDayLayoutBinding
+import com.example.lifediary.databinding.CalendarMonthLayoutBinding
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.ViewContainer
 
 class CalendarDayViewContainer(view: View) : ViewContainer(view) {
     val binding = CalendarDayLayoutBinding.bind(view)
-    val textView = binding.dayText
+    val dayTextView = binding.dayText
     lateinit var day: CalendarDay
 
     fun setOnClickListener(onClick: (CalendarDay) -> Unit) {
@@ -31,4 +32,8 @@ class CalendarDayViewContainer(view: View) : ViewContainer(view) {
     fun hideNoteIcon() {
         binding.noteIcon.visibility = View.INVISIBLE
     }
+}
+
+class CalendarMonthViewContainer(view: View) : ViewContainer(view) {
+    val monthTextView = CalendarMonthLayoutBinding.bind(view).monthText
 }
