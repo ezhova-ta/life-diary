@@ -1,6 +1,7 @@
 package com.example.lifediary.utils
 
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 fun Calendar.toDateString(): String {
@@ -23,3 +24,15 @@ fun Calendar.isSameDay(dateInSeconds: Long): Boolean {
         get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
         get(Calendar.YEAR) == date.get(Calendar.YEAR)
 }
+
+fun LocalDate.toCalendar(): Calendar = Calendar.getInstance().apply {
+    set(Calendar.DATE, dayOfMonth)
+    set(Calendar.MONTH, monthValue - 1)
+    set(Calendar.YEAR, year)
+}
+
+fun Calendar.toLocalDate(): LocalDate = LocalDate.of(
+    get(Calendar.DATE),
+    get(Calendar.MONTH + 1),
+    get(Calendar.YEAR)
+)
