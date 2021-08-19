@@ -21,4 +21,8 @@ class NotesRepository @Inject constructor(
     suspend fun saveNotes(notes: Notes) {
         localDataSource.saveNotes(notes)
     }
+
+    suspend fun saveNotes(text: String) {
+        localDataSource.saveNotes(Notes(text = text))
+    }
 }

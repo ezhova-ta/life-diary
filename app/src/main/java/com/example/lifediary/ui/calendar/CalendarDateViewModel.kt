@@ -15,6 +15,7 @@ import com.example.lifediary.utils.Text
 import com.example.lifediary.utils.isSameDay
 import com.example.lifediary.utils.toDateString
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -62,7 +63,12 @@ class CalendarDateViewModel : BaseViewModel() {
 	}
 
 	fun onAddNotesClick() {
-		TODO()
+		// TODO Real text
+		val testNotesText = "This book is a treatise on the theory of ethics, very popular during the Renaissance."
+
+		CoroutineScope(Dispatchers.IO).launch {
+			notesRepository.saveNotes(testNotesText)
+		}
 	}
 
 	fun onEditNotesClick() {
