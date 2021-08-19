@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="@id/selectedBackground"
         app:layout_constraintEnd_toEndOf="@id/selectedBackground"
         android:layout_marginTop="-4dp"
-        android:background="@drawable/note_icon_view_for_calendar_day"
+        android:background="@drawable/notes_icon_view_for_calendar_day"
         android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

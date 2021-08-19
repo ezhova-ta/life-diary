@@ -6,6 +6,7 @@ import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
 import com.example.lifediary.data.db.dao.CurrentWeatherDao
 import com.example.lifediary.data.db.dao.LocationDao
+import com.example.lifediary.data.db.dao.NotesDao
 import com.example.lifediary.data.db.dao.ShoppingListDao
 import com.example.lifediary.di.providers.*
 import com.github.terrakok.cicerone.NavigatorHolder
@@ -25,6 +26,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(ShoppingListDao::class.java).toProvider(ShoppingListDaoProvider::class.java)
         bind(LocationDao::class.java).toProvider(LocationDaoProvider::class.java)
         bind(CurrentWeatherDao::class.java).toProvider(CurrentWeatherDaoProvider::class.java)
+        bind(NotesDao::class.java).toProvider(NotesDaoProvider::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())

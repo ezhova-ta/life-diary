@@ -1,11 +1,13 @@
 package com.example.lifediary.ui.calendar
 
-import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.lifediary.R
+import com.example.lifediary.data.domain.Notes
 import com.example.lifediary.data.domain.WeatherForecast
+import com.example.lifediary.data.repositories.NotesRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.OneTimeEvent
@@ -22,14 +24,15 @@ class CalendarDateViewModel : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
-	lateinit var repository: WeatherRepository
+	lateinit var weatherRepository: WeatherRepository
+	@Inject
+	lateinit var notesRepository: NotesRepository
 
 	lateinit var date: Calendar
 	val title: String by lazy { date.toDateString() }
-	val noteText = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source."
-	val noteRolledUpMaxLines = 5
-	val isAddNoteVisible = true
-	val isNoteVisible = false
+	private val notes: LiveData<Notes?>
+	val notesText: LiveData<String?>
+	val isNotesVisible: LiveData<Boolean>
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->
@@ -42,11 +45,14 @@ class CalendarDateViewModel : BaseViewModel() {
 
 	init {
 		bindAppScope()
+		notes = notesRepository.getNotesLiveData()
+		notesText = notes.map { it?.text }
+		isNotesVisible = notes.map { it != null }
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				val locationId = repository.getLocation()?.id ?: throw NullPointerException()
-				val forecast = repository.getForecast(locationId)
+				val locationId = weatherRepository.getLocation()?.id ?: throw NullPointerException()
+				val forecast = weatherRepository.getForecast(locationId)
 				weatherForecast.postValue(forecast)
 			} catch(e: Exception) {
 				val messageRes = R.string.failed_to_get_forecast
@@ -55,11 +61,11 @@ class CalendarDateViewModel : BaseViewModel() {
 		}
 	}
 
-	fun onAddNoteClick() {
-		Log.d("fffffffffffff", "onAddNoteClick")
+	fun onAddNotesClick() {
+		TODO()
 	}
 
-	fun onEditNoteClick() {
-		Log.d("fffffffffffff", "onEditNoteClick")
+	fun onEditNotesClick() {
+		TODO()
 	}
 }

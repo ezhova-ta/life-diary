@@ -16,10 +16,15 @@ class RollOutTextPanel(context: Context, attrs: AttributeSet) : FrameLayout(cont
             binding.textView.maxLines = value
         }
 
-    var text: String = ""
+    var text: String? = null
         set(value) {
             field = value
-            binding.textView.text = text
+
+            if(value == null) {
+                binding.textView.text = ""
+            } else {
+                binding.textView.text = text
+            }
         }
 
     companion object {
