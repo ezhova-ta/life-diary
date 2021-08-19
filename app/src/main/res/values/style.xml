@@ -27,6 +27,16 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="Text.MainControlsHint">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text.Substrate">
+        <item name="android:padding">8dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="ScreenContainer">
         <item name="android:padding">16dp</item>
     </style>

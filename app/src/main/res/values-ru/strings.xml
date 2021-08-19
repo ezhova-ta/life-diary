@@ -21,4 +21,5 @@
     <string name="deleting_item_error">Ошибка при удалении элемента</string>
     <string name="write_note">Напишите записк</string>
     <string name="failed_to_get_forecast">Не удалось получить прогноз погоды</string>
+    <string name="add_note">Добавить заметку</string>
 </resources>
