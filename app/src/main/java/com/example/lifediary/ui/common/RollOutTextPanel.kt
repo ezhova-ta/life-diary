@@ -23,7 +23,7 @@ class RollOutTextPanel(context: Context, attrs: AttributeSet) : FrameLayout(cont
         }
 
     companion object {
-        private const val ROLLED_OUT_MAX_LINES = 200
+        private const val ROLLED_OUT_MAX_LINES = 100
     }
 
     init {
