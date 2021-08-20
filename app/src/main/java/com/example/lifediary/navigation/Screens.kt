@@ -1,6 +1,6 @@
 package com.example.lifediary.navigation
 
-import com.example.lifediary.ui.calendar.CalendarDateFragment
+import com.example.lifediary.ui.calendar.date.CalendarDateFragment
 import com.example.lifediary.ui.calendar.CalendarFragment
 import com.example.lifediary.ui.location.selection.LocationSelectionFragment
 import com.example.lifediary.ui.main.MainFragment

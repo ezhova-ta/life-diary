@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.calendar.CalendarDateViewModel" />
+            type="com.example.lifediary.ui.calendar.date.CalendarDateViewModel" />
     </data>
 
     <ScrollView

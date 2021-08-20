@@ -1,4 +1,4 @@
-package com.example.lifediary.ui.calendar
+package com.example.lifediary.ui.calendar.date
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

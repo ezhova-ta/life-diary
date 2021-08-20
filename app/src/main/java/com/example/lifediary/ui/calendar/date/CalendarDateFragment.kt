@@ -1,4 +1,4 @@
-package com.example.lifediary.ui.calendar
+package com.example.lifediary.ui.calendar.date
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.example.lifediary.ui.BaseFragment
 import java.util.*
 
 class CalendarDateFragment : BaseFragment() {
-    override val viewModel: CalendarDateViewModel  by viewModels()
+    override val viewModel: CalendarDateViewModel by viewModels()
     private var _binding: FragmentCalendarDateBinding? = null
     private val binding get() = _binding!!
 
