@@ -9,14 +9,14 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentAddNotesBinding
 import com.example.lifediary.ui.BaseFragment
 
-class AddNotesFragment : BaseFragment() {
-    override val viewModel: AddNotesViewModel by viewModels()
+class AddEditNotesFragment : BaseFragment() {
+    override val viewModel: AddEditNotesViewModel by viewModels()
     private var _binding: FragmentAddNotesBinding? = null
     private val binding get() = _binding!!
 
     companion object {
         fun getInstance(): Fragment {
-            return AddNotesFragment()
+            return AddEditNotesFragment()
         }
     }
 

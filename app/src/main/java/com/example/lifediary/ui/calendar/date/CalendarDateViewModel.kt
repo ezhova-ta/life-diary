@@ -63,10 +63,10 @@ class CalendarDateViewModel : BaseViewModel() {
 	}
 
 	fun onAddNotesClick() {
-		router.navigateTo(Screens.getAddNotesFragment())
+		router.navigateTo(Screens.getAddEditNotesFragment())
 	}
 
 	fun onEditNotesClick() {
-		TODO()
+		router.navigateTo(Screens.getAddEditNotesFragment())
 	}
 }

@@ -1,6 +1,7 @@
 package com.example.lifediary.ui.notes
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.lifediary.R
 import com.example.lifediary.data.repositories.NotesRepository
 import com.example.lifediary.ui.BaseViewModel
@@ -12,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddNotesViewModel : BaseViewModel() {
+class AddEditNotesViewModel : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
@@ -22,6 +23,16 @@ class AddNotesViewModel : BaseViewModel() {
 
 	init {
 		bindAppScope()
+
+		viewModelScope.launch(Dispatchers.IO) {
+			try {
+				val existingNotesText = notesRepository.getNotes()?.text ?: return@launch
+				notesText.postValue(existingNotesText)
+			} catch(e: Exception) {
+				val messageRes = R.string.error
+				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+			}
+		}
 	}
 
 	fun onSaveNotesClick() {

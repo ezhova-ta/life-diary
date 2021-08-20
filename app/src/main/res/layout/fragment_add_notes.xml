@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.notes.AddNotesViewModel" />
+            type="com.example.lifediary.ui.notes.AddEditNotesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
