@@ -24,14 +24,22 @@ class AddNotesViewModel : BaseViewModel() {
 		bindAppScope()
 	}
 
-	fun onSaveClick() {
-//		CoroutineScope(Dispatchers.IO).launch {
-//			try {
-//				notesRepository.saveNotes(testNotesText)
-//			} catch(e: Exception) {
-//				val messageRes = R.string.failed_to_save
-//				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
-//			}
-//		}
+	fun onSaveNotesClick() {
+		val text = notesText.value?.trim()
+
+		if(text.isNullOrBlank()) {
+			notesText.value = ""
+			return
+		}
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				notesRepository.saveNotes(text)
+				router.exit()
+			} catch(e: Exception) {
+				val messageRes = R.string.failed_to_save
+				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+			}
+		}
 	}
 }

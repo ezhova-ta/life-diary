@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="@id/addNoteInputContainer"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/icon_check_green"
-            android:onClick="@{() -> viewModel.onSaveClick()}" />
+            android:onClick="@{() -> viewModel.onSaveNotesClick()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
