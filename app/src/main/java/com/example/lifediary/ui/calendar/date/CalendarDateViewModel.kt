@@ -67,7 +67,12 @@ class CalendarDateViewModel : BaseViewModel() {
 		val testNotesText = "This book is a treatise on the theory of ethics, very popular during the Renaissance."
 
 		CoroutineScope(Dispatchers.IO).launch {
-			notesRepository.saveNotes(testNotesText)
+			try {
+				notesRepository.saveNotes(testNotesText)
+			} catch(e: Exception) {
+				val messageRes = R.string.failed_to_save
+				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+			}
 		}
 	}
 
