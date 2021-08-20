@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.lifediary.ui.notes.AddNotesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/ScreenContainer"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ScrollView
+            android:id="@+id/addNoteInputContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/saveButton"
+            android:padding="8dp"
+            android:background="@drawable/background_substrate_light_gray">
+            <EditText
+                android:id="@+id/addNoteInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:includeFontPadding="false"
+                android:text="@={viewModel.notesText}"
+                android:hint="@string/write_a_note" />
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/saveButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="@id/addNoteInputContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/icon_check_green"
+            android:onClick="@{() -> viewModel.onSaveClick()}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

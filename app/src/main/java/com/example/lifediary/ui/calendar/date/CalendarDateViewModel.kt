@@ -9,13 +9,13 @@ import com.example.lifediary.data.domain.Notes
 import com.example.lifediary.data.domain.WeatherForecast
 import com.example.lifediary.data.repositories.NotesRepository
 import com.example.lifediary.data.repositories.WeatherRepository
+import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import com.example.lifediary.utils.isSameDay
 import com.example.lifediary.utils.toDateString
 import com.github.terrakok.cicerone.Router
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -63,17 +63,7 @@ class CalendarDateViewModel : BaseViewModel() {
 	}
 
 	fun onAddNotesClick() {
-		// TODO Real text
-		val testNotesText = "This book is a treatise on the theory of ethics, very popular during the Renaissance."
-
-		CoroutineScope(Dispatchers.IO).launch {
-			try {
-				notesRepository.saveNotes(testNotesText)
-			} catch(e: Exception) {
-				val messageRes = R.string.failed_to_save
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
-			}
-		}
+		router.navigateTo(Screens.getAddNotesFragment())
 	}
 
 	fun onEditNotesClick() {
