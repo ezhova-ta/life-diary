@@ -8,15 +8,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentAddNotesBinding
 import com.example.lifediary.ui.BaseFragment
+import com.example.lifediary.utils.Day
 
 class AddEditNotesFragment : BaseFragment() {
-    override val viewModel: AddEditNotesViewModel by viewModels()
+    override val viewModel: AddEditNotesViewModel by viewModels(
+        factoryProducer = { AddEditNotesViewModel.Factory(getDayFromArgument()) }
+    )
     private var _binding: FragmentAddNotesBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        fun getInstance(): Fragment {
-            return AddEditNotesFragment()
+        private const val DAY_KEY = "com.example.lifediary.ui.notes.TIME_IN_MILLIS_KEY"
+
+        fun getInstance(day: Day): Fragment {
+            val fragment = AddEditNotesFragment()
+            fragment.arguments = Bundle().apply { putParcelable(DAY_KEY, day) }
+            return fragment
         }
     }
 
@@ -29,6 +36,11 @@ class AddEditNotesFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root
+    }
+
+    private fun getDayFromArgument(): Day {
+        // TODO !!
+        return requireArguments().getParcelable(DAY_KEY)!!
     }
 
     override fun onDestroyView() {

@@ -1,10 +1,14 @@
 package com.example.lifediary.ui.notes
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.lifediary.R
+import com.example.lifediary.data.domain.Notes
 import com.example.lifediary.data.repositories.NotesRepository
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
@@ -13,12 +17,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddEditNotesViewModel : BaseViewModel() {
+class AddEditNotesViewModel(private val day: Day) : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
 	lateinit var notesRepository: NotesRepository
 
+	private var existingNotes: Notes? = null
 	val notesText = MutableLiveData("")
 
 	init {
@@ -26,8 +31,8 @@ class AddEditNotesViewModel : BaseViewModel() {
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				val existingNotesText = notesRepository.getNotes()?.text ?: return@launch
-				notesText.postValue(existingNotesText)
+				existingNotes = notesRepository.getNotes(day)
+				existingNotes?.text?.let { notesText.postValue(it) }
 			} catch(e: Exception) {
 				val messageRes = R.string.error
 				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
@@ -45,12 +50,27 @@ class AddEditNotesViewModel : BaseViewModel() {
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				notesRepository.saveNotes(text)
+				val notes = existingNotes
+
+				if(notes == null) {
+					notesRepository.addNotes(text, day)
+				} else {
+					notes.text = text
+					notesRepository.updateNotes(notes)
+				}
+
 				router.exit()
 			} catch(e: Exception) {
 				val messageRes = R.string.failed_to_save
 				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
 			}
+		}
+	}
+
+	class Factory(private val day: Day) : ViewModelProvider.Factory {
+		@Suppress("UNCHECKED_CAST")
+		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+			return AddEditNotesViewModel(day) as T
 		}
 	}
 }

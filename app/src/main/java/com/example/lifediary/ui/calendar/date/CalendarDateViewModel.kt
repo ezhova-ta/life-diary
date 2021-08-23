@@ -1,9 +1,6 @@
 package com.example.lifediary.ui.calendar.date
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.Notes
 import com.example.lifediary.data.domain.WeatherForecast
@@ -11,17 +8,13 @@ import com.example.lifediary.data.repositories.NotesRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.OneTimeEvent
-import com.example.lifediary.utils.Text
-import com.example.lifediary.utils.isSameDay
-import com.example.lifediary.utils.toDateString
+import com.example.lifediary.utils.*
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
-class CalendarDateViewModel : BaseViewModel() {
+class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
@@ -29,15 +22,14 @@ class CalendarDateViewModel : BaseViewModel() {
 	@Inject
 	lateinit var notesRepository: NotesRepository
 
-	lateinit var date: Calendar
-	val title: String by lazy { date.toDateString() }
+	val title = day.toDateString()
 	private val notes: LiveData<Notes?>
 	val notesText: LiveData<String?>
 	val isNotesVisible: LiveData<Boolean>
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->
-		forecast.items.find { date.isSameDay(it.dateInSeconds) }
+		forecast.items.find { day.isSameDay(it.dateInSeconds) }
 	}
 
 	val isWeatherForecastContainerVisible = weatherForecastForDate.map { it != null }
@@ -46,7 +38,7 @@ class CalendarDateViewModel : BaseViewModel() {
 
 	init {
 		bindAppScope()
-		notes = notesRepository.getNotesLiveData()
+		notes = notesRepository.getNotesLiveData(day)
 		notesText = notes.map { it?.text }
 		isNotesVisible = notes.map { it != null }
 
@@ -63,10 +55,21 @@ class CalendarDateViewModel : BaseViewModel() {
 	}
 
 	fun onAddNotesClick() {
-		router.navigateTo(Screens.getAddEditNotesFragment())
+		navigateToAddEditNotesScreen()
 	}
 
 	fun onEditNotesClick() {
-		router.navigateTo(Screens.getAddEditNotesFragment())
+		navigateToAddEditNotesScreen()
+	}
+
+	private fun navigateToAddEditNotesScreen() {
+		router.navigateTo(Screens.getAddEditNotesFragment(day))
+	}
+
+	class Factory(private val day: Day) : ViewModelProvider.Factory {
+		@Suppress("UNCHECKED_CAST")
+		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+			return CalendarDateViewModel(day) as T
+		}
 	}
 }

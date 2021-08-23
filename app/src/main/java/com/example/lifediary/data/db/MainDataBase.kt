@@ -12,7 +12,7 @@ import com.example.lifediary.data.db.entities.ShoppingListItemEntity
 import com.example.lifediary.data.db.entities.WeatherEntity
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         ShoppingListItemEntity::class,
         LocationEntity::class,

@@ -11,7 +11,7 @@ import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
 import com.example.lifediary.ui.common.CalendarMonthViewContainer
-import com.example.lifediary.utils.toCalendar
+import com.example.lifediary.utils.toDomainDay
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -72,7 +72,7 @@ class CalendarFragment : BaseFragment() {
             }
 
             container.setOnClickListener {
-                viewModel.onDateClick(it.date.toCalendar())
+                viewModel.onDateClick(it.toDomainDay())
             }
         }
     }

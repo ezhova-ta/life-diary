@@ -3,6 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.NotesLocalDataSource
 import com.example.lifediary.data.domain.Notes
+import com.example.lifediary.utils.Day
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -10,19 +11,19 @@ import javax.inject.Singleton
 class NotesRepository @Inject constructor(
     private val localDataSource: NotesLocalDataSource
 ) {
-    fun getNotesLiveData(): LiveData<Notes?> {
-        return localDataSource.getNotesLiveData()
+    fun getNotesLiveData(day: Day): LiveData<Notes?> {
+        return localDataSource.getNotesLiveData(day)
     }
 
-    fun getNotes(): Notes? {
-        return localDataSource.getNotes()
+    fun getNotes(day: Day): Notes? {
+        return localDataSource.getNotes(day)
     }
 
-    suspend fun saveNotes(notes: Notes) {
-        localDataSource.saveNotes(notes)
+    suspend fun addNotes(text: String, day: Day) {
+        localDataSource.addNotes(Notes(text = text, day = day))
     }
 
-    suspend fun saveNotes(text: String) {
-        localDataSource.saveNotes(Notes(text = text))
+    suspend fun updateNotes(notes: Notes) {
+        localDataSource.updateNotes(notes)
     }
 }

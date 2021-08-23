@@ -1,3 +1,9 @@
 package com.example.lifediary.data.domain
 
-data class Notes(val id: Long? = null, val text: String)
+import com.example.lifediary.utils.Day
+
+data class Notes(
+	val id: Long? = null,
+	var text: String,
+	val day: Day
+)
