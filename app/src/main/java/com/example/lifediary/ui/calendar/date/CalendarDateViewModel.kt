@@ -10,6 +10,7 @@ import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.*
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -60,6 +61,19 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	fun onEditNotesClick() {
 		navigateToAddEditNotesScreen()
+	}
+
+	fun onDeleteNotesClick() {
+		val notesId = notes.value?.id ?: return
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				notesRepository.deleteNotes(notesId)
+			} catch(e: Exception) {
+				val messageRes = R.string.error
+				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+			}
+		}
 	}
 
 	private fun navigateToAddEditNotesScreen() {

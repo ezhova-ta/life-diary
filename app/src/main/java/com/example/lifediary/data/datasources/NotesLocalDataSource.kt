@@ -24,4 +24,8 @@ class NotesLocalDataSource @Inject constructor(private val dao: NotesDao) {
     suspend fun updateNotes(notes: Notes) {
         dao.update(NotesEntity.fromDomain(notes))
     }
+
+    suspend fun deleteNotes(id: Long) {
+        dao.delete(id)
+    }
 }

@@ -100,18 +100,26 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/editNotesButton"
-                    android:layout_marginEnd="8dp"
                     app:text="@{viewModel.notesText}" />
 
                 <ImageView
                     android:id="@+id/editNotesButton"
+                    android:layout_width="40dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintTop_toTopOf="@id/notesView"
+                    app:layout_constraintEnd_toStartOf="@id/deleteNotesButton"
+                    android:paddingStart="8dp"
+                    android:src="@drawable/icon_edit_blue"
+                    android:onClick="@{() -> viewModel.onEditNotesClick()}" />
+
+                <ImageView
+                    android:id="@+id/deleteNotesButton"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     app:layout_constraintTop_toTopOf="@id/notesView"
-                    app:layout_constraintStart_toEndOf="@id/notesView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/icon_edit_blue"
-                    android:onClick="@{() -> viewModel.onEditNotesClick()}" />
+                    android:src="@drawable/icon_delete_red"
+                    android:onClick="@{() -> viewModel.onDeleteNotesClick()}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

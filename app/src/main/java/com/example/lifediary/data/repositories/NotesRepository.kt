@@ -26,4 +26,8 @@ class NotesRepository @Inject constructor(
     suspend fun updateNotes(notes: Notes) {
         localDataSource.updateNotes(notes)
     }
+
+    suspend fun deleteNotes(id: Long) {
+        localDataSource.deleteNotes(id)
+    }
 }
