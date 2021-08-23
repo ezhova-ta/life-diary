@@ -54,7 +54,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_check_green"
                 android:onClick="@{() -> viewModel.onSaveNotesClick()}"
-                app:booleanVisibility="@{viewModel.isSaveButtonVisible}" />
+                app:booleanVisibility="@{!viewModel.isAddButtonVisible}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

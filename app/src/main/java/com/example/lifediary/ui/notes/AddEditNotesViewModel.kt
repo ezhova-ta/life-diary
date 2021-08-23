@@ -23,13 +23,10 @@ class AddEditNotesViewModel(private val day: Day) : BaseViewModel() {
 	private var existingNotes: Notes? = null
 	val notesText = MutableLiveData("")
 	val isAddButtonVisible: LiveData<Boolean>
-	val isSaveButtonVisible: LiveData<Boolean>
 
 	init {
 		bindAppScope()
-		val existingNotesLiveData = notesRepository.getNotesLiveData(day)
-		isAddButtonVisible = existingNotesLiveData.map { it == null }
-		isSaveButtonVisible = existingNotesLiveData.map { it != null }
+		isAddButtonVisible = notesRepository.getNotesLiveData(day).map { it == null }
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
