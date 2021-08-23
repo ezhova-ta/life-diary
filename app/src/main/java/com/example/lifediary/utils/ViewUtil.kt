@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.example.lifediary.ui.common.CurrentWeatherView
 
-// TODO Correct fun name
 fun EditText.requestFocusWithKeyboard() {
     requestFocus()
     showKeyboard()
@@ -22,7 +21,6 @@ private fun View.showKeyboard() {
     }
 }
 
-// TODO Correct fun name
 fun EditText.clearFocusWithKeyboard(activity: Activity?) {
     clearFocus()
     activity?.hideKeyboard()

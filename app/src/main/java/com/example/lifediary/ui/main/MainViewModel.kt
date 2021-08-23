@@ -46,7 +46,6 @@ class MainViewModel : BaseViewModel() {
         location.observeForever(locationObserver)
     }
 
-    // TODO True solution?
     fun onScreenResumed() {
         location.value?.id?.let {
             updateCurrentWeather(it)

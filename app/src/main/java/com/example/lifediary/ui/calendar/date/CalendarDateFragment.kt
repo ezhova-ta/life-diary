@@ -45,7 +45,6 @@ class CalendarDateFragment : BaseFragment() {
     }
 
     private fun getDayFromArgument(): Day {
-        // TODO !!
         return requireArguments().getParcelable(DAY_KEY)!!
     }
 

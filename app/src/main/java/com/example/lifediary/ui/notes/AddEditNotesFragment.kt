@@ -39,7 +39,6 @@ class AddEditNotesFragment : BaseFragment() {
     }
 
     private fun getDayFromArgument(): Day {
-        // TODO !!
         return requireArguments().getParcelable(DAY_KEY)!!
     }
 
