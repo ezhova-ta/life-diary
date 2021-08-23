@@ -1,18 +1,18 @@
 package com.example.lifediary.data.db.converters
 
 import androidx.room.TypeConverter
+import com.example.lifediary.utils.toCalendar
+import com.example.lifediary.utils.toLong
 import java.util.*
 
 class CalendarConverter {
     @TypeConverter
     fun calendarToLong(calendar: Calendar): Long {
-        return calendar.timeInMillis
+        return calendar.toLong()
     }
 
     @TypeConverter
     fun longToCalendar(long: Long): Calendar {
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = long
-        return calendar
+        return long.toCalendar()
     }
 }

@@ -4,6 +4,16 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
+fun Calendar.toLong(): Long {
+    return timeInMillis
+}
+
+fun Long.toCalendar(): Calendar {
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = this
+    return calendar
+}
+
 fun Calendar.toDateString(): String {
     val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     return format.format(time)
