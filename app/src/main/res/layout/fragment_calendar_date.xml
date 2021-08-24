@@ -19,49 +19,54 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <ImageView
-                android:id="@+id/calendarIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/icon_calendar_logo" />
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/Text"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dateWeatherContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/calendarIcon"
-                app:layout_constraintBottom_toBottomOf="@+id/calendarIcon"
-                app:layout_constraintStart_toEndOf="@id/calendarIcon"
-                android:textColor="@color/app_green"
-                android:textSize="24sp"
-                tools:text="16.08.2021"
-                android:text="@{viewModel.title}" />
+                app:layout_constraintTop_toTopOf="parent">
+                <ImageView
+                    android:id="@+id/calendarIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/icon_calendar_logo" />
 
-            <com.example.lifediary.ui.common.WeatherForecastView
-                android:id="@+id/weatherForecastView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:booleanVisibility="@{viewModel.isWeatherForecastContainerVisible()}"
-                app:dayTemperature='@{String.format("%s°C", viewModel.weatherForecastForDate.temperature.dayString)}'
-                app:nightTemperature='@{String.format("%s°C", viewModel.weatherForecastForDate.temperature.nightString)}'
-                app:weatherIconUrl="@{viewModel.weatherForecastIconUrl}"
-                app:description="@{viewModel.weatherForecastDescription}"
-                app:windSpeed='@{String.format("%.1f%s", viewModel.weatherForecastForDate.windSpeed, @string/meters_per_second)}'
-                app:humidity='@{String.format("%d%s", viewModel.weatherForecastForDate.humidity, "%")}' />
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/calendarIcon"
+                    app:layout_constraintBottom_toBottomOf="@+id/calendarIcon"
+                    app:layout_constraintStart_toEndOf="@id/calendarIcon"
+                    android:textColor="@color/app_green"
+                    android:textSize="24sp"
+                    tools:text="16.08.2021"
+                    android:text="@{viewModel.title}" />
+
+                <com.example.lifediary.ui.common.WeatherForecastView
+                    android:id="@+id/weatherForecastView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:booleanVisibility="@{viewModel.isWeatherForecastContainerVisible()}"
+                    app:dayTemperature='@{String.format("%s°C", viewModel.weatherForecastForDate.temperature.dayString)}'
+                    app:nightTemperature='@{String.format("%s°C", viewModel.weatherForecastForDate.temperature.nightString)}'
+                    app:weatherIconUrl="@{viewModel.weatherForecastIconUrl}"
+                    app:description="@{viewModel.weatherForecastDescription}"
+                    app:windSpeed='@{String.format("%.1f%s", viewModel.weatherForecastForDate.windSpeed, @string/meters_per_second)}'
+                    app:humidity='@{String.format("%d%s", viewModel.weatherForecastForDate.humidity, "%")}' />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/addNotesContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dateWeatherContainer"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="110dp"
+                android:layout_marginTop="16dp"
                 app:booleanVisibility="@{!viewModel.notesVisible}"
                 android:onClick="@{() -> viewModel.onAddNotesClick()}">
 
@@ -89,8 +94,8 @@
                 android:id="@+id/notesContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="110dp"
+                app:layout_constraintTop_toBottomOf="@id/dateWeatherContainer"
+                android:layout_marginTop="16dp"
                 app:booleanVisibility="@{viewModel.notesVisible}">
 
                 <com.example.lifediary.ui.common.RollOutTextPanel
