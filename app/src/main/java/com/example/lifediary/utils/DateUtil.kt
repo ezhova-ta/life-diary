@@ -2,6 +2,8 @@ package com.example.lifediary.utils
 
 import com.kizitonwose.calendarview.model.CalendarDay
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.*
 
 fun Calendar.toLong(): Long {
@@ -33,6 +35,12 @@ private fun Day.toCalendar(): Calendar {
     }
 }
 
+fun Day.isSameDay(date: CalendarDay): Boolean {
+    return dayNumber == date.date.dayOfMonth &&
+        monthNumber == date.date.monthValue &&
+        year == date.date.year
+}
+
 fun Day.isSameDay(dateInSeconds: Long): Boolean {
     val dateInMillis = dateInSeconds * 1000
     val date = Calendar.getInstance().apply {
@@ -50,4 +58,9 @@ private fun Calendar.getMonthNumber(): Int {
 
 fun CalendarDay.toDomainDay(): Day {
     return Day(date.dayOfMonth, date.monthValue, date.year)
+}
+
+fun CalendarDay.isToday(): Boolean {
+    val today = LocalDate.now(ZoneId.systemDefault())
+    return date.isEqual(today)
 }

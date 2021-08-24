@@ -7,19 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
+import com.example.lifediary.data.domain.Notes
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
 import com.example.lifediary.ui.common.CalendarMonthViewContainer
+import com.example.lifediary.utils.isSameDay
+import com.example.lifediary.utils.isToday
 import com.example.lifediary.utils.toDomainDay
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
-import java.time.LocalDate
 import java.time.YearMonth
-import java.time.ZoneId
 import java.time.temporal.WeekFields
 import java.util.*
 
@@ -27,6 +28,7 @@ class CalendarFragment : BaseFragment() {
     override val viewModel: CalendarViewModel  by viewModels()
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
+    private var notesList = listOf<Notes>()
 
     companion object {
         fun getInstance(): Fragment {
@@ -55,6 +57,14 @@ class CalendarFragment : BaseFragment() {
         val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
         binding.calendarView.scrollToMonth(currentMonth) // TODO Execute only once
+        setupDisplayingNotesIconsInCalendar()
+    }
+
+    private fun setupDisplayingNotesIconsInCalendar() {
+        viewModel.notesList.observe(viewLifecycleOwner) { notesList ->
+            this.notesList = notesList
+            binding.calendarView.notifyCalendarChanged()
+        }
     }
 
     private fun createCalendarDayBinder() = object : DayBinder<CalendarDayViewContainer> {
@@ -64,6 +74,7 @@ class CalendarFragment : BaseFragment() {
             container.day = day
             container.dayTextView.text = day.getDayNumber()
             container.dayTextView.setTextColor(day.getTextColor())
+            container.setOnClickListener { viewModel.onDateClick(it.toDomainDay()) }
 
             if(day.isToday()) {
                 container.setSelectedStyle()
@@ -71,9 +82,15 @@ class CalendarFragment : BaseFragment() {
                 container.setNormalStyle()
             }
 
-            container.setOnClickListener {
-                viewModel.onDateClick(it.toDomainDay())
+            if(isNotesExistFor(day)) {
+                container.showNoteIcon()
+            } else {
+                container.hideNoteIcon()
             }
+        }
+
+        private fun isNotesExistFor(day: CalendarDay): Boolean {
+            return notesList.find { it.day.isSameDay(day) } != null
         }
     }
 
@@ -95,11 +112,6 @@ class CalendarFragment : BaseFragment() {
         } else {
             resources.getColor(R.color.app_medium_gray, requireContext().theme)
         }
-    }
-
-    private fun CalendarDay.isToday(): Boolean {
-        val today = LocalDate.now(ZoneId.systemDefault())
-        return date.isEqual(today)
     }
 
     override fun onDestroyView() {

@@ -17,6 +17,18 @@ class NotesLocalDataSource @Inject constructor(private val dao: NotesDao) {
         return dao.get(day.dayNumber, day.monthNumber, day.year)?.toDomain()
     }
 
+    fun getAllNotes(): LiveData<List<Notes>> {
+        return dao.getAll().toDomain()
+    }
+
+    private fun LiveData<List<NotesEntity>>.toDomain(): LiveData<List<Notes>> {
+        return map { notesEntityList ->
+            notesEntityList.map { notesEntity ->
+                notesEntity.toDomain()
+            }
+        }
+    }
+
     suspend fun addNotes(notes: Notes) {
         dao.insert(NotesEntity.fromDomain(notes))
     }

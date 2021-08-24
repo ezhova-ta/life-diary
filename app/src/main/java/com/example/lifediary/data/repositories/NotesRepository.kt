@@ -19,6 +19,10 @@ class NotesRepository @Inject constructor(
         return localDataSource.getNotes(day)
     }
 
+    fun getAllNotes(): LiveData<List<Notes>> {
+        return localDataSource.getAllNotes()
+    }
+
     suspend fun addNotes(text: String, day: Day) {
         localDataSource.addNotes(Notes(text = text, day = day))
     }
