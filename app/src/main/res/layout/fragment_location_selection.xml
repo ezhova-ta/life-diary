@@ -63,7 +63,7 @@
 
         <ProgressBar
             android:id="@+id/progressView"
-            style="@style/CommonProgressBar"
+            style="@style/ProgressBar"
             app:layout_constraintTop_toTopOf="@id/locationListView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -41,7 +41,7 @@
         <item name="android:padding">16dp</item>
     </style>
 
-    <style name="CommonProgressBar">
+    <style name="ProgressBar">
         <item name="android:layout_width">42dp</item>
         <item name="android:layout_height">42dp</item>
         <item name="android:indeterminate">true</item>
@@ -53,5 +53,11 @@
         <item name="android:background">@drawable/background_substrate_light_gray</item>
         <item name="android:textCursorDrawable">@drawable/edit_text_cursor_blue</item>
         <item name="android:textColorHighlight">@color/app_light_blue</item>
+    </style>
+
+    <style name="MainScreenSticker">
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@drawable/background_sticker</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>

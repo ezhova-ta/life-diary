@@ -83,6 +83,10 @@ class MainViewModel : BaseViewModel() {
         router.navigateTo(Screens.getShoppingListScreen())
     }
 
+    fun onPostAddressesClick() {
+        router.navigateTo(Screens.getPostAddressesScreen())
+    }
+
     override fun onCleared() {
         location.removeObserver(locationObserver)
         super.onCleared()

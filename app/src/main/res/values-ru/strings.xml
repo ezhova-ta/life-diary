@@ -22,4 +22,5 @@
     <string name="failed_to_get_forecast">Не удалось получить прогноз погоды</string>
     <string name="add_note">Добавить заметку</string>
     <string name="write_a_note">Напишите заметку</string>
+    <string name="post_addresses">Почтовые адреса</string>
 </resources>
