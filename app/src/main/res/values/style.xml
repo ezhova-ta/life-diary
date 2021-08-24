@@ -37,6 +37,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="Text.InputHint">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="ScreenContainer">
         <item name="android:padding">16dp</item>
     </style>

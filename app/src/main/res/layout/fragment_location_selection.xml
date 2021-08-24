@@ -15,13 +15,12 @@
 
         <TextView
             android:id="@+id/searchLocationInputHint"
-            style="@style/Text"
+            style="@style/Text.InputHint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="14sp"
             android:text="@string/enter_ful_name_your_location" />
 
         <EditText

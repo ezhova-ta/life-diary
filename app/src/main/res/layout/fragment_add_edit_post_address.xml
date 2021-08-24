@@ -12,5 +12,110 @@
         android:layout_height="match_parent"
         style="@style/ScreenContainer">
 
+        <TextView
+            android:id="@+id/inputsHint"
+            style="@style/Text.InputHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/fields_marked_asterisk_required" />
+
+        <EditText
+            android:id="@+id/addresseeNameInput"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/inputsHint"
+            android:layout_marginTop="8dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="@string/addressee_name"
+            android:text="@={viewModel.addresseeName}" />
+
+        <EditText
+            android:id="@+id/addresseeStreetInput"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addresseeNameInput"
+            android:layout_marginTop="8dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="@string/street"
+            android:text="@={viewModel.addresseeStreet}" />
+
+        <EditText
+            android:id="@+id/addresseeBuildingInput"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addresseeStreetInput"
+            android:layout_marginTop="8dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="@string/building_number"
+            android:text="@={viewModel.addresseeBuildingNumber}" />
+
+        <EditText
+            android:id="@+id/addresseeApartmentInput"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addresseeBuildingInput"
+            android:layout_marginTop="8dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="@string/apartment_number"
+            android:text="@={viewModel.addresseeApartmentNumber}" />
+
+        <EditText
+            android:id="@+id/addresseeCityInput"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addresseeApartmentInput"
+            android:layout_marginTop="8dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="@string/settlement"
+            android:text="@={viewModel.addresseeCity}" />
+
+        <EditText
+            android:id="@+id/addresseeEdgeRegionInput"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addresseeCityInput"
+            android:layout_marginTop="8dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="@string/edge_region_optional"
+            android:text="@={viewModel.addresseeEdgeRegion}" />
+
+        <EditText
+            android:id="@+id/addresseePostcodeInput"
+            style="@style/Input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addresseeEdgeRegionInput"
+            android:layout_marginTop="8dp"
+            android:inputType="number"
+            android:singleLine="true"
+            android:hint="@string/postcode"
+            android:text="@={viewModel.addresseePostcode}" />
+
+        <ImageButton
+            android:id="@+id/addPostAddressButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toBottomOf="@id/addresseePostcodeInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:inputType="text"
+            android:src="@drawable/icon_plus_green"
+            android:background="@null"
+            android:onClick="@{() -> viewModel.onSavePostAddressClick()}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
