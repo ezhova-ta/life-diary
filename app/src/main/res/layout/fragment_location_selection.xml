@@ -26,15 +26,15 @@
 
         <EditText
             android:id="@+id/searchLocationInput"
+            style="@style/Input"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/searchLocationInputHint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/searchLocationButton"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:inputType="text"
-            android:includeFontPadding="false"
             android:singleLine="true"
             android:maxLength="70"
             android:text="@={viewModel.locationName}"

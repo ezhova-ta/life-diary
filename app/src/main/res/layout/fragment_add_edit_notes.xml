@@ -20,15 +20,13 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/buttonsContainer"
-            android:padding="8dp"
-            android:background="@drawable/background_substrate_light_gray">
+            app:layout_constraintEnd_toStartOf="@id/buttonsContainer">
             <EditText
                 android:id="@+id/addNoteInput"
+                style="@style/Input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:includeFontPadding="false"
                 android:text="@={viewModel.notesText}"
                 android:hint="@string/write_a_note" />
         </ScrollView>

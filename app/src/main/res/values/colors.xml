@@ -11,7 +11,9 @@
 
     <color name="app_red">#e74c3c</color>
     <color name="app_green">#65B653</color>
+    <color name="app_light_green">#5465B653</color>
     <color name="app_blue">#03A9F4</color>
+    <color name="app_light_blue">#5403A9F4</color>
     <color name="app_dark_gray">#A5A5A5</color>
     <color name="app_medium_gray">@color/black_opacity_20</color>
     <color name="app_light_gray">@color/black_opacity_05</color>
