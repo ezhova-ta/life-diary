@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.lifediary.databinding.FragmentAddNotesBinding
+import com.example.lifediary.databinding.FragmentAddEditNotesBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.Day
 
@@ -14,7 +14,7 @@ class AddEditNotesFragment : BaseFragment() {
     override val viewModel: AddEditNotesViewModel by viewModels(
         factoryProducer = { AddEditNotesViewModel.Factory(getDayFromArgument()) }
     )
-    private var _binding: FragmentAddNotesBinding? = null
+    private var _binding: FragmentAddEditNotesBinding? = null
     private val binding get() = _binding!!
 
     companion object {
@@ -32,7 +32,7 @@ class AddEditNotesFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddNotesBinding.inflate(inflater, container, false)
+        _binding = FragmentAddEditNotesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root
