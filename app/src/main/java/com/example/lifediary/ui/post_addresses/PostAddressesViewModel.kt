@@ -2,7 +2,7 @@ package com.example.lifediary.ui.post_addresses
 
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Addressee
+import com.example.lifediary.data.domain.PostAddress
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.OneTimeEvent
@@ -43,7 +43,7 @@ class PostAddressesViewModel: BaseViewModel() {
     }
 
     // TODO Javadoc
-    private fun createAddressee(): Addressee? {
+    private fun createAddressee(): PostAddress? {
         val addresseeName = this.addresseeName.value ?: return null
         val addresseeStreet = this.addresseeStreet.value ?: return null
         val addresseeBuildingNumber = this.addresseeBuildingNumber.value ?: return null
@@ -63,14 +63,14 @@ class PostAddressesViewModel: BaseViewModel() {
             return null
         }
 
-        return Addressee(
-            addresseeName,
-            addresseeStreet,
-            addresseeBuildingNumber,
-            addresseeApartmentNumber,
-            addresseeCity,
-            addresseePostcode,
-            addresseeEdgeRegion
+        return PostAddress(
+            name = addresseeName,
+            street = addresseeStreet,
+            buildingNumber = addresseeBuildingNumber,
+            apartmentNumber = addresseeApartmentNumber,
+            city = addresseeCity,
+            postcode = addresseePostcode,
+            edgeRegion = addresseeEdgeRegion
         )
     }
 }

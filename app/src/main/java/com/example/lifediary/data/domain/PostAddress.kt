@@ -1,6 +1,7 @@
 package com.example.lifediary.data.domain
 
-data class Addressee(
+data class PostAddress(
+	val id: Long? = null,
 	val name: String,
 	val street: String,
 	val buildingNumber: String,
