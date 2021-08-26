@@ -26,10 +26,12 @@
     <string name="addressee_name">Addressee name *</string>
     <string name="street">Street *</string>
     <string name="building_number">Building number *</string>
-    <string name="apartment_number">Apartment number *</string>
+    <string name="apartment_number">Apartment number</string>
     <string name="postcode">Postcode *</string>
     <string name="settlement">Settlement name *</string>
     <string name="edge_region_optional">Edge/Region</string>
     <string name="fields_marked_asterisk_required">Fields marked with <b>*</b> are required</string>
     <string name="fill_all_necessary_fields">Fill all necessary fields</string>
+    <string name="bld">bld.</string>
+    <string name="apt">apt.</string>
 </resources>

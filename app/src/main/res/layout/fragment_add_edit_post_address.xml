@@ -112,7 +112,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"
-            android:inputType="text"
             android:src="@drawable/icon_plus_green"
             android:background="@null"
             android:onClick="@{() -> viewModel.onSavePostAddressClick()}" />

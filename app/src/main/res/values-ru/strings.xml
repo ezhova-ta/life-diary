@@ -26,10 +26,12 @@
     <string name="addressee_name">Имя адресата *</string>
     <string name="street">Улица *</string>
     <string name="building_number">Номер дома *</string>
-    <string name="apartment_number">Номер квартиры *</string>
+    <string name="apartment_number">Номер квартиры</string>
     <string name="postcode">Индекс *</string>
     <string name="settlement">Населенный пункт *</string>
     <string name="edge_region_optional">Край/область</string>
     <string name="fields_marked_asterisk_required">Поля, отмеченные <b>*</b>, являются обязательными</string>
     <string name="fill_all_necessary_fields">Заполните все необходимые поля</string>
+    <string name="bld">д.</string>
+    <string name="apt">кв.</string>
 </resources>

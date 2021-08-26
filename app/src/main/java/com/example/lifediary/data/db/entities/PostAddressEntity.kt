@@ -14,7 +14,7 @@ data class PostAddressEntity(
     @ColumnInfo(name = "building_number")
     val buildingNumber: String,
     @ColumnInfo(name = "apartment_number")
-    val apartmentNumber: String,
+    val apartmentNumber: String? = null,
     val city: String,
     val postcode: String,
     @ColumnInfo(name = "edge_region")

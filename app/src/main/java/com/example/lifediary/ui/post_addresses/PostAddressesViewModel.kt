@@ -1,5 +1,7 @@
 package com.example.lifediary.ui.post_addresses
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.PostAddress
@@ -20,6 +22,8 @@ class PostAddressesViewModel: BaseViewModel() {
     @Inject
     lateinit var repository: PostAddressRepository
 
+    val addresses: LiveData<List<PostAddress>>
+
     val addresseeName = MutableLiveData("")
     val addresseeStreet = MutableLiveData("")
     val addresseeBuildingNumber = MutableLiveData("")
@@ -30,6 +34,11 @@ class PostAddressesViewModel: BaseViewModel() {
 
     init {
         bindAppScope()
+        addresses = repository.getAllAddresses()
+    }
+
+    fun onDeletePostAddressClick(address: PostAddress) {
+        Log.d("post_addresses_testing", "${address.name} ${address.postcode}")
     }
 
     fun onAddPostAddressClick() {
@@ -61,7 +70,7 @@ class PostAddressesViewModel: BaseViewModel() {
         val addresseeName = this.addresseeName.value ?: return null
         val addresseeStreet = this.addresseeStreet.value ?: return null
         val addresseeBuildingNumber = this.addresseeBuildingNumber.value ?: return null
-        val addresseeApartmentNumber = this.addresseeApartmentNumber.value ?: return null
+        val addresseeApartmentNumber = this.addresseeApartmentNumber.value
         val addresseeCity = this.addresseeCity.value ?: return null
         val addresseePostcode = this.addresseePostcode.value ?: return null
         val addresseeEdgeRegion = this.addresseeEdgeRegion.value
@@ -70,7 +79,6 @@ class PostAddressesViewModel: BaseViewModel() {
             addresseeName.isBlank() ||
             addresseeStreet.isBlank() ||
             addresseeBuildingNumber.isBlank() ||
-            addresseeApartmentNumber.isBlank() ||
             addresseeCity.isBlank() ||
             addresseePostcode.isBlank()
         ) {
