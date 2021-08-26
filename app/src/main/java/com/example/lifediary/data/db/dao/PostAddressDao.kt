@@ -19,5 +19,5 @@ interface PostAddressDao {
     suspend fun delete(id: Long)
 
     @Query("DELETE FROM post_address")
-    suspend fun clear()
+    suspend fun deleteAll()
 }
