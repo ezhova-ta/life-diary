@@ -2,6 +2,7 @@ package com.example.lifediary.ui.post_addresses
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.PostAddress
 import com.example.lifediary.data.repositories.PostAddressRepository
@@ -22,7 +23,6 @@ class PostAddressesViewModel: BaseViewModel() {
     lateinit var repository: PostAddressRepository
 
     val addresses: LiveData<List<PostAddress>>
-
     val addresseeName = MutableLiveData("")
     val addresseeStreet = MutableLiveData("")
     val addresseeBuildingNumber = MutableLiveData("")
@@ -30,10 +30,12 @@ class PostAddressesViewModel: BaseViewModel() {
     val addresseeCity = MutableLiveData("")
     val addresseeEdgeRegion = MutableLiveData("")
     val addresseePostcode = MutableLiveData("")
+    val isAddressListVisible: LiveData<Boolean>
 
     init {
         bindAppScope()
         addresses = repository.getAllAddresses()
+        isAddressListVisible = addresses.map { it.isNotEmpty() }
     }
 
     fun onDeletePostAddressClick(address: PostAddress) {
