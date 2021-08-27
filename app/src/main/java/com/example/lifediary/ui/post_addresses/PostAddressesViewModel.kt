@@ -1,6 +1,5 @@
 package com.example.lifediary.ui.post_addresses
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.R
@@ -38,7 +37,16 @@ class PostAddressesViewModel: BaseViewModel() {
     }
 
     fun onDeletePostAddressClick(address: PostAddress) {
-        TODO()
+        val addressId = address.id ?: return
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                repository.deleteAddress(addressId)
+            } catch(e: Exception) {
+                val messageRes = R.string.deleting_item_error
+                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+            }
+        }
     }
 
     fun onAddPostAddressClick() {
