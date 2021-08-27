@@ -3,9 +3,13 @@ package com.example.lifediary.data.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.lifediary.data.db.converters.CalendarConverter
 import com.example.lifediary.data.domain.PostAddress
+import java.util.*
 
 @Entity(tableName = "post_address")
+@TypeConverters(CalendarConverter::class)
 data class PostAddressEntity(
     @PrimaryKey
     val id: Long?,
@@ -18,7 +22,9 @@ data class PostAddressEntity(
     val city: String,
     val postcode: String,
     @ColumnInfo(name = "edge_region")
-    val edgeRegion: String
+    val edgeRegion: String,
+    @ColumnInfo(name = "created_at")
+    val createdAt: Calendar
 ) {
     companion object {
         fun fromDomain(address: PostAddress): PostAddressEntity {
@@ -30,7 +36,8 @@ data class PostAddressEntity(
                 apartmentNumber = address.apartmentNumber,
                 city = address.city,
                 postcode = address.postcode,
-                edgeRegion = address.edgeRegion
+                edgeRegion = address.edgeRegion,
+                createdAt = address.createdAt
             )
         }
     }
@@ -44,7 +51,8 @@ data class PostAddressEntity(
             apartmentNumber = apartmentNumber,
             city = city,
             postcode = postcode,
-            edgeRegion = edgeRegion
+            edgeRegion = edgeRegion,
+            createdAt = createdAt
         )
     }
 }

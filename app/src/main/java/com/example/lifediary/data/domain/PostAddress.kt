@@ -1,5 +1,7 @@
 package com.example.lifediary.data.domain
 
+import java.util.*
+
 data class PostAddress(
 	val id: Long? = null,
 	val name: String,
@@ -8,5 +10,6 @@ data class PostAddress(
 	val apartmentNumber: String,
 	val city: String,
 	val postcode: String,
-	val edgeRegion: String
+	val edgeRegion: String,
+	val createdAt: Calendar = Calendar.getInstance()
 )
