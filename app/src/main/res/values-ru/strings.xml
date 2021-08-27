@@ -36,5 +36,6 @@
     <string name="apt">кв.</string>
     <string name="error_try_again">Ошибка повторите позже</string>
     <string name="unknown_addressee">Неизвестный адресат</string>
-    <string name="add_postal_addresses_and_send_letters">Добавьте почтовые адреса и шлите побольше писем и открыток!</string>
+    <string name="add_postal_addresses_title">Добавьте почтовые адреса\nи шлите побольше писем и открыток!</string>
+    <string name="make_shopping_lists_title">Составляйте списки покупок,\nчтобы ничего не забыть</string>
 </resources>

@@ -39,5 +39,6 @@
     <string name="question_mark" translatable="false">\?</string>
     <string name="three_question_marks" translatable="false">\???</string>
     <string name="six_question_marks" translatable="false">\??????</string>
-    <string name="add_postal_addresses_and_send_letters">Add postal addresses and send more letters and postcards!</string>
+    <string name="add_postal_addresses_title">Add postal addresses\nand send more letters and postcards!</string>
+    <string name="make_shopping_lists_title">Make shopping lists\nso you don\'t forget to buy anything</string>
 </resources>

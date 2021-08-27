@@ -2,6 +2,7 @@ package com.example.lifediary.ui.shopping_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.data.repositories.ShoppingListRepository
@@ -24,10 +25,12 @@ class ShoppingListViewModel: BaseViewModel() {
         get() = _showClearShoppingListConfirmationDialog
 
     val newShoppingListItemText = MutableLiveData("")
+    val isShoppingListVisible: LiveData<Boolean>
 
     init {
         bindAppScope()
         shoppingList = repository.getShoppingList()
+        isShoppingListVisible = shoppingList.map { it.isNotEmpty() }
     }
 
     fun onAddShoppingListItemClick() {
