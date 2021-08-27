@@ -5,8 +5,8 @@ data class PostAddress(
 	val name: String,
 	val street: String,
 	val buildingNumber: String,
-	val apartmentNumber: String? = null,
+	val apartmentNumber: String,
 	val city: String,
 	val postcode: String,
-	val edgeRegion: String? = null
+	val edgeRegion: String
 )

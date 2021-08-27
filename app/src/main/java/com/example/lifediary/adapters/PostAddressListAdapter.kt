@@ -21,9 +21,8 @@ class PostAddressListAdapter(
 	}
 
 	class PostAddressListItemViewModel(val address: PostAddress) {
-		// TODO Converted data if it needed
-		val isApartmentViewVisible = !address.apartmentNumber.isNullOrBlank()
-		val isEdgeRegionViewVisible = !address.edgeRegion.isNullOrBlank()
+		val isApartmentViewVisible = address.apartmentNumber.isNotBlank()
+		val isEdgeRegionViewVisible = address.edgeRegion.isNotBlank()
 	}
 
 	class ViewHolder private constructor(

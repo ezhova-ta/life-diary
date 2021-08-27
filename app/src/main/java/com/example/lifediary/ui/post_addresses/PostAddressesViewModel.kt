@@ -38,7 +38,7 @@ class PostAddressesViewModel: BaseViewModel() {
     }
 
     fun onDeletePostAddressClick(address: PostAddress) {
-        Log.d("post_addresses_testing", "${address.name} ${address.postcode}")
+        TODO()
     }
 
     fun onAddPostAddressClick() {
@@ -49,7 +49,7 @@ class PostAddressesViewModel: BaseViewModel() {
         val address = createAddress()
 
         if(address == null) {
-            val messageRes = R.string.fill_all_necessary_fields
+            val messageRes = R.string.error_try_again
             popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
             return
         }
@@ -65,25 +65,14 @@ class PostAddressesViewModel: BaseViewModel() {
         }
     }
 
-    // TODO Javadoc
     private fun createAddress(): PostAddress? {
         val addresseeName = this.addresseeName.value ?: return null
         val addresseeStreet = this.addresseeStreet.value ?: return null
         val addresseeBuildingNumber = this.addresseeBuildingNumber.value ?: return null
-        val addresseeApartmentNumber = this.addresseeApartmentNumber.value
+        val addresseeApartmentNumber = this.addresseeApartmentNumber.value ?: return null
         val addresseeCity = this.addresseeCity.value ?: return null
         val addresseePostcode = this.addresseePostcode.value ?: return null
-        val addresseeEdgeRegion = this.addresseeEdgeRegion.value
-
-        if(
-            addresseeName.isBlank() ||
-            addresseeStreet.isBlank() ||
-            addresseeBuildingNumber.isBlank() ||
-            addresseeCity.isBlank() ||
-            addresseePostcode.isBlank()
-        ) {
-            return null
-        }
+        val addresseeEdgeRegion = this.addresseeEdgeRegion.value ?: return null
 
         return PostAddress(
             name = addresseeName,

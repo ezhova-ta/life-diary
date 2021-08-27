@@ -14,11 +14,11 @@ data class PostAddressEntity(
     @ColumnInfo(name = "building_number")
     val buildingNumber: String,
     @ColumnInfo(name = "apartment_number")
-    val apartmentNumber: String? = null,
+    val apartmentNumber: String,
     val city: String,
     val postcode: String,
     @ColumnInfo(name = "edge_region")
-    val edgeRegion: String? = null
+    val edgeRegion: String
 ) {
     companion object {
         fun fromDomain(address: PostAddress): PostAddressEntity {

@@ -12,21 +12,12 @@
         android:layout_height="match_parent"
         style="@style/ScreenContainer">
 
-        <TextView
-            android:id="@+id/inputsHint"
-            style="@style/Text.InputHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/fields_marked_asterisk_required" />
-
         <EditText
             android:id="@+id/addresseeNameInput"
             style="@style/Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/inputsHint"
-            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
             android:inputType="text"
             android:singleLine="true"
             android:hint="@string/addressee_name"

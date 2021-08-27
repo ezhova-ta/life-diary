@@ -6,7 +6,7 @@ import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.data.db.entities.*
 
 @Database(
-    version = 5,
+    version = 6,
     entities = [
         ShoppingListItemEntity::class,
         LocationEntity::class,

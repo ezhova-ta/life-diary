@@ -35,43 +35,55 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/app_green"
                 android:textSize="16sp"
-                android:text="@{viewModel.address.name}"
+                android:text="@{viewModel.address.name.empty ? @string/unknown_addressee : viewModel.address.name}"
                 tools:text="Виталий Гудков" />
 
             <TextView
-                android:id="@+id/streetBuildingNumberView"
+                android:id="@+id/streetView"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/addresseeNameView"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="14sp"
-                tools:text="Литейный проспект, дом 63"
-                android:text='@{String.format("%s, %s %s", viewModel.address.street, @string/bld, viewModel.address.buildingNumber)}' />
+                tools:text="Литейный проспект"
+                android:text="@{viewModel.address.street.empty ? @string/three_question_marks : viewModel.address.street}" />
+
+            <TextView
+                android:id="@+id/buildingNumberView"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/streetView"
+                app:layout_constraintBottom_toBottomOf="@id/streetView"
+                app:layout_constraintStart_toEndOf="@+id/streetView"
+                android:textSize="14sp"
+                tools:text=", дом 63"
+                android:text='@{String.format(", %s %s", @string/bld, viewModel.address.buildingNumber.empty ? @string/question_mark : viewModel.address.buildingNumber)}' />
 
             <TextView
                 android:id="@+id/apartmentNumberView"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/streetBuildingNumberView"
-                app:layout_constraintBottom_toBottomOf="@id/streetBuildingNumberView"
-                app:layout_constraintStart_toEndOf="@id/streetBuildingNumberView"
+                app:layout_constraintTop_toTopOf="@id/buildingNumberView"
+                app:layout_constraintBottom_toBottomOf="@id/buildingNumberView"
+                app:layout_constraintStart_toEndOf="@id/buildingNumberView"
                 app:booleanVisibility="@{viewModel.apartmentViewVisible}"
                 android:textSize="14sp"
                 tools:text=", кв. 87"
-                android:text='@{String.format(", %s %s", @string/apt, viewModel.address.apartmentNumber)}' />
+                android:text='@{String.format(", %s %s", @string/apt, viewModel.address.apartmentNumber.empty ? @string/question_mark : viewModel.address.apartmentNumber)}' />
 
             <TextView
                 android:id="@+id/cityView"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/streetBuildingNumberView"
+                app:layout_constraintTop_toBottomOf="@id/streetView"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="14sp"
                 tools:text="Санкт-Петербург"
-                android:text="@{viewModel.address.city}" />
+                android:text="@{viewModel.address.city.empty ? @string/three_question_marks : viewModel.address.city}" />
 
             <TextView
                 android:id="@+id/edgeRegionView"
@@ -94,7 +106,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="14sp"
                 tools:text="191025"
-                android:text="@{viewModel.address.postcode}" />
+                android:text="@{viewModel.address.postcode.empty ? @string/six_question_marks : viewModel.address.postcode}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
