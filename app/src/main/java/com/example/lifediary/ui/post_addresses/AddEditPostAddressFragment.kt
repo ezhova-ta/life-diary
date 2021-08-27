@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.lifediary.databinding.FragmentAddEditPostAddressBinding
 import com.example.lifediary.ui.BaseFragment
 
 class AddEditPostAddressFragment : BaseFragment() {
-    override val viewModel: PostAddressesViewModel by viewModels()
+    override val viewModel: PostAddressesViewModel by activityViewModels()
     private var _binding: FragmentAddEditPostAddressBinding? = null
     private val binding get() = _binding!!
 

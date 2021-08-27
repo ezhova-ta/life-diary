@@ -23,6 +23,8 @@ class PostAddressesViewModel: BaseViewModel() {
     lateinit var repository: PostAddressRepository
 
     val addresses: LiveData<List<PostAddress>>
+    val isAddressListVisible: LiveData<Boolean>
+
     val addresseeName = MutableLiveData("")
     val addresseeStreet = MutableLiveData("")
     val addresseeBuildingNumber = MutableLiveData("")
@@ -30,7 +32,19 @@ class PostAddressesViewModel: BaseViewModel() {
     val addresseeCity = MutableLiveData("")
     val addresseeEdgeRegion = MutableLiveData("")
     val addresseePostcode = MutableLiveData("")
-    val isAddressListVisible: LiveData<Boolean>
+
+    // TODO Good solution?
+    private var editingAddress: PostAddress? = null
+        set(value) {
+            field = value
+            addresseeName.value = value?.name ?: ""
+            addresseeStreet.value = value?.street ?: ""
+            addresseeBuildingNumber.value = value?.buildingNumber ?: ""
+            addresseeApartmentNumber.value = value?.apartmentNumber ?: ""
+            addresseeCity.value = value?.city ?: ""
+            addresseeEdgeRegion.value = value?.edgeRegion ?: ""
+            addresseePostcode.value = value?.postcode ?: ""
+        }
 
     init {
         bindAppScope()
@@ -51,7 +65,13 @@ class PostAddressesViewModel: BaseViewModel() {
         }
     }
 
+    fun onEditPostAddressClick(address: PostAddress) {
+        editingAddress = address
+        router.navigateTo(Screens.getAddEditPostAddressScreen())
+    }
+
     fun onAddPostAddressClick() {
+        editingAddress = null
         router.navigateTo(Screens.getAddEditPostAddressScreen())
     }
 
@@ -66,7 +86,7 @@ class PostAddressesViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.addAddress(address)
+                saveAddress(address)
                 router.exit()
             } catch(e: Exception) {
                 val messageRes = R.string.failed_to_save
@@ -76,6 +96,7 @@ class PostAddressesViewModel: BaseViewModel() {
     }
 
     private fun createAddress(): PostAddress? {
+        val addressId = editingAddress?.id
         val addresseeName = this.addresseeName.value ?: return null
         val addresseeStreet = this.addresseeStreet.value ?: return null
         val addresseeBuildingNumber = this.addresseeBuildingNumber.value ?: return null
@@ -85,6 +106,7 @@ class PostAddressesViewModel: BaseViewModel() {
         val addresseeEdgeRegion = this.addresseeEdgeRegion.value ?: return null
 
         return PostAddress(
+            id = addressId,
             name = addresseeName,
             street = addresseeStreet,
             buildingNumber = addresseeBuildingNumber,
@@ -93,5 +115,13 @@ class PostAddressesViewModel: BaseViewModel() {
             postcode = addresseePostcode,
             edgeRegion = addresseeEdgeRegion
         )
+    }
+
+    private suspend fun saveAddress(address: PostAddress) {
+        if(editingAddress == null) {
+            repository.addAddress(address)
+        } else {
+            repository.updateAddress(address)
+        }
     }
 }
