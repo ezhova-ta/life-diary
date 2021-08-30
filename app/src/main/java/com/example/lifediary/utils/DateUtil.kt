@@ -30,7 +30,7 @@ fun Day.toDateTimeString(withMilliseconds: Boolean = false): String {
 private fun Day.toCalendar(): Calendar {
     return Calendar.getInstance().apply {
         set(Calendar.DATE, dayNumber)
-        set(Calendar.MONTH, monthNumber)
+        set(Calendar.MONTH, monthNumber - 1)
         set(Calendar.YEAR, year)
     }
 }
