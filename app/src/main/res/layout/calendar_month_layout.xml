@@ -1,14 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/monthText"
-    style="@style/Text.CalendarMonth"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    tools:text="October" />
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/monthTextView"
+        style="@style/Text.CalendarMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="AUGUST 2021" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/daysOfWeekContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/monthTextView"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/background_substrate_light_gray"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/firstDayView"
+            style="@style/Text"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/secondDayView"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            tools:text="Sun" />
+
+        <TextView
+            android:id="@+id/secondDayView"
+            style="@style/Text"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/firstDayView"
+            app:layout_constraintEnd_toStartOf="@id/thirdDayView"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            tools:text="Mon" />
+
+        <TextView
+            android:id="@+id/thirdDayView"
+            style="@style/Text"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/secondDayView"
+            app:layout_constraintEnd_toStartOf="@id/fourthDayView"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            tools:text="Tue" />
+
+        <TextView
+            android:id="@+id/fourthDayView"
+            style="@style/Text"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/thirdDayView"
+            app:layout_constraintEnd_toStartOf="@id/fifthDayView"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            tools:text="Wed" />
+
+        <TextView
+            android:id="@+id/fifthDayView"
+            style="@style/Text"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fourthDayView"
+            app:layout_constraintEnd_toStartOf="@id/sixthDayView"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            tools:text="Thu" />
+
+        <TextView
+            android:id="@+id/sixthDayView"
+            style="@style/Text"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fifthDayView"
+            app:layout_constraintEnd_toStartOf="@id/seventhDayView"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            tools:text="Fri" />
+
+        <TextView
+            android:id="@+id/seventhDayView"
+            style="@style/Text"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/sixthDayView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            tools:text="Sat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

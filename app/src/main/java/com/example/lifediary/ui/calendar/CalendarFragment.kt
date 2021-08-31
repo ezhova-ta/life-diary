@@ -20,6 +20,7 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import java.time.DayOfWeek
 import java.time.YearMonth
 import java.time.temporal.WeekFields
 import java.util.*
@@ -50,14 +51,30 @@ class CalendarFragment : BaseFragment() {
 
     private fun setupCalendarView() {
         binding.calendarView.dayBinder = createCalendarDayBinder()
-        binding.calendarView.monthHeaderBinder = createCalendarMonthBinder()
+        binding.calendarView.monthHeaderBinder = createCalendarMonthBinder(getDaysOfWeek())
         val currentMonth = YearMonth.now()
         val firstMonth = currentMonth.minusMonths(10)
         val lastMonth = currentMonth.plusMonths(10)
-        val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
+        val firstDayOfWeek = getWeekFields().firstDayOfWeek
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
         binding.calendarView.scrollToMonth(currentMonth) // TODO Execute only once
         setupDisplayingNotesIconsInCalendar()
+    }
+
+    private fun getDaysOfWeek(): Array<DayOfWeek> {
+        val firstDayOfWeek = getWeekFields().firstDayOfWeek
+        val daysOfWeek = DayOfWeek.values()
+
+        if (firstDayOfWeek != DayOfWeek.MONDAY) {
+            val rightPart = daysOfWeek.sliceArray(firstDayOfWeek.ordinal..daysOfWeek.indices.last)
+            val leftPart = daysOfWeek.sliceArray(0 until firstDayOfWeek.ordinal)
+            return rightPart + leftPart
+        }
+        return daysOfWeek
+    }
+
+    private fun getWeekFields(): WeekFields {
+        return WeekFields.of(Locale.getDefault())
     }
 
     private fun setupDisplayingNotesIconsInCalendar() {
@@ -94,13 +111,15 @@ class CalendarFragment : BaseFragment() {
         }
     }
 
-    private fun createCalendarMonthBinder() = object : MonthHeaderFooterBinder<CalendarMonthViewContainer> {
-        override fun create(view: View) = CalendarMonthViewContainer(view)
+    private fun createCalendarMonthBinder(daysOfWeek: Array<DayOfWeek>) =
+        object : MonthHeaderFooterBinder<CalendarMonthViewContainer> {
+            override fun create(view: View) = CalendarMonthViewContainer(view)
 
-        override fun bind(container: CalendarMonthViewContainer, month: CalendarMonth) {
-            container.monthTextView.text = String.format("%s %d", month.yearMonth.month.name, month.year)
+            override fun bind(container: CalendarMonthViewContainer, month: CalendarMonth) {
+                container.setupTitle(month)
+                container.setupDaysOfWeek(daysOfWeek)
+            }
         }
-    }
 
     private fun CalendarDay.getDayNumber(): String {
         return date.dayOfMonth.toString()
