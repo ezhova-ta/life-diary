@@ -1,7 +1,9 @@
 package com.example.lifediary.ui.post_addresses
 
 import android.Manifest
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,17 +21,13 @@ class AddEditPostAddressFragment : BaseFragment() {
     private val requestReadContactsPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
-        if(isGranted) {
-            launchPickContactRequest()
-        } else {
-            viewModel.onPickContactPermissionNotGranted()
-        }
+        onReadContactsPermissionRequestCompleted(isGranted)
     }
 
     private val requestPickContact = registerForActivityResult(
         ActivityResultContracts.PickContact()
     ) { contactUri ->
-        viewModel.onContactPicked(contactUri)
+        onContactPicked(contactUri)
     }
 
     companion object {
@@ -38,6 +36,33 @@ class AddEditPostAddressFragment : BaseFragment() {
         fun getInstance(): Fragment {
             return AddEditPostAddressFragment()
         }
+    }
+
+    private fun onReadContactsPermissionRequestCompleted(isGranted: Boolean) {
+        if(isGranted) {
+            launchPickContactRequest()
+        } else {
+            viewModel.onPickContactPermissionNotGranted()
+        }
+    }
+
+    private fun onContactPicked(contactUri: Uri) {
+        val cursor = requireContext().contentResolver.query(
+            contactUri,
+            arrayOf(ContactsContract.Contacts.DISPLAY_NAME),
+            null,
+            null,
+            null
+        )
+
+        if(cursor != null && cursor.moveToFirst()) {
+            val name = cursor.getString(0)
+            viewModel.onContactPicked(name)
+        } else {
+            viewModel.onPickContactFailed()
+        }
+
+        cursor?.close()
     }
 
     override fun onCreateView(

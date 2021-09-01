@@ -42,4 +42,5 @@
     <string name="add_postal_addresses_title">Add postal addresses\nand send more letters and postcards!</string>
     <string name="make_shopping_lists_title">Make shopping lists\nso you don\'t forget to buy anything</string>
     <string name="requires_permission_to_access_contacts">Requires permission to access contacts</string>
+    <string name="failed_to_get_contact">Failed to get contact</string>
 </resources>

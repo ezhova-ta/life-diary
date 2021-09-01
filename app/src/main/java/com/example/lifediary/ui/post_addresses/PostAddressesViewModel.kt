@@ -76,8 +76,13 @@ class PostAddressesViewModel: BaseViewModel() {
         router.navigateTo(Screens.getAddEditPostAddressScreen())
     }
 
-    fun onContactPicked(uri: Uri) {
-        TODO()
+    fun onContactPicked(contactName: String) {
+        addresseeName.value = contactName
+    }
+
+    fun onPickContactFailed() {
+        val messageRes = R.string.failed_to_get_contact
+        popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
     }
 
     fun onPickContactPermissionNotGranted() {
