@@ -1,5 +1,6 @@
 package com.example.lifediary.ui.post_addresses
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -75,13 +76,13 @@ class PostAddressesViewModel: BaseViewModel() {
         router.navigateTo(Screens.getAddEditPostAddressScreen())
     }
 
-    fun onPickContactClick(isPermissionGrated: Boolean) {
-        if(isPermissionGrated) {
-            TODO()
-        } else {
-            val messageRes = R.string.requires_permission_to_access_contacts
-            popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
-        }
+    fun onContactPicked(uri: Uri) {
+        TODO()
+    }
+
+    fun onPickContactPermissionNotGranted() {
+        val messageRes = R.string.requires_permission_to_access_contacts
+        popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
     }
 
     fun onSavePostAddressClick() {

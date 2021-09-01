@@ -19,10 +19,22 @@ class AddEditPostAddressFragment : BaseFragment() {
     private val requestReadContactsPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
-        viewModel.onPickContactClick(isGranted)
+        if(isGranted) {
+            launchPickContactRequest()
+        } else {
+            viewModel.onPickContactPermissionNotGranted()
+        }
+    }
+
+    private val requestPickContact = registerForActivityResult(
+        ActivityResultContracts.PickContact()
+    ) { contactUri ->
+        viewModel.onContactPicked(contactUri)
     }
 
     companion object {
+        const val READ_CONTACTS_PERMISSION_NAME = Manifest.permission.READ_CONTACTS
+
         fun getInstance(): Fragment {
             return AddEditPostAddressFragment()
         }
@@ -45,13 +57,19 @@ class AddEditPostAddressFragment : BaseFragment() {
     }
 
     private fun onPickContactClick() {
-        val permission = Manifest.permission.READ_CONTACTS
-
-        if(isPermissionGranted(permission)) {
-            viewModel.onPickContactClick(true)
+        if(isPermissionGranted(READ_CONTACTS_PERMISSION_NAME)) {
+            launchPickContactRequest()
         } else {
-            requestReadContactsPermission.launch(permission)
+            launchReadContactsPermissionRequest()
         }
+    }
+
+    private fun launchPickContactRequest() {
+        requestPickContact.launch(null)
+    }
+
+    private fun launchReadContactsPermissionRequest() {
+        requestReadContactsPermission.launch(READ_CONTACTS_PERMISSION_NAME)
     }
 
     override fun onDestroyView() {
