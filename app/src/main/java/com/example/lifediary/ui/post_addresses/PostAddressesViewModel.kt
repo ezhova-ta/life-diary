@@ -26,6 +26,10 @@ class PostAddressesViewModel: BaseViewModel() {
     val addresses: LiveData<List<PostAddress>>
     val isAddressListVisible: LiveData<Boolean>
 
+    private val _isAddButtonVisible = MutableLiveData<Boolean>()
+    val isAddButtonVisible: LiveData<Boolean>
+        get() = _isAddButtonVisible
+
     val addresseeName = MutableLiveData("")
     val addresseeStreet = MutableLiveData("")
     val addresseeBuildingNumber = MutableLiveData("")
@@ -38,6 +42,7 @@ class PostAddressesViewModel: BaseViewModel() {
     private var editingAddress: PostAddress? = null
         set(value) {
             field = value
+            _isAddButtonVisible.value = value == null
             addresseeName.value = value?.name ?: ""
             addresseeStreet.value = value?.street ?: ""
             addresseeBuildingNumber.value = value?.buildingNumber ?: ""
