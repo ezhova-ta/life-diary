@@ -75,6 +75,15 @@ class PostAddressesViewModel: BaseViewModel() {
         router.navigateTo(Screens.getAddEditPostAddressScreen())
     }
 
+    fun onPickContactClick(isPermissionGrated: Boolean) {
+        if(isPermissionGrated) {
+            TODO()
+        } else {
+            val messageRes = R.string.requires_permission_to_access_contacts
+            popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+        }
+    }
+
     fun onSavePostAddressClick() {
         val address = createAddress()
 

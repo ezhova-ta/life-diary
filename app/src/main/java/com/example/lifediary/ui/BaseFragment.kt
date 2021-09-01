@@ -1,8 +1,10 @@
 package com.example.lifediary.ui
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lifediary.utils.InsetsStyle
 import com.example.lifediary.utils.Text
@@ -43,5 +45,11 @@ abstract class BaseFragment : Fragment() {
             text.getText(requireContext()),
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    protected fun isPermissionGranted(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(), permission
+        ) == PackageManager.PERMISSION_GRANTED
     }
 }
