@@ -81,19 +81,30 @@
             android:onClick="@{() -> viewModel.onSettingsClick()}"/>
 
         <TextView
-            android:id="@+id/shoppingListsView"
-            style="@style/MainScreenSticker"
+            android:id="@+id/notesView"
+            style="@style/MainScreenSection.Notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/calendarView"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
+            android:text="@string/notes"
+            android:onClick="@{() -> viewModel.onNotesClick()}" />
+
+        <TextView
+            android:id="@+id/shoppingListsView"
+            style="@style/MainScreenSection.ShoppingList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/notesView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
             android:text="@string/shopping_list"
             android:onClick="@{() -> viewModel.onShoppingListClick()}" />
 
         <TextView
             android:id="@+id/postAddressesView"
-            style="@style/MainScreenSticker"
+            style="@style/MainScreenSection.PostAddresses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/shoppingListsView"

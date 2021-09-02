@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <solid android:color="@color/black_opacity_05" />
+        </shape>
+    </item>
+
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:gravity="center_vertical|right"
+        android:right="8dp"
+        android:drawable="@drawable/icon_letter_gray">
+        <rotate android:fromDegrees="5"/>
+    </item>
+</layer-list>

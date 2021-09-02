@@ -59,9 +59,20 @@
         <item name="android:textColorHighlight">@color/app_light_blue</item>
     </style>
 
-    <style name="MainScreenSticker">
+    <style name="MainScreenSection">
         <item name="android:padding">16dp</item>
-        <item name="android:background">@drawable/background_sticker</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="MainScreenSection.Notes">
+        <item name="android:background">@drawable/background_main_screen_notes_section</item>
+    </style>
+
+    <style name="MainScreenSection.ShoppingList">
+        <item name="android:background">@drawable/background_main_screen_shopping_list_section</item>
+    </style>
+
+    <style name="MainScreenSection.PostAddresses">
+        <item name="android:background">@drawable/background_main_screen_post_addresses_section</item>
     </style>
 </resources>

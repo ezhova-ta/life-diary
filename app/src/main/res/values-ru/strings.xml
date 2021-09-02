@@ -40,4 +40,5 @@
     <string name="make_shopping_lists_title">Составляйте списки покупок,\nчтобы ничего не забыть</string>
     <string name="requires_permission_to_access_contacts">Необходимо разрешение на доступ к контактам</string>
     <string name="failed_to_get_contact">Не удалось получить контакт</string>
+    <string name="notes">Заметки</string>
 </resources>

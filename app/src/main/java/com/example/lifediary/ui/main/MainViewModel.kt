@@ -79,6 +79,10 @@ class MainViewModel : BaseViewModel() {
         router.navigateTo(Screens.getCalendarScreen())
     }
 
+    fun onNotesClick() {
+        TODO()
+    }
+
     fun onShoppingListClick() {
         router.navigateTo(Screens.getShoppingListScreen())
     }
