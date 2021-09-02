@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.databinding.MainNoteListItemBinding
+import com.example.lifediary.ui.calendar.date.CalendarDateFragment
 
 class MainNoteListAdapter(
 	private val onEditItemClickListener: OnMainNoteListItemClickListener? = null,
@@ -26,6 +27,8 @@ class MainNoteListAdapter(
 		private val binding: MainNoteListItemBinding
 	) : RecyclerView.ViewHolder(binding.root) {
 		companion object {
+			private const val NOTE_VIEW_ROLLED_UP_MAX_LINES = 5
+
 			fun getInstance(parent: ViewGroup): ViewHolder {
 				val layoutInflater = LayoutInflater.from(parent.context)
 				val binding = MainNoteListItemBinding.inflate(layoutInflater, parent, false)
@@ -40,7 +43,19 @@ class MainNoteListAdapter(
 		) {
 			binding.viewModel = MainNoteListItemViewModel(item)
 			binding.executePendingBindings()
+			setUpNoteView()
+			setupClickListeners(item, onEditItemClickListener, onDeleteItemClickListener)
+		}
 
+		private fun setUpNoteView() {
+			binding.noteView.rolledUpMaxLines = NOTE_VIEW_ROLLED_UP_MAX_LINES
+		}
+
+		private fun setupClickListeners(
+			item: MainNote,
+			onEditItemClickListener: OnMainNoteListItemClickListener?,
+			onDeleteItemClickListener: OnMainNoteListItemClickListener?
+		) {
 			binding.editNoteButton.setOnClickListener {
 				onEditItemClickListener?.onClick(item)
 			}

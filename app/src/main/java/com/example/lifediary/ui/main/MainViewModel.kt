@@ -80,7 +80,7 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun onNotesClick() {
-        TODO()
+        router.navigateTo(Screens.getMainNotesFragment())
     }
 
     fun onShoppingListClick() {

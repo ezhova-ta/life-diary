@@ -10,7 +10,7 @@ class RollOutTextPanel(context: Context, attrs: AttributeSet) : FrameLayout(cont
     private var binding = RollOutTextPanelLayoutBinding.inflate(LayoutInflater.from(context))
     private var isRolledOut = false
 
-    var rolledUpMaxLines: Int = 7
+    var rolledUpMaxLines: Int = ROLLED_UP_MAX_LINES
         set(value) {
             field = value
             binding.textView.maxLines = value
@@ -28,6 +28,7 @@ class RollOutTextPanel(context: Context, attrs: AttributeSet) : FrameLayout(cont
         }
 
     companion object {
+        private const val ROLLED_UP_MAX_LINES = 7
         private const val ROLLED_OUT_MAX_LINES = 100
     }
 
