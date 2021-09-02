@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.adapters.MainNoteListAdapter
+import com.example.lifediary.adapters.OnMainNoteListItemClickListener
 import com.example.lifediary.databinding.FragmentMainNotesBinding
 import com.example.lifediary.ui.BaseFragment
 
@@ -28,7 +30,19 @@ class MainNotesFragment : BaseFragment() {
         _binding = FragmentMainNotesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupNoteListView()
         return binding.root
+    }
+
+    private fun setupNoteListView() {
+        val mainNoteListAdapter = MainNoteListAdapter(
+            OnMainNoteListItemClickListener { viewModel::onEditNoteClick },
+            OnMainNoteListItemClickListener { viewModel::onDeleteNoteClick }
+        )
+        binding.noteListView.adapter = mainNoteListAdapter
+        viewModel.noteList.observe(viewLifecycleOwner) { noteList ->
+            mainNoteListAdapter.submitList(noteList)
+        }
     }
 
     override fun onDestroyView() {

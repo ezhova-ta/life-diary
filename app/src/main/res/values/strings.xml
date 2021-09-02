@@ -44,4 +44,5 @@
     <string name="requires_permission_to_access_contacts">Requires permission to access contacts</string>
     <string name="failed_to_get_contact">Failed to get contact</string>
     <string name="notes">Notes</string>
+    <string name="no_notes_yet">There are no notes yet</string>
 </resources>
