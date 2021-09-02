@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.lifediary.adapters.MainNoteListAdapter.MainNoteListItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+
+        <com.example.lifediary.ui.common.RollOutTextPanel
+            android:id="@+id/noteView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/editNoteButton"
+            app:text="@{viewModel.mainNoteListItem.text}" />
+
+        <ImageView
+            android:id="@+id/editNoteButton"
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toTopOf="@id/noteView"
+            app:layout_constraintEnd_toStartOf="@id/deleteNoteButton"
+            android:paddingStart="8dp"
+            android:src="@drawable/icon_edit_blue" />
+
+        <ImageView
+            android:id="@+id/deleteNoteButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toTopOf="@id/noteView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/icon_delete_red" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
