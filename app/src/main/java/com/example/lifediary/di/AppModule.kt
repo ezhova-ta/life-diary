@@ -24,6 +24,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(LocationDao::class.java).toProvider(LocationDaoProvider::class.java)
         bind(CurrentWeatherDao::class.java).toProvider(CurrentWeatherDaoProvider::class.java)
         bind(NoteDao::class.java).toProvider(NoteDaoProvider::class.java)
+        bind(MainNotesDao::class.java).toProvider(MainNotesDaoProvider::class.java)
         bind(PostAddressDao::class.java).toProvider(PostAddressDaoProvider::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
