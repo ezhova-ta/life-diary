@@ -46,7 +46,9 @@ class AddEditPostAddressFragment : BaseFragment() {
         }
     }
 
-    private fun onContactPicked(contactUri: Uri) {
+    private fun onContactPicked(contactUri: Uri?) {
+        contactUri ?: return
+
         val cursor = requireContext().contentResolver.query(
             contactUri,
             arrayOf(ContactsContract.Contacts.DISPLAY_NAME),
