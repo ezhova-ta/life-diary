@@ -77,7 +77,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	private fun navigateToAddEditNoteScreen() {
-		router.navigateTo(Screens.getAddEditNoteFragment(day))
+		router.navigateTo(Screens.getAddEditDateNoteFragment(day))
 	}
 
 	class Factory(private val day: Day) : ViewModelProvider.Factory {

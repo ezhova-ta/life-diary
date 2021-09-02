@@ -1,4 +1,4 @@
-package com.example.lifediary.ui.note
+package com.example.lifediary.ui.calendar.date.note
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddEditNoteViewModel(private val day: Day) : BaseViewModel() {
+class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
@@ -69,7 +69,7 @@ class AddEditNoteViewModel(private val day: Day) : BaseViewModel() {
 	class Factory(private val day: Day) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-			return AddEditNoteViewModel(day) as T
+			return AddEditDateNoteViewModel(day) as T
 		}
 	}
 }
