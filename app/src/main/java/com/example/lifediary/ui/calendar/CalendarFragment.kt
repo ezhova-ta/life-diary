@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Notes
+import com.example.lifediary.data.domain.Note
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
@@ -29,7 +29,7 @@ class CalendarFragment : BaseFragment() {
     override val viewModel: CalendarViewModel  by viewModels()
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
-    private var notesList = listOf<Notes>()
+    private var noteList = listOf<Note>()
 
     companion object {
         fun getInstance(): Fragment {
@@ -58,7 +58,7 @@ class CalendarFragment : BaseFragment() {
         val firstDayOfWeek = getWeekFields().firstDayOfWeek
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
         binding.calendarView.scrollToMonth(currentMonth) // TODO Execute only once
-        setupDisplayingNotesIconsInCalendar()
+        setupDisplayingNoteIconsInCalendar()
     }
 
     private fun getDaysOfWeek(): Array<DayOfWeek> {
@@ -77,9 +77,9 @@ class CalendarFragment : BaseFragment() {
         return WeekFields.of(Locale.getDefault())
     }
 
-    private fun setupDisplayingNotesIconsInCalendar() {
-        viewModel.notesList.observe(viewLifecycleOwner) { notesList ->
-            this.notesList = notesList
+    private fun setupDisplayingNoteIconsInCalendar() {
+        viewModel.noteList.observe(viewLifecycleOwner) { noteList ->
+            this.noteList = noteList
             binding.calendarView.notifyCalendarChanged()
         }
     }
@@ -99,15 +99,15 @@ class CalendarFragment : BaseFragment() {
                 container.setNormalStyle()
             }
 
-            if(isNotesExistFor(day)) {
+            if(isNoteExistFor(day)) {
                 container.showNoteIcon()
             } else {
                 container.hideNoteIcon()
             }
         }
 
-        private fun isNotesExistFor(day: CalendarDay): Boolean {
-            return notesList.find { it.day.isSameDay(day) } != null
+        private fun isNoteExistFor(day: CalendarDay): Boolean {
+            return noteList.find { it.day.isSameDay(day) } != null
         }
     }
 

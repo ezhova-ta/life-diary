@@ -1,8 +1,8 @@
 package com.example.lifediary.ui.calendar
 
 import androidx.lifecycle.LiveData
-import com.example.lifediary.data.domain.Notes
-import com.example.lifediary.data.repositories.NotesRepository
+import com.example.lifediary.data.domain.Note
+import com.example.lifediary.data.repositories.NoteRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Day
@@ -13,13 +13,13 @@ class CalendarViewModel : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
-	lateinit var notesRepository: NotesRepository
+	lateinit var noteRepository: NoteRepository
 
-	var notesList: LiveData<List<Notes>>
+	var noteList: LiveData<List<Note>>
 
 	init {
 		bindAppScope()
-		notesList = notesRepository.getAllNotes()
+		noteList = noteRepository.getAllNote()
 	}
 
 	fun onDateClick(day: Day) {

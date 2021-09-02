@@ -1,9 +1,9 @@
-package com.example.lifediary.ui.notes
+package com.example.lifediary.ui.note
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Notes
-import com.example.lifediary.data.repositories.NotesRepository
+import com.example.lifediary.data.domain.Note
+import com.example.lifediary.data.repositories.NoteRepository
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.OneTimeEvent
@@ -14,24 +14,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddEditNotesViewModel(private val day: Day) : BaseViewModel() {
+class AddEditNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
-	lateinit var notesRepository: NotesRepository
+	lateinit var noteRepository: NoteRepository
 
-	private var existingNotes: Notes? = null
-	val notesText = MutableLiveData("")
+	private var existingNote: Note? = null
+	val noteText = MutableLiveData("")
 	val isAddButtonVisible: LiveData<Boolean>
 
 	init {
 		bindAppScope()
-		isAddButtonVisible = notesRepository.getNotesLiveData(day).map { it == null }
+		isAddButtonVisible = noteRepository.getNoteLiveData(day).map { it == null }
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				existingNotes = notesRepository.getNotes(day)
-				existingNotes?.text?.let { notesText.postValue(it) }
+				existingNote = noteRepository.getNote(day)
+				existingNote?.text?.let { noteText.postValue(it) }
 			} catch(e: Exception) {
 				val messageRes = R.string.error
 				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
@@ -39,23 +39,23 @@ class AddEditNotesViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
-	fun onSaveNotesClick() {
-		val text = notesText.value?.trim()
+	fun onSaveNoteClick() {
+		val text = noteText.value?.trim()
 
 		if(text.isNullOrBlank()) {
-			notesText.value = ""
+			noteText.value = ""
 			return
 		}
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				val notes = existingNotes
+				val note = existingNote
 
-				if(notes == null) {
-					notesRepository.addNotes(text, day)
+				if(note == null) {
+					noteRepository.addNote(text, day)
 				} else {
-					notes.text = text
-					notesRepository.updateNotes(notes)
+					note.text = text
+					noteRepository.updateNote(note)
 				}
 
 				router.exit()
@@ -69,7 +69,7 @@ class AddEditNotesViewModel(private val day: Day) : BaseViewModel() {
 	class Factory(private val day: Day) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-			return AddEditNotesViewModel(day) as T
+			return AddEditNoteViewModel(day) as T
 		}
 	}
 }

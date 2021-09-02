@@ -1,15 +1,15 @@
 package com.example.lifediary.di.providers
 
 import com.example.lifediary.data.db.MainDataBase
-import com.example.lifediary.data.db.dao.NotesDao
+import com.example.lifediary.data.db.dao.NoteDao
 import javax.inject.Inject
 import javax.inject.Provider
 
-class NotesDaoProvider @Inject constructor(
+class NoteDaoProvider @Inject constructor(
     private val mainDataBase: MainDataBase
-) : Provider<NotesDao> {
+) : Provider<NoteDao> {
 
-    override fun get(): NotesDao {
-        return mainDataBase.notesDao()
+    override fun get(): NoteDao {
+        return mainDataBase.noteDao()
     }
 }

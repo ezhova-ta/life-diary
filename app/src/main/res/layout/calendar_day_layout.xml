@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/dayText"
         app:layout_constraintStart_toStartOf="@id/dayText"
         app:layout_constraintEnd_toEndOf="@id/dayText"
-        android:background="@drawable/notes_icon_view_for_calendar_day"
+        android:background="@drawable/note_icon_view_for_calendar_day"
         android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

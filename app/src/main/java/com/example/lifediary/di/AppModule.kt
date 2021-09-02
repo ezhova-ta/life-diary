@@ -23,7 +23,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(ShoppingListDao::class.java).toProvider(ShoppingListDaoProvider::class.java)
         bind(LocationDao::class.java).toProvider(LocationDaoProvider::class.java)
         bind(CurrentWeatherDao::class.java).toProvider(CurrentWeatherDaoProvider::class.java)
-        bind(NotesDao::class.java).toProvider(NotesDaoProvider::class.java)
+        bind(NoteDao::class.java).toProvider(NoteDaoProvider::class.java)
         bind(PostAddressDao::class.java).toProvider(PostAddressDaoProvider::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)

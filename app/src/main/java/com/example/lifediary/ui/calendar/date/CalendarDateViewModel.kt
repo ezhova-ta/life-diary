@@ -2,9 +2,9 @@ package com.example.lifediary.ui.calendar.date
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Notes
+import com.example.lifediary.data.domain.Note
 import com.example.lifediary.data.domain.WeatherForecast
-import com.example.lifediary.data.repositories.NotesRepository
+import com.example.lifediary.data.repositories.NoteRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
@@ -21,12 +21,12 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject
 	lateinit var weatherRepository: WeatherRepository
 	@Inject
-	lateinit var notesRepository: NotesRepository
+	lateinit var noteRepository: NoteRepository
 
 	val title = day.toDateString()
-	private val notes: LiveData<Notes?>
-	val notesText: LiveData<String?>
-	val isNotesVisible: LiveData<Boolean>
+	private val note: LiveData<Note?>
+	val noteText: LiveData<String?>
+	val isNoteVisible: LiveData<Boolean>
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->
@@ -39,9 +39,9 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	init {
 		bindAppScope()
-		notes = notesRepository.getNotesLiveData(day)
-		notesText = notes.map { it?.text }
-		isNotesVisible = notes.map { it != null }
+		note = noteRepository.getNoteLiveData(day)
+		noteText = note.map { it?.text }
+		isNoteVisible = note.map { it != null }
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
@@ -55,20 +55,20 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
-	fun onAddNotesClick() {
-		navigateToAddEditNotesScreen()
+	fun onAddNoteClick() {
+		navigateToAddEditNoteScreen()
 	}
 
-	fun onEditNotesClick() {
-		navigateToAddEditNotesScreen()
+	fun onEditNoteClick() {
+		navigateToAddEditNoteScreen()
 	}
 
-	fun onDeleteNotesClick() {
-		val notesId = notes.value?.id ?: return
+	fun onDeleteNoteClick() {
+		val noteId = note.value?.id ?: return
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				notesRepository.deleteNotes(notesId)
+				noteRepository.deleteNote(noteId)
 			} catch(e: Exception) {
 				val messageRes = R.string.error
 				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
@@ -76,8 +76,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
-	private fun navigateToAddEditNotesScreen() {
-		router.navigateTo(Screens.getAddEditNotesFragment(day))
+	private fun navigateToAddEditNoteScreen() {
+		router.navigateTo(Screens.getAddEditNoteFragment(day))
 	}
 
 	class Factory(private val day: Day) : ViewModelProvider.Factory {

@@ -19,7 +19,7 @@ class CalendarDateFragment : BaseFragment() {
 
     companion object {
         private const val DAY_KEY = "com.example.lifediary.ui.calendar.TIME_IN_MILLIS_KEY"
-        private const val NOTES_VIEW_ROLLED_UP_MAX_LINES = 5
+        private const val NOTE_VIEW_ROLLED_UP_MAX_LINES = 5
 
         fun getInstance(day: Day): Fragment {
             val fragment = CalendarDateFragment()
@@ -36,12 +36,12 @@ class CalendarDateFragment : BaseFragment() {
         _binding = FragmentCalendarDateBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        setUpNotesView()
+        setUpNoteView()
         return binding.root
     }
 
-    private fun setUpNotesView() {
-        binding.notesView.rolledUpMaxLines = NOTES_VIEW_ROLLED_UP_MAX_LINES
+    private fun setUpNoteView() {
+        binding.noteView.rolledUpMaxLines = NOTE_VIEW_ROLLED_UP_MAX_LINES
     }
 
     private fun getDayFromArgument(): Day {

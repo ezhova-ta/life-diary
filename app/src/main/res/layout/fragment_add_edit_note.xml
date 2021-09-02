@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.notes.AddEditNotesViewModel" />
+            type="com.example.lifediary.ui.note.AddEditNoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:text="@={viewModel.notesText}"
+                android:text="@={viewModel.noteText}"
                 android:hint="@string/write_a_note" />
         </ScrollView>
 
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_plus_green"
-                android:onClick="@{() -> viewModel.onSaveNotesClick()}"
+                android:onClick="@{() -> viewModel.onSaveNoteClick()}"
                 app:booleanVisibility="@{viewModel.isAddButtonVisible}" />
 
             <ImageView
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_check_green"
-                android:onClick="@{() -> viewModel.onSaveNotesClick()}"
+                android:onClick="@{() -> viewModel.onSaveNoteClick()}"
                 app:booleanVisibility="@{!viewModel.isAddButtonVisible}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

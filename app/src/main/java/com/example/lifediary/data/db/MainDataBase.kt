@@ -11,7 +11,7 @@ import com.example.lifediary.data.db.entities.*
         ShoppingListItemEntity::class,
         LocationEntity::class,
         WeatherEntity::class,
-        NotesEntity::class,
+        NoteEntity::class,
         PostAddressEntity::class
     ]
 )
@@ -23,6 +23,6 @@ abstract class MainDataBase : RoomDatabase() {
     abstract fun shoppingListDao(): ShoppingListDao
     abstract fun locationDao(): LocationDao
     abstract fun currentWeatherDao(): CurrentWeatherDao
-    abstract fun notesDao(): NotesDao
+    abstract fun noteDao(): NoteDao
     abstract fun postAddressDao(): PostAddressDao
 }
