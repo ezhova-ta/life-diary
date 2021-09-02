@@ -3,11 +3,11 @@ package com.example.lifediary.data.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.lifediary.data.domain.Note
+import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.utils.Day
 
 @Entity(tableName = "note")
-data class NoteEntity(
+data class DateNoteEntity(
     @PrimaryKey
     val id: Long?,
     val text: String,
@@ -18,8 +18,8 @@ data class NoteEntity(
     val year: Int
 ) {
     companion object {
-        fun fromDomain(note: Note): NoteEntity {
-            return NoteEntity(
+        fun fromDomain(note: DateNote): DateNoteEntity {
+            return DateNoteEntity(
                 id = note.id,
                 text = note.text,
                 dayNumber = note.day.dayNumber,
@@ -29,8 +29,8 @@ data class NoteEntity(
         }
     }
 
-    fun toDomain(): Note {
-        return Note(
+    fun toDomain(): DateNote {
+        return DateNote(
             id = id,
             text = text,
             day = Day(dayNumber, monthNumber, year)

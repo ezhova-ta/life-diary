@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Note
+import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
@@ -29,7 +29,7 @@ class CalendarFragment : BaseFragment() {
     override val viewModel: CalendarViewModel  by viewModels()
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
-    private var noteList = listOf<Note>()
+    private var noteList = listOf<DateNote>()
 
     companion object {
         fun getInstance(): Fragment {

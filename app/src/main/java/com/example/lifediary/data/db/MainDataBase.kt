@@ -11,7 +11,7 @@ import com.example.lifediary.data.db.entities.*
         ShoppingListItemEntity::class,
         LocationEntity::class,
         WeatherEntity::class,
-        NoteEntity::class,
+        DateNoteEntity::class,
         PostAddressEntity::class
     ]
 )

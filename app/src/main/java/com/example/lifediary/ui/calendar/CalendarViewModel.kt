@@ -1,7 +1,7 @@
 package com.example.lifediary.ui.calendar
 
 import androidx.lifecycle.LiveData
-import com.example.lifediary.data.domain.Note
+import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.data.repositories.NoteRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
@@ -15,7 +15,7 @@ class CalendarViewModel : BaseViewModel() {
 	@Inject
 	lateinit var noteRepository: NoteRepository
 
-	var noteList: LiveData<List<Note>>
+	var noteList: LiveData<List<DateNote>>
 
 	init {
 		bindAppScope()

@@ -2,7 +2,7 @@ package com.example.lifediary.ui.calendar.date
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Note
+import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.data.domain.WeatherForecast
 import com.example.lifediary.data.repositories.NoteRepository
 import com.example.lifediary.data.repositories.WeatherRepository
@@ -24,7 +24,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	lateinit var noteRepository: NoteRepository
 
 	val title = day.toDateString()
-	private val note: LiveData<Note?>
+	private val note: LiveData<DateNote?>
 	val noteText: LiveData<String?>
 	val isNoteVisible: LiveData<Boolean>
 

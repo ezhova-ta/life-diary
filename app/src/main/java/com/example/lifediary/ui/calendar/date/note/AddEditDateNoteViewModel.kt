@@ -2,7 +2,7 @@ package com.example.lifediary.ui.calendar.date.note
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Note
+import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.data.repositories.NoteRepository
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Day
@@ -20,7 +20,7 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject
 	lateinit var noteRepository: NoteRepository
 
-	private var existingNote: Note? = null
+	private var existingNote: DateNote? = null
 	val noteText = MutableLiveData("")
 	val isAddButtonVisible: LiveData<Boolean>
 
