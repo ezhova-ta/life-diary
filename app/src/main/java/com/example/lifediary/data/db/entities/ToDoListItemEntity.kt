@@ -15,7 +15,7 @@ data class ToDoListItemEntity(
     var isDone: Boolean,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
-) {
+) : DbEntity<ToDoListItem>() {
     companion object {
         fun fromDomain(toDoListItem: ToDoListItem): ToDoListItemEntity {
             return ToDoListItemEntity(
@@ -27,7 +27,7 @@ data class ToDoListItemEntity(
         }
     }
 
-    fun toDomain(): ToDoListItem {
+    override fun toDomain(): ToDoListItem {
         return ToDoListItem(
             id = id,
             text = text,

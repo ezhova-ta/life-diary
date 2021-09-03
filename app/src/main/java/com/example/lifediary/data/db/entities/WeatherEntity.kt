@@ -22,7 +22,7 @@ data class WeatherEntity(
     val windSpeed: Double,
     @ColumnInfo(name = "gust_speed")
     val gustSpeed: Double
-) {
+) : DbEntity<Weather>() {
     companion object {
         fun fromDomain(weather: Weather): WeatherEntity {
             return WeatherEntity(
@@ -40,7 +40,7 @@ data class WeatherEntity(
         }
     }
 
-    fun toDomain(): Weather {
+    override fun toDomain(): Weather {
         return Weather(
             id = id,
             shortDescription = shortDescription,

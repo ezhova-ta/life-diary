@@ -16,7 +16,7 @@ data class MainNoteEntity(
     val text: String,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
-) {
+) : DbEntity<MainNote>() {
     companion object {
         fun fromDomain(note: MainNote): MainNoteEntity {
             return MainNoteEntity(
@@ -27,7 +27,7 @@ data class MainNoteEntity(
         }
     }
 
-    fun toDomain(): MainNote {
+    override fun toDomain(): MainNote {
         return MainNote(
             id = id,
             text = text,

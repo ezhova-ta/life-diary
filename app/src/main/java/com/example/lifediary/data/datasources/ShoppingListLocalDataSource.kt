@@ -1,23 +1,15 @@
 package com.example.lifediary.data.datasources
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.example.lifediary.data.db.dao.ShoppingListDao
 import com.example.lifediary.data.db.entities.ShoppingListItemEntity
 import com.example.lifediary.data.domain.ShoppingListItem
+import com.example.lifediary.utils.toDomain
 import javax.inject.Inject
 
 class ShoppingListLocalDataSource @Inject constructor(private val dao: ShoppingListDao) {
     fun getShoppingList(): LiveData<List<ShoppingListItem>> {
         return dao.getAll().toDomain()
-    }
-
-    private fun LiveData<List<ShoppingListItemEntity>>.toDomain(): LiveData<List<ShoppingListItem>> {
-        return map { entityList ->
-            entityList.map { entity ->
-                entity.toDomain()
-            }
-        }
     }
 
     suspend fun saveShoppingListItem(item: ShoppingListItem) {

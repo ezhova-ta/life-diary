@@ -25,7 +25,7 @@ data class PostAddressEntity(
     val edgeRegion: String,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
-) {
+) : DbEntity<PostAddress>() {
     companion object {
         fun fromDomain(address: PostAddress): PostAddressEntity {
             return PostAddressEntity(
@@ -42,7 +42,7 @@ data class PostAddressEntity(
         }
     }
 
-    fun toDomain(): PostAddress {
+    override fun toDomain(): PostAddress {
         return PostAddress(
             id = id,
             name = name,

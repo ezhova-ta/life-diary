@@ -17,7 +17,7 @@ data class ShoppingListItemEntity(
     var isCrossedOut: Boolean,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
-) {
+) : DbEntity<ShoppingListItem>() {
     companion object {
         fun fromDomain(shoppingListItem: ShoppingListItem): ShoppingListItemEntity {
             return ShoppingListItemEntity(
@@ -30,7 +30,7 @@ data class ShoppingListItemEntity(
         }
     }
 
-    fun toDomain(): ShoppingListItem {
+    override fun toDomain(): ShoppingListItem {
         return ShoppingListItem(
             id = id,
             text = text,

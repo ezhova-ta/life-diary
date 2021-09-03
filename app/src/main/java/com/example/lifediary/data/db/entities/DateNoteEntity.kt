@@ -16,7 +16,7 @@ data class DateNoteEntity(
     @ColumnInfo(name = "month")
     val monthNumber: Int,
     val year: Int
-) {
+) : DbEntity<DateNote>() {
     companion object {
         fun fromDomain(note: DateNote): DateNoteEntity {
             return DateNoteEntity(
@@ -29,7 +29,7 @@ data class DateNoteEntity(
         }
     }
 
-    fun toDomain(): DateNote {
+    override fun toDomain(): DateNote {
         return DateNote(
             id = id,
             text = text,

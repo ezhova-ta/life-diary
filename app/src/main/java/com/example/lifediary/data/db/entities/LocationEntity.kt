@@ -12,7 +12,7 @@ data class LocationEntity(
     val name: String,
     val lat: Double,
     val lon: Double
-) {
+) : DbEntity<Location>() {
     companion object {
         fun fromDomain(location: Location): LocationEntity {
             return LocationEntity(
@@ -24,7 +24,7 @@ data class LocationEntity(
         }
     }
 
-    fun toDomain(): Location {
+    override fun toDomain(): Location {
         return Location(
             id = id,
             name = name,

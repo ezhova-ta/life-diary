@@ -6,6 +6,7 @@ import com.example.lifediary.data.db.dao.DateNoteDao
 import com.example.lifediary.data.db.entities.DateNoteEntity
 import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.utils.Day
+import com.example.lifediary.utils.toDomain
 import javax.inject.Inject
 
 class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) {
@@ -19,14 +20,6 @@ class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) 
 
     fun getAllNote(): LiveData<List<DateNote>> {
         return dao.getAll().toDomain()
-    }
-
-    private fun LiveData<List<DateNoteEntity>>.toDomain(): LiveData<List<DateNote>> {
-        return map { noteEntityList ->
-            noteEntityList.map { noteEntity ->
-                noteEntity.toDomain()
-            }
-        }
     }
 
     suspend fun addNote(note: DateNote) {
