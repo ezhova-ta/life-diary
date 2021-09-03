@@ -1,0 +1,55 @@
+package com.example.lifediary.adapters
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.lifediary.data.domain.ToDoListItem
+import com.example.lifediary.databinding.ToDoListItemBinding
+
+class ToDoListAdapter(
+	private val onDeleteItemClickListener: ListItemClickListener<ToDoListItem>? = null
+) : ListAdapter<ToDoListItem, ToDoListAdapter.ViewHolder>(ToDoItemDiffCallBack()) {
+
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+		ViewHolder.getInstance(parent)
+
+	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+		val item = getItem(position)
+		holder.bind(item, onDeleteItemClickListener)
+	}
+
+	class ToDoListItemViewModel(val toDoListItem: ToDoListItem) {
+		val isChecked = toDoListItem.isDone
+	}
+
+	class ViewHolder private constructor(
+		private val binding: ToDoListItemBinding
+	) : RecyclerView.ViewHolder(binding.root) {
+
+		companion object {
+			fun getInstance(parent: ViewGroup): ViewHolder {
+				val layoutInflater = LayoutInflater.from(parent.context)
+				val binding = ToDoListItemBinding.inflate(layoutInflater, parent, false)
+				return ViewHolder(binding)
+			}
+		}
+
+		fun bind(item: ToDoListItem, onDeleteItemClickListener: ListItemClickListener<ToDoListItem>?) {
+			binding.viewModel = ToDoListItemViewModel(item)
+			binding.deleteButtonContainer.setOnClickListener {
+				onDeleteItemClickListener?.onClick(item)
+			}
+		}
+	}
+}
+
+class ToDoItemDiffCallBack : DiffUtil.ItemCallback<ToDoListItem>() {
+	override fun areItemsTheSame(oldItem: ToDoListItem, newItem: ToDoListItem) =
+		oldItem.text == newItem.text
+
+	override fun areContentsTheSame(oldItem: ToDoListItem, newItem: ToDoListItem) =
+		oldItem == newItem
+}
