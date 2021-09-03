@@ -61,8 +61,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
                 <ImageView
                     android:id="@+id/setHighPriorityButton"
                     android:layout_width="24dp"
@@ -78,8 +78,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/setHighPriorityButtonContainer"
                 app:layout_constraintEnd_toStartOf="@id/setHighPriorityButtonContainer"
                 android:layout_marginEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
                 <ImageView
                     android:id="@+id/deleteButton"
                     android:layout_width="24dp"
