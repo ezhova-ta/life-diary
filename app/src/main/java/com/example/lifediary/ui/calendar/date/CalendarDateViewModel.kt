@@ -3,6 +3,7 @@ package com.example.lifediary.ui.calendar.date
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.DateNote
+import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.WeatherForecast
 import com.example.lifediary.data.repositories.DateNoteRepository
 import com.example.lifediary.data.repositories.ToDoListRepository
@@ -27,6 +28,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val title = day.toDateString()
 	val noteText: LiveData<String?>
 	val isNoteVisible: LiveData<Boolean>
+	val toDoList: LiveData<List<ToDoListItem>>
+	val isToDoListVisible: LiveData<Boolean>
 	private val note: LiveData<DateNote?>
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
@@ -43,6 +46,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		note = noteRepository.getNoteLiveData(day)
 		noteText = note.map { it?.text }
 		isNoteVisible = note.map { it != null }
+		toDoList = toDoListRepository.getToDoList(day)
+		isToDoListVisible = toDoList.map { it.isNotEmpty() }
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
@@ -77,6 +82,10 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	private fun navigateToAddEditNoteScreen() {
 		router.navigateTo(Screens.getAddEditDateNoteFragment(day))
+	}
+
+	fun onDeleteToDoListItemClick(item: ToDoListItem) {
+		TODO()
 	}
 
 	class Factory(private val day: Day) : ViewModelProvider.Factory {

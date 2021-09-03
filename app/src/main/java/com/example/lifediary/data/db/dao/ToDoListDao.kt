@@ -6,8 +6,8 @@ import com.example.lifediary.data.db.entities.ToDoListItemEntity
 
 @Dao
 interface ToDoListDao {
-    @Query("SELECT * FROM to_do_list ORDER BY created_at DESC")
-    fun getAll(): LiveData<List<ToDoListItemEntity>>
+    @Query("SELECT * FROM to_do_list WHERE day = :dayNumber AND month = :monthNumber AND year = :year ORDER BY created_at DESC")
+    fun getAll(dayNumber: Int, monthNumber: Int, year: Int): LiveData<List<ToDoListItemEntity>>
 
     @Query("SELECT * FROM to_do_list WHERE id = :id")
     suspend fun get(id: Long): ToDoListItemEntity?
@@ -24,6 +24,6 @@ interface ToDoListDao {
     @Query("DELETE FROM to_do_list WHERE id = :id")
     suspend fun delete(id: Long)
 
-    @Query("DELETE FROM to_do_list")
-    suspend fun deleteAll()
+    @Query("DELETE FROM to_do_list WHERE day = :dayNumber AND month = :monthNumber AND year = :year")
+    suspend fun deleteAll(dayNumber: Int, monthNumber: Int, year: Int)
 }

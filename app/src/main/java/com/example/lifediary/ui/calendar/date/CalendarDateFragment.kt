@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.adapters.ListItemClickListener
+import com.example.lifediary.adapters.ToDoListAdapter
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.Day
@@ -36,12 +38,23 @@ class CalendarDateFragment : BaseFragment() {
         _binding = FragmentCalendarDateBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        setUpNoteView()
+        setupNoteView()
+        setupToDoListView()
         return binding.root
     }
 
-    private fun setUpNoteView() {
+    private fun setupNoteView() {
         binding.noteView.rolledUpMaxLines = NOTE_VIEW_ROLLED_UP_MAX_LINES
+    }
+
+    private fun setupToDoListView() {
+        val toDoListAdapter = ToDoListAdapter(
+            ListItemClickListener { viewModel.onDeleteToDoListItemClick(it) }
+        )
+        binding.toDoListView.adapter = toDoListAdapter
+        viewModel.toDoList.observe(viewLifecycleOwner) { toDoList ->
+            toDoListAdapter.submitList(toDoList)
+        }
     }
 
     private fun getDayFromArgument(): Day {

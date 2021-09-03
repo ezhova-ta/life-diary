@@ -59,72 +59,81 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/addNoteContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/dateWeatherContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="16dp"
-                app:booleanVisibility="@{!viewModel.noteVisible}"
-                android:onClick="@{() -> viewModel.onAddNoteClick()}">
-
-                <ImageView
-                    android:id="@+id/addNoteButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/icon_plus_green" />
-
-                <TextView
-                    android:id="@+id/addNoteTextView"
-                    style="@style/Text.MainControlsHint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/addNoteButton"
-                    app:layout_constraintTop_toTopOf="@id/addNoteButton"
-                    app:layout_constraintBottom_toBottomOf="@id/addNoteButton"
-                    android:text="@string/add_note" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/noteContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/dateWeatherContainer"
-                android:layout_marginTop="16dp"
-                app:booleanVisibility="@{viewModel.noteVisible}">
+                android:layout_marginTop="16dp">
 
-                <com.example.lifediary.ui.common.RollOutTextPanel
-                    android:id="@+id/noteView"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/addNoteContainer"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/editNoteButton"
-                    app:text="@{viewModel.noteText}" />
+                    app:booleanVisibility="@{!viewModel.noteVisible}"
+                    android:onClick="@{() -> viewModel.onAddNoteClick()}">
+                    <ImageView
+                        android:id="@+id/addNoteButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:src="@drawable/icon_plus_green" />
+                    <TextView
+                        android:id="@+id/addNoteTextView"
+                        style="@style/Text.MainControlsHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/addNoteButton"
+                        app:layout_constraintTop_toTopOf="@id/addNoteButton"
+                        app:layout_constraintBottom_toBottomOf="@id/addNoteButton"
+                        android:text="@string/add_note" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/editNoteButton"
-                    android:layout_width="40dp"
-                    android:layout_height="32dp"
-                    app:layout_constraintTop_toTopOf="@id/noteView"
-                    app:layout_constraintEnd_toStartOf="@id/deleteNoteButton"
-                    android:paddingStart="8dp"
-                    android:src="@drawable/icon_edit_blue"
-                    android:onClick="@{() -> viewModel.onEditNoteClick()}" />
-
-                <ImageView
-                    android:id="@+id/deleteNoteButton"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    app:layout_constraintTop_toTopOf="@id/noteView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/icon_delete_red"
-                    android:onClick="@{() -> viewModel.onDeleteNoteClick()}" />
-
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/noteControlsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:booleanVisibility="@{viewModel.noteVisible}">
+                    <com.example.lifediary.ui.common.RollOutTextPanel
+                        android:id="@+id/noteView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/editNoteButton"
+                        app:text="@{viewModel.noteText}" />
+                    <ImageView
+                        android:id="@+id/editNoteButton"
+                        android:layout_width="40dp"
+                        android:layout_height="32dp"
+                        app:layout_constraintTop_toTopOf="@id/noteView"
+                        app:layout_constraintEnd_toStartOf="@id/deleteNoteButton"
+                        android:paddingStart="8dp"
+                        android:src="@drawable/icon_edit_blue"
+                        android:onClick="@{() -> viewModel.onEditNoteClick()}" />
+                    <ImageView
+                        android:id="@+id/deleteNoteButton"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        app:layout_constraintTop_toTopOf="@id/noteView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/icon_delete_red"
+                        android:onClick="@{() -> viewModel.onDeleteNoteClick()}" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/toDoListView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/noteContainer"
+                android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/to_do_list_item"
+                app:booleanVisibility="@{viewModel.isToDoListVisible()}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -21,9 +21,7 @@ class ToDoListAdapter(
 		holder.bind(item, onDeleteItemClickListener)
 	}
 
-	class ToDoListItemViewModel(val toDoListItem: ToDoListItem) {
-		val isChecked = toDoListItem.isDone
-	}
+	class ToDoListItemViewModel(val toDoListItem: ToDoListItem)
 
 	class ViewHolder private constructor(
 		private val binding: ToDoListItemBinding

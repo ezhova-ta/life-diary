@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:background="@drawable/background_shopping_list_item">
 
         <CheckBox
@@ -22,8 +24,7 @@
             android:layout_height="24dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:checked="@{viewModel.checked}" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/titleView"
@@ -40,7 +41,6 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:textSize="18sp"
-            android:textColor="@{viewModel.checked ? @color/app_green : @color/app_dark_gray}"
             tools:text="Погладить котика"
             android:text="@{viewModel.toDoListItem.text}" />
 
