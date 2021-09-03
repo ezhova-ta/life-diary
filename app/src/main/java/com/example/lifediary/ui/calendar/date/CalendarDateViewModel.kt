@@ -49,6 +49,18 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		toDoList = toDoListRepository.getToDoList(day)
 		isToDoListVisible = toDoList.map { it.isNotEmpty() }
 
+
+
+//		viewModelScope.launch(Dispatchers.IO) {
+//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "1111111111111111", day = day))
+//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "2222222222", day = day))
+//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "333333333", day = day))
+//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "444444444", day = day))
+//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "555555555", day = day))
+//		}
+
+
+
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
 				val locationId = weatherRepository.getLocation()?.id ?: throw NullPointerException()

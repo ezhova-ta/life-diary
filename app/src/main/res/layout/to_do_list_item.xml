@@ -75,13 +75,12 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:clickable="true">
-            <ImageButton
+            android:paddingEnd="8dp">
+            <ImageView
                 android:id="@+id/deleteButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/icon_delete_gray" />
+                android:src="@drawable/icon_delete_gray" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
