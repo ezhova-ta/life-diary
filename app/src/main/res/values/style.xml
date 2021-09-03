@@ -57,6 +57,7 @@
         <item name="android:background">@drawable/background_substrate_light_gray</item>
         <item name="android:textCursorDrawable">@drawable/edit_text_cursor_blue</item>
         <item name="android:textColorHighlight">@color/app_light_blue</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="MainScreenSection">
