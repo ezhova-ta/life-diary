@@ -7,7 +7,6 @@ import com.example.lifediary.data.domain.Weather
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
@@ -59,8 +58,7 @@ class MainViewModel : BaseViewModel() {
             try {
                 repository.updateCurrentWeather(locationId)
             } catch(e: Exception) {
-                val messageRes = R.string.failed_to_update_weather_data
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
             } finally {
                 _isCurrentWeatherProgressVisible.postValue(false)
             }

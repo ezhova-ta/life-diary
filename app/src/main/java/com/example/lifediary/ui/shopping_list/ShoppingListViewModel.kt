@@ -7,7 +7,6 @@ import com.example.lifediary.R
 import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.data.repositories.ShoppingListRepository
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,8 +51,7 @@ class ShoppingListViewModel: BaseViewModel() {
                 repository.saveShoppingListItem(item)
                 newShoppingListItemText.postValue("")
             } catch(e: Exception) {
-                val messageRes = R.string.failed_to_save
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.failed_to_save))
             }
         }
     }
@@ -69,8 +67,7 @@ class ShoppingListViewModel: BaseViewModel() {
             try {
                 repository.clearShoppingList()
             } catch(e: Exception) {
-                val messageRes = R.string.failed_to_clear_list
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.failed_to_clear_list))
             }
         }
     }
@@ -85,8 +82,7 @@ class ShoppingListViewModel: BaseViewModel() {
             try {
                 repository.inverseListItemCrossedOut(itemId)
             } catch(e: Exception) {
-                val messageRes = R.string.error
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.error))
             }
         }
     }
@@ -97,8 +93,7 @@ class ShoppingListViewModel: BaseViewModel() {
             try {
                 repository.inverseShoppingListItemPriority(itemId)
             } catch(e: Exception) {
-                val messageRes = R.string.error
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.error))
             }
         }
     }
@@ -109,8 +104,7 @@ class ShoppingListViewModel: BaseViewModel() {
             try {
                 repository.deleteShoppingListItem(itemId)
             } catch(e: Exception) {
-                val messageRes = R.string.deleting_item_error
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.deleting_item_error))
             }
         }
     }

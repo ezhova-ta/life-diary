@@ -9,7 +9,10 @@ import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.*
+import com.example.lifediary.utils.Day
+import com.example.lifediary.utils.Text
+import com.example.lifediary.utils.isSameDay
+import com.example.lifediary.utils.toDateString
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,8 +55,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 				val forecast = weatherRepository.getForecast(locationId)
 				weatherForecast.postValue(forecast)
 			} catch(e: Exception) {
-				val messageRes = R.string.failed_to_get_forecast
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+				showMessage(Text.TextResource(R.string.failed_to_get_forecast))
 			}
 		}
 	}
@@ -73,8 +75,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 			try {
 				noteRepository.deleteNote(noteId)
 			} catch(e: Exception) {
-				val messageRes = R.string.error
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+				showMessage(Text.TextResource(R.string.error))
 			}
 		}
 	}

@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MainNote
-import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.data.repositories.MainNoteRepository
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -37,8 +35,7 @@ class MainNotesViewModel : BaseViewModel() {
 			try {
 				repository.saveNote(item)
 			} catch(e: Exception) {
-				val messageRes = R.string.failed_to_save
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+				showMessage(Text.TextResource(R.string.failed_to_save))
 			}
 		}
 	}
@@ -50,8 +47,7 @@ class MainNotesViewModel : BaseViewModel() {
 			try {
 				repository.clearNoteList()
 			} catch(e: Exception) {
-				val messageRes = R.string.failed_to_clear_list
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+				showMessage(Text.TextResource(R.string.failed_to_clear_list))
 			}
 		}
 	}
@@ -67,8 +63,7 @@ class MainNotesViewModel : BaseViewModel() {
 			try {
 				repository.deleteNote(itemId)
 			} catch(e: Exception) {
-				val messageRes = R.string.deleting_item_error
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+				showMessage(Text.TextResource(R.string.deleting_item_error))
 			}
 		}
 	}

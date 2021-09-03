@@ -7,7 +7,6 @@ import com.example.lifediary.R
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -52,8 +51,7 @@ class LocationSelectionViewModel : BaseViewModel() {
                 val foundLocations = repository.findLocations(enteredLocationName)
                 _locations.postValue(foundLocations)
             } catch(e: Exception) {
-                val messageRes = R.string.search_location_error
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.search_location_error))
             } finally {
                 isProgressVisible.postValue(false)
             }
@@ -68,8 +66,7 @@ class LocationSelectionViewModel : BaseViewModel() {
             try {
                 repository.saveLocation(location)
             } catch(e: Exception) {
-                val messageRes = R.string.saving_location_error
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.saving_location_error))
             }
         }
         router.exit()

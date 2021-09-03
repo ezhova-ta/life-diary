@@ -6,7 +6,6 @@ import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.data.repositories.DateNoteRepository
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Day
-import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -33,8 +32,7 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 				existingNote = noteRepository.getNote(day)
 				existingNote?.text?.let { noteText.postValue(it) }
 			} catch(e: Exception) {
-				val messageRes = R.string.error
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+				showMessage(Text.TextResource(R.string.error))
 			}
 		}
 	}
@@ -60,8 +58,7 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 
 				router.exit()
 			} catch(e: Exception) {
-				val messageRes = R.string.failed_to_save
-				popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+				showMessage(Text.TextResource(R.string.failed_to_save))
 			}
 		}
 	}

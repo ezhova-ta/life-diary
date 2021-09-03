@@ -1,6 +1,5 @@
 package com.example.lifediary.ui.post_addresses
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -9,7 +8,6 @@ import com.example.lifediary.data.domain.PostAddress
 import com.example.lifediary.data.repositories.PostAddressRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -65,8 +63,7 @@ class PostAddressesViewModel: BaseViewModel() {
             try {
                 repository.deleteAddress(addressId)
             } catch(e: Exception) {
-                val messageRes = R.string.deleting_item_error
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.deleting_item_error))
             }
         }
     }
@@ -86,21 +83,18 @@ class PostAddressesViewModel: BaseViewModel() {
     }
 
     fun onPickContactFailed() {
-        val messageRes = R.string.failed_to_get_contact
-        popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+        showMessage(Text.TextResource(R.string.failed_to_get_contact))
     }
 
     fun onPickContactPermissionNotGranted() {
-        val messageRes = R.string.requires_permission_to_access_contacts
-        popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+        showMessage(Text.TextResource(R.string.requires_permission_to_access_contacts))
     }
 
     fun onSavePostAddressClick() {
         val address = createAddress()
 
         if(address == null) {
-            val messageRes = R.string.error_try_again
-            popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+            showMessage(Text.TextResource(R.string.error_try_again))
             return
         }
 
@@ -109,8 +103,7 @@ class PostAddressesViewModel: BaseViewModel() {
                 saveAddress(address)
                 router.exit()
             } catch(e: Exception) {
-                val messageRes = R.string.failed_to_save
-                popupMessageEvent.postValue(OneTimeEvent(Text.TextResource(messageRes)))
+                showMessage(Text.TextResource(R.string.failed_to_save))
             }
         }
     }
