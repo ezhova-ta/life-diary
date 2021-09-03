@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.adapters.ListItemClickListener
@@ -40,6 +41,7 @@ class CalendarDateFragment : BaseFragment() {
         binding.viewModel = viewModel
         setupNoteView()
         setupToDoListView()
+        setupAddToDoListItemInputView()
         return binding.root
     }
 
@@ -55,6 +57,19 @@ class CalendarDateFragment : BaseFragment() {
         binding.toDoListView.adapter = toDoListAdapter
         viewModel.toDoList.observe(viewLifecycleOwner) { toDoList ->
             toDoListAdapter.submitList(toDoList)
+        }
+    }
+
+    private fun setupAddToDoListItemInputView() {
+        binding.addToDoListItemInput.imeOptions = EditorInfo.IME_ACTION_DONE
+
+        binding.addToDoListItemInput.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.onAddToDoListItemInputDone()
+                return@setOnEditorActionListener true
+            }
+
+            return@setOnEditorActionListener false
         }
     }
 

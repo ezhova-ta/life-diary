@@ -45,4 +45,5 @@
     <string name="failed_to_get_contact">Failed to get contact</string>
     <string name="notes">Notes</string>
     <string name="no_notes_yet">There are no notes yet</string>
+    <string name="what_should_be_done">What should be done?</string>
 </resources>

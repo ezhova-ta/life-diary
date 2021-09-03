@@ -42,4 +42,5 @@
     <string name="failed_to_get_contact">Не удалось получить контакт</string>
     <string name="notes">Заметки</string>
     <string name="no_notes_yet">Пока нет ни одной заметки</string>
+    <string name="what_should_be_done">Что нужно сделать?</string>
 </resources>

@@ -31,6 +31,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val toDoList: LiveData<List<ToDoListItem>>
 	val isToDoListVisible: LiveData<Boolean>
 	private val note: LiveData<DateNote?>
+	val newToDoListItemText = MutableLiveData("")
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->
@@ -48,18 +49,6 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		isNoteVisible = note.map { it != null }
 		toDoList = toDoListRepository.getToDoList(day)
 		isToDoListVisible = toDoList.map { it.isNotEmpty() }
-
-
-
-//		viewModelScope.launch(Dispatchers.IO) {
-//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "1111111111111111", day = day))
-//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "2222222222", day = day))
-//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "333333333", day = day))
-//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "444444444", day = day))
-//			toDoListRepository.saveToDoListItem(ToDoListItem(text = "555555555", day = day))
-//		}
-
-
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
@@ -94,6 +83,30 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	private fun navigateToAddEditNoteScreen() {
 		router.navigateTo(Screens.getAddEditDateNoteFragment(day))
+	}
+
+	fun onAddToDoListItemClick() {
+		onAddToDoListItemInputDone()
+	}
+
+	fun onAddToDoListItemInputDone() {
+		val text = newToDoListItemText.value?.trim()
+
+		if(text.isNullOrBlank()) {
+			newToDoListItemText.value = ""
+			return
+		}
+
+		val item = ToDoListItem(text = text, day = day)
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				toDoListRepository.saveToDoListItem(item)
+				newToDoListItemText.postValue("")
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.failed_to_save))
+			}
+		}
 	}
 
 	fun onDeleteToDoListItemClick(item: ToDoListItem) {

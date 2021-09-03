@@ -125,12 +125,39 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <EditText
+                android:id="@+id/addToDoListItemInput"
+                style="@style/Input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/noteContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/addToDoListItemButton"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:inputType="text"
+                android:singleLine="true"
+                android:maxLength="70"
+                android:text="@={viewModel.newToDoListItemText}"
+                android:hint="@string/what_should_be_done" />
+
+            <ImageView
+                android:id="@+id/addToDoListItemButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                app:layout_constraintTop_toTopOf="@id/addToDoListItemInput"
+                app:layout_constraintBottom_toBottomOf="@id/addToDoListItemInput"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/icon_plus_green"
+                android:clickable="true"
+                android:onClick="@{() -> viewModel.onAddToDoListItemClick()}"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/toDoListView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/noteContainer"
-                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/addToDoListItemInput"
+                android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/to_do_list_item"
                 app:booleanVisibility="@{viewModel.isToDoListVisible()}" />
