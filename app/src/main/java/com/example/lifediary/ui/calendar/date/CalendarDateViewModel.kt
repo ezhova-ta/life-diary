@@ -20,19 +20,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
-	@Inject
-	lateinit var router: Router
-	@Inject
-	lateinit var weatherRepository: WeatherRepository
-	@Inject
-	lateinit var noteRepository: DateNoteRepository
-	@Inject
-	lateinit var toDoListRepository: ToDoListRepository
-
+	@Inject lateinit var router: Router
+	@Inject lateinit var weatherRepository: WeatherRepository
+	@Inject lateinit var noteRepository: DateNoteRepository
+	@Inject lateinit var toDoListRepository: ToDoListRepository
 	val title = day.toDateString()
-	private val note: LiveData<DateNote?>
 	val noteText: LiveData<String?>
 	val isNoteVisible: LiveData<Boolean>
+	private val note: LiveData<DateNote?>
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->

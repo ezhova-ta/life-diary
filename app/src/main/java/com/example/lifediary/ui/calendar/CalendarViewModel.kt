@@ -10,11 +10,8 @@ import com.github.terrakok.cicerone.Router
 import javax.inject.Inject
 
 class CalendarViewModel : BaseViewModel() {
-	@Inject
-	lateinit var router: Router
-	@Inject
-	lateinit var noteRepository: DateNoteRepository
-
+	@Inject lateinit var router: Router
+	@Inject lateinit var noteRepository: DateNoteRepository
 	var noteList: LiveData<List<DateNote>>
 
 	init {

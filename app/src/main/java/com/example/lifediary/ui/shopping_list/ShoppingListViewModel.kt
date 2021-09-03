@@ -14,17 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ShoppingListViewModel: BaseViewModel() {
-    @Inject
-    lateinit var repository: ShoppingListRepository
-
+    @Inject lateinit var repository: ShoppingListRepository
     var shoppingList: LiveData<List<ShoppingListItem>>
+    val newShoppingListItemText = MutableLiveData("")
+    val isShoppingListVisible: LiveData<Boolean>
 
     private val _showClearShoppingListConfirmationDialog = MutableLiveData(false)
     val showClearShoppingListConfirmationDialog: LiveData<Boolean>
         get() = _showClearShoppingListConfirmationDialog
-
-    val newShoppingListItemText = MutableLiveData("")
-    val isShoppingListVisible: LiveData<Boolean>
 
     init {
         bindAppScope()

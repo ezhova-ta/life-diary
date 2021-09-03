@@ -14,11 +14,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainNotesViewModel : BaseViewModel() {
-	@Inject
-	lateinit var router: Router
-	@Inject
-	lateinit var repository: MainNoteRepository
-
+	@Inject lateinit var router: Router
+	@Inject lateinit var repository: MainNoteRepository
 	val noteList: LiveData<List<MainNote>>
 	val isNotesVisible: LiveData<Boolean>
 

@@ -14,14 +14,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
-	@Inject
-	lateinit var router: Router
-	@Inject
-	lateinit var noteRepository: DateNoteRepository
-
-	private var existingNote: DateNote? = null
+	@Inject lateinit var router: Router
+	@Inject lateinit var noteRepository: DateNoteRepository
 	val noteText = MutableLiveData("")
 	val isAddButtonVisible: LiveData<Boolean>
+	private var existingNote: DateNote? = null
 
 	init {
 		bindAppScope()

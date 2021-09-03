@@ -15,12 +15,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LocationSelectionViewModel : BaseViewModel() {
-    @Inject
-    lateinit var repository: WeatherRepository
-    @Inject
-    lateinit var router: Router
-
+    @Inject lateinit var repository: WeatherRepository
+    @Inject lateinit var router: Router
     val locationName = MutableLiveData("")
+    val isProgressVisible = MutableLiveData(false)
 
     private val _locations = MutableLiveData<List<Location>>()
     val locations: LiveData<List<Location>>
@@ -29,8 +27,6 @@ class LocationSelectionViewModel : BaseViewModel() {
     private val _searchLocationInputNeedsFocus = MutableLiveData(true)
     val searchLocationInputNeedsFocus: LiveData<Boolean>
         get() = _searchLocationInputNeedsFocus
-
-    val isProgressVisible = MutableLiveData(false)
 
     init {
         bindAppScope()

@@ -12,9 +12,7 @@ import toothpick.Toothpick
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    @Inject
-    lateinit var navigationHolder: NavigatorHolder
-
+    @Inject lateinit var navigationHolder: NavigatorHolder
     private val viewModel: MainActivityViewModel by viewModels()
     private val navigator = AppNavigator(this, R.id.mainContainer)
 

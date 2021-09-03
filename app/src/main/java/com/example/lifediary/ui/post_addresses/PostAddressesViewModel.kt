@@ -16,11 +16,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PostAddressesViewModel: BaseViewModel() {
-    @Inject
-    lateinit var router: Router
-    @Inject
-    lateinit var repository: PostAddressRepository
-
+    @Inject lateinit var router: Router
+    @Inject lateinit var repository: PostAddressRepository
     val addresses: LiveData<List<PostAddress>>
     val isAddressListVisible: LiveData<Boolean>
 

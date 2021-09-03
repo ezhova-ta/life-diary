@@ -14,15 +14,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel : BaseViewModel() {
-    @Inject
-    lateinit var router: Router
-    @Inject
-    lateinit var repository: WeatherRepository
-
-    private var location: LiveData<Location?>
+    @Inject lateinit var router: Router
+    @Inject lateinit var repository: WeatherRepository
     var locationName: LiveData<String?>
     var currentWeather: LiveData<Weather?>
     var isCurrentWeatherViewVisible: LiveData<Boolean>
+    private var location: LiveData<Location?>
 
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
