@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.databinding.MainNoteListItemBinding
-import com.example.lifediary.ui.calendar.date.CalendarDateFragment
 
 class MainNoteListAdapter(
-	private val onEditItemClickListener: OnMainNoteListItemClickListener? = null,
-	private val onDeleteItemClickListener: OnMainNoteListItemClickListener? = null
+	private val onEditItemClickListener: ListItemClickListener<MainNote>? = null,
+	private val onDeleteItemClickListener: ListItemClickListener<MainNote>? = null
 ) : ListAdapter<MainNote, MainNoteListAdapter.ViewHolder>(MainNoteListItemDiffCallBack()) {
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
 		ViewHolder.getInstance(parent)
@@ -38,8 +37,8 @@ class MainNoteListAdapter(
 
 		fun bind(
 			item: MainNote,
-			onEditItemClickListener: OnMainNoteListItemClickListener?,
-			onDeleteItemClickListener: OnMainNoteListItemClickListener?
+			onEditItemClickListener: ListItemClickListener<MainNote>?,
+			onDeleteItemClickListener: ListItemClickListener<MainNote>?
 		) {
 			binding.viewModel = MainNoteListItemViewModel(item)
 			binding.executePendingBindings()
@@ -53,8 +52,8 @@ class MainNoteListAdapter(
 
 		private fun setupClickListeners(
 			item: MainNote,
-			onEditItemClickListener: OnMainNoteListItemClickListener?,
-			onDeleteItemClickListener: OnMainNoteListItemClickListener?
+			onEditItemClickListener: ListItemClickListener<MainNote>?,
+			onDeleteItemClickListener: ListItemClickListener<MainNote>?
 		) {
 			binding.editNoteButton.setOnClickListener {
 				onEditItemClickListener?.onClick(item)
@@ -73,8 +72,4 @@ class MainNoteListItemDiffCallBack : DiffUtil.ItemCallback<MainNote>() {
 
 	override fun areContentsTheSame(oldItem: MainNote, newItem: MainNote) =
 		oldItem == newItem
-}
-
-class OnMainNoteListItemClickListener(val clickListener: (MainNote) -> Unit) {
-	fun onClick(mainNoteListItem: MainNote) = clickListener(mainNoteListItem)
 }

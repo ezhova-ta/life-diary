@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.LocationListAdapter
-import com.example.lifediary.adapters.OnLocationListItemClickListener
 import com.example.lifediary.databinding.FragmentLocationSelectionBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.clearFocusWithKeyboard
@@ -61,7 +61,7 @@ class LocationSelectionFragment : BaseFragment() {
 
     private fun setupLocationListRecycler() {
         val locationListAdapter = LocationListAdapter(
-            OnLocationListItemClickListener { viewModel.onLocationListItemClick(it) }
+            ListItemClickListener { viewModel.onLocationListItemClick(it) }
         )
         binding.locationListView.adapter = locationListAdapter
         viewModel.locations.observe(viewLifecycleOwner) { locations ->

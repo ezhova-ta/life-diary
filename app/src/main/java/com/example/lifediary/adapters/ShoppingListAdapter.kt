@@ -11,9 +11,9 @@ import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.databinding.ShoppingListItemBinding
 
 class ShoppingListAdapter(
-    private val onItemClickListener: OnShoppingListItemClickListener? = null,
-    private val onHighPriorityClickListener: OnShoppingListItemClickListener? = null,
-    private val onDeleteItemClickListener: OnShoppingListItemClickListener? = null
+    private val onItemClickListener: ListItemClickListener<ShoppingListItem>? = null,
+    private val onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>? = null,
+    private val onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>? = null
 ) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ViewHolder>(ShoppingListItemDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -46,9 +46,9 @@ class ShoppingListAdapter(
 
         fun bind(
             item: ShoppingListItem,
-            onItemClickListener: OnShoppingListItemClickListener?,
-            onHighPriorityClickListener: OnShoppingListItemClickListener?,
-            onDeleteItemClickListener: OnShoppingListItemClickListener?
+            onItemClickListener: ListItemClickListener<ShoppingListItem>?,
+            onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>?,
+            onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
             binding.viewModel = ShoppingListItemViewModel(item)
             binding.executePendingBindings()
@@ -79,9 +79,9 @@ class ShoppingListAdapter(
 
         private fun setClickListeners(
             item: ShoppingListItem,
-            onItemClickListener: OnShoppingListItemClickListener?,
-            onHighPriorityClickListener: OnShoppingListItemClickListener?,
-            onDeleteItemClickListener: OnShoppingListItemClickListener?
+            onItemClickListener: ListItemClickListener<ShoppingListItem>?,
+            onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>?,
+            onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
             binding.titleView.setOnClickListener {
                 onItemClickListener?.onClick(item)
@@ -104,8 +104,4 @@ class ShoppingListItemDiffCallBack : DiffUtil.ItemCallback<ShoppingListItem>() {
 
     override fun areContentsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem) =
         oldItem == newItem
-}
-
-class OnShoppingListItemClickListener(val clickListener: (ShoppingListItem) -> Unit) {
-    fun onClick(shoppingListItem: ShoppingListItem) = clickListener(shoppingListItem)
 }

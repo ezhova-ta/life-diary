@@ -9,8 +9,8 @@ import com.example.lifediary.data.domain.PostAddress
 import com.example.lifediary.databinding.PostAddressListItemBinding
 
 class PostAddressListAdapter(
-	private val onDeleteItemClickListener: OnPostAddressListItemClickListener,
-	private val onEditItemClickListener: OnPostAddressListItemClickListener
+	private val onDeleteItemClickListener: ListItemClickListener<PostAddress>,
+	private val onEditItemClickListener: ListItemClickListener<PostAddress>
 ) : ListAdapter<PostAddress, PostAddressListAdapter.ViewHolder>(PostAddressListItemDiffCallBack()) {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder  =
@@ -39,8 +39,8 @@ class PostAddressListAdapter(
 
 		fun bind(
 			item: PostAddress,
-			onDeleteItemClickListener: OnPostAddressListItemClickListener,
-			onEditItemClickListener: OnPostAddressListItemClickListener
+			onDeleteItemClickListener: ListItemClickListener<PostAddress>,
+			onEditItemClickListener: ListItemClickListener<PostAddress>
 		) {
 			binding.viewModel = PostAddressListItemViewModel(item)
 			binding.executePendingBindings()
@@ -56,8 +56,4 @@ class PostAddressListItemDiffCallBack : DiffUtil.ItemCallback<PostAddress>() {
 
 	override fun areContentsTheSame(oldItem: PostAddress, newItem: PostAddress) =
 		oldItem == newItem
-}
-
-class OnPostAddressListItemClickListener(val clickListener: (PostAddress) -> Unit) {
-	fun onClick(address: PostAddress) = clickListener(address)
 }

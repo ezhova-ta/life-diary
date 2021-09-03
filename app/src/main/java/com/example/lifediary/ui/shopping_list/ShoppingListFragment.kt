@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
-import com.example.lifediary.adapters.OnShoppingListItemClickListener
+import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ShoppingListAdapter
 import com.example.lifediary.databinding.FragmentShoppingListBinding
 import com.example.lifediary.ui.BaseFragment
@@ -54,9 +54,9 @@ class ShoppingListFragment : BaseFragment() {
 
     private fun setupShoppingListRecycler() {
         val shoppingListAdapter = ShoppingListAdapter(
-            OnShoppingListItemClickListener { viewModel.onShoppingListItemClick(it) },
-            OnShoppingListItemClickListener { viewModel.onHighPriorityShoppingListItemClick(it) },
-            OnShoppingListItemClickListener { viewModel.onDeleteShoppingListItemClick(it) }
+            ListItemClickListener { viewModel.onShoppingListItemClick(it) },
+            ListItemClickListener { viewModel.onHighPriorityShoppingListItemClick(it) },
+            ListItemClickListener { viewModel.onDeleteShoppingListItemClick(it) }
         )
         binding.shoppingListView.adapter = shoppingListAdapter
         viewModel.shoppingList.observe(viewLifecycleOwner) { shoppingList ->

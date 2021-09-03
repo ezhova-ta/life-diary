@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.databinding.LocationListItemBinding
 
-class LocationListAdapter(private val onItemClickListener: OnLocationListItemClickListener) :
+class LocationListAdapter(private val onItemClickListener: ListItemClickListener<Location>) :
         ListAdapter<Location, LocationListAdapter.ViewHolder>(LocationListItemDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -34,7 +34,7 @@ class LocationListAdapter(private val onItemClickListener: OnLocationListItemCli
             }
         }
 
-        fun bind(item: Location, onItemClickListener: OnLocationListItemClickListener) {
+        fun bind(item: Location, onItemClickListener: ListItemClickListener<Location>) {
             binding.viewModel = LocationListItemViewModel(item)
             binding.executePendingBindings()
             binding.container.setOnClickListener {
@@ -50,8 +50,4 @@ class LocationListItemDiffCallBack : DiffUtil.ItemCallback<Location>() {
 
     override fun areContentsTheSame(oldItem: Location, newItem: Location) =
         oldItem == newItem
-}
-
-class OnLocationListItemClickListener(val clickListener: (Location) -> Unit) {
-    fun onClick(location: Location) = clickListener(location)
 }
