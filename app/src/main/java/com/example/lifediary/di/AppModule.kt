@@ -26,6 +26,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(DateNoteDao::class.java).toProvider(DateNoteDaoProvider::class.java)
         bind(MainNotesDao::class.java).toProvider(MainNotesDaoProvider::class.java)
         bind(PostAddressDao::class.java).toProvider(PostAddressDaoProvider::class.java)
+        bind(ToDoListDao::class.java).toProvider(ToDoListDaoProvider::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())

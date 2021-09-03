@@ -6,14 +6,15 @@ import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.data.db.entities.*
 
 @Database(
-    version = 8,
+    version = 9,
     entities = [
         ShoppingListItemEntity::class,
         LocationEntity::class,
         WeatherEntity::class,
         DateNoteEntity::class,
         PostAddressEntity::class,
-        MainNoteEntity::class
+        MainNoteEntity::class,
+        ToDoListItemEntity::class
     ]
 )
 abstract class MainDataBase : RoomDatabase() {
@@ -27,4 +28,5 @@ abstract class MainDataBase : RoomDatabase() {
     abstract fun noteDao(): DateNoteDao
     abstract fun mainNotesDao(): MainNotesDao
     abstract fun postAddressDao(): PostAddressDao
+    abstract fun toDoListDao(): ToDoListDao
 }

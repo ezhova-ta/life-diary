@@ -5,6 +5,7 @@ import com.example.lifediary.R
 import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.data.domain.WeatherForecast
 import com.example.lifediary.data.repositories.DateNoteRepository
+import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
@@ -22,6 +23,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	lateinit var weatherRepository: WeatherRepository
 	@Inject
 	lateinit var noteRepository: DateNoteRepository
+	@Inject
+	lateinit var toDoListRepository: ToDoListRepository
 
 	val title = day.toDateString()
 	private val note: LiveData<DateNote?>
