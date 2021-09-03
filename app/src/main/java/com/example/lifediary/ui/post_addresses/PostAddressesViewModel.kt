@@ -91,7 +91,7 @@ class PostAddressesViewModel: BaseViewModel() {
         val address = createAddress()
 
         if(address == null) {
-            showMessage(Text.TextResource(R.string.error_try_again))
+            showMessage(Text.TextResource(R.string.error_try_again_later))
             return
         }
 

@@ -34,7 +34,7 @@
     <string name="fill_all_necessary_fields">Fill all necessary fields</string>
     <string name="bld">bld.</string>
     <string name="apt">apt.</string>
-    <string name="error_try_again">Error. Try again later</string>
+    <string name="error_try_again_later">Error. Try again later</string>
     <string name="unknown_addressee">Unknown addressee</string>
     <string name="question_mark" translatable="false">\?</string>
     <string name="three_question_marks" translatable="false">\???</string>

@@ -88,6 +88,18 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		TODO()
 	}
 
+	fun onToDoListItemClick(item: ToDoListItem) {
+		val itemId = item.id ?: return
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				toDoListRepository.inverseListItemIsDone(itemId)
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.error_try_again_later))
+			}
+		}
+	}
+
 	class Factory(private val day: Day) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
