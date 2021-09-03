@@ -3,7 +3,7 @@ package com.example.lifediary.ui.calendar.date.note
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.repositories.NoteRepository
+import com.example.lifediary.data.repositories.DateNoteRepository
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.OneTimeEvent
@@ -18,7 +18,7 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject
 	lateinit var router: Router
 	@Inject
-	lateinit var noteRepository: NoteRepository
+	lateinit var noteRepository: DateNoteRepository
 
 	private var existingNote: DateNote? = null
 	val noteText = MutableLiveData("")

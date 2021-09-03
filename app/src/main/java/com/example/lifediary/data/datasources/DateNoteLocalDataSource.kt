@@ -2,13 +2,13 @@ package com.example.lifediary.data.datasources
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.example.lifediary.data.db.dao.NoteDao
+import com.example.lifediary.data.db.dao.DateNoteDao
 import com.example.lifediary.data.db.entities.DateNoteEntity
 import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.utils.Day
 import javax.inject.Inject
 
-class NoteLocalDataSource @Inject constructor(private val dao: NoteDao) {
+class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) {
     fun getNoteLiveData(day: Day): LiveData<DateNote?> {
         return dao.getLiveData(day.dayNumber, day.monthNumber, day.year).map { it?.toDomain() }
     }

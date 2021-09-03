@@ -24,7 +24,7 @@ abstract class MainDataBase : RoomDatabase() {
     abstract fun shoppingListDao(): ShoppingListDao
     abstract fun locationDao(): LocationDao
     abstract fun currentWeatherDao(): CurrentWeatherDao
-    abstract fun noteDao(): NoteDao
+    abstract fun noteDao(): DateNoteDao
     abstract fun mainNotesDao(): MainNotesDao
     abstract fun postAddressDao(): PostAddressDao
 }

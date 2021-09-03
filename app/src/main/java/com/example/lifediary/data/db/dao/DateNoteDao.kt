@@ -5,7 +5,7 @@ import androidx.room.*
 import com.example.lifediary.data.db.entities.DateNoteEntity
 
 @Dao
-interface NoteDao {
+interface DateNoteDao {
     @Query("SELECT * FROM note WHERE day = :dayNumber AND month = :monthNumber AND year = :year LIMIT 1")
     fun get(dayNumber: Int, monthNumber: Int, year: Int): DateNoteEntity?
 
