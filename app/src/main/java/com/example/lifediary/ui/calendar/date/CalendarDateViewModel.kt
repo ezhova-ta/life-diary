@@ -85,7 +85,15 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	fun onDeleteToDoListItemClick(item: ToDoListItem) {
-		TODO()
+		val itemId = item.id ?: return
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				toDoListRepository.deleteToDoListItem(itemId)
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.deleting_item_error))
+			}
+		}
 	}
 
 	fun onToDoListItemClick(item: ToDoListItem) {
