@@ -1,5 +1,6 @@
 package com.example.lifediary.ui.calendar
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.repositories.DateNoteRepository
@@ -18,9 +19,12 @@ class CalendarViewModel : BaseViewModel() {
 
 	init {
 		bindAppScope()
+		setupDaysWithNotesOrToDoList()
+	}
 
-		val daysWithNote = noteRepository.getAllNotes().map { it.map { it.day } }
-		val daysWithToDoList = doToDoListRepository.getAllToDoLists().map { it.map { it.day } }
+	private fun setupDaysWithNotesOrToDoList() {
+		val daysWithNote = getDaysWithNote()
+		val daysWithToDoList = getDaysWithToDoList()
 		daysWithNotesOrToDoList.value = listOf()
 
 		daysWithNotesOrToDoList.addSource(daysWithNote) {
@@ -33,6 +37,22 @@ class CalendarViewModel : BaseViewModel() {
 			val daysWithNoteValue = daysWithNote.value ?: listOf()
 			val allDays = it.plus(daysWithNoteValue)
 			daysWithNotesOrToDoList.value = allDays
+		}
+	}
+
+	private fun getDaysWithNote(): LiveData<List<Day>> {
+		return noteRepository.getAllNotes().map { noteList ->
+			noteList.map { note ->
+				note.day
+			}
+		}
+	}
+
+	private fun getDaysWithToDoList():  LiveData<List<Day>> {
+		return doToDoListRepository.getAllToDoLists().map { toDoList ->
+			toDoList.map { toDoListItem ->
+				toDoListItem.day
+			}
 		}
 	}
 
