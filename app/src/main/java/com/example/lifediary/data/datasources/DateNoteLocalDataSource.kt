@@ -18,7 +18,7 @@ class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) 
         return dao.get(day.dayNumber, day.monthNumber, day.year)?.toDomain()
     }
 
-    fun getAllNote(): LiveData<List<DateNote>> {
+    fun getAllNotes(): LiveData<List<DateNote>> {
         return dao.getAll().toDomain()
     }
 

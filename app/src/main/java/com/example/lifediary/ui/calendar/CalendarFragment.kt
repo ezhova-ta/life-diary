@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
 import com.example.lifediary.ui.common.CalendarMonthViewContainer
+import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.isSameDay
 import com.example.lifediary.utils.isToday
 import com.example.lifediary.utils.toDomainDay
@@ -29,7 +29,7 @@ class CalendarFragment : BaseFragment() {
     override val viewModel: CalendarViewModel  by viewModels()
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
-    private var noteList = listOf<DateNote>()
+    private var daysWithNotesOrToDoList = listOf<Day>()
 
     companion object {
         fun getInstance(): Fragment {
@@ -78,8 +78,8 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun setupDisplayingNoteIconsInCalendar() {
-        viewModel.noteList.observe(viewLifecycleOwner) { noteList ->
-            this.noteList = noteList
+        viewModel.daysWithNotesOrToDoList.observe(viewLifecycleOwner) { days ->
+            daysWithNotesOrToDoList = days
             binding.calendarView.notifyCalendarChanged()
         }
     }
@@ -99,15 +99,15 @@ class CalendarFragment : BaseFragment() {
                 container.setNormalStyle()
             }
 
-            if(isNoteExistFor(day)) {
+            if(isNoteOrToDoListExistsFor(day)) {
                 container.showNoteIcon()
             } else {
                 container.hideNoteIcon()
             }
         }
 
-        private fun isNoteExistFor(day: CalendarDay): Boolean {
-            return noteList.find { it.day.isSameDay(day) } != null
+        private fun isNoteOrToDoListExistsFor(day: CalendarDay): Boolean {
+            return daysWithNotesOrToDoList.find { it.isSameDay(day) } != null
         }
     }
 

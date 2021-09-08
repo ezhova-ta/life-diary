@@ -9,6 +9,9 @@ interface ToDoListDao {
     @Query("SELECT * FROM to_do_list WHERE day = :dayNumber AND month = :monthNumber AND year = :year ORDER BY created_at DESC")
     fun getAll(dayNumber: Int, monthNumber: Int, year: Int): LiveData<List<ToDoListItemEntity>>
 
+    @Query("SELECT * FROM to_do_list")
+    fun getAll(): LiveData<List<ToDoListItemEntity>>
+
     @Query("SELECT * FROM to_do_list WHERE id = :id")
     suspend fun get(id: Long): ToDoListItemEntity?
 

@@ -5,12 +5,18 @@ import com.example.lifediary.data.datasources.ToDoListLocalDataSource
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.utils.Day
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ToDoListRepository @Inject constructor(
 	private val localDataSource: ToDoListLocalDataSource
 ) {
 	fun getToDoList(day: Day): LiveData<List<ToDoListItem>> {
 		return localDataSource.getToDoList(day)
+	}
+
+	fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
+		return localDataSource.getAllToDoLists()
 	}
 
 	suspend fun saveToDoListItem(item: ToDoListItem) {

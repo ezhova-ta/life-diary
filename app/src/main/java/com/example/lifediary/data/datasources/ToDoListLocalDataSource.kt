@@ -13,6 +13,10 @@ class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) 
 		return dao.getAll(day.dayNumber, day.monthNumber, day.year).toDomain()
 	}
 
+	fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
+		return dao.getAll().toDomain()
+	}
+
 	suspend fun saveToDoListItem(item: ToDoListItem) {
 		dao.insert(ToDoListItemEntity.fromDomain(item))
 	}
