@@ -13,6 +13,7 @@ import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ShoppingListAdapter
 import com.example.lifediary.databinding.FragmentShoppingListBinding
 import com.example.lifediary.ui.BaseFragment
+import com.example.lifediary.utils.setDefaultButtonsStyle
 
 class ShoppingListFragment : BaseFragment() {
     override val viewModel: ShoppingListViewModel by viewModels()
@@ -81,17 +82,7 @@ class ShoppingListFragment : BaseFragment() {
             }
             .setCancelable(false)
             .show()
-            .setButtonsStyle()
-    }
-
-    private fun AlertDialog.setButtonsStyle() {
-        getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(
-            resources.getColor(R.color.app_blue, requireContext().theme)
-        )
-
-        getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
-            resources.getColor(R.color.black_opacity_50, requireContext().theme)
-        )
+            .setDefaultButtonsStyle()
     }
 
     override fun onDestroyView() {

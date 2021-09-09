@@ -5,9 +5,8 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.core.view.isVisible
-import androidx.databinding.BindingAdapter
-import com.example.lifediary.ui.common.CurrentWeatherView
+import androidx.appcompat.app.AlertDialog
+import com.example.lifediary.R
 
 fun EditText.requestFocusWithKeyboard() {
     requestFocus()
@@ -31,12 +30,12 @@ private fun Activity.hideKeyboard() {
     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
 }
 
-@BindingAdapter("booleanVisibility")
-fun View.setBooleanVisibility(isVisible: Boolean) {
-    this.isVisible = isVisible
-}
+fun AlertDialog.setDefaultButtonsStyle() {
+    getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+        context.resources.getColor(R.color.app_blue, context.theme)
+    )
 
-@BindingAdapter("progressVisibility")
-fun CurrentWeatherView.setProgressVisibility(visibility: Boolean) {
-    progressIsVisible = visibility
+    getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+        context.resources.getColor(R.color.black_opacity_50, context.theme)
+    )
 }

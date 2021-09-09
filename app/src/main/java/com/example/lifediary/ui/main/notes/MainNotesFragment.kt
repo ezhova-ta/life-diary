@@ -12,6 +12,7 @@ import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.MainNoteListAdapter
 import com.example.lifediary.databinding.FragmentMainNotesBinding
 import com.example.lifediary.ui.BaseFragment
+import com.example.lifediary.utils.setDefaultButtonsStyle
 
 class MainNotesFragment : BaseFragment() {
     override val viewModel: MainNotesViewModel by viewModels()
@@ -65,17 +66,7 @@ class MainNotesFragment : BaseFragment() {
             }
             .setCancelable(false)
             .show()
-            .setButtonsStyle()
-    }
-
-    private fun AlertDialog.setButtonsStyle() {
-        getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(
-            resources.getColor(R.color.app_blue, requireContext().theme)
-        )
-
-        getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
-            resources.getColor(R.color.black_opacity_50, requireContext().theme)
-        )
+            .setDefaultButtonsStyle()
     }
 
     override fun onDestroyView() {
