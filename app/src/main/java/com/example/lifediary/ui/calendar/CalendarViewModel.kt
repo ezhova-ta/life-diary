@@ -29,13 +29,13 @@ class CalendarViewModel : BaseViewModel() {
 
 		daysWithNotesOrToDoList.addSource(daysWithNote) {
 			val daysWithToDoListValue = daysWithToDoList.value ?: listOf()
-			val allDays = it.plus(daysWithToDoListValue)
+			val allDays = it.plus(daysWithToDoListValue).distinct()
 			daysWithNotesOrToDoList.value = allDays
 		}
 
 		daysWithNotesOrToDoList.addSource(daysWithToDoList) {
 			val daysWithNoteValue = daysWithNote.value ?: listOf()
-			val allDays = it.plus(daysWithNoteValue)
+			val allDays = it.plus(daysWithNoteValue).distinct()
 			daysWithNotesOrToDoList.value = allDays
 		}
 	}
