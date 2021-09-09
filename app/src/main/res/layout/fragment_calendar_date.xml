@@ -162,6 +162,28 @@
                 android:clickable="true"
                 android:onClick="@{() -> viewModel.onAddToDoListItemClick()}"/>
 
+            <LinearLayout
+                android:id="@+id/createToDoListTitleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/addToDoListItemInput"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:booleanVisibility="@{!viewModel.isToDoListVisible()}">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:text="@string/crete_to_do_lists_title" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_checklist_blue" />
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/toDoListView"
                 android:layout_width="match_parent"
@@ -170,7 +192,8 @@
                 android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/to_do_list_item"
-                app:booleanVisibility="@{viewModel.isToDoListVisible()}" />
+                app:booleanVisibility="@{viewModel.isToDoListVisible()}"
+                android:visibility="gone"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
