@@ -40,7 +40,7 @@
     <string name="error_try_again_later">Ошибка повторите позже</string>
     <string name="unknown_addressee">Неизвестный адресат</string>
     <string name="crete_to_do_lists_title">Составляйте списки дел,\nчтобы ничего не забыть</string>
-    <string name="add_postal_addresses_title">Добавьте почтовые адреса\nи шлите побольше писем и открыток!</string>
+    <string name="add_postal_addresses_title">Добавляйте почтовые адреса\nи шлите побольше писем и открыток!</string>
     <string name="make_shopping_lists_title">Составляйте списки покупок,\nчтобы ничего не забыть</string>
     <string name="requires_permission_to_access_contacts">Необходимо разрешение на доступ к контактам</string>
     <string name="failed_to_get_contact">Не удалось получить контакт</string>
