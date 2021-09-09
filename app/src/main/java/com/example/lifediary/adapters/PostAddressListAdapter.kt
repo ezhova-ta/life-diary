@@ -22,8 +22,13 @@ class PostAddressListAdapter(
 	}
 
 	class PostAddressListItemViewModel(val address: PostAddress) {
+		val isAddresseeNameViewVisible = address.name.isNotBlank()
+		val isStreetViewVisible = address.street.isNotBlank()
+		val isBuildingNumberViewVisible = address.buildingNumber.isNotBlank()
 		val isApartmentViewVisible = address.apartmentNumber.isNotBlank()
+		val isCityViewVisible = address.city.isNotBlank()
 		val isEdgeRegionViewVisible = address.edgeRegion.isNotBlank()
+		val isPostcodeViewVisible = address.postcode.isNotBlank()
 	}
 
 	class ViewHolder private constructor(
