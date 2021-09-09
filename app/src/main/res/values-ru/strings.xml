@@ -4,8 +4,10 @@
     <string name="clear_all">Очистить всё</string>
     <string name="clear_shopping_list">Очистить списко покупок</string>
     <string name="clear_shopping_list_confirmation">Вы уверены, что хотите очистить список покупок?</string>
+    <string name="clear_note_list_confirmation">Вы уверены, что хотите удалить все заметки?</string>
     <string name="cancel">Закрыть</string>
     <string name="clear">Очистить</string>
+    <string name="delete">Удалить</string>
     <string name="what_do_you_want_to_buy">Что купить?</string>
     <string name="enter_ful_name_your_location">Введите полное название вашего местоположения:</string>
     <string name="for_example_st_petersburg">Например, Санкт-Петербург</string>

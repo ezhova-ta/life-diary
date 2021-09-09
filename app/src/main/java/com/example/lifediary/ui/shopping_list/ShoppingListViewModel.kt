@@ -60,6 +60,10 @@ class ShoppingListViewModel: BaseViewModel() {
 
     fun onClearShoppingListConfirmed() {
         _showClearShoppingListConfirmationDialog.value = false
+        clearShoppingList()
+    }
+
+    private fun clearShoppingList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 repository.clearShoppingList()

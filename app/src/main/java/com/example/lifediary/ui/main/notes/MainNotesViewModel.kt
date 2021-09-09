@@ -1,6 +1,7 @@
 package com.example.lifediary.ui.main.notes
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MainNote
@@ -16,13 +17,17 @@ import javax.inject.Inject
 
 class MainNotesViewModel : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var repository: MainNotesRepository
+	@Inject lateinit var notesRepository: MainNotesRepository
 	val noteList: LiveData<List<MainNote>>
 	val isNotesVisible: LiveData<Boolean>
 
+	private val _showClearNoteListConfirmationDialog = MutableLiveData(false)
+	val showClearNoteListConfirmationDialog: LiveData<Boolean>
+		get() = _showClearNoteListConfirmationDialog
+
 	init {
 		bindAppScope()
-		noteList = repository.getNotes()
+		noteList = notesRepository.getNotes()
 		isNotesVisible = noteList.map { it.isNotEmpty() }
 	}
 
@@ -31,15 +36,27 @@ class MainNotesViewModel : BaseViewModel() {
 	}
 
 	fun onClearNotesClick() {
-		// TODO Clear confirmation dialog
+		if(noteList.value.isNullOrEmpty()) return
+		_showClearNoteListConfirmationDialog.value = true
+	}
 
+	fun onClearNoteListConfirmed() {
+		_showClearNoteListConfirmationDialog.value = false
+		clearNoteList()
+	}
+
+	private fun clearNoteList() {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				repository.clearNoteList()
+				notesRepository.clearNoteList()
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_clear_list))
 			}
 		}
+	}
+
+	fun onClearNoteListCancelled() {
+		_showClearNoteListConfirmationDialog.value = false
 	}
 
 	fun onEditNoteClick(note: MainNote) {
@@ -52,7 +69,7 @@ class MainNotesViewModel : BaseViewModel() {
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				repository.deleteNote(itemId)
+				notesRepository.deleteNote(itemId)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.deleting_item_error))
 			}

@@ -66,11 +66,11 @@ class ShoppingListFragment : BaseFragment() {
 
     private fun setupClearShoppingListConfirmationDialog() {
         viewModel.showClearShoppingListConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
-            if(needToShow) showClearShoppingListDialog()
+            if(needToShow) showClearShoppingListConfirmationDialog()
         }
     }
 
-    private fun showClearShoppingListDialog() {
+    private fun showClearShoppingListConfirmationDialog() {
         AlertDialog.Builder(requireContext())
             .setMessage(R.string.clear_shopping_list_confirmation)
             .setPositiveButton(R.string.clear) { _, _ ->

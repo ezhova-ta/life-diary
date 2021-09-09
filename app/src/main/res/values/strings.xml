@@ -4,8 +4,10 @@
     <string name="clear_all">Clear all</string>
     <string name="clear_shopping_list">Clear shopping list</string>
     <string name="clear_shopping_list_confirmation">Are you sure you want to clear your shopping list?</string>
+    <string name="clear_note_list_confirmation">Are you sure you want to delete all notes?</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
+    <string name="delete">Delete</string>
     <string name="what_do_you_want_to_buy">What to buy?</string>
     <string name="enter_ful_name_your_location">Enter the full name of your location:</string>
     <string name="for_example_st_petersburg">For example, St. Petersburg</string>
