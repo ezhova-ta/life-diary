@@ -42,6 +42,10 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val weatherForecastIconUrl = weatherForecastForDate.map { it?.weather?.firstOrNull()?.iconUrl }
 	val weatherForecastDescription = weatherForecastForDate.map { it?.weather?.firstOrNull()?.description }
 
+	private val _showClearToDoListConfirmationDialog = MutableLiveData(false)
+	val showClearToDoListConfirmationDialog: LiveData<Boolean>
+		get() = _showClearToDoListConfirmationDialog
+
 	init {
 		bindAppScope()
 		note = noteRepository.getNoteLiveData(day)
@@ -83,6 +87,30 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	private fun navigateToAddEditNoteScreen() {
 		router.navigateTo(Screens.getAddEditDateNoteFragment(day))
+	}
+
+	fun onClearToDoListClick() {
+		if(toDoList.value.isNullOrEmpty()) return
+		_showClearToDoListConfirmationDialog.value = true
+	}
+
+	fun onClearToDoListConfirmed() {
+		_showClearToDoListConfirmationDialog.value = false
+		clearToDoList()
+	}
+
+	private fun clearToDoList() {
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				toDoListRepository.clearToDoList(day)
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.failed_to_clear_list))
+			}
+		}
+	}
+
+	fun onClearToDoListCancelled() {
+		_showClearToDoListConfirmationDialog.value = false
 	}
 
 	fun onAddToDoListItemClick() {

@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.R
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ToDoListAdapter
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.Day
+import com.example.lifediary.utils.setDefaultButtonsStyle
 
 class CalendarDateFragment : BaseFragment() {
     override val viewModel: CalendarDateViewModel by viewModels(
@@ -31,6 +34,10 @@ class CalendarDateFragment : BaseFragment() {
         }
     }
 
+    private fun getDayFromArguments(): Day {
+        return requireArguments().getParcelable(DAY_KEY)!!
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +49,7 @@ class CalendarDateFragment : BaseFragment() {
         setupNoteView()
         setupToDoListView()
         setupAddToDoListItemInputView()
+        setupClearToDOListConfirmationDialog()
         return binding.root
     }
 
@@ -73,8 +81,24 @@ class CalendarDateFragment : BaseFragment() {
         }
     }
 
-    private fun getDayFromArguments(): Day {
-        return requireArguments().getParcelable(DAY_KEY)!!
+    private fun setupClearToDOListConfirmationDialog() {
+        viewModel.showClearToDoListConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showClearToDOListConfirmationDialog()
+        }
+    }
+
+    private fun showClearToDOListConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setMessage(R.string.clear_to_do_list_confirmation)
+            .setPositiveButton(R.string.clear) { _, _ ->
+                viewModel.onClearToDoListConfirmed()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                viewModel.onClearToDoListCancelled()
+            }
+            .setCancelable(false)
+            .show()
+            .setDefaultButtonsStyle()
     }
 
     override fun onDestroyView() {

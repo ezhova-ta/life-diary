@@ -5,6 +5,7 @@
     <string name="clear_shopping_list">Clear shopping list</string>
     <string name="clear_shopping_list_confirmation">Are you sure you want to clear your shopping list?</string>
     <string name="clear_note_list_confirmation">Are you sure you want to delete all notes?</string>
+    <string name="clear_to_do_list_confirmation">Are you sure you want to clear to-do list?</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
