@@ -15,13 +15,13 @@ import com.example.lifediary.utils.Day
 
 class CalendarDateFragment : BaseFragment() {
     override val viewModel: CalendarDateViewModel by viewModels(
-        factoryProducer = { CalendarDateViewModel.Factory(getDayFromArgument()) }
+        factoryProducer = { CalendarDateViewModel.Factory(getDayFromArguments()) }
     )
     private var _binding: FragmentCalendarDateBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        private const val DAY_KEY = "com.example.lifediary.ui.calendar.TIME_IN_MILLIS_KEY"
+        private const val DAY_KEY = "com.example.lifediary.ui.calendar.DAY_KEY"
         private const val NOTE_VIEW_ROLLED_UP_MAX_LINES = 5
 
         fun getInstance(day: Day): Fragment {
@@ -73,7 +73,7 @@ class CalendarDateFragment : BaseFragment() {
         }
     }
 
-    private fun getDayFromArgument(): Day {
+    private fun getDayFromArguments(): Day {
         return requireArguments().getParcelable(DAY_KEY)!!
     }
 

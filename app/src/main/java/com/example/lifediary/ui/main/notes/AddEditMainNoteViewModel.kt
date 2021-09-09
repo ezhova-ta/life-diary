@@ -1,11 +1,10 @@
-package com.example.lifediary.ui.calendar.date.note
+package com.example.lifediary.ui.main.notes
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.repositories.DateNoteRepository
+import com.example.lifediary.data.domain.MainNote
+import com.example.lifediary.data.repositories.MainNotesRepository
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -13,23 +12,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
+class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var noteRepository: DateNoteRepository
+	@Inject lateinit var notesRepository: MainNotesRepository
 	val noteText = MutableLiveData("")
-	val isAddButtonVisible: LiveData<Boolean>
-	private var existingNote: DateNote? = null
+	val isAddButtonVisible = noteId == null
+	private var existingNote: MainNote? = null
 
 	init {
 		bindAppScope()
-		isAddButtonVisible = noteRepository.getNoteLiveData(day).map { it == null }
 		substituteNoteTextInInput()
 	}
 
 	private fun substituteNoteTextInInput() {
+		if(noteId == null) return
+
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				existingNote = noteRepository.getNote(day)
+				existingNote = notesRepository.getNote(noteId)
 				existingNote?.text?.let { noteText.postValue(it) }
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error))
@@ -50,10 +50,10 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 				val note = existingNote
 
 				if(note == null) {
-					noteRepository.addNote(text, day)
+					notesRepository.addNote(text)
 				} else {
 					note.text = text
-					noteRepository.updateNote(note)
+					notesRepository.updateNote(note)
 				}
 
 				router.exit()
@@ -61,12 +61,13 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 				showMessage(Text.TextResource(R.string.failed_to_save))
 			}
 		}
+
 	}
 
-	class Factory(private val day: Day) : ViewModelProvider.Factory {
+	class Factory(private val noteId: Long?) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-			return AddEditDateNoteViewModel(day) as T
+			return AddEditMainNoteViewModel(noteId) as T
 		}
 	}
 }

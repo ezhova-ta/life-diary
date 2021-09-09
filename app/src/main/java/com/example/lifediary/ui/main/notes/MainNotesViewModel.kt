@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MainNote
-import com.example.lifediary.data.repositories.MainNoteRepository
+import com.example.lifediary.data.repositories.MainNotesRepository
+import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 class MainNotesViewModel : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var repository: MainNoteRepository
+	@Inject lateinit var repository: MainNotesRepository
 	val noteList: LiveData<List<MainNote>>
 	val isNotesVisible: LiveData<Boolean>
 
@@ -26,15 +27,7 @@ class MainNotesViewModel : BaseViewModel() {
 	}
 
 	fun onAddNoteClick() {
-		val item = MainNote(text = "Test note\nTest note\nTest note\nTest note\nTest note\nTest note\n")
-
-		CoroutineScope(Dispatchers.IO).launch {
-			try {
-				repository.saveNote(item)
-			} catch(e: Exception) {
-				showMessage(Text.TextResource(R.string.failed_to_save))
-			}
-		}
+		router.navigateTo(Screens.getAddEditMainNoteFragment())
 	}
 
 	fun onClearNotesClick() {
@@ -50,7 +43,8 @@ class MainNotesViewModel : BaseViewModel() {
 	}
 
 	fun onEditNoteClick(note: MainNote) {
-		TODO()
+		val noteId = note.id ?: return
+		router.navigateTo(Screens.getAddEditMainNoteFragment(noteId))
 	}
 
 	fun onDeleteNoteClick(note: MainNote) {

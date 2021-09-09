@@ -12,19 +12,23 @@ import com.example.lifediary.utils.Day
 
 class AddEditDateNoteFragment : BaseFragment() {
     override val viewModel: AddEditDateNoteViewModel by viewModels(
-        factoryProducer = { AddEditDateNoteViewModel.Factory(getDayFromArgument()) }
+        factoryProducer = { AddEditDateNoteViewModel.Factory(getDayFromArguments()) }
     )
     private var _binding: FragmentAddEditDateNoteBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        private const val DAY_KEY = "com.example.lifediary.ui.calendar.date.note.TIME_IN_MILLIS_KEY"
+        private const val DAY_KEY = "com.example.lifediary.ui.calendar.date.note.DAY_KEY"
 
         fun getInstance(day: Day): Fragment {
             val fragment = AddEditDateNoteFragment()
             fragment.arguments = Bundle().apply { putParcelable(DAY_KEY, day) }
             return fragment
         }
+    }
+
+    private fun getDayFromArguments(): Day {
+        return requireArguments().getParcelable(DAY_KEY)!!
     }
 
     override fun onCreateView(
@@ -36,10 +40,6 @@ class AddEditDateNoteFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root
-    }
-
-    private fun getDayFromArgument(): Day {
-        return requireArguments().getParcelable(DAY_KEY)!!
     }
 
     override fun onDestroyView() {
