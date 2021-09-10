@@ -2,6 +2,7 @@
 <resources>
     <style name="Text">
         <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/app_dark_gray</item>
     </style>
 
     <style name="Text.ScreenTitle">
@@ -25,6 +26,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/app_green</item>
         <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Text.CalendarWeekDay">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Text.MainControlsHint">
@@ -60,20 +67,20 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="MainScreenSection">
+    <style name="Text.MainScreenSection">
         <item name="android:padding">16dp</item>
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="MainScreenSection.Notes">
+    <style name="Text.MainScreenSection.Notes">
         <item name="android:background">@drawable/background_main_screen_notes_section</item>
     </style>
 
-    <style name="MainScreenSection.ShoppingList">
+    <style name="Text.MainScreenSection.ShoppingList">
         <item name="android:background">@drawable/background_main_screen_shopping_list_section</item>
     </style>
 
-    <style name="MainScreenSection.PostAddresses">
+    <style name="Text.MainScreenSection.PostAddresses">
         <item name="android:background">@drawable/background_main_screen_post_addresses_section</item>
     </style>
 </resources>
