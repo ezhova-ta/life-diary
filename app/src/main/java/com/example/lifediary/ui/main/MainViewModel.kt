@@ -16,10 +16,10 @@ import javax.inject.Inject
 class MainViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var weatherRepository: WeatherRepository
-    var locationName: LiveData<String?>
-    var currentWeather: LiveData<Weather?>
-    var isCurrentWeatherViewVisible: LiveData<Boolean>
-    private var location: LiveData<Location?>
+    val currentWeather: LiveData<Weather?> by lazy { weatherRepository.getCurrentWeather() }
+    private val location: LiveData<Location?> by lazy { weatherRepository.getLocationLiveData() }
+    val locationName: LiveData<String?> by lazy { location.map { it?.name } }
+    val isCurrentWeatherViewVisible: LiveData<Boolean> by lazy { location.map { it != null } }
 
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
@@ -33,11 +33,6 @@ class MainViewModel : BaseViewModel() {
 
     init {
         bindAppScope()
-        location = weatherRepository.getLocationLiveData()
-        locationName = location.map { it?.name }
-        currentWeather = weatherRepository.getCurrentWeather()
-        isCurrentWeatherViewVisible = location.map { it != null }
-
         // TODO Temp solution!
         location.observeForever(locationObserver)
     }

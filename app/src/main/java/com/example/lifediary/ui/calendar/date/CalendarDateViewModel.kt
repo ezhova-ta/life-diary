@@ -26,11 +26,11 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var noteRepository: DateNoteRepository
 	@Inject lateinit var toDoListRepository: ToDoListRepository
 	val title = day.toDateString()
-	val noteText: LiveData<String?>
-	val isNoteVisible: LiveData<Boolean>
-	val toDoList: LiveData<List<ToDoListItem>>
-	val isToDoListVisible: LiveData<Boolean>
-	private val note: LiveData<DateNote?>
+	val toDoList: LiveData<List<ToDoListItem>> by lazy { toDoListRepository.getToDoList(day) }
+	val isToDoListVisible: LiveData<Boolean> by lazy { toDoList.map { it.isNotEmpty() } }
+	private val note: LiveData<DateNote?> by lazy { noteRepository.getNoteLiveData(day) }
+	val noteText: LiveData<String?> by lazy { note.map { it?.text } }
+	val isNoteVisible: LiveData<Boolean> by lazy { note.map { it != null } }
 	val newToDoListItemText = MutableLiveData("")
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
@@ -48,11 +48,6 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	init {
 		bindAppScope()
-		note = noteRepository.getNoteLiveData(day)
-		noteText = note.map { it?.text }
-		isNoteVisible = note.map { it != null }
-		toDoList = toDoListRepository.getToDoList(day)
-		isToDoListVisible = toDoList.map { it.isNotEmpty() }
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
