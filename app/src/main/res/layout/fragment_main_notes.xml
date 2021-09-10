@@ -18,17 +18,17 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/icon_plus_green"
             android:onClick="@{() -> viewModel.onAddNoteClick()}" />
 
         <ImageButton
             android:id="@+id/clearAllButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             app:layout_constraintTop_toTopOf="@id/addNoteButton"
             app:layout_constraintBottom_toBottomOf="@id/addNoteButton"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/icon_delete_sweep_color_link"
             android:onClick="@{() -> viewModel.onClearNotesClick()}" />
 

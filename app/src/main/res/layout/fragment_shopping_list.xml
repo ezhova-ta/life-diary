@@ -14,24 +14,13 @@
         android:layout_height="match_parent"
         style="@style/ScreenContainer">
 
-        <TextView
-            android:id="@+id/title"
-            style="@style/Text.ScreenTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/clearAllButton"
-            app:layout_constraintBottom_toBottomOf="@id/clearAllButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/clearAllButton"
-            android:layout_marginEnd="16dp"
-            android:text="@string/shopping_list" />
-
         <ImageView
             android:id="@+id/clearAllButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            app:layout_constraintTop_toTopOf="@id/addShoppingListItemInput"
+            app:layout_constraintBottom_toBottomOf="@id/addShoppingListItemInput"
+            app:layout_constraintStart_toStartOf="parent"
             android:clickable="true"
             android:onClick="@{() -> viewModel.onClearShoppingListClick()}"
             android:src="@drawable/icon_delete_sweep_color_link" />
@@ -41,11 +30,10 @@
             style="@style/Input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/clearAllButton"
             app:layout_constraintEnd_toStartOf="@id/addShoppingListItemButton"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
             android:inputType="text"
             android:singleLine="true"
             android:maxLength="70"
