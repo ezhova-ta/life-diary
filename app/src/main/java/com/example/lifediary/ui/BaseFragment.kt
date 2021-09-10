@@ -4,10 +4,14 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.lifediary.R
 import com.example.lifediary.utils.InsetsStyle
 import com.example.lifediary.utils.Text
+import com.example.lifediary.utils.setDefaultButtonsStyle
 import com.example.lifediary.utils.setInsetsStyle
 
 abstract class BaseFragment : Fragment() {
@@ -51,5 +55,21 @@ abstract class BaseFragment : Fragment() {
         return ContextCompat.checkSelfPermission(
             requireContext(), permission
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    protected fun showDefaultConfirmationDialog(
+        @StringRes messageRes: Int,
+        @StringRes positiveButtonTextRes: Int,
+        @StringRes negativeButtonRes: Int,
+        onConfirmed: () -> Unit,
+        onCancelled: () -> Unit
+    ) {
+        AlertDialog.Builder(requireContext())
+            .setMessage(messageRes)
+            .setPositiveButton(positiveButtonTextRes) { _, _ -> onConfirmed() }
+            .setNegativeButton(negativeButtonRes) { _, _ -> onCancelled() }
+            .setCancelable(false)
+            .show()
+            .setDefaultButtonsStyle()
     }
 }

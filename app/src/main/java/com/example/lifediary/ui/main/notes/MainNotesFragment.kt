@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
@@ -12,7 +11,6 @@ import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.MainNoteListAdapter
 import com.example.lifediary.databinding.FragmentMainNotesBinding
 import com.example.lifediary.ui.BaseFragment
-import com.example.lifediary.utils.setDefaultButtonsStyle
 
 class MainNotesFragment : BaseFragment() {
     override val viewModel: MainNotesViewModel by viewModels()
@@ -56,17 +54,13 @@ class MainNotesFragment : BaseFragment() {
     }
 
     private fun showClearNoteListConfirmationDialog() {
-        AlertDialog.Builder(requireContext())
-            .setMessage(R.string.clear_note_list_confirmation)
-            .setPositiveButton(R.string.delete) { _, _ ->
-                viewModel.onClearNoteListConfirmed()
-            }
-            .setNegativeButton(R.string.cancel) { _, _ ->
-                viewModel.onClearNoteListCancelled()
-            }
-            .setCancelable(false)
-            .show()
-            .setDefaultButtonsStyle()
+        showDefaultConfirmationDialog(
+            messageRes = R.string.clear_note_list_confirmation,
+            positiveButtonTextRes = R.string.delete,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onClearNoteListConfirmed,
+            onCancelled = viewModel::onClearNoteListCancelled
+        )
     }
 
     override fun onDestroyView() {

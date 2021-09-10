@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
@@ -14,7 +13,6 @@ import com.example.lifediary.adapters.ToDoListAdapter
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.Day
-import com.example.lifediary.utils.setDefaultButtonsStyle
 
 class CalendarDateFragment : BaseFragment() {
     override val viewModel: CalendarDateViewModel by viewModels(
@@ -88,17 +86,13 @@ class CalendarDateFragment : BaseFragment() {
     }
 
     private fun showClearToDOListConfirmationDialog() {
-        AlertDialog.Builder(requireContext())
-            .setMessage(R.string.clear_to_do_list_confirmation)
-            .setPositiveButton(R.string.clear) { _, _ ->
-                viewModel.onClearToDoListConfirmed()
-            }
-            .setNegativeButton(R.string.cancel) { _, _ ->
-                viewModel.onClearToDoListCancelled()
-            }
-            .setCancelable(false)
-            .show()
-            .setDefaultButtonsStyle()
+        showDefaultConfirmationDialog(
+            messageRes = R.string.clear_to_do_list_confirmation,
+            positiveButtonTextRes = R.string.clear,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onClearToDoListConfirmed,
+            onCancelled = viewModel::onClearToDoListCancelled
+        )
     }
 
     override fun onDestroyView() {
