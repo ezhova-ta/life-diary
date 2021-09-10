@@ -16,3 +16,8 @@ fun <T : DbEntity<R>, R> LiveData<List<T>>.toDomain(): LiveData<List<R>> {
 		}
 	}
 }
+
+fun List<String>.isAllItemsBlank(): Boolean {
+	forEach { if(it.isNotBlank()) return false }
+	return true
+}

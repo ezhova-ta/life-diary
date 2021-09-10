@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentAddEditPostAddressBinding
 import com.example.lifediary.ui.BaseFragment
+import com.example.lifediary.utils.setDefaultButtonsStyle
 
 class AddEditPostAddressFragment : BaseFragment() {
     override val viewModel: PostAddressesViewModel by activityViewModels()
@@ -76,6 +79,8 @@ class AddEditPostAddressFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setUpPickContactButton()
+        setupNoContactWillBeCreatedConfirmationDialog()
+        setupContactWillBeDeletedConfirmationDialog()
         return binding.root
     }
 
@@ -97,6 +102,46 @@ class AddEditPostAddressFragment : BaseFragment() {
 
     private fun launchReadContactsPermissionRequest() {
         requestReadContactsPermission.launch(READ_CONTACTS_PERMISSION_NAME)
+    }
+
+    private fun setupNoContactWillBeCreatedConfirmationDialog() {
+        viewModel.showNoContactWillBeCreatedConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showNoContactWillBeCreatedConfirmationDialog()
+        }
+    }
+
+    private fun setupContactWillBeDeletedConfirmationDialog() {
+        viewModel.showContactWillBeDeletedConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showContactWillBeDeletedConfirmationDialog()
+        }
+    }
+
+    private fun showNoContactWillBeCreatedConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setMessage(R.string.fields_empty_no_contact_will_be_created)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                viewModel.onCreatingEmptyContactConfirmed()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                viewModel.onCreatingEmptyContactDialogCancelled()
+            }
+            .setCancelable(false)
+            .show()
+            .setDefaultButtonsStyle()
+    }
+
+    private fun showContactWillBeDeletedConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setMessage(R.string.fields_empty_contact_will_be_deleted)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                viewModel.onDeletingEmptyAddressConfirmed()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                viewModel.onDeletingEmptyAddressDialogCancelled()
+            }
+            .setCancelable(false)
+            .show()
+            .setDefaultButtonsStyle()
     }
 
     override fun onDestroyView() {

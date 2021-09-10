@@ -9,6 +9,7 @@ import com.example.lifediary.data.repositories.PostAddressRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
+import com.example.lifediary.utils.isAllItemsBlank
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,14 @@ class PostAddressesViewModel: BaseViewModel() {
     private val _isAddButtonVisible = MutableLiveData<Boolean>()
     val isAddButtonVisible: LiveData<Boolean>
         get() = _isAddButtonVisible
+
+    private val _showNoContactWillBeCreatedConfirmationDialog = MutableLiveData(false)
+    val showNoContactWillBeCreatedConfirmationDialog: LiveData<Boolean>
+        get() = _showNoContactWillBeCreatedConfirmationDialog
+
+    private val _showContactWillBeDeletedConfirmationDialog = MutableLiveData(false)
+    val showContactWillBeDeletedConfirmationDialog: LiveData<Boolean>
+        get() = _showContactWillBeDeletedConfirmationDialog
 
     val addresseeName = MutableLiveData("")
     val addresseeStreet = MutableLiveData("")
@@ -95,6 +104,11 @@ class PostAddressesViewModel: BaseViewModel() {
             return
         }
 
+        if(address.isEmpty()) {
+            showEmptyAddressDialog()
+            return
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 saveAddress(address)
@@ -127,11 +141,62 @@ class PostAddressesViewModel: BaseViewModel() {
         )
     }
 
+    private fun PostAddress.isEmpty(): Boolean {
+        return listOf(
+            name,
+            street,
+            buildingNumber,
+            apartmentNumber,
+            city,
+            postcode,
+            edgeRegion
+        ).isAllItemsBlank()
+    }
+
+    private fun showEmptyAddressDialog() {
+        if(isAddingAddressOperation()) {
+            _showNoContactWillBeCreatedConfirmationDialog.value = true
+        } else {
+            _showContactWillBeDeletedConfirmationDialog.value = true
+        }
+    }
+
     private suspend fun saveAddress(address: PostAddress) {
-        if(editingAddress == null) {
+        if(isAddingAddressOperation()) {
             repository.addAddress(address)
         } else {
             repository.updateAddress(address)
         }
+    }
+
+    private fun isAddingAddressOperation(): Boolean {
+        return editingAddress == null
+    }
+
+    fun onDeletingEmptyAddressConfirmed() {
+        _showContactWillBeDeletedConfirmationDialog.value = false
+        val editingAddressId = editingAddress?.id ?: return
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                repository.deleteAddress(editingAddressId)
+                router.exit()
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.error_try_again_later))
+            }
+        }
+    }
+
+    fun onCreatingEmptyContactConfirmed() {
+        _showNoContactWillBeCreatedConfirmationDialog.value = false
+        router.exit()
+    }
+
+    fun onDeletingEmptyAddressDialogCancelled() {
+        _showContactWillBeDeletedConfirmationDialog.value = false
+    }
+
+    fun onCreatingEmptyContactDialogCancelled() {
+        _showNoContactWillBeCreatedConfirmationDialog.value = false
     }
 }

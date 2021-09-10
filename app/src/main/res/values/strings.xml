@@ -9,6 +9,7 @@
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
+    <string name="ok">Хорошо</string>
     <string name="what_do_you_want_to_buy">What to buy?</string>
     <string name="enter_ful_name_your_location">Enter the full name of your location:</string>
     <string name="for_example_st_petersburg">For example, St. Petersburg</string>
@@ -47,4 +48,6 @@
     <string name="notes">Notes</string>
     <string name="no_notes_yet">There are no notes yet</string>
     <string name="what_should_be_done">What should be done?</string>
+    <string name="fields_empty_no_contact_will_be_created">All fields are empty, no contact will be created</string>
+    <string name="fields_empty_contact_will_be_deleted">All fields are empty, the contact will be deleted</string>
 </resources>
