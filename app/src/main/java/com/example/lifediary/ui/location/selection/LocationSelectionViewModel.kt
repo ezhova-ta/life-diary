@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LocationSelectionViewModel : BaseViewModel() {
-    @Inject lateinit var repository: WeatherRepository
+    @Inject lateinit var weatherRepository: WeatherRepository
     @Inject lateinit var router: Router
     val locationName = MutableLiveData("")
     val isProgressVisible = MutableLiveData(false)
@@ -44,7 +44,7 @@ class LocationSelectionViewModel : BaseViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val foundLocations = repository.findLocations(enteredLocationName)
+                val foundLocations = weatherRepository.findLocations(enteredLocationName)
                 _locations.postValue(foundLocations)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.search_location_error))
@@ -60,7 +60,7 @@ class LocationSelectionViewModel : BaseViewModel() {
     fun onLocationListItemClick(location: Location) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.saveLocation(location)
+                weatherRepository.saveLocation(location)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.saving_location_error))
             }

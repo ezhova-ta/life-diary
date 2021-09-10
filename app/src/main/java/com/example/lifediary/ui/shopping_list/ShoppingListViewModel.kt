@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ShoppingListViewModel: BaseViewModel() {
-    @Inject lateinit var repository: ShoppingListRepository
+    @Inject lateinit var shoppingListRepository: ShoppingListRepository
     var shoppingList: LiveData<List<ShoppingListItem>>
     val newShoppingListItemText = MutableLiveData("")
     val isShoppingListVisible: LiveData<Boolean>
@@ -25,7 +25,7 @@ class ShoppingListViewModel: BaseViewModel() {
 
     init {
         bindAppScope()
-        shoppingList = repository.getShoppingList()
+        shoppingList = shoppingListRepository.getShoppingList()
         isShoppingListVisible = shoppingList.map { it.isNotEmpty() }
     }
 
@@ -45,7 +45,7 @@ class ShoppingListViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.saveShoppingListItem(item)
+                shoppingListRepository.saveShoppingListItem(item)
                 newShoppingListItemText.postValue("")
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_save))
@@ -66,7 +66,7 @@ class ShoppingListViewModel: BaseViewModel() {
     private fun clearShoppingList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.clearShoppingList()
+                shoppingListRepository.clearShoppingList()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_clear_list))
             }
@@ -81,7 +81,7 @@ class ShoppingListViewModel: BaseViewModel() {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.inverseListItemCrossedOut(itemId)
+                shoppingListRepository.inverseListItemCrossedOut(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
@@ -92,7 +92,7 @@ class ShoppingListViewModel: BaseViewModel() {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.inverseShoppingListItemPriority(itemId)
+                shoppingListRepository.inverseShoppingListItemPriority(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
@@ -103,7 +103,7 @@ class ShoppingListViewModel: BaseViewModel() {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.deleteShoppingListItem(itemId)
+                shoppingListRepository.deleteShoppingListItem(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }

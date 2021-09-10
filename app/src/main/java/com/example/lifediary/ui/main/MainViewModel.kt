@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class MainViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
-    @Inject lateinit var repository: WeatherRepository
+    @Inject lateinit var weatherRepository: WeatherRepository
     var locationName: LiveData<String?>
     var currentWeather: LiveData<Weather?>
     var isCurrentWeatherViewVisible: LiveData<Boolean>
@@ -33,9 +33,9 @@ class MainViewModel : BaseViewModel() {
 
     init {
         bindAppScope()
-        location = repository.getLocationLiveData()
+        location = weatherRepository.getLocationLiveData()
         locationName = location.map { it?.name }
-        currentWeather = repository.getCurrentWeather()
+        currentWeather = weatherRepository.getCurrentWeather()
         isCurrentWeatherViewVisible = location.map { it != null }
 
         // TODO Temp solution!
@@ -53,7 +53,7 @@ class MainViewModel : BaseViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.updateCurrentWeather(locationId)
+                weatherRepository.updateCurrentWeather(locationId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
             } finally {

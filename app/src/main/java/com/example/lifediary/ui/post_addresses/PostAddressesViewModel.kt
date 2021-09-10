@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class PostAddressesViewModel: BaseViewModel() {
     @Inject lateinit var router: Router
-    @Inject lateinit var repository: PostAddressRepository
+    @Inject lateinit var postAddressRepository: PostAddressRepository
     val addresses: LiveData<List<PostAddress>>
     val isAddressListVisible: LiveData<Boolean>
 
@@ -58,7 +58,7 @@ class PostAddressesViewModel: BaseViewModel() {
 
     init {
         bindAppScope()
-        addresses = repository.getAllAddresses()
+        addresses = postAddressRepository.getAllAddresses()
         isAddressListVisible = addresses.map { it.isNotEmpty() }
     }
 
@@ -67,7 +67,7 @@ class PostAddressesViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.deleteAddress(addressId)
+                postAddressRepository.deleteAddress(addressId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }
@@ -163,9 +163,9 @@ class PostAddressesViewModel: BaseViewModel() {
 
     private suspend fun saveAddress(address: PostAddress) {
         if(isAddingAddressOperation()) {
-            repository.addAddress(address)
+            postAddressRepository.addAddress(address)
         } else {
-            repository.updateAddress(address)
+            postAddressRepository.updateAddress(address)
         }
     }
 
@@ -179,7 +179,7 @@ class PostAddressesViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                repository.deleteAddress(editingAddressId)
+                postAddressRepository.deleteAddress(editingAddressId)
                 router.exit()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
