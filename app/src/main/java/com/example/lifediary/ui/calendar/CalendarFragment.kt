@@ -127,7 +127,7 @@ class CalendarFragment : BaseFragment() {
 
     private fun CalendarDay.getTextColor(): Int {
         return if(owner == DayOwner.THIS_MONTH) {
-            resources.getColor(R.color.app_dark_gray, requireContext().theme)
+            resources.getColor(R.color.app_medium_dark_gray, requireContext().theme)
         } else {
             resources.getColor(R.color.app_medium_gray, requireContext().theme)
         }
