@@ -28,18 +28,7 @@ class SettingsFragment : BaseFragment() {
         _binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        setupViews()
         return binding.root
-    }
-
-    private fun setupViews() {
-        viewModel.isShoppingListSectionEnabled.observe(viewLifecycleOwner) { isEnabled ->
-            TODO()
-        }
-
-        viewModel.isPostAddressesSectionEnabled.observe(viewLifecycleOwner) { isEnabled ->
-            TODO()
-        }
     }
 
     override fun onDestroyView() {

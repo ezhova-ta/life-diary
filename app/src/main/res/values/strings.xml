@@ -50,4 +50,6 @@
     <string name="what_should_be_done">What should be done?</string>
     <string name="fields_empty_no_contact_will_be_created">All fields are empty, no contact will be created</string>
     <string name="fields_empty_contact_will_be_deleted">All fields are empty, the contact will be deleted</string>
+    <string name="display_section_shopping_list">Display section Shopping list</string>
+    <string name="display_section_post_addresses">Display section Post addresses</string>
 </resources>

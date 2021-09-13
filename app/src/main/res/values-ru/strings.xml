@@ -49,4 +49,6 @@
     <string name="what_should_be_done">Что нужно сделать?</string>
     <string name="fields_empty_no_contact_will_be_created">Все поля пусты, контакт не будет создан</string>
     <string name="fields_empty_contact_will_be_deleted">Все поля пусты, контакт будет удален</string>
+    <string name="display_section_shopping_list">Отображать раздел Список покупок</string>
+    <string name="display_section_post_addresses">Отображать раздел Почтовые адреса</string>
 </resources>
