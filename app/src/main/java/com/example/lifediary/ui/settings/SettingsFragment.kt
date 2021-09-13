@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentSettingsBinding
 import com.example.lifediary.ui.BaseFragment
 
@@ -29,6 +30,8 @@ class SettingsFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupSwitches()
+        setupClearCalendarNotesConfirmationDialog()
+        setupClearToDoListsConfirmationDialog()
         return binding.root
     }
 
@@ -40,6 +43,38 @@ class SettingsFragment : BaseFragment() {
         binding.postAddressesSectionSwitch.setOnCheckedChangeListener { _, isChecked ->
             viewModel.onPostAddressesSectionEnabledChanged(isChecked)
         }
+    }
+
+    private fun setupClearCalendarNotesConfirmationDialog() {
+        viewModel.showClearCalendarNotesConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showClearCalendarNotesConfirmationDialog()
+        }
+    }
+
+    private fun showClearCalendarNotesConfirmationDialog() {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.all_calendar_notes_will_be_cleared,
+            positiveButtonTextRes = R.string.clear,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onClearCalendarNotesConfirmed,
+            onCancelled = viewModel::onClearCalendarNotesCancelled
+        )
+    }
+
+    private fun setupClearToDoListsConfirmationDialog() {
+        viewModel.showClearToDoListsConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showClearToDoListsConfirmationDialog()
+        }
+    }
+
+    private fun showClearToDoListsConfirmationDialog() {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.all_to_do_lists_will_be_cleared,
+            positiveButtonTextRes = R.string.clear,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onClearToDoListsConfirmed,
+            onCancelled = viewModel::onClearToDoListsCancelled
+        )
     }
 
     override fun onDestroyView() {

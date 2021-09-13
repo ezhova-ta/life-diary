@@ -12,6 +12,15 @@
         android:layout_height="match_parent"
         style="@style/ScreenContainer">
 
+        <TextView
+            android:id="@+id/sectionSwitchesTitle"
+            style="@style/Text.SettingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/main_screen" />
+
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/shoppingListSectionSwitch"
             android:layout_width="wrap_content"
@@ -23,12 +32,13 @@
 
         <TextView
             android:id="@+id/shoppingListSectionSwitchTitle"
-            style="@style/Text.SettingsScreenTitle"
+            style="@style/Text.SettingsScreenMenuItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sectionSwitchesTitle"
             app:layout_constraintStart_toEndOf="@id/shoppingListSectionSwitch"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
             android:text="@string/display_section_shopping_list" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -42,13 +52,47 @@
 
         <TextView
             android:id="@+id/postAddressesSectionSwitchTitle"
-            style="@style/Text.SettingsScreenTitle"
+            style="@style/Text.SettingsScreenMenuItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/shoppingListSectionSwitchTitle"
             app:layout_constraintStart_toEndOf="@id/postAddressesSectionSwitch"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/display_section_post_addresses" />
+
+        <TextView
+            android:id="@+id/calendarTitle"
+            style="@style/Text.SettingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/postAddressesSectionSwitchTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="@string/calendar" />
+
+        <TextView
+            android:id="@+id/clearNotesLink"
+            style="@style/Text.Link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/calendarTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/clear_notes"
+            android:onClick="@{() -> viewModel.onClearCalendarNotesClick()}" />
+
+        <TextView
+            android:id="@+id/clearToDoListsLink"
+            style="@style/Text.Link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/clearNotesLink"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/clear_to_do_lists"
+            android:onClick="@{() -> viewModel.onClearToDoListsClick()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

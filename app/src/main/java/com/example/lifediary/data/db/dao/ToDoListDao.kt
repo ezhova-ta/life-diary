@@ -29,4 +29,7 @@ interface ToDoListDao {
 
     @Query("DELETE FROM to_do_list WHERE day = :dayNumber AND month = :monthNumber AND year = :year")
     suspend fun deleteAll(dayNumber: Int, monthNumber: Int, year: Int)
+
+    @Query("DELETE FROM to_do_list")
+    suspend fun deleteAll()
 }

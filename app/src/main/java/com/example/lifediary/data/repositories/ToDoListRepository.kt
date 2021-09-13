@@ -34,4 +34,8 @@ class ToDoListRepository @Inject constructor(
 	suspend fun deleteToDoListItem(id: Long) {
 		localDataSource.deleteToDoListItem(id)
 	}
+
+	suspend fun clearToDoLists() {
+		localDataSource.clearToDoLists()
+	}
 }

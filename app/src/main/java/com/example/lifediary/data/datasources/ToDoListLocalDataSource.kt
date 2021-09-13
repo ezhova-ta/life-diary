@@ -35,4 +35,8 @@ class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) 
 	suspend fun deleteToDoListItem(id: Long) {
 		dao.delete(id)
 	}
+
+	suspend fun clearToDoLists() {
+		dao.deleteAll()
+	}
 }

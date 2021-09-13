@@ -34,4 +34,8 @@ class DateNoteRepository @Inject constructor(
     suspend fun deleteNote(id: Long) {
         localDataSource.deleteNote(id)
     }
+
+    suspend fun clearNotes() {
+        localDataSource.clearNotes()
+    }
 }
