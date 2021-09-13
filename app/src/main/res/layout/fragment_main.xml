@@ -100,7 +100,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"
             android:text="@string/shopping_list"
-            android:onClick="@{() -> viewModel.onShoppingListClick()}" />
+            android:onClick="@{() -> viewModel.onShoppingListClick()}"
+            app:booleanVisibility="@{viewModel.isShoppingListSectionVisible()}" />
 
         <TextView
             android:id="@+id/postAddressesView"
@@ -111,7 +112,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"
             android:text="@string/post_addresses"
-            android:onClick="@{() -> viewModel.onPostAddressesClick()}" />
+            android:onClick="@{() -> viewModel.onPostAddressesClick()}"
+            app:booleanVisibility="@{viewModel.isPostAddressesSectionVisible()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.domain.Weather
+import com.example.lifediary.data.repositories.SettingsRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
@@ -16,10 +17,13 @@ import javax.inject.Inject
 class MainViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var weatherRepository: WeatherRepository
+    @Inject lateinit var settingsRepository: SettingsRepository
     val currentWeather: LiveData<Weather?> by lazy { weatherRepository.getCurrentWeather() }
     private val location: LiveData<Location?> by lazy { weatherRepository.getLocationLiveData() }
     val locationName: LiveData<String?> by lazy { location.map { it?.name } }
     val isCurrentWeatherViewVisible: LiveData<Boolean> by lazy { location.map { it != null } }
+    val isShoppingListSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getShoppingListSectionEnabled() }
+    val isPostAddressesSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getPostAddressesSectionEnabled() }
 
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
