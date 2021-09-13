@@ -18,6 +18,11 @@ open class BaseViewModel : ViewModel() {
         Toothpick.inject(this, appScope)
     }
 
+    protected fun bindSettingsScope() {
+        val settingsScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.SETTINGS_SCOPE)
+        Toothpick.inject(this, settingsScope)
+    }
+
     protected fun showMessage(text: Text) {
         _popupMessageEvent.postValue(OneTimeEvent(text))
     }

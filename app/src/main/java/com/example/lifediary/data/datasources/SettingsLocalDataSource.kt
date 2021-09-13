@@ -1,21 +1,26 @@
 package com.example.lifediary.data.datasources
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import com.example.lifediary.data.SettingsDataStoreManager
 import javax.inject.Inject
 
-class SettingsLocalDataSource @Inject constructor() {
-    fun setShoppingListSectionEnabled(isEnabled: Boolean) {
-        TODO()
+class SettingsLocalDataSource @Inject constructor(
+    private val settingsDataStoreManager: SettingsDataStoreManager
+) {
+    suspend fun setShoppingListSectionEnabled(isEnabled: Boolean) {
+        settingsDataStoreManager.setShoppingListSectionEnabled(isEnabled)
     }
 
-    fun setPostAddressesSectionEnabled(isEnabled: Boolean) {
-        TODO()
+    suspend fun setPostAddressesSectionEnabled(isEnabled: Boolean) {
+        settingsDataStoreManager.setPostAddressesSectionEnabled(isEnabled)
     }
 
-    fun getShoppingListSectionEnabled(): Boolean {
-        TODO()
+    fun getShoppingListSectionEnabled(): LiveData<Boolean> {
+        return settingsDataStoreManager.isShoppingListSectionEnabled.asLiveData()
     }
 
-    fun getPostAddressesSectionEnabled(): Boolean {
-        TODO()
+    fun getPostAddressesSectionEnabled(): LiveData<Boolean> {
+        return settingsDataStoreManager.isPostAddressesSectionEnabled.asLiveData()
     }
 }
