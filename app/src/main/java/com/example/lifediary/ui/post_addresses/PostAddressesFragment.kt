@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.lifediary.R
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.PostAddressListAdapter
 import com.example.lifediary.databinding.FragmentPostAddressesBinding
@@ -31,6 +32,7 @@ class PostAddressesFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupPostAddressListRecycler()
+        setupClearPostAddressesConfirmationDialog()
         return binding.root
     }
 
@@ -43,6 +45,22 @@ class PostAddressesFragment : BaseFragment() {
         viewModel.addresses.observe(viewLifecycleOwner) { postAddresses ->
             postAddressesAdapter.submitList(postAddresses)
         }
+    }
+
+    private fun setupClearPostAddressesConfirmationDialog() {
+        viewModel.showClearPostAddressesConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showClearPostAddressesConfirmationDialog()
+        }
+    }
+
+    private fun showClearPostAddressesConfirmationDialog() {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.clear_post_addresses_confirmation,
+            positiveButtonTextRes = R.string.clear,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onClearPostAddressesConfirmed,
+            onCancelled = viewModel::onClearPostAddressesCancelled
+        )
     }
 
     override fun onDestroyView() {

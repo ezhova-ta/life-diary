@@ -26,7 +26,7 @@ class PostAddressRepository @Inject constructor(
         localDataSource.deleteAddress(id)
     }
 
-    suspend fun deleteAll() {
-        localDataSource.deleteAll()
+    suspend fun clearAddresses() {
+        localDataSource.clearAddresses()
     }
 }

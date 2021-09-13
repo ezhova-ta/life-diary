@@ -108,12 +108,6 @@ class AddEditPostAddressFragment : BaseFragment() {
         }
     }
 
-    private fun setupContactWillBeDeletedConfirmationDialog() {
-        viewModel.showContactWillBeDeletedConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
-            if(needToShow) showContactWillBeDeletedConfirmationDialog()
-        }
-    }
-
     private fun showNoContactWillBeCreatedConfirmationDialog() {
         showDefaultConfirmationDialog(
             messageRes = R.string.fields_empty_no_contact_will_be_created,
@@ -122,6 +116,12 @@ class AddEditPostAddressFragment : BaseFragment() {
             onConfirmed = viewModel::onCreatingEmptyContactConfirmed,
             onCancelled = viewModel::onCreatingEmptyContactDialogCancelled
         )
+    }
+
+    private fun setupContactWillBeDeletedConfirmationDialog() {
+        viewModel.showContactWillBeDeletedConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showContactWillBeDeletedConfirmationDialog()
+        }
     }
 
     private fun showContactWillBeDeletedConfirmationDialog() {

@@ -34,6 +34,10 @@ class PostAddressesViewModel: BaseViewModel() {
     val showContactWillBeDeletedConfirmationDialog: LiveData<Boolean>
         get() = _showContactWillBeDeletedConfirmationDialog
 
+    private val _showClearPostAddressesConfirmationDialog = MutableLiveData(false)
+    val showClearPostAddressesConfirmationDialog: LiveData<Boolean>
+        get() = _showClearPostAddressesConfirmationDialog
+
     val addresseeName = MutableLiveData("")
     val addresseeStreet = MutableLiveData("")
     val addresseeBuildingNumber = MutableLiveData("")
@@ -196,5 +200,28 @@ class PostAddressesViewModel: BaseViewModel() {
 
     fun onCreatingEmptyContactDialogCancelled() {
         _showNoContactWillBeCreatedConfirmationDialog.value = false
+    }
+
+    fun onClearPostAddressesClick() {
+        _showClearPostAddressesConfirmationDialog.value = true
+    }
+
+    fun onClearPostAddressesConfirmed() {
+        _showClearPostAddressesConfirmationDialog.value = false
+        clearPostAddresses()
+    }
+
+    private fun clearPostAddresses() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                postAddressRepository.clearAddresses()
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.error_try_again_later))
+            }
+        }
+    }
+
+    fun onClearPostAddressesCancelled() {
+        _showClearPostAddressesConfirmationDialog.value = false
     }
 }

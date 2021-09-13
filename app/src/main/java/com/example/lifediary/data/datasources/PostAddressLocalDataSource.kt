@@ -24,7 +24,7 @@ class PostAddressLocalDataSource @Inject constructor(private val dao: PostAddres
         dao.delete(id)
     }
 
-    suspend fun deleteAll() {
+    suspend fun clearAddresses() {
         dao.deleteAll()
     }
 }
