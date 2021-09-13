@@ -24,7 +24,7 @@ class MainNotesLocalDataSource @Inject constructor(private val dao: MainNotesDao
         dao.update(MainNoteEntity.fromDomain(item))
     }
 
-    suspend fun clearNoteList() {
+    suspend fun clearNotes() {
         dao.deleteAll()
     }
 

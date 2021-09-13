@@ -46,7 +46,7 @@ class MainNotesViewModel : BaseViewModel() {
 	private fun clearNoteList() {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				notesRepository.clearNoteList()
+				notesRepository.clearNotes()
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_clear_list))
 			}

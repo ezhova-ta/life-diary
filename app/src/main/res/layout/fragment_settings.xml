@@ -71,7 +71,7 @@
             android:text="@string/calendar" />
 
         <TextView
-            android:id="@+id/clearNotesLink"
+            android:id="@+id/clearCalendarNotesLink"
             style="@style/Text.Link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            android:text="@string/clear_notes"
+            android:text="@string/clear_notes_in_calendar"
             android:onClick="@{() -> viewModel.onClearCalendarNotesClick()}" />
 
         <TextView
@@ -87,7 +87,7 @@
             style="@style/Text.Link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/clearNotesLink"
+            app:layout_constraintTop_toBottomOf="@id/clearCalendarNotesLink"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
