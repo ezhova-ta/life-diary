@@ -28,7 +28,18 @@ class SettingsFragment : BaseFragment() {
         _binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupSwitches()
         return binding.root
+    }
+
+    private fun setupSwitches() {
+        binding.shoppingListSectionSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.onShoppingListSectionEnabledChanged(isChecked)
+        }
+
+        binding.postAddressesSectionSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.onPostAddressesSectionEnabledChanged(isChecked)
+        }
     }
 
     override fun onDestroyView() {
