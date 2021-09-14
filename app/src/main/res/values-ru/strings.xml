@@ -37,8 +37,8 @@
     <string name="edge_region_optional">Край/область</string>
     <string name="fields_marked_asterisk_required">Поля, отмеченные <b>*</b>, являются обязательными</string>
     <string name="fill_all_necessary_fields">Заполните все необходимые поля</string>
-    <string name="bld">Дом</string>
-    <string name="apt">Квартира</string>
+    <string name="bld">дом</string>
+    <string name="apt">квартира</string>
     <string name="error_try_again_later">Ошибка повторите позже</string>
     <string name="crete_to_do_lists_title">Составляйте списки дел,\nчтобы ничего не забыть</string>
     <string name="add_postal_addresses_title">Добавляйте почтовые адреса\nи шлите побольше писем и открыток!</string>

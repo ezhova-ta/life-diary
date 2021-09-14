@@ -37,8 +37,8 @@
     <string name="edge_region_optional">Edge/Region</string>
     <string name="fields_marked_asterisk_required">Fields marked with <b>*</b> are required</string>
     <string name="fill_all_necessary_fields">Fill all necessary fields</string>
-    <string name="bld">Building</string>
-    <string name="apt">Apartment</string>
+    <string name="bld">building</string>
+    <string name="apt">apartment</string>
     <string name="error_try_again_later">Error. Try again later</string>
     <string name="question_mark" translatable="false">\?</string>
     <string name="crete_to_do_lists_title">Create to-do lists\nso you don\'t forget anything</string>
