@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentAddEditDateNoteBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.Day
+import com.example.lifediary.utils.clearFocusWithKeyboard
+import com.example.lifediary.utils.requestFocusWithKeyboard
 
 class AddEditDateNoteFragment : BaseFragment() {
     override val viewModel: AddEditDateNoteViewModel by viewModels(
@@ -39,7 +41,18 @@ class AddEditDateNoteFragment : BaseFragment() {
         _binding = FragmentAddEditDateNoteBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupAddEditNoteInput()
         return binding.root
+    }
+
+    private fun setupAddEditNoteInput() {
+        viewModel.inputNeedsFocus.observe(viewLifecycleOwner) { needFocus ->
+            if(needFocus) {
+                binding.addNoteInput.requestFocusWithKeyboard()
+            } else {
+                binding.addNoteInput.clearFocusWithKeyboard(activity)
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -20,6 +20,10 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	val noteText = MutableLiveData("")
 	private var existingNote: DateNote? = null
 
+	private val _inputNeedsFocus = MutableLiveData(true)
+	val inputNeedsFocus: LiveData<Boolean>
+		get() = _inputNeedsFocus
+
 	init {
 		bindAppScope()
 		substituteNoteTextInInput()
@@ -44,6 +48,11 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 			return
 		}
 
+		_inputNeedsFocus.value = false
+		saveNote(text)
+	}
+
+	private fun saveNote(text: String) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				val note = existingNote
