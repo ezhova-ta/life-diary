@@ -147,7 +147,7 @@
                 android:layout_marginStart="4dp"
                 android:inputType="text"
                 android:singleLine="true"
-                android:maxLength="70"
+                android:maxLength="100"
                 android:text="@={viewModel.newToDoListItemText}"
                 android:hint="@string/what_should_be_done" />
 

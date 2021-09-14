@@ -48,7 +48,7 @@ class ToDoListAdapter(
 				onItemClickListener?.onClick(item)
 			}
 
-			binding.deleteButtonContainer.setOnClickListener {
+			binding.deleteButton.setOnClickListener {
 				onDeleteItemClickListener?.onClick(item)
 			}
 		}
