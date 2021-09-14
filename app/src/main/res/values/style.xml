@@ -2,7 +2,7 @@
 <resources>
     <style name="Text">
         <item name="android:includeFontPadding">false</item>
-        <item name="android:textColor">@color/app_dark_gray</item>
+        <item name="android:textColor">@color/app_default_text_color</item>
     </style>
 
     <style name="Text.ScreenTitle">

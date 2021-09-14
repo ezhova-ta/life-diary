@@ -38,6 +38,6 @@
         android:format12Hour="MMMM"
         android:format24Hour="MMMM"
         android:textSize="20sp"
-        android:textColor="@color/black_opacity_50"
+        android:textColor="@color/app_medium_dark_gray"
         tools:text="July" />
 </androidx.constraintlayout.widget.ConstraintLayout>

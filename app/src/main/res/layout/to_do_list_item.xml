@@ -60,7 +60,7 @@
                 android:ellipsize="marquee"
                 android:singleLine="true"
                 android:textSize="18sp"
-                android:textColor="@{viewModel.checked ? @color/app_green : @color/app_dark_gray}"
+                android:textColor="@{viewModel.checked ? @color/app_green : @color/app_default_text_color}"
                 tools:text="Погладить котика"
                 android:text="@{viewModel.toDoListItem.text}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
