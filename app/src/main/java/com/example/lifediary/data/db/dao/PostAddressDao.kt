@@ -6,7 +6,7 @@ import com.example.lifediary.data.db.entities.PostAddressEntity
 
 @Dao
 interface PostAddressDao {
-    @Query("SELECT * FROM post_address ORDER BY created_at DESC")
+    @Query("SELECT * FROM post_address ORDER BY name ASC")
     fun getAll(): LiveData<List<PostAddressEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
