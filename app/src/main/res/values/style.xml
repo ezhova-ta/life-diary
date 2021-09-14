@@ -2,6 +2,7 @@
 <resources>
     <style name="Text">
         <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/app_default_text_color</item>
     </style>
 
@@ -17,19 +18,15 @@
     </style>
 
     <style name="Text.SettingsScreenMenuItem">
-        <item name="android:textSize">18sp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="Text.Link">
-        <item name="android:textSize">18sp</item>
-    </style>
+    <style name="Text.Link" />
 
     <style name="Text.Location">
         <item name="android:ellipsize">marquee</item>
         <item name="singleLine">true</item>
-        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Text.CalendarDay">
@@ -49,14 +46,28 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="Text.MainControlsHint">
-        <item name="android:textSize">14sp</item>
+    <style name="Text.MainControlsHint" />
+
+    <style name="Text.ExplanatoryMessage">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="ExplanatoryMessageIcon">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="Text.ShoppingListItem">
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="singleLine">true</item>
     </style>
 
     <style name="Text.Substrate">
         <item name="android:padding">8dp</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Text.InputHint">

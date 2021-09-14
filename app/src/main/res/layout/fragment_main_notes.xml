@@ -41,17 +41,13 @@
             android:orientation="vertical"
             app:booleanVisibility="@{!viewModel.isNotesVisible()}">
             <TextView
-                style="@style/Text"
+                style="@style/Text.ExplanatoryMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="16sp"
                 android:text="@string/no_notes_yet" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
+                style="@style/ExplanatoryMessageIcon"
                 android:src="@drawable/icon_sentiment_dissatisfied_gray" />
         </LinearLayout>
 
