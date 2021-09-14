@@ -130,8 +130,9 @@ class PostAddressesViewModel: BaseViewModel() {
         val addresseeCity = this.addresseeCity.value ?: return null
         val addresseePostcode = this.addresseePostcode.value ?: return null
         val addresseeEdgeRegion = this.addresseeEdgeRegion.value ?: return null
+        val createdAt = editingAddress?.createdAt
 
-        return PostAddress(
+        val address = PostAddress(
             id = addressId,
             name = addresseeName,
             street = addresseeStreet,
@@ -141,6 +142,9 @@ class PostAddressesViewModel: BaseViewModel() {
             postcode = addresseePostcode,
             edgeRegion = addresseeEdgeRegion
         )
+
+        createdAt?.let { address.createdAt = it }
+        return address
     }
 
     private fun PostAddress.isEmpty(): Boolean {
