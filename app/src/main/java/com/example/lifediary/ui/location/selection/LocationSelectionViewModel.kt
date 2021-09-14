@@ -24,9 +24,9 @@ class LocationSelectionViewModel : BaseViewModel() {
     val locations: LiveData<List<Location>>
         get() = _locations
 
-    private val _searchLocationInputNeedsFocus = MutableLiveData(true)
-    val searchLocationInputNeedsFocus: LiveData<Boolean>
-        get() = _searchLocationInputNeedsFocus
+    private val _inputNeedsFocus = MutableLiveData(true)
+    val inputNeedsFocus: LiveData<Boolean>
+        get() = _inputNeedsFocus
 
     init {
         bindAppScope()
@@ -37,7 +37,7 @@ class LocationSelectionViewModel : BaseViewModel() {
     }
 
     fun onSearchLocationInputDone() {
-        _searchLocationInputNeedsFocus.value = false
+        _inputNeedsFocus.value = false
         val enteredLocationName = formatLocationName(locationName.value) ?: return
         if(enteredLocationName.isBlank()) return
         isProgressVisible.value = true

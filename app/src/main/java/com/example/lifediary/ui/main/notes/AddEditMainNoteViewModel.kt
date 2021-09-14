@@ -19,6 +19,10 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 	val isAddButtonVisible = noteId == null
 	private var existingNote: MainNote? = null
 
+	private val _inputNeedsFocus = MutableLiveData(true)
+	val inputNeedsFocus: LiveData<Boolean>
+		get() = _inputNeedsFocus
+
 	init {
 		bindAppScope()
 		substituteNoteTextInInput()
@@ -45,6 +49,11 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 			return
 		}
 
+		_inputNeedsFocus.value = false
+		saveNote(text)
+	}
+
+	private fun saveNote(text: String) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				val note = existingNote
@@ -61,7 +70,6 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 				showMessage(Text.TextResource(R.string.failed_to_save))
 			}
 		}
-
 	}
 
 	class Factory(private val noteId: Long?) : ViewModelProvider.Factory {

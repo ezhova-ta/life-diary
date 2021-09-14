@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentAddEditMainNoteBinding
 import com.example.lifediary.ui.BaseFragment
+import com.example.lifediary.utils.clearFocusWithKeyboard
+import com.example.lifediary.utils.requestFocusWithKeyboard
 
 class AddEditMainNoteFragment : BaseFragment() {
 	override val viewModel: AddEditMainNoteViewModel by viewModels(
@@ -41,6 +43,17 @@ class AddEditMainNoteFragment : BaseFragment() {
 		_binding = FragmentAddEditMainNoteBinding.inflate(inflater, container, false)
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
+		setupAddEditNoteInput()
 		return binding.root
+	}
+
+	private fun setupAddEditNoteInput() {
+		viewModel.inputNeedsFocus.observe(viewLifecycleOwner) { needFocus ->
+			if(needFocus) {
+				binding.addNoteInput.requestFocusWithKeyboard()
+			} else {
+				binding.addNoteInput.clearFocusWithKeyboard(activity)
+			}
+		}
 	}
  }

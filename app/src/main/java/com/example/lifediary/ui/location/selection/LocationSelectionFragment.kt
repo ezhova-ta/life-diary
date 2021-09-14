@@ -39,7 +39,7 @@ class LocationSelectionFragment : BaseFragment() {
     }
 
     private fun setupSearchLocationInput() {
-        viewModel.searchLocationInputNeedsFocus.observe(viewLifecycleOwner) { needFocus ->
+        viewModel.inputNeedsFocus.observe(viewLifecycleOwner) { needFocus ->
             if(needFocus) {
                 binding.searchLocationInput.requestFocusWithKeyboard()
             } else {
