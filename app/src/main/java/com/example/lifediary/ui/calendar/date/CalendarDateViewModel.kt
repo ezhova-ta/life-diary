@@ -55,7 +55,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 				val forecast = weatherRepository.getForecast(locationId)
 				weatherForecast.postValue(forecast)
 			} catch(e: Exception) {
-				showMessage(Text.TextResource(R.string.failed_to_get_forecast))
+				// TODO Message display temporarily removed
+//				showMessage(Text.TextResource(R.string.failed_to_get_forecast))
 			}
 		}
 	}

@@ -54,7 +54,8 @@ class MainViewModel : BaseViewModel() {
             try {
                 weatherRepository.updateCurrentWeather(locationId)
             } catch(e: Exception) {
-                showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
+                // TODO Message display temporarily removed
+//                showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
             } finally {
                 _isCurrentWeatherProgressVisible.postValue(false)
             }
