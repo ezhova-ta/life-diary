@@ -48,9 +48,9 @@ class PostAddressListAdapter(
 			onEditItemClickListener: ListItemClickListener<PostAddress>
 		) {
 			binding.viewModel = PostAddressListItemViewModel(item)
-			binding.executePendingBindings()
 			binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
 			binding.editButton.setOnClickListener { onEditItemClickListener.onClick(item) }
+			binding.executePendingBindings()
 		}
 	}
 }

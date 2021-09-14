@@ -51,16 +51,10 @@ class ShoppingListAdapter(
             onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
             binding.viewModel = ShoppingListItemViewModel(item)
-            binding.executePendingBindings()
             setupHighPriorityButton(item)
             setupCrossOutLine(item)
-
-            setClickListeners(
-                item,
-                onItemClickListener,
-                onHighPriorityClickListener,
-                onDeleteItemClickListener
-            )
+            setClickListeners(item, onItemClickListener, onHighPriorityClickListener, onDeleteItemClickListener)
+            binding.executePendingBindings()
         }
 
         private fun setupHighPriorityButton(item: ShoppingListItem) {

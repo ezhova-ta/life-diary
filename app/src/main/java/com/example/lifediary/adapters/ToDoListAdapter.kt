@@ -43,14 +43,9 @@ class ToDoListAdapter(
 			onDeleteItemClickListener: ListItemClickListener<ToDoListItem>?
 		) {
 			binding.viewModel = ToDoListItemViewModel(item)
-
-			binding.textContainer.setOnClickListener {
-				onItemClickListener?.onClick(item)
-			}
-
-			binding.deleteButton.setOnClickListener {
-				onDeleteItemClickListener?.onClick(item)
-			}
+			binding.textContainer.setOnClickListener { onItemClickListener?.onClick(item) }
+			binding.deleteButton.setOnClickListener { onDeleteItemClickListener?.onClick(item) }
+			binding.executePendingBindings()
 		}
 	}
 }

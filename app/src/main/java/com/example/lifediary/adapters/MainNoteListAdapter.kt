@@ -41,9 +41,9 @@ class MainNoteListAdapter(
 			onDeleteItemClickListener: ListItemClickListener<MainNote>?
 		) {
 			binding.viewModel = MainNoteListItemViewModel(item)
-			binding.executePendingBindings()
 			setUpNoteView()
 			setupClickListeners(item, onEditItemClickListener, onDeleteItemClickListener)
+			binding.executePendingBindings()
 		}
 
 		private fun setUpNoteView() {
