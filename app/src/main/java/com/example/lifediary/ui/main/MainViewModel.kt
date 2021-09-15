@@ -1,14 +1,12 @@
 package com.example.lifediary.ui.main
 
 import androidx.lifecycle.*
-import com.example.lifediary.R
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.domain.Weather
 import com.example.lifediary.data.repositories.SettingsRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +27,6 @@ class MainViewModel : BaseViewModel() {
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
         get() = _isCurrentWeatherProgressVisible
 
-    // TODO Temp solution!
     private val locationObserver = Observer<Location?> {
         val locationId = it?.id ?: return@Observer
         updateCurrentWeather(locationId)
@@ -37,7 +34,6 @@ class MainViewModel : BaseViewModel() {
 
     init {
         bindAppScope()
-        // TODO Temp solution!
         location.observeForever(locationObserver)
     }
 

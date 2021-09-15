@@ -17,8 +17,7 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
             binding.progressView.isVisible = value
         }
 
-    // TODO Correct default value
-    var temperature: String = "???"
+    var temperature: String? = null
         set(value) {
             field = value
             binding.temperatureView.text = value

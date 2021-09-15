@@ -17,15 +17,13 @@ class WeatherForecastView(context: Context, attrs: AttributeSet) : FrameLayout(c
             binding.progressView.isVisible = value
         }
 
-    // TODO Correct default value
-    var dayTemperature: String = "???"
+    var dayTemperature: String? = null
         set(value) {
             field = value
             binding.dayTemperatureView.text = value
         }
 
-    // TODO Correct default value
-    var nightTemperature: String = "???"
+    var nightTemperature: String? = null
         set(value) {
             field = value
             binding.nightTemperatureView.text = value

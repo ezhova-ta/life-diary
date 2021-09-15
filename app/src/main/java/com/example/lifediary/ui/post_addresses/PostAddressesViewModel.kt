@@ -46,7 +46,6 @@ class PostAddressesViewModel: BaseViewModel() {
     val addresseeEdgeRegion = MutableLiveData("")
     val addresseePostcode = MutableLiveData("")
 
-    // TODO Good solution?
     private var editingAddress: PostAddress? = null
         set(value) {
             field = value

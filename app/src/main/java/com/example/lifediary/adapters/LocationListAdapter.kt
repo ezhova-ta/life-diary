@@ -19,9 +19,7 @@ class LocationListAdapter(private val onItemClickListener: ListItemClickListener
         holder.bind(item, onItemClickListener)
     }
 
-    class LocationListItemViewModel(val location: Location) {
-        // TODO Converted data if it needed
-    }
+    class LocationListItemViewModel(val location: Location)
 
     class ViewHolder private constructor(
         private val binding: LocationListItemBinding
