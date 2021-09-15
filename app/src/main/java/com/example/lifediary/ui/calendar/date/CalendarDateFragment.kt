@@ -61,9 +61,9 @@ class CalendarDateFragment : BaseFragment() {
 
     private fun setupToDoListView() {
         val toDoListAdapter = ToDoListAdapter(
-            ListItemClickListener { viewModel.onToDoListItemClick(it) },
-            ListItemClickListener { viewModel.onToDoListItemLongClick(it) },
-            ListItemClickListener { viewModel.onDeleteToDoListItemClick(it) }
+            onDeleteItemClickListener = ListItemClickListener { viewModel.onDeleteToDoListItemClick(it) },
+            onItemClickListener = ListItemClickListener { viewModel.onToDoListItemClick(it) },
+            onItemLongClickListener = ListItemClickListener { viewModel.onToDoListItemLongClick(it) }
         )
         binding.toDoListView.adapter = toDoListAdapter
         viewModel.toDoList.observe(viewLifecycleOwner) { toDoList ->

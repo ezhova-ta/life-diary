@@ -38,9 +38,9 @@ class MainNotesFragment : BaseFragment() {
 
     private fun setupNoteListView() {
         val mainNoteListAdapter = MainNoteListAdapter(
-            ListItemClickListener { viewModel.onNoteLongClick(it) },
-            ListItemClickListener { viewModel.onEditNoteClick(it) },
-            ListItemClickListener { viewModel.onDeleteNoteClick(it) }
+            onEditItemClickListener = ListItemClickListener { viewModel.onEditNoteClick(it) },
+            onDeleteItemClickListener = ListItemClickListener { viewModel.onDeleteNoteClick(it) },
+            onItemLongClickListener = ListItemClickListener { viewModel.onNoteLongClick(it) }
         )
         binding.noteListView.adapter = mainNoteListAdapter
         viewModel.noteList.observe(viewLifecycleOwner) { noteList ->

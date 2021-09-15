@@ -9,9 +9,9 @@ import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.databinding.ToDoListItemBinding
 
 class ToDoListAdapter(
+	private val onDeleteItemClickListener: ListItemClickListener<ToDoListItem>,
 	private val onItemClickListener: ListItemClickListener<ToDoListItem>? = null,
 	private val onItemLongClickListener: ListItemClickListener<ToDoListItem>? = null,
-	private val onDeleteItemClickListener: ListItemClickListener<ToDoListItem>? = null
 ) : ListAdapter<ToDoListItem, ToDoListAdapter.ViewHolder>(ToDoItemDiffCallBack()) {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -19,7 +19,7 @@ class ToDoListAdapter(
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val item = getItem(position)
-		holder.bind(item, onItemClickListener, onItemLongClickListener, onDeleteItemClickListener)
+		holder.bind(item, onDeleteItemClickListener, onItemClickListener, onItemLongClickListener)
 	}
 
 	class ToDoListItemViewModel(val toDoListItem: ToDoListItem) {
@@ -40,13 +40,13 @@ class ToDoListAdapter(
 
 		fun bind(
 			item: ToDoListItem,
+			onDeleteItemClickListener: ListItemClickListener<ToDoListItem>,
 			onItemClickListener: ListItemClickListener<ToDoListItem>?,
 			onItemLongClickListener: ListItemClickListener<ToDoListItem>?,
-			onDeleteItemClickListener: ListItemClickListener<ToDoListItem>?
 		) {
 			binding.viewModel = ToDoListItemViewModel(item)
 			binding.textContainer.setOnClickListener { onItemClickListener?.onClick(item) }
-			binding.deleteButton.setOnClickListener { onDeleteItemClickListener?.onClick(item) }
+			binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
 			binding.textContainer.setOnLongClickListener {
 				onItemLongClickListener?.onClick(item)
 				true

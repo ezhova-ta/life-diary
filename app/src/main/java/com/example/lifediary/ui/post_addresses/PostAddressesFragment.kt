@@ -38,9 +38,9 @@ class PostAddressesFragment : BaseFragment() {
 
     private fun setupPostAddressListRecycler() {
         val postAddressesAdapter = PostAddressListAdapter(
-            ListItemClickListener { viewModel.onDeletePostAddressClick(it) },
-            ListItemClickListener { viewModel.onEditPostAddressClick(it) },
-            ListItemClickListener { viewModel.onPostAddressLongClick(it) }
+            onDeleteItemClickListener = ListItemClickListener { viewModel.onDeletePostAddressClick(it) },
+            onEditItemClickListener = ListItemClickListener { viewModel.onEditPostAddressClick(it) },
+            onItemLongClickListener = ListItemClickListener { viewModel.onPostAddressLongClick(it) }
         )
         binding.postAddressListView.adapter = postAddressesAdapter
         viewModel.addresses.observe(viewLifecycleOwner) { postAddresses ->

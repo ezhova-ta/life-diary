@@ -10,10 +10,10 @@ import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.databinding.ShoppingListItemBinding
 
 class ShoppingListAdapter(
+    private val onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>,
+    private val onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>,
     private val onItemClickListener: ListItemClickListener<ShoppingListItem>? = null,
-    private val onItemLongClickListener: ListItemClickListener<ShoppingListItem>? = null,
-    private val onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>? = null,
-    private val onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>? = null
+    private val onItemLongClickListener: ListItemClickListener<ShoppingListItem>? = null
 ) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ViewHolder>(ShoppingListItemDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -23,10 +23,10 @@ class ShoppingListAdapter(
         val item = getItem(position)
         holder.bind(
             item,
-            onItemClickListener,
-            onItemLongClickListener,
             onHighPriorityClickListener,
-            onDeleteItemClickListener
+            onDeleteItemClickListener,
+            onItemClickListener,
+            onItemLongClickListener
         )
     }
 
@@ -47,19 +47,19 @@ class ShoppingListAdapter(
 
         fun bind(
             item: ShoppingListItem,
+            onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>,
+            onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>,
             onItemClickListener: ListItemClickListener<ShoppingListItem>?,
             onItemLongClickListener: ListItemClickListener<ShoppingListItem>?,
-            onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>?,
-            onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
             binding.viewModel = ShoppingListItemViewModel(item)
             setupHighPriorityButton(item)
             setClickListeners(
                 item,
-                onItemClickListener,
-                onItemLongClickListener,
                 onHighPriorityClickListener,
-                onDeleteItemClickListener
+                onDeleteItemClickListener,
+                onItemClickListener,
+                onItemLongClickListener
             )
             binding.executePendingBindings()
         }
@@ -76,14 +76,14 @@ class ShoppingListAdapter(
 
         private fun setClickListeners(
             item: ShoppingListItem,
+            onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>,
+            onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>,
             onItemClickListener: ListItemClickListener<ShoppingListItem>?,
             onItemLongClickListener: ListItemClickListener<ShoppingListItem>?,
-            onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>?,
-            onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
             binding.titleView.setOnClickListener { onItemClickListener?.onClick(item) }
-            binding.setHighPriorityButton.setOnClickListener { onHighPriorityClickListener?.onClick(item) }
-            binding.deleteButton.setOnClickListener { onDeleteItemClickListener?.onClick(item) }
+            binding.setHighPriorityButton.setOnClickListener { onHighPriorityClickListener.onClick(item) }
+            binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
 
             binding.titleView.setOnLongClickListener {
                 onItemLongClickListener?.onClick(item)
