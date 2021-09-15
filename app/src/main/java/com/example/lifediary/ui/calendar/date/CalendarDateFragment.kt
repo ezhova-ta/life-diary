@@ -53,6 +53,10 @@ class CalendarDateFragment : BaseFragment() {
 
     private fun setupNoteView() {
         binding.noteView.rolledUpMaxLines = NOTE_VIEW_ROLLED_UP_MAX_LINES
+        binding.noteView.setOnLongClickListener {
+            viewModel.onNoteLongClick()
+            true
+        }
     }
 
     private fun setupToDoListView() {

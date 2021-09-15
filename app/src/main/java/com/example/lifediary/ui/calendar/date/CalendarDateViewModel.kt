@@ -61,6 +61,12 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
+	fun onNoteLongClick() {
+		val noteText = note.value?.text ?: return
+		copyToClipboard(noteText)
+		showMessage(Text.TextResource(R.string.text_copied))
+	}
+
 	fun onAddNoteClick() {
 		navigateToAddEditNoteScreen()
 	}
