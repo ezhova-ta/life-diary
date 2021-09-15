@@ -2,7 +2,6 @@ package com.example.lifediary.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +31,7 @@ class ShoppingListAdapter(
     }
 
     class ShoppingListItemViewModel(val shoppingListItem: ShoppingListItem) {
-        // TODO Converted data if it needed
+        val isChecked = shoppingListItem.isCrossedOut
     }
 
     class ViewHolder private constructor(
@@ -55,7 +54,6 @@ class ShoppingListAdapter(
         ) {
             binding.viewModel = ShoppingListItemViewModel(item)
             setupHighPriorityButton(item)
-            setupCrossOutLine(item)
             setClickListeners(
                 item,
                 onItemClickListener,
@@ -76,10 +74,6 @@ class ShoppingListAdapter(
             binding.setHighPriorityButton.setImageResource(highPriorityButtonImageResource)
         }
 
-        private fun setupCrossOutLine(item: ShoppingListItem) {
-            binding.crossOutLine.isVisible = item.isCrossedOut
-        }
-
         private fun setClickListeners(
             item: ShoppingListItem,
             onItemClickListener: ListItemClickListener<ShoppingListItem>?,
@@ -88,8 +82,8 @@ class ShoppingListAdapter(
             onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
             binding.titleView.setOnClickListener { onItemClickListener?.onClick(item) }
-            binding.setHighPriorityButtonContainer.setOnClickListener { onHighPriorityClickListener?.onClick(item) }
-            binding.deleteButtonContainer.setOnClickListener { onDeleteItemClickListener?.onClick(item) }
+            binding.setHighPriorityButton.setOnClickListener { onHighPriorityClickListener?.onClick(item) }
+            binding.deleteButton.setOnClickListener { onDeleteItemClickListener?.onClick(item) }
 
             binding.titleView.setOnLongClickListener {
                 onItemLongClickListener?.onClick(item)
