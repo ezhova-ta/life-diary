@@ -16,11 +16,19 @@ class SettingsLocalDataSource @Inject constructor(
         settingsDataStoreManager.setPostAddressesSectionEnabled(isEnabled)
     }
 
+    suspend fun setMemorableDatesSectionEnabled(isEnabled: Boolean) {
+        settingsDataStoreManager.setMemorableDatesSectionEnabled(isEnabled)
+    }
+
     fun getShoppingListSectionEnabled(): LiveData<Boolean> {
         return settingsDataStoreManager.isShoppingListSectionEnabled.asLiveData()
     }
 
     fun getPostAddressesSectionEnabled(): LiveData<Boolean> {
         return settingsDataStoreManager.isPostAddressesSectionEnabled.asLiveData()
+    }
+
+    fun getMemorableDatesSectionEnabled(): LiveData<Boolean> {
+        return settingsDataStoreManager.isMemorableDatesSectionEnabled.asLiveData()
     }
 }

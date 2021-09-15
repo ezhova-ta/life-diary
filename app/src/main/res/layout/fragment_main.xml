@@ -115,5 +115,17 @@
             android:onClick="@{() -> viewModel.onPostAddressesClick()}"
             app:booleanVisibility="@{viewModel.isPostAddressesSectionVisible()}" />
 
+        <TextView
+            android:id="@+id/memorableDatesView"
+            style="@style/Text.MainScreenSection.MemorableDates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/postAddressesView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:text="@string/memorable_dates"
+            android:onClick="@{() -> viewModel.onMemorableDatesClick()}"
+            app:booleanVisibility="@{viewModel.isMemorableDatesSectionVisible()}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

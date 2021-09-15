@@ -53,6 +53,7 @@
     <string name="fields_empty_contact_will_be_deleted">All fields are empty, the contact will be deleted</string>
     <string name="display_section_shopping_list">Display section Shopping list</string>
     <string name="display_section_post_addresses">Display section Post addresses</string>
+    <string name="display_section_memorable_dates">Display section Memorable dates</string>
     <string name="calendar">Calendar</string>
     <string name="main_screen">Main screen</string>
     <string name="clear_notes_in_calendar">Clear calendar notes</string>
@@ -60,4 +61,5 @@
     <string name="all_calendar_notes_will_be_cleared">All notes in the calendar will be cleared</string>
     <string name="all_to_do_lists_will_be_cleared">All to-do lists on the calendar will be cleared</string>
     <string name="text_copied">Text copied</string>
+    <string name="memorable_dates">Memorable dates</string>
 </resources>

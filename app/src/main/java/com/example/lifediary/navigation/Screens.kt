@@ -7,6 +7,7 @@ import com.example.lifediary.ui.main.MainFragment
 import com.example.lifediary.ui.calendar.date.note.AddEditDateNoteFragment
 import com.example.lifediary.ui.main.notes.AddEditMainNoteFragment
 import com.example.lifediary.ui.main.notes.MainNotesFragment
+import com.example.lifediary.ui.memorable_dates.MemorableDatesFragment
 import com.example.lifediary.ui.post_addresses.AddEditPostAddressFragment
 import com.example.lifediary.ui.post_addresses.PostAddressesFragment
 import com.example.lifediary.ui.settings.SettingsFragment
@@ -29,4 +30,5 @@ object Screens {
     fun getMainNotesFragment() = FragmentScreen { MainNotesFragment.getInstance() }
     fun getAddEditMainNoteFragment(noteId: Long) = FragmentScreen { AddEditMainNoteFragment.getInstance(noteId) }
     fun getAddEditMainNoteFragment() = FragmentScreen { AddEditMainNoteFragment.getInstance(null) }
+    fun getMemorableDatesFragment() = FragmentScreen { MemorableDatesFragment.getInstance() }
 }

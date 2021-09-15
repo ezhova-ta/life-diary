@@ -24,6 +24,9 @@ class SettingsViewModel : BaseViewModel() {
     val isPostAddressesSectionEnabled: LiveData<Boolean> by lazy {
         settingsRepository.getPostAddressesSectionEnabled()
     }
+    val isMemorableDatesSectionEnabled: LiveData<Boolean> by lazy {
+        settingsRepository.getMemorableDatesSectionEnabled()
+    }
 
     private val _showClearCalendarNotesConfirmationDialog = MutableLiveData(false)
     val showClearCalendarNotesConfirmationDialog: LiveData<Boolean>
@@ -47,6 +50,11 @@ class SettingsViewModel : BaseViewModel() {
         savePostAddressesSectionEnabled(isEnabled)
     }
 
+    fun onMemorableDatesSectionEnabledChanged(isEnabled: Boolean) {
+        if(isEnabled == isMemorableDatesSectionEnabled.value) return
+        saveMemorableDatesSectionEnabled(isEnabled)
+    }
+
     private fun saveShoppingListSectionEnabled(isEnabled: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -61,6 +69,16 @@ class SettingsViewModel : BaseViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 settingsRepository.setPostAddressesSectionEnabled(isEnabled)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.error_try_again_later))
+            }
+        }
+    }
+
+    private fun saveMemorableDatesSectionEnabled(isEnabled: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                settingsRepository.setMemorableDatesSectionEnabled(isEnabled)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }

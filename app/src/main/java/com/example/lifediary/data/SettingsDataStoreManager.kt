@@ -17,7 +17,8 @@ class SettingsDataStoreManager @Inject constructor(private val context: Context)
         corruptionHandler = ReplaceFileCorruptionHandler {
             preferencesOf(
                 IS_SHOPPING_LIST_SECTION_ENABLED_KEY to IS_SHOPPING_LIST_SECTION_ENABLED_DEFAULT_VALUE,
-                IS_POST_ADDRESSES_SECTION_ENABLED_KEY to IS_POST_ADDRESSES_SECTION_ENABLED_DEFAULT_VALUE
+                IS_POST_ADDRESSES_SECTION_ENABLED_KEY to IS_POST_ADDRESSES_SECTION_ENABLED_DEFAULT_VALUE,
+                IS_MEMORABLE_DATES_SECTION_ENABLED_KEY to IS_MEMORABLE_DATES_SECTION_ENABLED_DEFAULT_VALUE
             )
         }
     )
@@ -33,11 +34,23 @@ class SettingsDataStoreManager @Inject constructor(private val context: Context)
         preferences[IS_POST_ADDRESSES_SECTION_ENABLED_KEY] ?: IS_POST_ADDRESSES_SECTION_ENABLED_DEFAULT_VALUE
     }
 
+    val isMemorableDatesSectionEnabled = settingsDataStore.data.map { preferences ->
+        preferences[IS_MEMORABLE_DATES_SECTION_ENABLED_KEY] ?: IS_MEMORABLE_DATES_SECTION_ENABLED_DEFAULT_VALUE
+    }
+
     companion object {
-        val IS_SHOPPING_LIST_SECTION_ENABLED_KEY = booleanPreferencesKey("com.example.lifediary.data.IS_SHOPPING_LIST_SECTION_ENABLED")
-        val IS_POST_ADDRESSES_SECTION_ENABLED_KEY = booleanPreferencesKey("com.example.lifediary.data.IS_POST_ADDRESSES_SECTION_ENABLED")
+        val IS_SHOPPING_LIST_SECTION_ENABLED_KEY = booleanPreferencesKey(
+            "com.example.lifediary.data.IS_SHOPPING_LIST_SECTION_ENABLED"
+        )
+        val IS_POST_ADDRESSES_SECTION_ENABLED_KEY = booleanPreferencesKey(
+            "com.example.lifediary.data.IS_POST_ADDRESSES_SECTION_ENABLED"
+        )
+        val IS_MEMORABLE_DATES_SECTION_ENABLED_KEY = booleanPreferencesKey(
+            "com.example.lifediary.data.IS_MEMORABLE_DATES_SECTION_ENABLED_KEY"
+        )
         const val IS_SHOPPING_LIST_SECTION_ENABLED_DEFAULT_VALUE = true
         const val IS_POST_ADDRESSES_SECTION_ENABLED_DEFAULT_VALUE = true
+        const val IS_MEMORABLE_DATES_SECTION_ENABLED_DEFAULT_VALUE = true
     }
 
     suspend fun setShoppingListSectionEnabled(isEnabled: Boolean) {
@@ -49,6 +62,12 @@ class SettingsDataStoreManager @Inject constructor(private val context: Context)
     suspend fun setPostAddressesSectionEnabled(isEnabled: Boolean) {
         settingsDataStore.edit { preferences ->
             preferences[IS_POST_ADDRESSES_SECTION_ENABLED_KEY] = isEnabled
+        }
+    }
+
+    suspend fun setMemorableDatesSectionEnabled(isEnabled: Boolean) {
+        settingsDataStore.edit { preferences ->
+            preferences[IS_MEMORABLE_DATES_SECTION_ENABLED_KEY] = isEnabled
         }
     }
 }

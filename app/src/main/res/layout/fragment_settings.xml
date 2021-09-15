@@ -21,51 +21,78 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/main_screen" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/shoppingListSectionSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="@id/shoppingListSectionSwitchTitle"
-            app:layout_constraintBottom_toBottomOf="@id/shoppingListSectionSwitchTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            android:checked="@{viewModel.isShoppingListSectionEnabled()}" />
-
-        <TextView
-            android:id="@+id/shoppingListSectionSwitchTitle"
-            style="@style/Text.SettingsScreenMenuItem"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainScreenSwitchesContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/sectionSwitchesTitle"
-            app:layout_constraintStart_toEndOf="@id/shoppingListSectionSwitch"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
-            android:text="@string/display_section_shopping_list" />
+            app:layout_constraintTop_toBottomOf="@id/sectionSwitchesTitle">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/postAddressesSectionSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="@id/postAddressesSectionSwitchTitle"
-            app:layout_constraintBottom_toBottomOf="@id/postAddressesSectionSwitchTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            android:checked="@{viewModel.isPostAddressesSectionEnabled()}" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/shoppingListSectionSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/shoppingListSectionSwitchTitle"
+                app:layout_constraintBottom_toBottomOf="@id/shoppingListSectionSwitchTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:checked="@{viewModel.isShoppingListSectionEnabled()}" />
 
-        <TextView
-            android:id="@+id/postAddressesSectionSwitchTitle"
-            style="@style/Text.SettingsScreenMenuItem"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/shoppingListSectionSwitchTitle"
-            app:layout_constraintStart_toEndOf="@id/postAddressesSectionSwitch"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/display_section_post_addresses" />
+            <TextView
+                android:id="@+id/shoppingListSectionSwitchTitle"
+                style="@style/Text.SettingsScreenMenuItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shoppingListSectionSwitch"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:text="@string/display_section_shopping_list" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/postAddressesSectionSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/postAddressesSectionSwitchTitle"
+                app:layout_constraintBottom_toBottomOf="@id/postAddressesSectionSwitchTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:checked="@{viewModel.isPostAddressesSectionEnabled()}" />
+
+            <TextView
+                android:id="@+id/postAddressesSectionSwitchTitle"
+                style="@style/Text.SettingsScreenMenuItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/shoppingListSectionSwitchTitle"
+                app:layout_constraintStart_toEndOf="@id/postAddressesSectionSwitch"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/display_section_post_addresses" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/memorableDatesSectionSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/memorableDatesSectionSwitchTitle"
+                app:layout_constraintBottom_toBottomOf="@id/memorableDatesSectionSwitchTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:checked="@{viewModel.isMemorableDatesSectionEnabled()}" />
+
+            <TextView
+                android:id="@+id/memorableDatesSectionSwitchTitle"
+                style="@style/Text.SettingsScreenMenuItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/postAddressesSectionSwitchTitle"
+                app:layout_constraintStart_toEndOf="@id/memorableDatesSectionSwitch"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/display_section_memorable_dates" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/calendarTitle"
             style="@style/Text.SettingsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/postAddressesSectionSwitchTitle"
+            app:layout_constraintTop_toBottomOf="@id/mainScreenSwitchesContainer"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:text="@string/calendar" />

@@ -52,6 +52,7 @@
     <string name="fields_empty_contact_will_be_deleted">Все поля пусты, контакт будет удален</string>
     <string name="display_section_shopping_list">Отображать раздел Список покупок</string>
     <string name="display_section_post_addresses">Отображать раздел Почтовые адреса</string>
+    <string name="display_section_memorable_dates">Display section Памятные даты</string>
     <string name="calendar">Календарь</string>
     <string name="main_screen">Главный экран</string>
     <string name="clear_notes_in_calendar">Очистить заметки в календаре</string>
@@ -59,4 +60,5 @@
     <string name="all_calendar_notes_will_be_cleared">Все заметки в календаре будут очищены</string>
     <string name="all_to_do_lists_will_be_cleared">Все списки дел в календаре будут очищены</string>
     <string name="text_copied">Текст скопирован</string>
+    <string name="memorable_dates">Памятные даты</string>
 </resources>

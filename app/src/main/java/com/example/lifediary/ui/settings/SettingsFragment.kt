@@ -43,6 +43,10 @@ class SettingsFragment : BaseFragment() {
         binding.postAddressesSectionSwitch.setOnCheckedChangeListener { _, isChecked ->
             viewModel.onPostAddressesSectionEnabledChanged(isChecked)
         }
+
+        binding.memorableDatesSectionSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.onMemorableDatesSectionEnabledChanged(isChecked)
+        }
     }
 
     private fun setupClearCalendarNotesConfirmationDialog() {
