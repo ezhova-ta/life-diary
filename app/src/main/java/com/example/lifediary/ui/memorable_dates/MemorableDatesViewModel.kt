@@ -11,4 +11,12 @@ class MemorableDatesViewModel : BaseViewModel() {
     init {
         bindAppScope()
     }
+
+    fun onAddDateClick() {
+
+    }
+
+    fun onClearDatesClick() {
+
+    }
 }

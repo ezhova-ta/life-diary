@@ -12,5 +12,25 @@
         style="@style/ScreenContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/addDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/icon_plus_green"
+            android:onClick="@{() -> viewModel.onAddDateClick()}" />
+
+        <ImageButton
+            android:id="@+id/clearAllButton"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            app:layout_constraintTop_toTopOf="@id/addDateButton"
+            app:layout_constraintBottom_toBottomOf="@id/addDateButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/icon_delete_sweep_color_link"
+            android:onClick="@{() -> viewModel.onClearDatesClick()}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
