@@ -3,6 +3,7 @@ package com.example.lifediary.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.lifediary.R
 import com.example.lifediary.databinding.ActivityMainBinding
 import com.example.lifediary.di.DiScopes
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     @Inject lateinit var navigationHolder: NavigatorHolder
-    private val viewModel: MainActivityViewModel by viewModels()
+    private lateinit var viewModel: MainActivityViewModel
     private val navigator = AppNavigator(this, R.id.mainContainer)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,9 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // TODO Find another solution to instantiate the MainActivityViewModel
-        viewModel.onActivityCreated()
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
     }
 
     private fun bindAppScope() {

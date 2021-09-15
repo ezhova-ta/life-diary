@@ -16,6 +16,4 @@ class MainActivityViewModel : BaseViewModel() {
     private fun routeToMainScreen() {
         router.newRootChain(Screens.getMainScreen())
     }
-
-    fun onActivityCreated() {}
 }
