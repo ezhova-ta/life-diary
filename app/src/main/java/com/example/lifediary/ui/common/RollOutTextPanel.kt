@@ -58,4 +58,8 @@ class RollOutTextPanel(context: Context, attrs: AttributeSet) : FrameLayout(cont
     private fun rollOutText() {
         binding.textView.maxLines = ROLLED_OUT_MAX_LINES
     }
+
+    override fun setOnLongClickListener(l: OnLongClickListener?) {
+        binding.textView.setOnLongClickListener(l)
+    }
 }

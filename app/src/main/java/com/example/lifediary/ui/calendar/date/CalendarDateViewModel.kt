@@ -157,6 +157,11 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
+	fun onToDoListItemLongClick(item: ToDoListItem) {
+		copyToClipboard(item.text)
+		showMessage(Text.TextResource(R.string.text_copied))
+	}
+
 	class Factory(private val day: Day) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {

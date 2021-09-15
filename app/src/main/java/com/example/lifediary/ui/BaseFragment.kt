@@ -1,5 +1,8 @@
 package com.example.lifediary.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
@@ -25,6 +28,7 @@ abstract class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setInsetsStyle()
         setupMessageShowing()
+        setupTextCopying()
     }
 
     private fun setInsetsStyle() {
@@ -49,6 +53,18 @@ abstract class BaseFragment : Fragment() {
             text.getText(requireContext()),
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    private fun setupTextCopying() {
+        viewModel.copyToClipboardEvent.observe(viewLifecycleOwner) { event ->
+            event?.let { copyToClipboard(it) }
+        }
+    }
+
+    private  fun copyToClipboard(text: String) {
+        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("", text)
+        clipboardManager.setPrimaryClip(clip)
     }
 
     protected fun isPermissionGranted(permission: String): Boolean {

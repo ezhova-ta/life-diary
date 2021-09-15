@@ -57,6 +57,11 @@ class MainNotesViewModel : BaseViewModel() {
 		_showClearNoteListConfirmationDialog.value = false
 	}
 
+	fun onNoteLongClick(note: MainNote) {
+		copyToClipboard(note.text)
+		showMessage(Text.TextResource(R.string.text_copied))
+	}
+
 	fun onEditNoteClick(note: MainNote) {
 		val noteId = note.id ?: return
 		router.navigateTo(Screens.getAddEditMainNoteFragment(noteId))

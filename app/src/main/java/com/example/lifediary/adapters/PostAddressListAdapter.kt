@@ -10,7 +10,8 @@ import com.example.lifediary.databinding.PostAddressListItemBinding
 
 class PostAddressListAdapter(
 	private val onDeleteItemClickListener: ListItemClickListener<PostAddress>,
-	private val onEditItemClickListener: ListItemClickListener<PostAddress>
+	private val onEditItemClickListener: ListItemClickListener<PostAddress>,
+	private val onItemLongClickListener: ListItemClickListener<PostAddress>? = null
 ) : ListAdapter<PostAddress, PostAddressListAdapter.ViewHolder>(PostAddressListItemDiffCallBack()) {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder  =
@@ -18,7 +19,7 @@ class PostAddressListAdapter(
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val item = getItem(position)
-		holder.bind(item, onDeleteItemClickListener, onEditItemClickListener)
+		holder.bind(item, onDeleteItemClickListener, onEditItemClickListener, onItemLongClickListener)
 	}
 
 	class PostAddressListItemViewModel(val address: PostAddress) {
@@ -45,11 +46,16 @@ class PostAddressListAdapter(
 		fun bind(
 			item: PostAddress,
 			onDeleteItemClickListener: ListItemClickListener<PostAddress>,
-			onEditItemClickListener: ListItemClickListener<PostAddress>
+			onEditItemClickListener: ListItemClickListener<PostAddress>,
+			onItemLongClickListener: ListItemClickListener<PostAddress>?
 		) {
 			binding.viewModel = PostAddressListItemViewModel(item)
 			binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
 			binding.editButton.setOnClickListener { onEditItemClickListener.onClick(item) }
+			binding.addressContainer.setOnLongClickListener {
+				onItemLongClickListener?.onClick(item)
+				true
+			}
 			binding.executePendingBindings()
 		}
 	}

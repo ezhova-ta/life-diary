@@ -13,6 +13,10 @@ open class BaseViewModel : ViewModel() {
     val popupMessageEvent: LiveData<OneTimeEvent<Text>>
         get() = _popupMessageEvent
 
+    private val _copyToClipboardEvent = MutableLiveData<String>()
+    val copyToClipboardEvent: LiveData<String>
+        get() = _copyToClipboardEvent
+
     protected fun bindAppScope() {
         val appScope = Toothpick.openScope(DiScopes.APP_SCOPE)
         Toothpick.inject(this, appScope)
@@ -25,5 +29,9 @@ open class BaseViewModel : ViewModel() {
 
     protected fun showMessage(text: Text) {
         _popupMessageEvent.postValue(OneTimeEvent(text))
+    }
+
+    protected fun copyToClipboard(text: String) {
+        _copyToClipboardEvent.postValue(text)
     }
 }

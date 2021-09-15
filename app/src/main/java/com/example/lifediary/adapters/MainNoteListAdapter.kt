@@ -9,6 +9,7 @@ import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.databinding.MainNoteListItemBinding
 
 class MainNoteListAdapter(
+	private val onItemLongClickListener: ListItemClickListener<MainNote>? = null,
 	private val onEditItemClickListener: ListItemClickListener<MainNote>? = null,
 	private val onDeleteItemClickListener: ListItemClickListener<MainNote>? = null
 ) : ListAdapter<MainNote, MainNoteListAdapter.ViewHolder>(MainNoteListItemDiffCallBack()) {
@@ -17,7 +18,7 @@ class MainNoteListAdapter(
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val item = getItem(position)
-		holder.bind(item, onEditItemClickListener, onDeleteItemClickListener)
+		holder.bind(item,onItemLongClickListener, onEditItemClickListener, onDeleteItemClickListener)
 	}
 
 	class MainNoteListItemViewModel(val mainNoteListItem: MainNote)
@@ -37,12 +38,18 @@ class MainNoteListAdapter(
 
 		fun bind(
 			item: MainNote,
+			onItemLongClickListener: ListItemClickListener<MainNote>?,
 			onEditItemClickListener: ListItemClickListener<MainNote>?,
 			onDeleteItemClickListener: ListItemClickListener<MainNote>?
 		) {
 			binding.viewModel = MainNoteListItemViewModel(item)
 			setUpNoteView()
-			setupClickListeners(item, onEditItemClickListener, onDeleteItemClickListener)
+			setupClickListeners(
+				item,
+				onItemLongClickListener,
+				onEditItemClickListener,
+				onDeleteItemClickListener
+			)
 			binding.executePendingBindings()
 		}
 
@@ -52,6 +59,7 @@ class MainNoteListAdapter(
 
 		private fun setupClickListeners(
 			item: MainNote,
+			onItemLongClickListener: ListItemClickListener<MainNote>?,
 			onEditItemClickListener: ListItemClickListener<MainNote>?,
 			onDeleteItemClickListener: ListItemClickListener<MainNote>?
 		) {
@@ -61,6 +69,11 @@ class MainNoteListAdapter(
 
 			binding.deleteNoteButton.setOnClickListener {
 				onDeleteItemClickListener?.onClick(item)
+			}
+
+			binding.noteView.setOnLongClickListener {
+				onItemLongClickListener?.onClick(item)
+				true
 			}
 		}
 	}

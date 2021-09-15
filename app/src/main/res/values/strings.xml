@@ -59,4 +59,5 @@
     <string name="clear_to_do_lists">Clear to-do lists</string>
     <string name="all_calendar_notes_will_be_cleared">All notes in the calendar will be cleared</string>
     <string name="all_to_do_lists_will_be_cleared">All to-do lists on the calendar will be cleared</string>
+    <string name="text_copied">Text copied</string>
 </resources>

@@ -81,6 +81,11 @@ class PostAddressesViewModel: BaseViewModel() {
         router.navigateTo(Screens.getAddEditPostAddressScreen())
     }
 
+    fun onPostAddressLongClick(address: PostAddress) {
+        copyToClipboard(address.toString())
+        showMessage(Text.TextResource(R.string.text_copied))
+    }
+
     fun onAddPostAddressClick() {
         editingAddress = null
         router.navigateTo(Screens.getAddEditPostAddressScreen())

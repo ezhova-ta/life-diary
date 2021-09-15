@@ -54,6 +54,7 @@ class ShoppingListFragment : BaseFragment() {
     private fun setupShoppingListRecycler() {
         val shoppingListAdapter = ShoppingListAdapter(
             ListItemClickListener { viewModel.onShoppingListItemClick(it) },
+            ListItemClickListener { viewModel.onShoppingListItemLongClick(it) },
             ListItemClickListener { viewModel.onHighPriorityShoppingListItemClick(it) },
             ListItemClickListener { viewModel.onDeleteShoppingListItemClick(it) }
         )

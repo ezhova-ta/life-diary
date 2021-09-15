@@ -86,6 +86,11 @@ class ShoppingListViewModel: BaseViewModel() {
         }
     }
 
+    fun onShoppingListItemLongClick(item: ShoppingListItem) {
+        copyToClipboard(item.text)
+        showMessage(Text.TextResource(R.string.text_copied))
+    }
+
     fun onHighPriorityShoppingListItemClick(item: ShoppingListItem) {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {

@@ -12,6 +12,7 @@ import com.example.lifediary.databinding.ShoppingListItemBinding
 
 class ShoppingListAdapter(
     private val onItemClickListener: ListItemClickListener<ShoppingListItem>? = null,
+    private val onItemLongClickListener: ListItemClickListener<ShoppingListItem>? = null,
     private val onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>? = null,
     private val onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>? = null
 ) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ViewHolder>(ShoppingListItemDiffCallBack()) {
@@ -24,6 +25,7 @@ class ShoppingListAdapter(
         holder.bind(
             item,
             onItemClickListener,
+            onItemLongClickListener,
             onHighPriorityClickListener,
             onDeleteItemClickListener
         )
@@ -47,13 +49,20 @@ class ShoppingListAdapter(
         fun bind(
             item: ShoppingListItem,
             onItemClickListener: ListItemClickListener<ShoppingListItem>?,
+            onItemLongClickListener: ListItemClickListener<ShoppingListItem>?,
             onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>?,
             onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
             binding.viewModel = ShoppingListItemViewModel(item)
             setupHighPriorityButton(item)
             setupCrossOutLine(item)
-            setClickListeners(item, onItemClickListener, onHighPriorityClickListener, onDeleteItemClickListener)
+            setClickListeners(
+                item,
+                onItemClickListener,
+                onItemLongClickListener,
+                onHighPriorityClickListener,
+                onDeleteItemClickListener
+            )
             binding.executePendingBindings()
         }
 
@@ -74,19 +83,17 @@ class ShoppingListAdapter(
         private fun setClickListeners(
             item: ShoppingListItem,
             onItemClickListener: ListItemClickListener<ShoppingListItem>?,
+            onItemLongClickListener: ListItemClickListener<ShoppingListItem>?,
             onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>?,
             onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>?
         ) {
-            binding.titleView.setOnClickListener {
-                onItemClickListener?.onClick(item)
-            }
+            binding.titleView.setOnClickListener { onItemClickListener?.onClick(item) }
+            binding.setHighPriorityButtonContainer.setOnClickListener { onHighPriorityClickListener?.onClick(item) }
+            binding.deleteButtonContainer.setOnClickListener { onDeleteItemClickListener?.onClick(item) }
 
-            binding.setHighPriorityButtonContainer.setOnClickListener {
-                onHighPriorityClickListener?.onClick(item)
-            }
-
-            binding.deleteButtonContainer.setOnClickListener {
-                onDeleteItemClickListener?.onClick(item)
+            binding.titleView.setOnLongClickListener {
+                onItemLongClickListener?.onClick(item)
+                true
             }
         }
     }

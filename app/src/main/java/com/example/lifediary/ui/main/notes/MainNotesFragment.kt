@@ -38,6 +38,7 @@ class MainNotesFragment : BaseFragment() {
 
     private fun setupNoteListView() {
         val mainNoteListAdapter = MainNoteListAdapter(
+            ListItemClickListener { viewModel.onNoteLongClick(it) },
             ListItemClickListener { viewModel.onEditNoteClick(it) },
             ListItemClickListener { viewModel.onDeleteNoteClick(it) }
         )
