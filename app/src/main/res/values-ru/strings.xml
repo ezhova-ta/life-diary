@@ -61,4 +61,5 @@
     <string name="all_to_do_lists_will_be_cleared">Все списки дел в календаре будут очищены</string>
     <string name="text_copied">Текст скопирован</string>
     <string name="memorable_dates">Памятные даты</string>
+    <string name="add_memorable_dates_title">Добавляйте памятные даты,\nчтобы никого не забыть поздравить</string>
 </resources>
