@@ -1,8 +1,6 @@
 package com.example.lifediary.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import com.example.lifediary.LifeDiaryApplication
 import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
@@ -29,6 +27,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(MainNotesDao::class.java).toProvider(MainNotesDaoProvider::class.java)
         bind(PostAddressDao::class.java).toProvider(PostAddressDaoProvider::class.java)
         bind(ToDoListDao::class.java).toProvider(ToDoListDaoProvider::class.java)
+        bind(MemorableDateDao::class.java).toProvider(MemorableDateDaoProvider::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())
