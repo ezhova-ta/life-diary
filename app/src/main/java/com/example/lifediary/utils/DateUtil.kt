@@ -6,6 +6,19 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
 
+const val DATE_FORMAT = "dd.MM.yyyy"
+const val DATE_TIME_FORMAT_WITH_MILLIS = "dd.MM.yyyy HH:mm:ss"
+const val DATE_TIME_FORMAT_WITHOUT_MILLIS = "dd.MM.yyyy HH:mm"
+
+const val MILLIS_IN_SECOND = 1000
+const val SECONDS_IN_MINUTE = 60
+const val MINUTES_IN_HOUR = 60
+const val HOURS_IN_DAY = 24
+const val DAYS_IN_WEEK = 7
+const val MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE
+const val MILLIS_IN_HOUR = MILLIS_IN_MINUTE * MINUTES_IN_HOUR
+const val MILLIS_IN_DAY = MILLIS_IN_HOUR * HOURS_IN_DAY
+
 fun Calendar.toLong(): Long {
     return timeInMillis
 }
@@ -17,14 +30,29 @@ fun Long.toCalendar(): Calendar {
 }
 
 fun Day.toDateString(): String {
-    val format = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+    val format = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
     return format.format(this.toCalendar().time)
 }
 
 fun Day.toDateTimeString(withMilliseconds: Boolean = false): String {
-    val pattern = if(withMilliseconds) "dd.MM.yyyy HH:mm:ss" else "dd.MM.yyyy HH:mm"
+    val pattern = if(withMilliseconds) DATE_TIME_FORMAT_WITH_MILLIS else DATE_TIME_FORMAT_WITHOUT_MILLIS
     val format = SimpleDateFormat(pattern, Locale.getDefault())
     return format.format(this.toCalendar().time)
+}
+
+fun getDaysBefore(day: Day): Int {
+    val millisecondsBefore = getMillisBefore(day)
+    return (millisecondsBefore / MILLIS_IN_DAY).toInt()
+}
+
+private fun getMillisBefore(day: Day): Long {
+    val time = day.toCalendar()
+    return getMillisBefore(time)
+}
+
+private fun getMillisBefore(time: Calendar): Long {
+    val now = Calendar.getInstance()
+    return time.timeInMillis - now.timeInMillis
 }
 
 private fun Day.toCalendar(): Calendar {
