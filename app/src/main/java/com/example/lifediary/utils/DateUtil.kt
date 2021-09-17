@@ -56,7 +56,7 @@ private fun Calendar.getMonthNumber(): Int {
     return get(Calendar.MONTH) + 1
 }
 
-fun CalendarDay.toDomainDay(): Day {
+fun CalendarDay.toDomain(): Day {
     return Day(date.dayOfMonth, date.monthValue, date.year)
 }
 

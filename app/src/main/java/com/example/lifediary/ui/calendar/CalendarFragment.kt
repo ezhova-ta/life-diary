@@ -14,7 +14,7 @@ import com.example.lifediary.ui.common.CalendarMonthViewContainer
 import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.isSameDay
 import com.example.lifediary.utils.isToday
-import com.example.lifediary.utils.toDomainDay
+import com.example.lifediary.utils.toDomain
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -91,7 +91,7 @@ class CalendarFragment : BaseFragment() {
             container.day = day
             container.dayTextView.text = day.getDayNumber()
             container.dayTextView.setTextColor(day.getTextColor())
-            container.setOnClickListener { viewModel.onDateClick(it.toDomainDay()) }
+            container.setOnClickListener { viewModel.onDateClick(it.toDomain()) }
 
             if(day.isToday()) {
                 container.setSelectedStyle()
