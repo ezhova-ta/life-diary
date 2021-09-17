@@ -1,12 +1,14 @@
 package com.example.lifediary.data.db
 
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.data.db.entities.*
 
 @Database(
-    version = 11,
+    version = 12,
+    exportSchema = true,
     entities = [
         ShoppingListItemEntity::class,
         LocationEntity::class,
@@ -16,6 +18,9 @@ import com.example.lifediary.data.db.entities.*
         MainNoteEntity::class,
         ToDoListItemEntity::class,
         MemorableDateEntity::class
+    ],
+    autoMigrations = [
+        AutoMigration(from = 11, to = 12)
     ]
 )
 abstract class MainDataBase : RoomDatabase() {

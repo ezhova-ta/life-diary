@@ -63,4 +63,5 @@
     <string name="text_copied">Text copied</string>
     <string name="memorable_dates">Memorable dates</string>
     <string name="add_memorable_dates_title">Add memorable dates so you don\'t\nforget to congratulate anyone</string>
+    <string name="today">today</string>
 </resources>

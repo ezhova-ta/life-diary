@@ -3,6 +3,7 @@ package com.example.lifediary.utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.db.entities.DbEntity
+import com.example.lifediary.data.domain.MemorableDate
 
 fun Int.createStringWithPlusOrMinusSign(): String {
 	if(this < 0) return toString()
@@ -20,4 +21,22 @@ fun <T : DbEntity<R>, R> LiveData<List<T>>.toDomain(): LiveData<List<R>> {
 fun List<String>.isAllItemsBlank(): Boolean {
 	forEach { if(it.isNotBlank()) return false }
 	return true
+}
+
+fun List<MemorableDate>.sortBasedToday(): List<MemorableDate> {
+	if(isEmpty()) return this
+
+	val nearestDateInThisMonth = find { it.monthNumber == getNowMonthNumber() && it.dayNumber >= getNowDayNumber() }
+	nearestDateInThisMonth?.let { return splitAndSwap(indexOf(it)) }
+
+	val nearestDate = find { it.monthNumber > getNowMonthNumber() }
+	nearestDate?.let { return splitAndSwap(indexOf(it)) }
+
+	return this
+}
+
+private fun <T> List<T>.splitAndSwap(splitIndex: Int): List<T> {
+	val head = this.subList(0, splitIndex)
+	val tail = this.subList(splitIndex, lastIndex + 1)
+	return tail.plus(head)
 }

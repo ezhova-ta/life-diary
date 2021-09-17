@@ -48,7 +48,7 @@
                 toos:text="04.05.1964" />
 
             <TextView
-                android:id="@+id/timeLeftView"
+                android:id="@+id/todayTitleView"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,9 +58,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="8dp"
                 android:textSize="14sp"
-                android:textColor="@color/app_medium_gray"
-                toos:text="через 4 дн."
-                android:visibility="gone" />
+                android:textColor="@color/app_orange"
+                android:text="@string/today"
+                app:booleanVisibility="@{viewModel.isTodayTitleVisible}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

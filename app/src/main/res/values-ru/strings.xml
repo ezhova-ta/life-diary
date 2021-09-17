@@ -62,4 +62,5 @@
     <string name="text_copied">Текст скопирован</string>
     <string name="memorable_dates">Памятные даты</string>
     <string name="add_memorable_dates_title">Добавляйте памятные даты,\nчтобы никого не забыть поздравить</string>
+    <string name="today">сегодня</string>
 </resources>

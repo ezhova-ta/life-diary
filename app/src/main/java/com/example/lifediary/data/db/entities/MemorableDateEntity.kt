@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.utils.Day
 
 @Entity(tableName = "memorable_date")
 data class MemorableDateEntity(
@@ -15,16 +14,16 @@ data class MemorableDateEntity(
     val dayNumber: Int,
     @ColumnInfo(name = "month")
     val monthNumber: Int,
-    val year: Int
+    val year: Int?
 ) : DbEntity<MemorableDate>() {
     companion object {
         fun fromDomain(date: MemorableDate): MemorableDateEntity {
             return MemorableDateEntity(
                 id = date.id,
                 name = date.name,
-                dayNumber = date.day.dayNumber,
-                monthNumber = date.day.monthNumber,
-                year = date.day.year
+                dayNumber = date.dayNumber,
+                monthNumber = date.monthNumber,
+                year = date.year
             )
         }
     }
@@ -33,7 +32,9 @@ data class MemorableDateEntity(
         return MemorableDate(
             id = id,
             name = name,
-            day = Day(dayNumber, monthNumber, year)
+            dayNumber = dayNumber,
+            monthNumber = monthNumber,
+            year = year
         )
     }
 }

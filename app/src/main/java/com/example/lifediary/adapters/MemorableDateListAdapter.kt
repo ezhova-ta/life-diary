@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.databinding.MemorableDateListItemBinding
+import com.example.lifediary.utils.getDateString
+import com.example.lifediary.utils.isToday
 import com.example.lifediary.utils.toDateString
 
 class MemorableDateListAdapter(
@@ -24,7 +26,8 @@ class MemorableDateListAdapter(
     }
 
     class MemorableDateListItemViewModel(val memorableDateListItem: MemorableDate) {
-        val dateString = memorableDateListItem.day.toDateString()
+        val dateString = memorableDateListItem.let { getDateString(it.dayNumber, it.monthNumber, it.year) }
+        val isTodayTitleVisible = memorableDateListItem.isToday()
     }
 
     class ViewHolder private constructor(

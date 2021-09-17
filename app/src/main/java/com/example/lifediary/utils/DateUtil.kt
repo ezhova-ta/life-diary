@@ -1,23 +1,16 @@
 package com.example.lifediary.utils
 
+import com.example.lifediary.data.domain.MemorableDate
 import com.kizitonwose.calendarview.model.CalendarDay
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
 
-const val DATE_FORMAT = "dd.MM.yyyy"
+const val DATE_FORMAT_WITH_YEAR = "dd.MM.yyyy"
+const val DATE_FORMAT_WITHOUT_YEAR = "dd.MM"
 const val DATE_TIME_FORMAT_WITH_MILLIS = "dd.MM.yyyy HH:mm:ss"
 const val DATE_TIME_FORMAT_WITHOUT_MILLIS = "dd.MM.yyyy HH:mm"
-
-const val MILLIS_IN_SECOND = 1000
-const val SECONDS_IN_MINUTE = 60
-const val MINUTES_IN_HOUR = 60
-const val HOURS_IN_DAY = 24
-const val DAYS_IN_WEEK = 7
-const val MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE
-const val MILLIS_IN_HOUR = MILLIS_IN_MINUTE * MINUTES_IN_HOUR
-const val MILLIS_IN_DAY = MILLIS_IN_HOUR * HOURS_IN_DAY
 
 fun Calendar.toLong(): Long {
     return timeInMillis
@@ -29,8 +22,12 @@ fun Long.toCalendar(): Calendar {
     return calendar
 }
 
-fun Day.toDateString(): String {
-    val format = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+fun Day.toDateString(withYear: Boolean = true): String {
+    val format = if(withYear) {
+        SimpleDateFormat(DATE_FORMAT_WITH_YEAR, Locale.getDefault())
+    } else {
+        SimpleDateFormat(DATE_FORMAT_WITHOUT_YEAR, Locale.getDefault())
+    }
     return format.format(this.toCalendar().time)
 }
 
@@ -40,22 +37,18 @@ fun Day.toDateTimeString(withMilliseconds: Boolean = false): String {
     return format.format(this.toCalendar().time)
 }
 
-fun getDaysBefore(day: Day): Int {
-    val millisecondsBefore = getMillisBefore(day)
-    return (millisecondsBefore / MILLIS_IN_DAY).toInt()
+fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {
+    return if(year == null) {
+        val thisYear = Calendar.getInstance().get(Calendar.YEAR)
+        val day = Day(dayNumber, monthNumber, thisYear)
+        day.toDateString(false)
+    } else {
+        val day = Day(dayNumber, monthNumber, year)
+        day.toDateString()
+    }
 }
 
-private fun getMillisBefore(day: Day): Long {
-    val time = day.toCalendar()
-    return getMillisBefore(time)
-}
-
-private fun getMillisBefore(time: Calendar): Long {
-    val now = Calendar.getInstance()
-    return time.timeInMillis - now.timeInMillis
-}
-
-private fun Day.toCalendar(): Calendar {
+fun Day.toCalendar(): Calendar {
     return Calendar.getInstance().apply {
         set(Calendar.DATE, dayNumber)
         set(Calendar.MONTH, monthNumber - 1)
@@ -91,4 +84,18 @@ fun CalendarDay.toDomain(): Day {
 fun CalendarDay.isToday(): Boolean {
     val today = LocalDate.now(ZoneId.systemDefault())
     return date.isEqual(today)
+}
+
+fun MemorableDate.isToday(): Boolean {
+    val nowDayNumber = getNowDayNumber()
+    val nowMonthNumber = getNowMonthNumber()
+    return dayNumber == nowDayNumber && monthNumber == nowMonthNumber
+}
+
+fun getNowDayNumber(): Int {
+    return Calendar.getInstance().get(Calendar.DATE)
+}
+
+fun getNowMonthNumber(): Int {
+    return Calendar.getInstance().get(Calendar.MONTH) + 1
 }

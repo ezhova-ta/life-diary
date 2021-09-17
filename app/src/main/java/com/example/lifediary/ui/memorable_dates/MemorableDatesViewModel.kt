@@ -6,19 +6,20 @@ import com.example.lifediary.R
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.repositories.MemorableDatesRepository
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.Text
+import com.example.lifediary.utils.sortBasedToday
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 class MemorableDatesViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var memorableDatesRepository: MemorableDatesRepository
-    val dates: LiveData<List<MemorableDate>> by lazy { memorableDatesRepository.getDates() }
+    val dates: LiveData<List<MemorableDate>> by lazy {
+        memorableDatesRepository.getDates().map { it.sortBasedToday() }
+    }
     val isDatesVisible: LiveData<Boolean> by lazy { dates.map { it.isNotEmpty() } }
 
     init {
