@@ -32,6 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{viewModel.memorableDateListItem.name}"
                 toos:text="День рождения маман" />
 
             <TextView
@@ -43,6 +44,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="14sp"
                 android:textColor="@color/app_green"
+                android:text="@{viewModel.dateString}"
                 toos:text="04.05.1964" />
 
             <TextView
@@ -57,7 +59,8 @@
                 android:layout_marginStart="8dp"
                 android:textSize="14sp"
                 android:textColor="@color/app_medium_gray"
-                toos:text="через 4 дн." />
+                toos:text="через 4 дн."
+                android:visibility="gone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
