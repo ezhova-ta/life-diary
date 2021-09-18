@@ -40,8 +40,12 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
         }
     }
 
+    fun onDayNumberSelected(dayNumber: Int) {
+        // TODO
+    }
+
     fun onMonthSelected(month: MonthDropDownItem) {
-        TODO()
+        // TODO
     }
 
     fun onSaveDateClick() {

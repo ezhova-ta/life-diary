@@ -18,8 +18,8 @@ enum class MonthDropDownItem(val number: Int, val text: Text) {
 	DECEMBER(12, Text.TextResource(R.string.december));
 
 	companion object {
-		fun getAll(): Array<MonthDropDownItem> {
-			return arrayOf(
+		private val allElements: List<MonthDropDownItem> by lazy {
+			listOf(
 				JANUARY,
 				FEBRUARY,
 				MARCH,
@@ -36,15 +36,27 @@ enum class MonthDropDownItem(val number: Int, val text: Text) {
 		}
 
 		fun getAllStrings(context: Context): List<String> {
-			return getAll().map { it.text.getText(context) }
+			return allElements.map { it.text.getText(context) }
 		}
 
 		fun getFromPosition(position: Int): MonthDropDownItem? {
 			return try {
-				getAll()[position]
+				allElements[position]
 			} catch(e: IndexOutOfBoundsException) {
 				null
 			}
+		}
+	}
+}
+
+object DayNumberDropDownItem {
+	val allElements: List<Int> by lazy { (1..31).toList() }
+
+	fun getFromPosition(position: Int): Int? {
+		return try {
+			allElements[position]
+		} catch(e: IndexOutOfBoundsException) {
+			null
 		}
 	}
 }

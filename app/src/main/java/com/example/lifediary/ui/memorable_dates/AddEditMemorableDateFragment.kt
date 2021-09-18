@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentAddEditMemorableDateBinding
 import com.example.lifediary.ui.BaseFragment
+import com.example.lifediary.utils.DayNumberDropDownItem
 import com.example.lifediary.utils.MonthDropDownItem
 
 class AddEditMemorableDateFragment : BaseFragment() {
@@ -45,8 +46,27 @@ class AddEditMemorableDateFragment : BaseFragment() {
 		_binding = FragmentAddEditMemorableDateBinding.inflate(inflater, container, false)
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
+		setupDayNumberDropDown()
 		setupMonthDropDown()
 		return binding.root
+	}
+
+	private fun setupDayNumberDropDown() {
+		val adapter = ArrayAdapter(
+			requireContext(),
+			R.layout.day_number_spinner_item,
+			DayNumberDropDownItem.allElements
+		)
+		binding.dayNumberDropDown.adapter = adapter
+
+		binding.dayNumberDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+			override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+				val dayNumber = DayNumberDropDownItem.getFromPosition(position) ?: return
+				viewModel.onDayNumberSelected(dayNumber)
+			}
+
+			override fun onNothingSelected(parent: AdapterView<*>?) {}
+		}
 	}
 
 	private fun setupMonthDropDown() {
@@ -55,7 +75,6 @@ class AddEditMemorableDateFragment : BaseFragment() {
 			R.layout.month_spinner_item,
 			MonthDropDownItem.getAllStrings(requireContext())
 		)
-		adapter.setDropDownViewResource(R.layout.month_spinner_item)
 		binding.monthDropDown.adapter = adapter
 
 		binding.monthDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

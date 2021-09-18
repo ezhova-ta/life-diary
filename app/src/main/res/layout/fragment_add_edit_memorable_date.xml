@@ -22,15 +22,27 @@
             android:singleLine="true"
             android:hint="@string/what_happened_that_day"
             android:text="@={viewModel.dateName}" />
-        
+
         <Spinner
-            android:id="@+id/monthDropDown"
+            android:id="@+id/dayNumberDropDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/nameInput"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:background="@drawable/background_substrate_light_gray" />
+        
+        <Spinner
+            android:id="@+id/monthDropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/dayNumberDropDown"
+            app:layout_constraintBottom_toBottomOf="@id/dayNumberDropDown"
+            app:layout_constraintStart_toEndOf="@id/dayNumberDropDown"
+            android:layout_marginStart="8dp"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/background_substrate_light_gray" />
 
         <ImageButton
             android:id="@+id/addDateButton"

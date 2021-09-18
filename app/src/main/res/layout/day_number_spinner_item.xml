@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:textAlignment="viewStart" />
+    android:paddingStart="28dp"
+    android:paddingEnd="28dp"
+    android:textAlignment="center" />
