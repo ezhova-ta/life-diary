@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.R
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.MemorableDateListAdapter
 import com.example.lifediary.databinding.FragmentMemorableDatesBinding
@@ -31,6 +32,7 @@ class MemorableDatesFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupMemorableDateListView()
+        setupClearNoteListConfirmationDialog()
         return binding.root
     }
 
@@ -44,6 +46,22 @@ class MemorableDatesFragment : BaseFragment() {
         viewModel.dates.observe(viewLifecycleOwner) { dateList ->
             memorableDateListAdapter.submitList(dateList)
         }
+    }
+
+    private fun setupClearNoteListConfirmationDialog() {
+        viewModel.showClearDateListConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showClearDateListConfirmationDialog()
+        }
+    }
+
+    private fun showClearDateListConfirmationDialog() {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.clear_memorable_dates_confirmation,
+            positiveButtonTextRes = R.string.delete,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onClearDateListConfirmed,
+            onCancelled = viewModel::onClearDateListCancelled
+        )
     }
 
     override fun onDestroyView() {
