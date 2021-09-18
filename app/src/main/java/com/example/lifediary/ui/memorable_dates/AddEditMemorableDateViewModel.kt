@@ -20,6 +20,7 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
     @Inject lateinit var memorableDatesRepository: MemorableDatesRepository
     val isAddButtonVisible = dateId == null
     val dateName = MutableLiveData("")
+    val year = MutableLiveData("")
     var existingDate: MemorableDate? = null
 
     init {

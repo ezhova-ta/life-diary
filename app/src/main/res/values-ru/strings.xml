@@ -63,7 +63,6 @@
     <string name="memorable_dates">Памятные даты</string>
     <string name="add_memorable_dates_title">Добавляйте памятные даты,\nчтобы никого не забыть поздравить</string>
     <string name="today">сегодня</string>
-    <string name="what_happened_that_day">Что произошло в этот день?</string>
     <string name="january">Январь</string>
     <string name="february">Февраль</string>
     <string name="march">Март</string>
@@ -76,4 +75,7 @@
     <string name="october">Октябрь</string>
     <string name="november">Ноябрь</string>
     <string name="december">Декабрь</string>
+    <string name="what_happened_that_day">Что произошло в этот день?</string>
+    <string name="year">Год</string>
+    <string name="year_is_optional">(указывать год необязательно)</string>
 </resources>

@@ -26,29 +26,55 @@
         <Spinner
             android:id="@+id/dayNumberDropDown"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/nameInput"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/yearInput"
+            app:layout_constraintBottom_toBottomOf="@id/yearInput"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
             android:spinnerMode="dropdown"
             android:background="@drawable/background_substrate_light_gray" />
         
         <Spinner
             android:id="@+id/monthDropDown"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/dayNumberDropDown"
-            app:layout_constraintBottom_toBottomOf="@id/dayNumberDropDown"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/yearInput"
+            app:layout_constraintBottom_toBottomOf="@id/yearInput"
             app:layout_constraintStart_toEndOf="@id/dayNumberDropDown"
             android:layout_marginStart="8dp"
             android:spinnerMode="dropdown"
             android:background="@drawable/background_substrate_light_gray" />
 
+        <EditText
+            android:id="@+id/yearInput"
+            style="@style/Input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nameInput"
+            app:layout_constraintStart_toEndOf="@id/monthDropDown"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:maxLength="4"
+            android:hint="@string/year"
+            android:text="@={viewModel.year}" />
+
+        <TextView
+            android:id="@+id/yearInputHint"
+            style="@style/Text.InputHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/yearInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:text="@string/year_is_optional" />
+
         <ImageButton
             android:id="@+id/addDateButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@id/monthDropDown"
+            app:layout_constraintTop_toBottomOf="@id/yearInputHint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
@@ -60,7 +86,7 @@
             android:id="@+id/saveDateButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@id/monthDropDown"
+            app:layout_constraintTop_toBottomOf="@id/yearInputHint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
