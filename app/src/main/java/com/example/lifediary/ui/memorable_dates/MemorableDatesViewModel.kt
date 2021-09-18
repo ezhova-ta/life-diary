@@ -65,7 +65,15 @@ class MemorableDatesViewModel : BaseViewModel() {
     }
 
     fun onDeleteDateClick(date: MemorableDate) {
-        TODO()
+        val dateId = date.id ?: return
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                memorableDatesRepository.deleteDate(dateId)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.deleting_item_error))
+            }
+        }
     }
 
     fun onDateLongClick(date: MemorableDate) {
