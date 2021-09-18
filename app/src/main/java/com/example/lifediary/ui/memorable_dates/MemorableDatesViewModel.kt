@@ -77,6 +77,7 @@ class MemorableDatesViewModel : BaseViewModel() {
     }
 
     fun onDateLongClick(date: MemorableDate) {
-        TODO()
+        copyToClipboard(date.name)
+        showMessage(Text.TextResource(R.string.text_copied))
     }
 }
