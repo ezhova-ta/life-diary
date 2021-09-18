@@ -1,16 +1,15 @@
 package com.example.lifediary.ui.memorable_dates
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.repositories.MemorableDatesRepository
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.DayNumberDropDownItem
 import com.example.lifediary.utils.MonthDropDownItem
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,8 +19,16 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
     @Inject lateinit var memorableDatesRepository: MemorableDatesRepository
     val isAddButtonVisible = dateId == null
     val dateName = MutableLiveData("")
+    private var dayNumber: Int = DayNumberDropDownItem.allElements.first()
+    private var month: MonthDropDownItem = MonthDropDownItem.JANUARY
     val year = MutableLiveData("")
-    var existingDate: MemorableDate? = null
+    private var existingDate: MemorableDate? = null
+
+    private val _existingDateDayNumber = MutableLiveData<Int>()
+    val existingDateDayNumber: LiveData<Int> get() = _existingDateDayNumber
+
+    private val _existingDateMonthNumber = MutableLiveData<Int>()
+    val existingDateMonthNumber: LiveData<Int> get() = _existingDateMonthNumber
 
     init {
         bindAppScope()
@@ -34,7 +41,11 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 existingDate = memorableDatesRepository.getDate(dateId)
-                existingDate?.name?.let { dateName.postValue(it) }
+                existingDate?.let {
+                    dateName.postValue(it.name)
+                    _existingDateDayNumber.postValue(it.dayNumber)
+                    _existingDateMonthNumber.postValue(it.monthNumber)
+                }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
@@ -42,15 +53,49 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
     }
 
     fun onDayNumberSelected(dayNumber: Int) {
-        // TODO
+        this.dayNumber = dayNumber
     }
 
     fun onMonthSelected(month: MonthDropDownItem) {
-        // TODO
+        this.month = month
     }
 
     fun onSaveDateClick() {
-        TODO()
+        val name = dateName.value?.trim()
+        if(name.isNullOrBlank()) return
+
+        // TODO Error message for user (year should be number)
+        val year = try {
+            this.year.value?.trim()?.toInt()
+        } catch(e: NumberFormatException) {
+            null
+        }
+
+        saveDate(name, dayNumber, month.number, year)
+    }
+
+    private fun saveDate(name: String, dayNumber: Int, monthNumber: Int, year: Int?) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val date = existingDate
+
+                if(date == null) {
+                    memorableDatesRepository.addDate(MemorableDate(
+                        name = name, dayNumber = dayNumber, monthNumber = monthNumber, year = year
+                    ))
+                } else {
+                    date.name = name
+                    date.dayNumber = dayNumber
+                    date.monthNumber = monthNumber
+                    date.year = year
+                    memorableDatesRepository.updateDate(date)
+                }
+
+                router.exit()
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.failed_to_save))
+            }
+        }
     }
 
     class Factory(private val dateId: Long?) : ViewModelProvider.Factory {

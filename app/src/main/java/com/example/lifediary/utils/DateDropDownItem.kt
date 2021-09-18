@@ -39,12 +39,13 @@ enum class MonthDropDownItem(val number: Int, val text: Text) {
 			return allElements.map { it.text.getText(context) }
 		}
 
-		fun getFromPosition(position: Int): MonthDropDownItem? {
-			return try {
-				allElements[position]
-			} catch(e: IndexOutOfBoundsException) {
-				null
-			}
+		fun getFromPosition(position: Int): MonthDropDownItem {
+			return allElements[position]
+		}
+
+		fun getPositionFromNumber(number: Int): Int {
+			val element = allElements.find { it.number == number } ?: return 0
+			return allElements.indexOf(element)
 		}
 	}
 }
@@ -52,11 +53,11 @@ enum class MonthDropDownItem(val number: Int, val text: Text) {
 object DayNumberDropDownItem {
 	val allElements: List<Int> by lazy { (1..31).toList() }
 
-	fun getFromPosition(position: Int): Int? {
-		return try {
-			allElements[position]
-		} catch(e: IndexOutOfBoundsException) {
-			null
-		}
+	fun getFromPosition(position: Int): Int {
+		return allElements[position]
+	}
+
+	fun getPosition(element: Int): Int {
+		return allElements.indexOf(element)
 	}
 }

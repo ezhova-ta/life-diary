@@ -61,11 +61,16 @@ class AddEditMemorableDateFragment : BaseFragment() {
 
 		binding.dayNumberDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 			override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-				val dayNumber = DayNumberDropDownItem.getFromPosition(position) ?: return
+				val dayNumber = DayNumberDropDownItem.getFromPosition(position)
 				viewModel.onDayNumberSelected(dayNumber)
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
+		}
+
+		viewModel.existingDateDayNumber.observe(viewLifecycleOwner) { dayNumber ->
+			val position = DayNumberDropDownItem.getPosition(dayNumber)
+			binding.dayNumberDropDown.setSelection(position)
 		}
 	}
 
@@ -79,11 +84,16 @@ class AddEditMemorableDateFragment : BaseFragment() {
 
 		binding.monthDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 			override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-				val month = MonthDropDownItem.getFromPosition(position) ?: return
+				val month = MonthDropDownItem.getFromPosition(position)
 				viewModel.onMonthSelected(month)
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
+		}
+
+		viewModel.existingDateMonthNumber.observe(viewLifecycleOwner) { monthNumber ->
+			val position = MonthDropDownItem.getPositionFromNumber(monthNumber)
+			binding.monthDropDown.setSelection(position)
 		}
 	}
  }
