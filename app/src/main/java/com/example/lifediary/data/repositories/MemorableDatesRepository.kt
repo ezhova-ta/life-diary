@@ -3,6 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.MemorableDatesLocalDataSource
 import com.example.lifediary.data.domain.MemorableDate
+import com.example.lifediary.utils.Day
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,6 +13,10 @@ class MemorableDatesRepository @Inject constructor(
 ) {
     fun getDates(): LiveData<List<MemorableDate>> {
         return localDataSource.getDates()
+    }
+
+    fun getDates(day: Day): LiveData<List<MemorableDate>> {
+        return localDataSource.getDates(day)
     }
 
     suspend fun getDate(id: Long): MemorableDate? {

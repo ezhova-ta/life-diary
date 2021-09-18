@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
+import com.example.lifediary.adapters.CalendarEventListAdapter
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ToDoListAdapter
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
@@ -46,6 +47,7 @@ class CalendarDateFragment : BaseFragment() {
         binding.viewModel = viewModel
         setupNoteView()
         setupToDoListView()
+        setupEventListView()
         setupAddToDoListItemInputView()
         setupClearToDOListConfirmationDialog()
         return binding.root
@@ -68,6 +70,14 @@ class CalendarDateFragment : BaseFragment() {
         binding.toDoListView.adapter = toDoListAdapter
         viewModel.toDoList.observe(viewLifecycleOwner) { toDoList ->
             toDoListAdapter.submitList(toDoList)
+        }
+    }
+
+    private fun setupEventListView() {
+        val calendarEventListAdapter = CalendarEventListAdapter()
+        binding.eventListView.adapter = calendarEventListAdapter
+        viewModel.memorableDates.observe(viewLifecycleOwner) { dateList ->
+            calendarEventListAdapter.submitList(dateList)
         }
     }
 

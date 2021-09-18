@@ -3,9 +3,11 @@ package com.example.lifediary.ui.calendar.date
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.DateNote
+import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.WeatherForecast
 import com.example.lifediary.data.repositories.DateNoteRepository
+import com.example.lifediary.data.repositories.MemorableDatesRepository
 import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
@@ -25,6 +27,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var weatherRepository: WeatherRepository
 	@Inject lateinit var noteRepository: DateNoteRepository
 	@Inject lateinit var toDoListRepository: ToDoListRepository
+	@Inject lateinit var memorableDatesRepository: MemorableDatesRepository
 	val title = day.toDateString()
 	val toDoList: LiveData<List<ToDoListItem>> by lazy { toDoListRepository.getToDoList(day) }
 	val isToDoListVisible: LiveData<Boolean> by lazy { toDoList.map { it.isNotEmpty() } }
@@ -32,6 +35,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val noteText: LiveData<String?> by lazy { note.map { it?.text } }
 	val isNoteVisible: LiveData<Boolean> by lazy { note.map { it != null } }
 	val newToDoListItemText = MutableLiveData("")
+	val memorableDates: LiveData<List<MemorableDate>> by lazy { memorableDatesRepository.getDates(day) }
+	val isMemorableDatesVisible: LiveData<Boolean> by lazy { memorableDates.map { it.isNotEmpty() } }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->

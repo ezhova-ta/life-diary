@@ -9,6 +9,9 @@ interface MemorableDateDao {
     @Query("SELECT * FROM memorable_date ORDER BY month ASC, day ASC, year DESC")
     fun getAll(): LiveData<List<MemorableDateEntity>>
 
+    @Query("SELECT * FROM memorable_date WHERE day = :dayNumber AND month = :monthNumber ORDER BY month ASC, day ASC, year DESC")
+    fun getAll(dayNumber: Int, monthNumber: Int): LiveData<List<MemorableDateEntity>>
+
     @Query("SELECT * FROM memorable_date WHERE id = :id")
     suspend fun get(id: Long): MemorableDateEntity?
 
