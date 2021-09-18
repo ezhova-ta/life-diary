@@ -61,7 +61,8 @@ class MemorableDatesViewModel : BaseViewModel() {
     }
 
     fun onEditDateClick(date: MemorableDate) {
-        TODO()
+        val dateId = date.id ?: return
+        router.navigateTo(Screens.getAddEditMemorableDateFragment(dateId))
     }
 
     fun onDeleteDateClick(date: MemorableDate) {

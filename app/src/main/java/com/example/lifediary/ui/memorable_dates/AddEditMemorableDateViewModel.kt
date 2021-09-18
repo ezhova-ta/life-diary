@@ -45,6 +45,7 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
                     dateName.postValue(it.name)
                     _existingDateDayNumber.postValue(it.dayNumber)
                     _existingDateMonthNumber.postValue(it.monthNumber)
+                    year.postValue(it.year?.toString() ?: "")
                 }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
