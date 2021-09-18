@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentAddEditMemorableDateBinding
 import com.example.lifediary.ui.BaseFragment
+import com.example.lifediary.utils.MonthDropDownItem
 
 class AddEditMemorableDateFragment : BaseFragment() {
 	override val viewModel: AddEditMemorableDateViewModel by viewModels(
@@ -41,6 +45,26 @@ class AddEditMemorableDateFragment : BaseFragment() {
 		_binding = FragmentAddEditMemorableDateBinding.inflate(inflater, container, false)
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
+		setupMonthDropDown()
 		return binding.root
+	}
+
+	private fun setupMonthDropDown() {
+		val adapter = ArrayAdapter(
+			requireContext(),
+			R.layout.month_spinner_item,
+			MonthDropDownItem.getAllStrings(requireContext())
+		)
+		adapter.setDropDownViewResource(R.layout.month_spinner_item)
+		binding.monthDropDown.adapter = adapter
+
+		binding.monthDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+			override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+				val month = MonthDropDownItem.getFromPosition(position) ?: return
+				viewModel.onMonthSelected(month)
+			}
+
+			override fun onNothingSelected(parent: AdapterView<*>?) {}
+		}
 	}
  }
