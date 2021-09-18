@@ -48,7 +48,7 @@
 
             <ImageView
                 style="@style/ExplanatoryMessageIcon"
-                android:src="@drawable/icon_gift_gray" />
+                android:src="@drawable/icon_gift_blue" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
