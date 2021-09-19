@@ -6,7 +6,7 @@ import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.utils.Day
 import java.util.*
 
-@Entity(tableName = "to_do_list", indices = [Index(value = ["text"], unique = true)])
+@Entity(tableName = "to_do_list")
 @TypeConverters(CalendarConverter::class)
 data class ToDoListItemEntity(
     @PrimaryKey

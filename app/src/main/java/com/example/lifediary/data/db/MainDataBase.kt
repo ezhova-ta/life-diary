@@ -7,7 +7,7 @@ import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.data.db.entities.*
 
 @Database(
-    version = 12,
+    version = 13,
     exportSchema = true,
     entities = [
         ShoppingListItemEntity::class,
@@ -20,7 +20,8 @@ import com.example.lifediary.data.db.entities.*
         MemorableDateEntity::class
     ],
     autoMigrations = [
-        AutoMigration(from = 11, to = 12)
+        AutoMigration(from = 11, to = 12),
+        AutoMigration(from = 12, to = 13)
     ]
 )
 abstract class MainDataBase : RoomDatabase() {
