@@ -60,6 +60,6 @@ class RollOutTextPanel(context: Context, attrs: AttributeSet) : FrameLayout(cont
     }
 
     override fun setOnLongClickListener(l: OnLongClickListener?) {
-        binding.textView.setOnLongClickListener(l)
+        binding.container.setOnLongClickListener(l)
     }
 }
