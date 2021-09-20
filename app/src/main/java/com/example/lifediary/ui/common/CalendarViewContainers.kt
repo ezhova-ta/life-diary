@@ -36,8 +36,16 @@ class CalendarDayViewContainer(view: View) : ViewContainer(view) {
         binding.noteIcon.visibility = View.VISIBLE
     }
 
+    fun showEventIcon() {
+        binding.eventIcon.visibility = View.VISIBLE
+    }
+
     fun hideNoteIcon() {
         binding.noteIcon.visibility = View.INVISIBLE
+    }
+
+    fun hideEventIcon() {
+        binding.eventIcon.visibility = View.INVISIBLE
     }
 }
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
+import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
@@ -30,6 +31,7 @@ class CalendarFragment : BaseFragment() {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
     private var daysWithNotesOrToDoList = listOf<Day>()
+    private var memorableDates = listOf<MemorableDate>()
 
     companion object {
         fun getInstance(): Fragment {
@@ -59,6 +61,7 @@ class CalendarFragment : BaseFragment() {
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
         binding.calendarView.scrollToMonth(currentMonth) // TODO Execute only once
         setupDisplayingNoteIconsInCalendar()
+        setupDisplayingEventIconsInCalendar()
     }
 
     private fun getDaysOfWeek(): Array<DayOfWeek> {
@@ -84,6 +87,13 @@ class CalendarFragment : BaseFragment() {
         }
     }
 
+    private fun setupDisplayingEventIconsInCalendar() {
+        viewModel.memorableDates.observe(viewLifecycleOwner) { dates ->
+            memorableDates = dates
+            binding.calendarView.notifyCalendarChanged()
+        }
+    }
+
     private fun createCalendarDayBinder() = object : DayBinder<CalendarDayViewContainer> {
         override fun create(view: View) = CalendarDayViewContainer(view)
 
@@ -104,10 +114,20 @@ class CalendarFragment : BaseFragment() {
             } else {
                 container.hideNoteIcon()
             }
+
+            if(isMemorableDatesExistFor(day)) {
+                container.showEventIcon()
+            } else {
+                container.hideEventIcon()
+            }
         }
 
         private fun isNoteOrToDoListExistsFor(day: CalendarDay): Boolean {
             return daysWithNotesOrToDoList.find { it.isSameDay(day) } != null
+        }
+
+        private fun isMemorableDatesExistFor(day: CalendarDay): Boolean {
+            return memorableDates.find { day.isSameDay(it) } != null
         }
     }
 

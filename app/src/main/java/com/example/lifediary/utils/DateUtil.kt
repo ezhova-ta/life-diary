@@ -86,6 +86,10 @@ fun CalendarDay.isToday(): Boolean {
     return date.isEqual(today)
 }
 
+fun CalendarDay.isSameDay(memorableDate: MemorableDate): Boolean {
+    return date.dayOfMonth == memorableDate.dayNumber && date.monthValue == memorableDate.monthNumber
+}
+
 fun MemorableDate.isToday(): Boolean {
     val nowDayNumber = getNowDayNumber()
     val nowMonthNumber = getNowMonthNumber()

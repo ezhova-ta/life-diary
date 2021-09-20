@@ -3,10 +3,13 @@ package com.example.lifediary.ui.calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.map
+import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.repositories.DateNoteRepository
+import com.example.lifediary.data.repositories.MemorableDatesRepository
 import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.CalendarEvent
 import com.example.lifediary.utils.Day
 import com.github.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -15,7 +18,9 @@ class CalendarViewModel : BaseViewModel() {
 	@Inject lateinit var router: Router
 	@Inject lateinit var noteRepository: DateNoteRepository
 	@Inject lateinit var doToDoListRepository: ToDoListRepository
+	@Inject lateinit var memorableDatesRepository: MemorableDatesRepository
 	val daysWithNotesOrToDoList = MediatorLiveData<List<Day>>()
+	val memorableDates: LiveData<List<MemorableDate>> by lazy { memorableDatesRepository.getDates() }
 
 	init {
 		bindAppScope()
