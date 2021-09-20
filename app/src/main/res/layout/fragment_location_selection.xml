@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/searchLocationInputHint"
-            style="@style/Text.InputHint"
+            style="@style/Text.Hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"

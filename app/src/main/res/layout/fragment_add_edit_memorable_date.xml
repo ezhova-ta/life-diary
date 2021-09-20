@@ -62,7 +62,7 @@
 
         <TextView
             android:id="@+id/yearInputHint"
-            style="@style/Text.InputHint"
+            style="@style/Text.Hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/yearInput"

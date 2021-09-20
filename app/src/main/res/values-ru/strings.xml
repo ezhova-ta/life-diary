@@ -79,4 +79,6 @@
     <string name="what_happened_that_day">Что произошло в этот день?</string>
     <string name="year">Год</string>
     <string name="year_is_optional">(указывать год необязательно)</string>
+    <string name="event">Событие</string>
+    <string name="note_or_to_do_list">Заметка или список дел</string>
 </resources>

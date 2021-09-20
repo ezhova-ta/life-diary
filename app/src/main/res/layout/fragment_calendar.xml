@@ -22,5 +22,51 @@
             app:cv_orientation="horizontal"
             app:cv_scrollMode="paged" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/legendsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/calendarView"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/legendEventIcon"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                app:layout_constraintTop_toTopOf="@id/legendEventIconText"
+                app:layout_constraintBottom_toBottomOf="@id/legendEventIconText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/calendar_day_event_icon_view" />
+
+            <ImageView
+                android:id="@+id/legendNoteToDoListIcon"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                app:layout_constraintTop_toTopOf="@id/legendNoteToDoListIconText"
+                app:layout_constraintBottom_toBottomOf="@id/legendNoteToDoListIconText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/calendar_day_note_icon_view" />
+
+            <TextView
+                android:id="@+id/legendEventIconText"
+                style="@style/Text.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/legendEventIcon"
+                android:layout_marginStart="8dp"
+                android:text="@string/event" />
+
+            <TextView
+                android:id="@+id/legendNoteToDoListIconText"
+                style="@style/Text.Hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/legendEventIconText"
+                app:layout_constraintStart_toEndOf="@id/legendNoteToDoListIcon"
+                android:layout_marginStart="8dp"
+                android:text="@string/note_or_to_do_list" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
