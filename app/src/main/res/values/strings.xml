@@ -82,4 +82,5 @@
     <string name="year_is_optional">(year is optional)</string>
     <string name="event">Event</string>
     <string name="note_or_to_do_list">Note or to-do list</string>
+    <string name="years_ago">years ago: %d</string>
 </resources>
