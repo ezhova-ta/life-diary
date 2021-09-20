@@ -81,5 +81,5 @@
     <string name="year_is_optional">(указывать год необязательно)</string>
     <string name="event">Событие</string>
     <string name="note_or_to_do_list">Заметка или список дел</string>
-    <string name="years_ago">лет назад: %d</string>
+    <string name="years_ago">Лет назад: %d</string>
 </resources>
