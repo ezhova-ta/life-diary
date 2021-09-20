@@ -27,7 +27,9 @@ class MemorableDateListAdapter(
 
     class MemorableDateListItemViewModel(val memorableDateListItem: MemorableDate) {
         val dateString = memorableDateListItem.let { getDateString(it.dayNumber, it.monthNumber, it.year) }
+        val yearsAgo = memorableDateListItem.howManyYearsAgo()
         val isTodayTitleVisible = memorableDateListItem.isToday()
+        val isHowManyYearsAgoViewVisible = isTodayTitleVisible && yearsAgo != null
     }
 
     class ViewHolder private constructor(
