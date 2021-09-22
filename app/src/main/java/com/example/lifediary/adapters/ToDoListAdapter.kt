@@ -31,6 +31,7 @@ class ToDoListAdapter(
 
 	class ToDoListItemViewModel(val toDoListItem: ToDoListItem) {
 		val isChecked = toDoListItem.isDone
+		val notificationEnabled = toDoListItem.notificationEnabled
 	}
 
 	class ViewHolder private constructor(

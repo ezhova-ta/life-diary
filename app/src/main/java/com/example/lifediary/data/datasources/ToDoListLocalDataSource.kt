@@ -32,6 +32,13 @@ class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) 
 		dao.update(item)
 	}
 
+	suspend fun inverseListItemNotificationEnabled(id: Long) {
+		val item = dao.get(id) ?: return
+		val notificationEnabled = item.notificationEnabled
+		item.notificationEnabled = !notificationEnabled
+		dao.update(item)
+	}
+
 	suspend fun deleteToDoListItem(id: Long) {
 		dao.delete(id)
 	}

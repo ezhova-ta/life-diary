@@ -158,7 +158,14 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	fun onEnableNotificationClick(item: ToDoListItem) {
 		val itemId = item.id ?: return
-		TODO()
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				toDoListRepository.inverseListItemNotificationEnabled(itemId)
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.error_try_again_later))
+			}
+		}
 	}
 
 	fun onToDoListItemClick(item: ToDoListItem) {
