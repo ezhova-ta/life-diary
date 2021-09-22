@@ -156,6 +156,11 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
+	fun onEnableNotificationClick(item: ToDoListItem) {
+		val itemId = item.id ?: return
+		TODO()
+	}
+
 	fun onToDoListItemClick(item: ToDoListItem) {
 		val itemId = item.id ?: return
 
