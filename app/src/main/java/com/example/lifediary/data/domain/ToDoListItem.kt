@@ -8,5 +8,6 @@ data class ToDoListItem(
     var text: String,
 	val day: Day,
     var isDone: Boolean = false,
+	var notificationEnabled: Boolean = false,
     val createdAt: Calendar = Calendar.getInstance()
 )
