@@ -12,10 +12,7 @@ import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.Day
-import com.example.lifediary.utils.Text
-import com.example.lifediary.utils.isSameDay
-import com.example.lifediary.utils.toDateString
+import com.example.lifediary.utils.*
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +47,14 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	private val _showClearToDoListConfirmationDialog = MutableLiveData(false)
 	val showClearToDoListConfirmationDialog: LiveData<Boolean>
 		get() = _showClearToDoListConfirmationDialog
+
+	private val _toDoListItemScheduleNotificationEvent = MutableLiveData<OneTimeEvent<ToDoListItem>>()
+	val toDoListItemScheduleNotificationEvent: LiveData<OneTimeEvent<ToDoListItem>>
+		get() = _toDoListItemScheduleNotificationEvent
+
+	private val _toDoListItemCancelScheduledNotificationEvent = MutableLiveData<OneTimeEvent<ToDoListItem>>()
+	val toDoListItemCancelScheduledNotificationEvent: LiveData<OneTimeEvent<ToDoListItem>>
+		get() = _toDoListItemCancelScheduledNotificationEvent
 
 	init {
 		bindAppScope()
@@ -159,6 +164,12 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	fun onEnableNotificationClick(item: ToDoListItem) {
 		val itemId = item.id ?: return
 
+		if(item.notificationEnabled) {
+			cancelScheduledToDoListItemNotification(item)
+		} else {
+			scheduleToDoListItemNotification(item)
+		}
+
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				toDoListRepository.inverseListItemNotificationEnabled(itemId)
@@ -166,6 +177,14 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 				showMessage(Text.TextResource(R.string.error_try_again_later))
 			}
 		}
+	}
+
+	private fun scheduleToDoListItemNotification(toDoListItem: ToDoListItem) {
+		_toDoListItemScheduleNotificationEvent.value = OneTimeEvent(toDoListItem)
+	}
+
+	private fun cancelScheduledToDoListItemNotification(toDoListItem: ToDoListItem) {
+		_toDoListItemCancelScheduledNotificationEvent.value = OneTimeEvent(toDoListItem)
 	}
 
 	fun onToDoListItemClick(item: ToDoListItem) {

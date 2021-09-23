@@ -14,6 +14,7 @@ import com.example.lifediary.adapters.ToDoListAdapter
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.Day
+import java.util.*
 
 class CalendarDateFragment : BaseFragment() {
     override val viewModel: CalendarDateViewModel by viewModels(
@@ -50,6 +51,7 @@ class CalendarDateFragment : BaseFragment() {
         setupEventListView()
         setupAddToDoListItemInputView()
         setupClearToDOListConfirmationDialog()
+        setupToDoListItemNotificationScheduling()
         return binding.root
     }
 
@@ -109,6 +111,18 @@ class CalendarDateFragment : BaseFragment() {
             onConfirmed = viewModel::onClearToDoListConfirmed,
             onCancelled = viewModel::onClearToDoListCancelled
         )
+    }
+
+    private fun setupToDoListItemNotificationScheduling() {
+        viewModel.toDoListItemScheduleNotificationEvent.observe(viewLifecycleOwner) { event ->
+            val toDoListItem = event.getData() ?: return@observe
+            scheduleNotification(toDoListItem)
+        }
+
+        viewModel.toDoListItemCancelScheduledNotificationEvent.observe(viewLifecycleOwner) { event ->
+            val toDoListItem = event.getData() ?: return@observe
+            cancelScheduledNotification(toDoListItem)
+        }
     }
 
     override fun onDestroyView() {

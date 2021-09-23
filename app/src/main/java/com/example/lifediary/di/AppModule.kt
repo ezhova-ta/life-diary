@@ -6,6 +6,7 @@ import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
 import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.di.providers.*
+import com.example.lifediary.utils.NotificationScheduler
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import okhttp3.OkHttpClient
@@ -18,6 +19,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(NavigatorHolder::class.java).toInstance(application.navigationHolder)
         bind(Router::class.java).toInstance(application.router)
         bind(Context::class.java).toInstance(application.applicationContext)
+        bind(NotificationScheduler::class.java)
 
         bind(MainDataBase::class.java).toProvider(MainDatabaseProvider::class.java).singleton()
         bind(ShoppingListDao::class.java).toProvider(ShoppingListDaoProvider::class.java)

@@ -17,6 +17,10 @@ class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) 
 		return dao.getAll().toDomain()
 	}
 
+	suspend fun getToDoListItem(id: Long) : ToDoListItem? {
+		return dao.get(id)?.toDomain()
+	}
+
 	suspend fun saveToDoListItem(item: ToDoListItem) {
 		dao.insert(ToDoListItemEntity.fromDomain(item))
 	}

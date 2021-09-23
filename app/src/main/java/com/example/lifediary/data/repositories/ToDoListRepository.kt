@@ -19,6 +19,10 @@ class ToDoListRepository @Inject constructor(
 		return localDataSource.getAllToDoLists()
 	}
 
+	suspend fun getToDoListItem(id: Long) : ToDoListItem? {
+		return localDataSource.getToDoListItem(id)
+	}
+
 	suspend fun saveToDoListItem(item: ToDoListItem) {
 		localDataSource.saveToDoListItem(item)
 	}
