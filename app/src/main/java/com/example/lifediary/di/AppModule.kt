@@ -6,7 +6,7 @@ import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
 import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.di.providers.*
-import com.example.lifediary.utils.NotificationScheduler
+import com.example.lifediary.NotificationScheduler
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import okhttp3.OkHttpClient

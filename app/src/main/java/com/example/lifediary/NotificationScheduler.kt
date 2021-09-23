@@ -1,4 +1,4 @@
-package com.example.lifediary.utils
+package com.example.lifediary
 
 import android.app.AlarmManager
 import android.app.PendingIntent
