@@ -81,6 +81,14 @@ fun CalendarDay.toDomain(): Day {
     return Day(date.dayOfMonth, date.monthValue, date.year)
 }
 
+fun Calendar.toDomain(): Day {
+    return Day(
+        get(Calendar.DATE),
+        get(Calendar.MONTH) + 1,
+        get(Calendar.YEAR)
+    )
+}
+
 fun CalendarDay.isToday(): Boolean {
     val today = LocalDate.now(ZoneId.systemDefault())
     return date.isEqual(today)

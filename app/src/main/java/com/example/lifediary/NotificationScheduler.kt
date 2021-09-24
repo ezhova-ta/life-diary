@@ -7,9 +7,9 @@ import android.content.Intent
 import android.net.Uri
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.receivers.AlarmReceiver
-import com.example.lifediary.utils.BroadcastConstants.ToDoListItemNotification.NOTIFICATION_TO_DO_LIST_ITEM_TEXT
-import com.example.lifediary.utils.BroadcastConstants.ToDoListItemNotification.SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION_ACTION
-import com.example.lifediary.utils.BroadcastConstants.ToDoListItemNotification.SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION_REQUEST_CODE
+import com.example.lifediary.utils.IntentConstants.ToDoListItemNotification.NOTIFICATION_TO_DO_LIST_ITEM_TEXT
+import com.example.lifediary.utils.IntentConstants.ToDoListItemNotification.ACTION_SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION
+import com.example.lifediary.utils.IntentConstants.ToDoListItemNotification.SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION_REQUEST_CODE
 import java.util.*
 import javax.inject.Inject
 
@@ -37,7 +37,7 @@ class NotificationScheduler @Inject constructor(private val context: Context) {
 	private fun createNotificationIntent(toDoListItem: ToDoListItem): PendingIntent? {
 		val intentData = toDoListItem.id?.toString()?.let { Uri.parse(it) } ?: return null
 		val intent = Intent(context, AlarmReceiver::class.java).apply {
-			action = SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION_ACTION
+			action = ACTION_SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION
 			data = intentData
 			putExtra(NOTIFICATION_TO_DO_LIST_ITEM_TEXT, toDoListItem.text)
 		}
