@@ -82,4 +82,7 @@
     <string name="event">Событие</string>
     <string name="note_or_to_do_list">Заметка или список дел</string>
     <string name="years_ago">Лет назад: %d</string>
+    <string name="to_do_list_channel">Канал для списка дел</string>
+    <string name="you_have_scheduled_for_today">Вы запланировали на сегодня:</string>
+    <string name="channel_to_remind_about_to_do_list">Канал для напоминания о списке дел на текущий день</string>
 </resources>

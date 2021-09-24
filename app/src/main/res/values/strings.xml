@@ -83,4 +83,7 @@
     <string name="event">Event</string>
     <string name="note_or_to_do_list">Note or to-do list</string>
     <string name="years_ago">Years ago: %d</string>
+    <string name="to_do_list_channel">To-do list channel</string>
+    <string name="you_have_scheduled_for_today">You have scheduled for today:</string>
+    <string name="channel_to_remind_about_to_do_list">Channel to remind you about the to-do list for the current day</string>
 </resources>

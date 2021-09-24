@@ -1,9 +1,9 @@
 package com.example.lifediary.ui.activity
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.lifediary.Notifications
 import com.example.lifediary.R
 import com.example.lifediary.databinding.ActivityMainBinding
 import com.example.lifediary.di.DiScopes
@@ -23,11 +23,16 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        ensureToDoListNotificationChannel()
     }
 
     private fun bindAppScope() {
         val appScope = Toothpick.openScope(DiScopes.APP_SCOPE)
         Toothpick.inject(this, appScope)
+    }
+
+    private fun ensureToDoListNotificationChannel() {
+        Notifications.ensureChannel(applicationContext, Notifications.ToDoListChannel)
     }
 
     override fun onResumeFragments() {
