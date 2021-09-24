@@ -101,6 +101,6 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun cancelScheduledNotification(toDoListItem: ToDoListItem) {
-        TODO()
+        notificationScheduler.cancelScheduledNotification(toDoListItem)
     }
 }

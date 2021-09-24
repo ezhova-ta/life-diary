@@ -16,12 +16,18 @@ import javax.inject.Inject
 class NotificationScheduler @Inject constructor(private val context: Context) {
 	fun scheduleNotification(toDoListItem: ToDoListItem, timeInMillis: Long? = null) {
 		val alarmManager = getAlarmManager()
-		val pendingIntent = createNotificationIntent(toDoListItem) ?: return
+		val intent = createNotificationIntent(toDoListItem) ?: return
 		alarmManager.setExact(
 			AlarmManager.RTC_WAKEUP,
 			timeInMillis ?: toDoListItem.getNotificationTimeInMillis(),
-			pendingIntent
+			intent
 		)
+	}
+
+	fun cancelScheduledNotification(toDoListItem: ToDoListItem) {
+		val alarmManager = getAlarmManager()
+		val intent = createNotificationIntent(toDoListItem) ?: return
+		alarmManager.cancel(intent)
 	}
 
 	private fun getAlarmManager(): AlarmManager {
