@@ -12,9 +12,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lifediary.NotificationScheduler
-import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.di.DiScopes
-import com.example.lifediary.utils.*
+import com.example.lifediary.utils.InsetsStyle
+import com.example.lifediary.utils.Text
+import com.example.lifediary.utils.setDefaultButtonsStyle
+import com.example.lifediary.utils.setInsetsStyle
 import toothpick.Toothpick
 import javax.inject.Inject
 
@@ -94,13 +96,5 @@ abstract class BaseFragment : Fragment() {
             .setCancelable(false)
             .show()
             .setDefaultButtonsStyle()
-    }
-
-    protected fun scheduleNotification(toDoListItem: ToDoListItem) {
-        notificationScheduler.scheduleNotification(toDoListItem)
-    }
-
-    protected fun cancelScheduledNotification(toDoListItem: ToDoListItem) {
-        notificationScheduler.cancelScheduledNotification(toDoListItem)
     }
 }

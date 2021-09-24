@@ -35,8 +35,12 @@ class ToDoListRepository @Inject constructor(
 		localDataSource.inverseListItemIsDone(id)
 	}
 
-	suspend fun inverseListItemNotificationEnabled(id: Long) {
-		localDataSource.inverseListItemNotificationEnabled(id)
+	suspend fun enableListItemNotification(id: Long) {
+		localDataSource.enableListItemNotification(id)
+	}
+
+	suspend fun disableListItemNotification(id: Long) {
+		localDataSource.disableListItemNotification(id)
 	}
 
 	suspend fun deleteToDoListItem(id: Long) {

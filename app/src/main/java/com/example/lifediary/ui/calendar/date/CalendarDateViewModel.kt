@@ -161,18 +161,21 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
-	fun onEnableNotificationClick(item: ToDoListItem) {
-		val itemId = item.id ?: return
-
+	fun onToDoListItemNotificationClick(item: ToDoListItem) {
 		if(item.notificationEnabled) {
 			cancelScheduledToDoListItemNotification(item)
 		} else {
 			scheduleToDoListItemNotification(item)
 		}
+	}
+
+	private fun cancelScheduledToDoListItemNotification(item: ToDoListItem) {
+		val itemId = item.id ?: return
+		_toDoListItemCancelScheduledNotificationEvent.value = OneTimeEvent(item)
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.inverseListItemNotificationEnabled(itemId)
+				toDoListRepository.disableListItemNotification(itemId)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error_try_again_later))
 			}
@@ -183,9 +186,19 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		_toDoListItemScheduleNotificationEvent.value = OneTimeEvent(toDoListItem)
 	}
 
-	private fun cancelScheduledToDoListItemNotification(toDoListItem: ToDoListItem) {
-		_toDoListItemCancelScheduledNotificationEvent.value = OneTimeEvent(toDoListItem)
+	fun onToDoListItemNotificationScheduled(item: ToDoListItem) {
+		val itemId = item.id ?: return
+
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				toDoListRepository.enableListItemNotification(itemId)
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.error_try_again_later))
+			}
+		}
 	}
+
+	fun onSchedulingToDoListItemNotificationCancelled(item: ToDoListItem) {}
 
 	fun onToDoListItemClick(item: ToDoListItem) {
 		val itemId = item.id ?: return

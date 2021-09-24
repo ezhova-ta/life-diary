@@ -7,19 +7,18 @@ import android.content.Intent
 import android.net.Uri
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.receivers.AlarmReceiver
-import com.example.lifediary.utils.IntentConstants.ToDoListItemNotification.NOTIFICATION_TO_DO_LIST_ITEM_TEXT
 import com.example.lifediary.utils.IntentConstants.ToDoListItemNotification.ACTION_SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION
+import com.example.lifediary.utils.IntentConstants.ToDoListItemNotification.NOTIFICATION_TO_DO_LIST_ITEM_TEXT
 import com.example.lifediary.utils.IntentConstants.ToDoListItemNotification.SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION_REQUEST_CODE
-import java.util.*
 import javax.inject.Inject
 
 class NotificationScheduler @Inject constructor(private val context: Context) {
-	fun scheduleNotification(toDoListItem: ToDoListItem, timeInMillis: Long? = null) {
+	fun scheduleNotification(toDoListItem: ToDoListItem, timeInMillis: Long) {
 		val alarmManager = getAlarmManager()
 		val intent = createNotificationIntent(toDoListItem) ?: return
 		alarmManager.setExact(
 			AlarmManager.RTC_WAKEUP,
-			timeInMillis ?: toDoListItem.getNotificationTimeInMillis(),
+			timeInMillis,
 			intent
 		)
 	}
@@ -32,12 +31,6 @@ class NotificationScheduler @Inject constructor(private val context: Context) {
 
 	private fun getAlarmManager(): AlarmManager {
 		return context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-	}
-
-	private fun ToDoListItem.getNotificationTimeInMillis(): Long {
-		// TODO Correct time
-		val now = Calendar.getInstance().apply { add(Calendar.SECOND, 10) }
-		return now.timeInMillis
 	}
 
 	private fun createNotificationIntent(toDoListItem: ToDoListItem): PendingIntent? {
