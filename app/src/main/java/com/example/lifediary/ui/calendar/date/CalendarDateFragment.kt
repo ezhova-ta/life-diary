@@ -156,6 +156,7 @@ class CalendarDateFragment : BaseFragment() {
                 onCancelled()
             } else {
                 val notificationTime = Calendar.getInstance().apply {
+                    set(Calendar.SECOND, 0)
                     set(Calendar.MINUTE, pickedTime.minute)
                     set(Calendar.HOUR_OF_DAY, pickedTime.hour)
                     set(Calendar.DATE, toDoListItem.day.dayNumber)
