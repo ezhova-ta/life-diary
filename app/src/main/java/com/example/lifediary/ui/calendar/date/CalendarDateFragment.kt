@@ -124,7 +124,9 @@ class CalendarDateFragment : BaseFragment() {
             val toDoListItem = event.getData() ?: return@observe
             scheduleNotification(
                 toDoListItem,
-                { viewModel.onToDoListItemNotificationScheduled(toDoListItem) },
+                { timeInMillis ->
+                    viewModel.onToDoListItemNotificationScheduled(toDoListItem, timeInMillis)
+                },
                 { viewModel.onSchedulingToDoListItemNotificationCancelled(toDoListItem) }
             )
         }
@@ -137,7 +139,7 @@ class CalendarDateFragment : BaseFragment() {
 
     private fun scheduleNotification(
         toDoListItem: ToDoListItem,
-        onComplete: () -> Unit,
+        onComplete: (time: Calendar) -> Unit,
         onCancelled: () -> Unit
     ) {
         setNotificationTimePickerResultListener(toDoListItem, onComplete, onCancelled)
@@ -146,7 +148,7 @@ class CalendarDateFragment : BaseFragment() {
 
     private fun setNotificationTimePickerResultListener(
         toDoListItem: ToDoListItem,
-        onComplete: () -> Unit,
+        onComplete: (time: Calendar) -> Unit,
         onCancelled: () -> Unit
     ) {
         setFragmentResultListener(PICK_TIME_REQUEST_KEY) { _, bundle ->
@@ -162,9 +164,9 @@ class CalendarDateFragment : BaseFragment() {
                     set(Calendar.DATE, toDoListItem.day.dayNumber)
                     set(Calendar.MONTH, toDoListItem.day.monthNumber - 1)
                     set(Calendar.YEAR, toDoListItem.day.year)
-                }.timeInMillis
-                notificationScheduler.scheduleNotification(toDoListItem, notificationTime)
-                onComplete()
+                }
+                notificationScheduler.scheduleNotification(toDoListItem, notificationTime.timeInMillis)
+                onComplete(notificationTime)
             }
 
             clearFragmentResultListener(PICK_TIME_REQUEST_KEY) // TODO Needed?

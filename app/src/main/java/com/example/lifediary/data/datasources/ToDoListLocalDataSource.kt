@@ -6,6 +6,7 @@ import com.example.lifediary.data.db.entities.ToDoListItemEntity
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.toDomain
+import java.util.*
 import javax.inject.Inject
 
 class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) {
@@ -36,9 +37,10 @@ class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) 
 		dao.update(item)
 	}
 
-	suspend fun enableListItemNotification(id: Long) {
+	suspend fun enableListItemNotification(id: Long, time: Calendar) {
 		val item = dao.get(id) ?: return
 		item.notificationEnabled = true
+		item.notificationTime = time
 		dao.update(item)
 	}
 

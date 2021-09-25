@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.ToDoListLocalDataSource
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.utils.Day
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -35,8 +36,8 @@ class ToDoListRepository @Inject constructor(
 		localDataSource.inverseListItemIsDone(id)
 	}
 
-	suspend fun enableListItemNotification(id: Long) {
-		localDataSource.enableListItemNotification(id)
+	suspend fun enableListItemNotification(id: Long, time: Calendar) {
+		localDataSource.enableListItemNotification(id, time)
 	}
 
 	suspend fun disableListItemNotification(id: Long) {

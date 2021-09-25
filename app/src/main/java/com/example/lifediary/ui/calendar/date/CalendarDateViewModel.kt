@@ -17,6 +17,7 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
@@ -186,12 +187,12 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		_toDoListItemScheduleNotificationEvent.value = OneTimeEvent(toDoListItem)
 	}
 
-	fun onToDoListItemNotificationScheduled(item: ToDoListItem) {
+	fun onToDoListItemNotificationScheduled(item: ToDoListItem, time: Calendar) {
 		val itemId = item.id ?: return
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.enableListItemNotification(itemId)
+				toDoListRepository.enableListItemNotification(itemId, time)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error_try_again_later))
 			}

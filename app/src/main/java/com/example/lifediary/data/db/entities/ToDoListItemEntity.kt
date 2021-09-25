@@ -21,6 +21,8 @@ data class ToDoListItemEntity(
     var isDone: Boolean,
     @ColumnInfo(name = "notification_enabled", defaultValue = "0")
     var notificationEnabled: Boolean,
+    @ColumnInfo(name = "notification_time", defaultValue = "0")
+    var notificationTime: Calendar,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
 ) : DbEntity<ToDoListItem>() {
@@ -34,6 +36,7 @@ data class ToDoListItemEntity(
                 year = toDoListItem.day.year,
                 isDone = toDoListItem.isDone,
                 notificationEnabled = toDoListItem.notificationEnabled,
+                notificationTime = toDoListItem.notificationTime,
                 createdAt = toDoListItem.createdAt
             )
         }
@@ -46,6 +49,7 @@ data class ToDoListItemEntity(
             day = Day(dayNumber, monthNumber, year),
             isDone = isDone,
             notificationEnabled = notificationEnabled,
+            notificationTime = notificationTime,
             createdAt = createdAt
         )
     }

@@ -13,6 +13,7 @@ class CalendarConverter {
 
     @TypeConverter
     fun longToCalendar(long: Long): Calendar {
+        if(long == 0L) return Calendar.getInstance()
         return long.toCalendar()
     }
 }
