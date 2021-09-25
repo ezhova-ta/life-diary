@@ -11,6 +11,8 @@ const val DATE_FORMAT_WITH_YEAR = "dd.MM.yyyy"
 const val DATE_FORMAT_WITHOUT_YEAR = "dd.MM"
 const val DATE_TIME_FORMAT_WITH_MILLIS = "dd.MM.yyyy HH:mm:ss"
 const val DATE_TIME_FORMAT_WITHOUT_MILLIS = "dd.MM.yyyy HH:mm"
+const val TIME_FORMAT_WITH_MILLIS = "HH:mm:ss"
+const val TIME_FORMAT_WITHOUT_MILLIS = "HH:mm"
 
 fun Calendar.toLong(): Long {
     return timeInMillis
@@ -35,6 +37,12 @@ fun Day.toDateTimeString(withMilliseconds: Boolean = false): String {
     val pattern = if(withMilliseconds) DATE_TIME_FORMAT_WITH_MILLIS else DATE_TIME_FORMAT_WITHOUT_MILLIS
     val format = SimpleDateFormat(pattern, Locale.getDefault())
     return format.format(this.toCalendar().time)
+}
+
+fun Calendar.toTimeString(withMilliseconds: Boolean = false): String {
+    val pattern = if(withMilliseconds) TIME_FORMAT_WITH_MILLIS else TIME_FORMAT_WITHOUT_MILLIS
+    val format = SimpleDateFormat(pattern, Locale.getDefault())
+    return format.format(this.time)
 }
 
 fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {
