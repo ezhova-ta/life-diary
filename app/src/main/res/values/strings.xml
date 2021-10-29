@@ -7,6 +7,7 @@
     <string name="clear_note_list_confirmation">Are you sure you want to delete all notes?</string>
     <string name="clear_to_do_list_confirmation">Are you sure you want to clear to-do list?</string>
     <string name="clear_post_addresses_confirmation">Are you sure you want to delete all post addresses?</string>
+    <string name="delete_post_address_confirmation">Are you sure you want to delete this address?</string>
     <string name="clear_memorable_dates_confirmation">Are you sure you want to delete all dates?</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>

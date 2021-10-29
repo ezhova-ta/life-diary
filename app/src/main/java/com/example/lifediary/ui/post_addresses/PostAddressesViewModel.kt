@@ -38,6 +38,10 @@ class PostAddressesViewModel: BaseViewModel() {
     val showClearPostAddressesConfirmationDialog: LiveData<Boolean>
         get() = _showClearPostAddressesConfirmationDialog
 
+    private val _showDeletePostAddressConfirmationDialog = MutableLiveData<Long?>(null)
+    val showDeletePostAddressConfirmationDialog: LiveData<Long?>
+        get() = _showDeletePostAddressConfirmationDialog
+
     val addresseeName = MutableLiveData("")
     val addresseeStreet = MutableLiveData("")
     val addresseeBuildingNumber = MutableLiveData("")
@@ -65,7 +69,15 @@ class PostAddressesViewModel: BaseViewModel() {
 
     fun onDeletePostAddressClick(address: PostAddress) {
         val addressId = address.id ?: return
+        _showDeletePostAddressConfirmationDialog.value = addressId
+    }
 
+    fun onDeletePostAddressConfirmed(addressId: Long) {
+        _showDeletePostAddressConfirmationDialog.value = null
+        deletePostAddress(addressId)
+    }
+
+    private fun deletePostAddress(addressId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 postAddressRepository.deleteAddress(addressId)
@@ -73,6 +85,10 @@ class PostAddressesViewModel: BaseViewModel() {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }
         }
+    }
+
+    fun onDeletePostAddressCancelled() {
+        _showDeletePostAddressConfirmationDialog.value = null
     }
 
     fun onEditPostAddressClick(address: PostAddress) {

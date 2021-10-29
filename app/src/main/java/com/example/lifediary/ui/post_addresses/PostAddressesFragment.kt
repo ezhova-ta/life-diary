@@ -33,6 +33,7 @@ class PostAddressesFragment : BaseFragment() {
         binding.viewModel = viewModel
         setupPostAddressListRecycler()
         setupClearPostAddressesConfirmationDialog()
+        setupDeletePostAddressConfirmationDialog()
         return binding.root
     }
 
@@ -61,6 +62,22 @@ class PostAddressesFragment : BaseFragment() {
             negativeButtonRes = R.string.cancel,
             onConfirmed = viewModel::onClearPostAddressesConfirmed,
             onCancelled = viewModel::onClearPostAddressesCancelled
+        )
+    }
+
+    private fun setupDeletePostAddressConfirmationDialog() {
+        viewModel.showDeletePostAddressConfirmationDialog.observe(viewLifecycleOwner) { addressId ->
+            if(addressId != null) showDeletePostAddressConfirmationDialog(addressId)
+        }
+    }
+
+    private fun showDeletePostAddressConfirmationDialog(addressId: Long) {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.delete_post_address_confirmation,
+            positiveButtonTextRes = R.string.delete,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = { viewModel.onDeletePostAddressConfirmed(addressId) },
+            onCancelled = viewModel::onDeletePostAddressCancelled
         )
     }
 
