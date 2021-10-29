@@ -57,6 +57,7 @@ class CalendarDateFragment : BaseFragment() {
         setupEventListView()
         setupAddToDoListItemInputView()
         setupClearToDOListConfirmationDialog()
+        setupDeleteNoteConfirmationDialog()
         setupToDoListItemNotificationScheduling()
         return binding.root
     }
@@ -116,6 +117,22 @@ class CalendarDateFragment : BaseFragment() {
             negativeButtonRes = R.string.cancel,
             onConfirmed = viewModel::onClearToDoListConfirmed,
             onCancelled = viewModel::onClearToDoListCancelled
+        )
+    }
+
+    private fun setupDeleteNoteConfirmationDialog() {
+        viewModel.showDeleteNoteConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showDeleteNoteConfirmationDialog()
+        }
+    }
+
+    private fun showDeleteNoteConfirmationDialog() {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.delete_note_confirmation,
+            positiveButtonTextRes = R.string.delete,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onDeleteNoteConfirmed,
+            onCancelled = viewModel::onDeleteNoteCancelled
         )
     }
 

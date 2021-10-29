@@ -49,6 +49,10 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val showClearToDoListConfirmationDialog: LiveData<Boolean>
 		get() = _showClearToDoListConfirmationDialog
 
+	private val _showDeleteNoteConfirmationDialog = MutableLiveData(false)
+	val showDeleteNoteConfirmationDialog: LiveData<Boolean>
+		get() = _showDeleteNoteConfirmationDialog
+
 	private val _toDoListItemScheduleNotificationEvent = MutableLiveData<OneTimeEvent<ToDoListItem>>()
 	val toDoListItemScheduleNotificationEvent: LiveData<OneTimeEvent<ToDoListItem>>
 		get() = _toDoListItemScheduleNotificationEvent
@@ -87,8 +91,17 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	fun onDeleteNoteClick() {
-		val noteId = note.value?.id ?: return
+		note.value?.id ?: return
+		_showDeleteNoteConfirmationDialog.value = true
+	}
 
+	fun onDeleteNoteConfirmed() {
+		_showDeleteNoteConfirmationDialog.value = false
+		val noteId = note.value?.id ?: return
+		deleteNote(noteId)
+	}
+
+	private fun deleteNote(noteId: Long) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				noteRepository.deleteNote(noteId)
@@ -96,6 +109,10 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 				showMessage(Text.TextResource(R.string.error))
 			}
 		}
+	}
+
+	fun onDeleteNoteCancelled() {
+		_showDeleteNoteConfirmationDialog.value = false
 	}
 
 	private fun navigateToAddEditNoteScreen() {
