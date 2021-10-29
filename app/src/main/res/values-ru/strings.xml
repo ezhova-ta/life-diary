@@ -9,6 +9,7 @@
     <string name="clear_post_addresses_confirmation">Вы уверены, что хотите удалить все почтовые адреса?</string>
     <string name="delete_post_address_confirmation">Вы уверены, что хотите удалить этот адрес?</string>
     <string name="clear_memorable_dates_confirmation">Вы уверены, что хотите удалить все даты?</string>
+    <string name="delete_memorable_date_confirmation">Вы уверены, что хотите удалить эту дату?</string>
     <string name="cancel">Закрыть</string>
     <string name="clear">Очистить</string>
     <string name="delete">Удалить</string>

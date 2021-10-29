@@ -28,6 +28,10 @@ class MemorableDatesViewModel : BaseViewModel() {
     val showClearDateListConfirmationDialog: LiveData<Boolean>
         get() = _showClearDateListConfirmationDialog
 
+    private val _showDeleteDateConfirmationDialog = MutableLiveData<Long?>(null)
+    val showDeleteDateConfirmationDialog: LiveData<Long?>
+        get() = _showDeleteDateConfirmationDialog
+
     init {
         bindAppScope()
     }
@@ -67,7 +71,15 @@ class MemorableDatesViewModel : BaseViewModel() {
 
     fun onDeleteDateClick(date: MemorableDate) {
         val dateId = date.id ?: return
+        _showDeleteDateConfirmationDialog.value = dateId
+    }
 
+    fun onDeleteDateConfirmed(dateId: Long) {
+        _showDeleteDateConfirmationDialog.value = null
+        deleteDate(dateId)
+    }
+
+    private fun deleteDate(dateId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 memorableDatesRepository.deleteDate(dateId)
@@ -75,6 +87,10 @@ class MemorableDatesViewModel : BaseViewModel() {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }
         }
+    }
+
+    fun onDeleteDateCancelled() {
+        _showDeleteDateConfirmationDialog.value = null
     }
 
     fun onDateLongClick(date: MemorableDate) {

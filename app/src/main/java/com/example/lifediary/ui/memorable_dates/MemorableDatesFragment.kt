@@ -33,6 +33,7 @@ class MemorableDatesFragment : BaseFragment() {
         binding.viewModel = viewModel
         setupMemorableDateListView()
         setupClearNoteListConfirmationDialog()
+        setupDeleteDateConfirmationDialog()
         return binding.root
     }
 
@@ -61,6 +62,22 @@ class MemorableDatesFragment : BaseFragment() {
             negativeButtonRes = R.string.cancel,
             onConfirmed = viewModel::onClearDateListConfirmed,
             onCancelled = viewModel::onClearDateListCancelled
+        )
+    }
+
+    private fun setupDeleteDateConfirmationDialog() {
+        viewModel.showDeleteDateConfirmationDialog.observe(viewLifecycleOwner) { dateId ->
+            if(dateId != null) showDeleteDateConfirmationDialog(dateId)
+        }
+    }
+
+    private fun showDeleteDateConfirmationDialog(dateId: Long) {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.delete_memorable_date_confirmation,
+            positiveButtonTextRes = R.string.delete,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = { viewModel.onDeleteDateConfirmed(dateId) },
+            onCancelled = viewModel::onDeleteDateCancelled
         )
     }
 
