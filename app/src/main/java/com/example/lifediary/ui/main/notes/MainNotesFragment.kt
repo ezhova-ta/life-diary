@@ -33,6 +33,7 @@ class MainNotesFragment : BaseFragment() {
         binding.viewModel = viewModel
         setupNoteListView()
         setupClearNoteListConfirmationDialog()
+        setupDeleteNoteConfirmationDialog()
         return binding.root
     }
 
@@ -61,6 +62,22 @@ class MainNotesFragment : BaseFragment() {
             negativeButtonRes = R.string.cancel,
             onConfirmed = viewModel::onClearNoteListConfirmed,
             onCancelled = viewModel::onClearNoteListCancelled
+        )
+    }
+
+    private fun setupDeleteNoteConfirmationDialog() {
+        viewModel.showDeleteNoteConfirmationDialog.observe(viewLifecycleOwner) { noteId ->
+            if(noteId != null) showDeleteNoteConfirmationDialog(noteId)
+        }
+    }
+
+    private fun showDeleteNoteConfirmationDialog(noteId: Long) {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.delete_note_confirmation,
+            positiveButtonTextRes = R.string.delete,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = { viewModel.onDeleteNoteConfirmed(noteId) },
+            onCancelled = viewModel::onDeleteNoteCancelled
         )
     }
 
