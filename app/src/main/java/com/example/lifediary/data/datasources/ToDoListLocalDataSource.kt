@@ -50,6 +50,10 @@ class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) 
 		dao.update(item)
 	}
 
+	suspend fun disableNotificationsFor(day: Day) {
+		dao.disableNotificationsFor(day.dayNumber, day.monthNumber, day.year)
+	}
+
 	suspend fun deleteToDoListItem(id: Long) {
 		dao.delete(id)
 	}

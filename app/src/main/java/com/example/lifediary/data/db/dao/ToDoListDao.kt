@@ -32,4 +32,7 @@ interface ToDoListDao {
 
     @Query("DELETE FROM to_do_list")
     suspend fun deleteAll()
+
+    @Query("UPDATE to_do_list SET notification_enabled=0 WHERE day = :dayNumber AND month = :monthNumber AND year = :year")
+    suspend fun disableNotificationsFor(dayNumber: Int, monthNumber: Int, year: Int)
 }

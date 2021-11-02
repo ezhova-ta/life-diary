@@ -29,6 +29,7 @@ class ToDoListRepository @Inject constructor(
 	}
 
 	suspend fun clearToDoList(day: Day) {
+		localDataSource.disableNotificationsFor(day)
 		localDataSource.clearToDoList(day)
 	}
 

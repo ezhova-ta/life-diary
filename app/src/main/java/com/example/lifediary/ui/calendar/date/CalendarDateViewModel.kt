@@ -126,7 +126,16 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	fun onClearToDoListConfirmed() {
 		_showClearToDoListConfirmationDialog.value = false
+		cancelToDoListNotifications()
 		clearToDoList()
+	}
+
+	private fun cancelToDoListNotifications() {
+		toDoList.value?.forEach {
+			if(it.notificationEnabled) {
+				_toDoListItemCancelScheduledNotificationEvent.value = OneTimeEvent(it)
+			}
+		}
 	}
 
 	private fun clearToDoList() {
@@ -169,7 +178,12 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	fun onDeleteToDoListItemClick(item: ToDoListItem) {
 		val itemId = item.id ?: return
+		if(item.notificationEnabled)
+			_toDoListItemCancelScheduledNotificationEvent.value = OneTimeEvent(item)
+		deleteToDoListItem(itemId)
+	}
 
+	private fun deleteToDoListItem(itemId: Long) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				toDoListRepository.deleteToDoListItem(itemId)
