@@ -7,11 +7,12 @@ import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.repositories.DateNoteRepository
 import com.example.lifediary.data.repositories.MemorableDatesRepository
 import com.example.lifediary.data.repositories.ToDoListRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.CalendarEvent
 import com.example.lifediary.utils.Day
 import com.github.terrakok.cicerone.Router
+import toothpick.Toothpick
 import javax.inject.Inject
 
 class CalendarViewModel : BaseViewModel() {
@@ -23,8 +24,13 @@ class CalendarViewModel : BaseViewModel() {
 	val memorableDates: LiveData<List<MemorableDate>> by lazy { memorableDatesRepository.getDates() }
 
 	init {
-		bindAppScope()
+		bindScope()
 		setupDaysWithNotesOrToDoList()
+	}
+
+	override fun bindScope() {
+		val calendarScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.CALENDAR_SCOPE)
+		Toothpick.inject(this, calendarScope)
 	}
 
 	private fun setupDaysWithNotesOrToDoList() {

@@ -4,12 +4,14 @@ import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.data.repositories.MainNotesRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import toothpick.Toothpick
 import javax.inject.Inject
 
 class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel() {
@@ -24,8 +26,13 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 		get() = _inputNeedsFocus
 
 	init {
-		bindAppScope()
+		bindScope()
 		substituteNoteTextInInput()
+	}
+
+	override fun bindScope() {
+		val mainScreenScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MAIN_SCREEN_SCOPE)
+		Toothpick.inject(this, mainScreenScope)
 	}
 
 	private fun substituteNoteTextInInput() {

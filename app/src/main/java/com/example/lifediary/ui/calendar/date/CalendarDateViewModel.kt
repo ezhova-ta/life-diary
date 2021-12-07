@@ -10,6 +10,7 @@ import com.example.lifediary.data.repositories.DateNoteRepository
 import com.example.lifediary.data.repositories.MemorableDatesRepository
 import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.data.repositories.WeatherRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.*
@@ -17,6 +18,7 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import toothpick.Toothpick
 import java.util.*
 import javax.inject.Inject
 
@@ -62,8 +64,16 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		get() = _toDoListItemCancelScheduledNotificationEvent
 
 	init {
-		bindAppScope()
+		bindScope()
+		loadForecast()
+	}
 
+	override fun bindScope() {
+		val calendarDateScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.CALENDAR_DATE_SCOPE)
+		Toothpick.inject(this, calendarDateScope)
+	}
+
+	private fun loadForecast() {
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
 				val locationId = weatherRepository.getLocation()?.id ?: throw NullPointerException()

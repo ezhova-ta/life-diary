@@ -6,12 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.repositories.WeatherRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import toothpick.Toothpick
 import javax.inject.Inject
 
 class LocationSelectionViewModel : BaseViewModel() {
@@ -29,7 +31,12 @@ class LocationSelectionViewModel : BaseViewModel() {
         get() = _inputNeedsFocus
 
     init {
-        bindAppScope()
+        bindScope()
+    }
+
+    override fun bindScope() {
+        val locationSelectionScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.LOCATION_SELECTION_SCOPE)
+        Toothpick.inject(this, locationSelectionScope)
     }
 
     fun onSearchLocationClick() {

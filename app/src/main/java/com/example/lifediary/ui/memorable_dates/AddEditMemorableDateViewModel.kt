@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.repositories.MemorableDatesRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.DayNumberDropDownItem
 import com.example.lifediary.utils.MonthDropDownItem
@@ -12,6 +13,7 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import toothpick.Toothpick
 import javax.inject.Inject
 
 class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseViewModel() {
@@ -31,8 +33,13 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
     val existingDateMonthNumber: LiveData<Int> get() = _existingDateMonthNumber
 
     init {
-        bindAppScope()
+        bindScope()
         substituteDateNameTextInInput()
+    }
+
+    override fun bindScope() {
+        val memorableDatesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MEMORABLE_DATES_SCOPE)
+        Toothpick.inject(this, memorableDatesScope)
     }
 
     private fun substituteDateNameTextInInput() {

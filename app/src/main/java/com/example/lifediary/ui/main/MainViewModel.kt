@@ -5,11 +5,13 @@ import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.domain.Weather
 import com.example.lifediary.data.repositories.SettingsRepository
 import com.example.lifediary.data.repositories.WeatherRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import toothpick.Toothpick
 import javax.inject.Inject
 
 class MainViewModel : BaseViewModel() {
@@ -34,8 +36,13 @@ class MainViewModel : BaseViewModel() {
     }
 
     init {
-        bindAppScope()
+        bindScope()
         location.observeForever(locationObserver)
+    }
+
+    override fun bindScope() {
+        val mainScreenScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MAIN_SCREEN_SCOPE)
+        Toothpick.inject(this, mainScreenScope)
     }
 
     fun onScreenResumed() {

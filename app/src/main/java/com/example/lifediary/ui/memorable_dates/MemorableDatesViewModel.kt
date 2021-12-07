@@ -6,6 +6,7 @@ import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.repositories.MemorableDatesRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
@@ -14,6 +15,7 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import toothpick.Toothpick
 import javax.inject.Inject
 
 class MemorableDatesViewModel : BaseViewModel() {
@@ -33,7 +35,12 @@ class MemorableDatesViewModel : BaseViewModel() {
         get() = _showDeleteDateConfirmationDialog
 
     init {
-        bindAppScope()
+        bindScope()
+    }
+
+    override fun bindScope() {
+        val memorableDatesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MEMORABLE_DATES_SCOPE)
+        Toothpick.inject(this, memorableDatesScope)
     }
 
     fun onAddDateClick() {

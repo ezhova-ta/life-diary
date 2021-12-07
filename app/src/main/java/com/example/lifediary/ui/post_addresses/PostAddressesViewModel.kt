@@ -6,6 +6,7 @@ import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.PostAddress
 import com.example.lifediary.data.repositories.PostAddressRepository
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
@@ -14,6 +15,7 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import toothpick.Toothpick
 import javax.inject.Inject
 
 class PostAddressesViewModel: BaseViewModel() {
@@ -64,7 +66,12 @@ class PostAddressesViewModel: BaseViewModel() {
         }
 
     init {
-        bindAppScope()
+        bindScope()
+    }
+
+    override fun bindScope() {
+        val postAddressesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.POST_ADDRESSES_SCOPE)
+        Toothpick.inject(this, postAddressesScope)
     }
 
     fun onDeletePostAddressClick(address: PostAddress) {
