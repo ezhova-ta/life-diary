@@ -7,8 +7,6 @@ import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.Text
 
 abstract class BaseViewModel : ViewModel() {
-    abstract fun bindScope()
-
     private val _popupMessageEvent = MutableLiveData<OneTimeEvent<Text>>()
     val popupMessageEvent: LiveData<OneTimeEvent<Text>>
         get() = _popupMessageEvent
@@ -16,6 +14,8 @@ abstract class BaseViewModel : ViewModel() {
     private val _copyToClipboardEvent = MutableLiveData<String>()
     val copyToClipboardEvent: LiveData<String>
         get() = _copyToClipboardEvent
+
+    abstract fun bindScope()
 
     protected fun showMessage(text: Text) {
         _popupMessageEvent.postValue(OneTimeEvent(text))
