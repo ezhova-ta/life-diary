@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import com.example.lifediary.NotificationScheduler
 import com.example.lifediary.R
 import com.example.lifediary.adapters.CalendarEventListAdapter
 import com.example.lifediary.adapters.ListItemClickListener
@@ -21,8 +22,10 @@ import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePicker
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.ToDoListItemNotificationTime
 import com.example.lifediary.utils.Day
 import java.util.*
+import javax.inject.Inject
 
 class CalendarDateFragment : BaseFragment() {
+    @Inject lateinit var notificationScheduler: NotificationScheduler
     override val viewModel: CalendarDateViewModel by viewModels(
         factoryProducer = { CalendarDateViewModel.Factory(getDayFromArguments()) }
     )
