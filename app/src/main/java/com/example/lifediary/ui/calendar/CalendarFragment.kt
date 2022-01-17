@@ -19,6 +19,7 @@ import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import com.kizitonwose.calendarview.ui.MonthScrollListener
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.YearMonth
@@ -31,6 +32,7 @@ class CalendarFragment : BaseFragment() {
     private val binding get() = _binding!!
     private var daysWithNotesOrToDoList = listOf<Day>()
     private var memorableDates = listOf<MemorableDate>()
+    private var lastSelectedMonth: YearMonth = YearMonth.now() // Correct variable name
 
     companion object {
         fun getInstance(): Fragment {
@@ -58,7 +60,10 @@ class CalendarFragment : BaseFragment() {
         val lastMonth = currentMonth.plusMonths(10)
         val firstDayOfWeek = getWeekFields().firstDayOfWeek
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
-        binding.calendarView.scrollToMonth(currentMonth) // TODO Execute only once
+        binding.calendarView.scrollToMonth(lastSelectedMonth)
+        binding.calendarView.monthScrollListener = object : MonthScrollListener {
+            override fun invoke(month: CalendarMonth) { lastSelectedMonth = month.yearMonth }
+        }
         setupDisplayingNoteIconsInCalendar()
         setupDisplayingEventIconsInCalendar()
     }
