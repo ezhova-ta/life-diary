@@ -53,7 +53,7 @@ class CalendarDayViewContainer(view: View) : ViewContainer(view) {
         view.setOnClickListener { onClick(day) }
     }
 
-    fun setStyle(
+    fun drawDesignations(
         day: CalendarDay,
         isNoteOrToDoListExists: Boolean,
         isMemorableDatesExist: Boolean

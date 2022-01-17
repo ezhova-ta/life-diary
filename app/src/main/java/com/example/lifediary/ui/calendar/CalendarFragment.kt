@@ -103,11 +103,13 @@ class CalendarFragment : BaseFragment() {
 
         override fun bind(container: CalendarDayViewContainer, day: CalendarDay) {
             container.setup(day) { viewModel.onDateClick(it.toDomain()) }
-            lifecycleScope.launch { setStyle(container, day) }
-        }
-
-        private suspend fun setStyle(container: CalendarDayViewContainer, day: CalendarDay) {
-            container.setStyle(day, isNoteOrToDoListExistsFor(day), isMemorableDatesExistFor(day))
+            lifecycleScope.launch {
+                container.drawDesignations(
+                    day,
+                    isNoteOrToDoListExistsFor(day),
+                    isMemorableDatesExistFor(day)
+                )
+            }
         }
 
         private suspend fun isNoteOrToDoListExistsFor(day: CalendarDay): Boolean {
