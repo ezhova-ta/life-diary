@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.lifediary.R
+import androidx.lifecycle.lifecycleScope
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
@@ -14,13 +14,12 @@ import com.example.lifediary.ui.common.CalendarDayViewContainer
 import com.example.lifediary.ui.common.CalendarMonthViewContainer
 import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.isSameDay
-import com.example.lifediary.utils.isToday
 import com.example.lifediary.utils.toDomain
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
-import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.YearMonth
 import java.time.temporal.WeekFields
@@ -98,35 +97,19 @@ class CalendarFragment : BaseFragment() {
         override fun create(view: View) = CalendarDayViewContainer(view)
 
         override fun bind(container: CalendarDayViewContainer, day: CalendarDay) {
-            container.day = day
-            container.dayTextView.text = day.getDayNumber()
-            container.dayTextView.setTextColor(day.getTextColor())
-            container.setOnClickListener { viewModel.onDateClick(it.toDomain()) }
-
-            if(day.isToday()) {
-                container.setSelectedStyle()
-            } else {
-                container.setNormalStyle()
-            }
-
-            if(isNoteOrToDoListExistsFor(day)) {
-                container.showNoteIcon()
-            } else {
-                container.hideNoteIcon()
-            }
-
-            if(isMemorableDatesExistFor(day)) {
-                container.showEventIcon()
-            } else {
-                container.hideEventIcon()
-            }
+            container.setup(day) { viewModel.onDateClick(it.toDomain()) }
+            lifecycleScope.launch { setStyle(container, day) }
         }
 
-        private fun isNoteOrToDoListExistsFor(day: CalendarDay): Boolean {
+        private suspend fun setStyle(container: CalendarDayViewContainer, day: CalendarDay) {
+            container.setStyle(day, isNoteOrToDoListExistsFor(day), isMemorableDatesExistFor(day))
+        }
+
+        private suspend fun isNoteOrToDoListExistsFor(day: CalendarDay): Boolean {
             return daysWithNotesOrToDoList.find { it.isSameDay(day) } != null
         }
 
-        private fun isMemorableDatesExistFor(day: CalendarDay): Boolean {
+        private suspend fun isMemorableDatesExistFor(day: CalendarDay): Boolean {
             return memorableDates.find { day.isSameDay(it) } != null
         }
     }
@@ -140,18 +123,6 @@ class CalendarFragment : BaseFragment() {
                 container.setupDaysOfWeek(daysOfWeek)
             }
         }
-
-    private fun CalendarDay.getDayNumber(): String {
-        return date.dayOfMonth.toString()
-    }
-
-    private fun CalendarDay.getTextColor(): Int {
-        return if(owner == DayOwner.THIS_MONTH) {
-            resources.getColor(R.color.app_medium_dark_gray, requireContext().theme)
-        } else {
-            resources.getColor(R.color.app_medium_gray, requireContext().theme)
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
