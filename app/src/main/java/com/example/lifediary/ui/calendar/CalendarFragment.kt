@@ -32,7 +32,7 @@ class CalendarFragment : BaseFragment() {
     private val binding get() = _binding!!
     private var daysWithNotesOrToDoList = listOf<Day>()
     private var memorableDates = listOf<MemorableDate>()
-    private var lastSelectedMonth: YearMonth = YearMonth.now() // Correct variable name
+    private var lastScrolledMonth: YearMonth = YearMonth.now()
 
     companion object {
         fun getInstance(): Fragment {
@@ -60,9 +60,9 @@ class CalendarFragment : BaseFragment() {
         val lastMonth = currentMonth.plusMonths(10)
         val firstDayOfWeek = getWeekFields().firstDayOfWeek
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
-        binding.calendarView.scrollToMonth(lastSelectedMonth)
+        binding.calendarView.scrollToMonth(lastScrolledMonth)
         binding.calendarView.monthScrollListener = object : MonthScrollListener {
-            override fun invoke(month: CalendarMonth) { lastSelectedMonth = month.yearMonth }
+            override fun invoke(month: CalendarMonth) { lastScrolledMonth = month.yearMonth }
         }
         setupDisplayingNoteIconsInCalendar()
         setupDisplayingEventIconsInCalendar()
