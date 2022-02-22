@@ -56,8 +56,8 @@ class CalendarFragment : BaseFragment() {
         binding.calendarView.dayBinder = createCalendarDayBinder()
         binding.calendarView.monthHeaderBinder = createCalendarMonthBinder(getDaysOfWeek())
         val currentMonth = YearMonth.now()
-        val firstMonth = currentMonth.minusMonths(10)
-        val lastMonth = currentMonth.plusMonths(10)
+        val firstMonth = currentMonth.minusMonths(15)
+        val lastMonth = currentMonth.plusMonths(15)
         val firstDayOfWeek = getWeekFields().firstDayOfWeek
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
         binding.calendarView.scrollToMonth(lastScrolledMonth)
