@@ -37,7 +37,7 @@ class MainNotesViewModel : BaseViewModel() {
 	}
 
 	fun onAddNoteClick() {
-		router.navigateTo(Screens.getAddEditMainNoteFragment())
+		router.navigateTo(Screens.getAddEditMainNoteScreen())
 	}
 
 	fun onClearNotesClick() {
@@ -66,6 +66,6 @@ class MainNotesViewModel : BaseViewModel() {
 
 	fun onNoteLongClick(note: MainNote) {
 		val noteId = note.id ?: return
-		router.navigateTo(Screens.getAddEditMainNoteFragment(noteId))
+		router.navigateTo(Screens.getAddEditMainNoteScreen(noteId))
 	}
 }

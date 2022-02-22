@@ -126,7 +126,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	private fun navigateToAddEditNoteScreen() {
-		router.navigateTo(Screens.getAddEditDateNoteFragment(day))
+		router.navigateTo(Screens.getAddEditDateNoteScreen(day))
 	}
 
 	fun onClearToDoListClick() {

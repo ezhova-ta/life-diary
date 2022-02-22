@@ -24,18 +24,18 @@ object Screens {
     fun getShoppingListScreen() = FragmentScreen { ShoppingListFragment.getInstance() }
     fun getSettingsScreen() = FragmentScreen { SettingsFragment.getInstance() }
     fun getLocationSelectionScreen() = FragmentScreen { LocationSelectionFragment.getInstance() }
-    fun getAddEditDateNoteFragment(day: Day) =
+    fun getAddEditDateNoteScreen(day: Day) =
         FragmentScreen { AddEditDateNoteFragment.getInstance(day) }
     fun getPostAddressesScreen() = FragmentScreen { PostAddressesFragment.getInstance() }
     fun getAddEditPostAddressScreen() = FragmentScreen { AddEditPostAddressFragment.getInstance() }
-    fun getMainNotesFragment() = FragmentScreen { MainNotesFragment.getInstance() }
-    fun getAddEditMainNoteFragment(noteId: Long) =
+    fun getMainNotesScreen() = FragmentScreen { MainNotesFragment.getInstance() }
+    fun getAddEditMainNoteScreen(noteId: Long) =
         FragmentScreen { AddEditMainNoteFragment.getInstance(noteId) }
-    fun getAddEditMainNoteFragment() =
+    fun getAddEditMainNoteScreen() =
         FragmentScreen { AddEditMainNoteFragment.getInstance(null) }
-    fun getMemorableDatesFragment() = FragmentScreen { MemorableDatesFragment.getInstance() }
-    fun getAddEditMemorableDateFragment(dateId: Long) =
+    fun getMemorableDatesScreen() = FragmentScreen { MemorableDatesFragment.getInstance() }
+    fun getAddEditMemorableDateScreen(dateId: Long) =
         FragmentScreen { AddEditMemorableDateFragment.getInstance(dateId) }
-    fun getAddEditMemorableDateFragment() =
+    fun getAddEditMemorableDateScreen() =
         FragmentScreen { AddEditMemorableDateFragment.getInstance(null) }
 }

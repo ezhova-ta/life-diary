@@ -79,7 +79,7 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun onNotesClick() {
-        router.navigateTo(Screens.getMainNotesFragment())
+        router.navigateTo(Screens.getMainNotesScreen())
     }
 
     fun onShoppingListClick() {
@@ -91,7 +91,7 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun onMemorableDatesClick() {
-        router.navigateTo(Screens.getMemorableDatesFragment())
+        router.navigateTo(Screens.getMemorableDatesScreen())
     }
 
     override fun onCleared() {
