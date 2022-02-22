@@ -27,10 +27,6 @@ class MainNotesViewModel : BaseViewModel() {
 	val showClearNoteListConfirmationDialog: LiveData<Boolean>
 		get() = _showClearNoteListConfirmationDialog
 
-	private val _showDeleteNoteConfirmationDialog = MutableLiveData<Long?>(null)
-	val showDeleteNoteConfirmationDialog: LiveData<Long?>
-		get() = _showDeleteNoteConfirmationDialog
-
 	init {
 		bindScope()
 	}
@@ -69,36 +65,7 @@ class MainNotesViewModel : BaseViewModel() {
 	}
 
 	fun onNoteLongClick(note: MainNote) {
-		copyToClipboard(note.text)
-		showMessage(Text.TextResource(R.string.text_copied))
-	}
-
-	fun onEditNoteClick(note: MainNote) {
 		val noteId = note.id ?: return
 		router.navigateTo(Screens.getAddEditMainNoteFragment(noteId))
-	}
-
-	fun onDeleteNoteClick(note: MainNote) {
-		val noteId = note.id ?: return
-		_showDeleteNoteConfirmationDialog.value = noteId
-	}
-
-	fun onDeleteNoteConfirmed(noteId: Long) {
-		_showDeleteNoteConfirmationDialog.value = null
-		deleteNote(noteId)
-	}
-
-	private fun deleteNote(noteId: Long) {
-		CoroutineScope(Dispatchers.IO).launch {
-			try {
-				notesRepository.deleteNote(noteId)
-			} catch(e: Exception) {
-				showMessage(Text.TextResource(R.string.deleting_item_error))
-			}
-		}
-	}
-
-	fun onDeleteNoteCancelled() {
-		_showDeleteNoteConfirmationDialog.value = null
 	}
 }

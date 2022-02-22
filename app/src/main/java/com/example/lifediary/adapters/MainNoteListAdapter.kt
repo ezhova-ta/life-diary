@@ -9,8 +9,6 @@ import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.databinding.MainNoteListItemBinding
 
 class MainNoteListAdapter(
-	private val onEditItemClickListener: ListItemClickListener<MainNote>,
-	private val onDeleteItemClickListener: ListItemClickListener<MainNote>,
 	private val onItemLongClickListener: ListItemClickListener<MainNote>? = null
 ) : ListAdapter<MainNote, MainNoteListAdapter.ViewHolder>(MainNoteListItemDiffCallBack()) {
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -18,7 +16,7 @@ class MainNoteListAdapter(
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val item = getItem(position)
-		holder.bind(item, onEditItemClickListener, onDeleteItemClickListener, onItemLongClickListener)
+		holder.bind(item, onItemLongClickListener)
 	}
 
 	class MainNoteListItemViewModel(val mainNoteListItem: MainNote)
@@ -36,20 +34,10 @@ class MainNoteListAdapter(
 			}
 		}
 
-		fun bind(
-			item: MainNote,
-			onEditItemClickListener: ListItemClickListener<MainNote>,
-			onDeleteItemClickListener: ListItemClickListener<MainNote>,
-			onItemLongClickListener: ListItemClickListener<MainNote>?
-		) {
+		fun bind(item: MainNote, onItemLongClickListener: ListItemClickListener<MainNote>?) {
 			binding.viewModel = MainNoteListItemViewModel(item)
 			setUpNoteView()
-			setupClickListeners(
-				item,
-				onEditItemClickListener,
-				onDeleteItemClickListener,
-				onItemLongClickListener
-			)
+			setupClickListeners(item, onItemLongClickListener)
 			binding.executePendingBindings()
 		}
 
@@ -59,18 +47,8 @@ class MainNoteListAdapter(
 
 		private fun setupClickListeners(
 			item: MainNote,
-			onEditItemClickListener: ListItemClickListener<MainNote>,
-			onDeleteItemClickListener: ListItemClickListener<MainNote>,
 			onItemLongClickListener: ListItemClickListener<MainNote>?
 		) {
-			binding.editNoteButton.setOnClickListener {
-				onEditItemClickListener.onClick(item)
-			}
-
-			binding.deleteNoteButton.setOnClickListener {
-				onDeleteItemClickListener.onClick(item)
-			}
-
 			binding.noteView.setOnLongClickListener {
 				onItemLongClickListener?.onClick(item)
 				true

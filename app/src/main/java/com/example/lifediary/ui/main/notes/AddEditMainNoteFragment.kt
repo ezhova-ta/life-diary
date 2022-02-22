@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentAddEditMainNoteBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.utils.clearFocusWithKeyboard
@@ -44,6 +45,7 @@ class AddEditMainNoteFragment : BaseFragment() {
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
 		setupAddEditNoteInput()
+		setupDeleteNoteConfirmationDialog()
 		return binding.root
 	}
 
@@ -55,5 +57,21 @@ class AddEditMainNoteFragment : BaseFragment() {
 				binding.addNoteInput.clearFocusWithKeyboard(activity)
 			}
 		}
+	}
+
+	private fun setupDeleteNoteConfirmationDialog() {
+		viewModel.showDeleteNoteConfirmationDialog.observe(viewLifecycleOwner) { noteId ->
+			if(noteId != null) showDeleteNoteConfirmationDialog(noteId)
+		}
+	}
+
+	private fun showDeleteNoteConfirmationDialog(noteId: Long) {
+		showDefaultConfirmationDialog(
+			messageRes = R.string.delete_note_confirmation,
+			positiveButtonTextRes = R.string.delete,
+			negativeButtonRes = R.string.cancel,
+			onConfirmed = { viewModel.onDeleteNoteConfirmed(noteId) },
+			onCancelled = viewModel::onDeleteNoteCancelled
+		)
 	}
  }

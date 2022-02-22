@@ -33,15 +33,12 @@ class MainNotesFragment : BaseFragment() {
         binding.viewModel = viewModel
         setupNoteListView()
         setupClearNoteListConfirmationDialog()
-        setupDeleteNoteConfirmationDialog()
         return binding.root
     }
 
     private fun setupNoteListView() {
         val mainNoteListAdapter = MainNoteListAdapter(
-            onEditItemClickListener = ListItemClickListener { viewModel.onEditNoteClick(it) },
-            onDeleteItemClickListener = ListItemClickListener { viewModel.onDeleteNoteClick(it) },
-            onItemLongClickListener = ListItemClickListener { viewModel.onNoteLongClick(it) }
+            ListItemClickListener { viewModel.onNoteLongClick(it) }
         )
         binding.noteListView.adapter = mainNoteListAdapter
         viewModel.noteList.observe(viewLifecycleOwner) { noteList ->
@@ -62,22 +59,6 @@ class MainNotesFragment : BaseFragment() {
             negativeButtonRes = R.string.cancel,
             onConfirmed = viewModel::onClearNoteListConfirmed,
             onCancelled = viewModel::onClearNoteListCancelled
-        )
-    }
-
-    private fun setupDeleteNoteConfirmationDialog() {
-        viewModel.showDeleteNoteConfirmationDialog.observe(viewLifecycleOwner) { noteId ->
-            if(noteId != null) showDeleteNoteConfirmationDialog(noteId)
-        }
-    }
-
-    private fun showDeleteNoteConfirmationDialog(noteId: Long) {
-        showDefaultConfirmationDialog(
-            messageRes = R.string.delete_note_confirmation,
-            positiveButtonTextRes = R.string.delete,
-            negativeButtonRes = R.string.cancel,
-            onConfirmed = { viewModel.onDeleteNoteConfirmed(noteId) },
-            onCancelled = viewModel::onDeleteNoteCancelled
         )
     }
 

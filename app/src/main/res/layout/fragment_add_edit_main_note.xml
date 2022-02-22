@@ -14,31 +14,23 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <ScrollView
-            android:id="@+id/addNoteInputContainer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/buttonsContainer"
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            app:layout_constraintTop_toTopOf="@id/addEditButtonsContainer"
+            app:layout_constraintBottom_toBottomOf="@id/addEditButtonsContainer"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/buttonsContainer"
-            android:layout_marginTop="6dp">
-            <EditText
-                android:id="@+id/addNoteInput"
-                style="@style/Input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:text="@={viewModel.noteText}"
-                android:hint="@string/write_a_note" />
-        </ScrollView>
+            android:background="@drawable/icon_delete_red"
+            android:onClick="@{() -> viewModel.onDeleteNoteClick()}"
+            app:booleanVisibility="@{!viewModel.isAddButtonVisible}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/buttonsContainer"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:id="@+id/addEditButtonsContainer"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-
             <ImageView
                 android:id="@+id/addButton"
                 android:layout_width="match_parent"
@@ -54,8 +46,23 @@
                 android:src="@drawable/icon_check_green"
                 android:onClick="@{() -> viewModel.onSaveNoteClick()}"
                 app:booleanVisibility="@{!viewModel.isAddButtonVisible}" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/addNoteInputContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addEditButtonsContainer"
+            android:layout_marginTop="16dp">
+            <EditText
+                android:id="@+id/addNoteInput"
+                style="@style/Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="@={viewModel.noteText}"
+                android:hint="@string/write_a_note" />
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

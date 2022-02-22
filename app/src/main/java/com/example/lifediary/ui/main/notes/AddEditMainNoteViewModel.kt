@@ -25,6 +25,10 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 	val inputNeedsFocus: LiveData<Boolean>
 		get() = _inputNeedsFocus
 
+	private val _showDeleteNoteConfirmationDialog = MutableLiveData<Long?>(null)
+	val showDeleteNoteConfirmationDialog: LiveData<Long?>
+		get() = _showDeleteNoteConfirmationDialog
+
 	init {
 		bindScope()
 		substituteNoteTextInInput()
@@ -77,6 +81,30 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 				showMessage(Text.TextResource(R.string.failed_to_save))
 			}
 		}
+	}
+
+	fun onDeleteNoteClick() {
+		_showDeleteNoteConfirmationDialog.value = noteId
+	}
+
+	fun onDeleteNoteConfirmed(noteId: Long) {
+		_showDeleteNoteConfirmationDialog.value = null
+		deleteNote(noteId)
+	}
+
+	private fun deleteNote(noteId: Long) {
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				notesRepository.deleteNote(noteId)
+				router.exit()
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.deleting_item_error))
+			}
+		}
+	}
+
+	fun onDeleteNoteCancelled() {
+		_showDeleteNoteConfirmationDialog.value = null
 	}
 
 	class Factory(private val noteId: Long?) : ViewModelProvider.Factory {
