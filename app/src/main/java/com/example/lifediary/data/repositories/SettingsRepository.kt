@@ -21,6 +21,10 @@ class SettingsRepository @Inject constructor(
         localDataSource.setMemorableDatesSectionEnabled(isEnabled)
     }
 
+    suspend fun setWomanSectionEnabled(isEnabled: Boolean) {
+        localDataSource.setWomanSectionEnabled(isEnabled)
+    }
+
     fun getShoppingListSectionEnabled(): LiveData<Boolean> {
         return localDataSource.getShoppingListSectionEnabled()
     }
@@ -31,5 +35,9 @@ class SettingsRepository @Inject constructor(
 
     fun getMemorableDatesSectionEnabled(): LiveData<Boolean> {
         return localDataSource.getMemorableDatesSectionEnabled()
+    }
+
+    fun getWomanSectionEnabled(): LiveData<Boolean> {
+        return localDataSource.getWomanSectionEnabled()
     }
 }

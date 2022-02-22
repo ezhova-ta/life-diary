@@ -58,6 +58,7 @@
     <string name="display_section_shopping_list">Display section Shopping list</string>
     <string name="display_section_post_addresses">Display section Post addresses</string>
     <string name="display_section_memorable_dates">Display section Memorable dates</string>
+    <string name="display_section_for_women">Display section For women</string>
     <string name="calendar">Calendar</string>
     <string name="main_screen">Main screen</string>
     <string name="clear_notes_in_calendar">Clear calendar notes</string>
@@ -89,4 +90,5 @@
     <string name="to_do_list_channel">To-do list channel</string>
     <string name="you_have_scheduled_for_today">You have scheduled for today:</string>
     <string name="channel_to_remind_about_to_do_list">Channel to remind you about the to-do list for the current day</string>
+    <string name="for_women">For women</string>
 </resources>

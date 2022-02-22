@@ -47,6 +47,9 @@ class SettingsFragment : BaseFragment() {
         binding.memorableDatesSectionSwitch.setOnCheckedChangeListener { _, isChecked ->
             viewModel.onMemorableDatesSectionEnabledChanged(isChecked)
         }
+        binding.womanSectionSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.onWomenSectionEnabledChanged(isChecked)
+        }
     }
 
     private fun setupClearCalendarNotesConfirmationDialog() {

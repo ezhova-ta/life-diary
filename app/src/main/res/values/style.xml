@@ -113,4 +113,8 @@
     <style name="Text.MainScreenSection.MemorableDates">
         <item name="android:background">@drawable/background_main_screen_memorable_dates_section</item>
     </style>
+
+    <style name="Text.MainScreenSection.WomanSection">
+        <item name="android:background">@drawable/background_main_screen_woman_section</item>
+    </style>
 </resources>

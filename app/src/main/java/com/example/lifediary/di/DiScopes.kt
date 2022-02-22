@@ -10,4 +10,5 @@ object DiScopes {
     const val MEMORABLE_DATES_SCOPE = "memorable_dates_scope"
     const val POST_ADDRESSES_SCOPE = "post_addresses_scope"
     const val SHOPPING_LIST_SCOPE = "shopping_list_scope"
+    const val WOMAN_SECTION_SCOPE = "woman_section_scope"
 }

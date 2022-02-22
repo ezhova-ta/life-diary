@@ -13,6 +13,7 @@ import com.example.lifediary.ui.post_addresses.AddEditPostAddressFragment
 import com.example.lifediary.ui.post_addresses.PostAddressesFragment
 import com.example.lifediary.ui.settings.SettingsFragment
 import com.example.lifediary.ui.shopping_list.ShoppingListFragment
+import com.example.lifediary.ui.woman_section.WomanSectionFragment
 import com.example.lifediary.utils.Day
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
@@ -38,4 +39,6 @@ object Screens {
         FragmentScreen { AddEditMemorableDateFragment.getInstance(dateId) }
     fun getAddEditMemorableDateFragment() =
         FragmentScreen { AddEditMemorableDateFragment.getInstance(null) }
+    fun getWomanSectionScreen() =
+        FragmentScreen { WomanSectionFragment.getInstance() }
 }

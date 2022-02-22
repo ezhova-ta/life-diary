@@ -20,6 +20,10 @@ class SettingsLocalDataSource @Inject constructor(
         settingsDataStoreManager.setMemorableDatesSectionEnabled(isEnabled)
     }
 
+    suspend fun setWomanSectionEnabled(isEnabled: Boolean) {
+        settingsDataStoreManager.setWomanSectionEnabled(isEnabled)
+    }
+
     fun getShoppingListSectionEnabled(): LiveData<Boolean> {
         return settingsDataStoreManager.isShoppingListSectionEnabled.asLiveData()
     }
@@ -30,5 +34,9 @@ class SettingsLocalDataSource @Inject constructor(
 
     fun getMemorableDatesSectionEnabled(): LiveData<Boolean> {
         return settingsDataStoreManager.isMemorableDatesSectionEnabled.asLiveData()
+    }
+
+    fun getWomanSectionEnabled(): LiveData<Boolean> {
+        return settingsDataStoreManager.isWomanSectionEnabled.asLiveData()
     }
 }

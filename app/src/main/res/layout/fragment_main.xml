@@ -126,5 +126,17 @@
             android:onClick="@{() -> viewModel.onMemorableDatesClick()}"
             app:booleanVisibility="@{viewModel.isMemorableDatesSectionVisible()}" />
 
+        <TextView
+            android:id="@+id/womanSectionView"
+            style="@style/Text.MainScreenSection.WomanSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/memorableDatesView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:text="@string/for_women"
+            android:onClick="@{() -> viewModel.onWomanSectionClick()}"
+            app:booleanVisibility="@{viewModel.isWomanSectionVisible()}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

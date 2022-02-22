@@ -25,6 +25,7 @@ class MainViewModel : BaseViewModel() {
     val isShoppingListSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getShoppingListSectionEnabled() }
     val isPostAddressesSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getPostAddressesSectionEnabled() }
     val isMemorableDatesSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getMemorableDatesSectionEnabled() }
+    val isWomanSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getWomanSectionEnabled() }
 
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
@@ -92,6 +93,10 @@ class MainViewModel : BaseViewModel() {
 
     fun onMemorableDatesClick() {
         router.navigateTo(Screens.getMemorableDatesFragment())
+    }
+
+    fun onWomanSectionClick() {
+        router.navigateTo(Screens.getWomanSectionScreen())
     }
 
     override fun onCleared() {

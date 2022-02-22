@@ -57,6 +57,7 @@
     <string name="display_section_shopping_list">Отображать раздел Список покупок</string>
     <string name="display_section_post_addresses">Отображать раздел Почтовые адреса</string>
     <string name="display_section_memorable_dates">Отображать раздел Памятные даты</string>
+    <string name="display_section_for_women">Отображать раздел Для женщин</string>
     <string name="calendar">Календарь</string>
     <string name="main_screen">Главный экран</string>
     <string name="clear_notes_in_calendar">Очистить заметки в календаре</string>
@@ -88,4 +89,5 @@
     <string name="to_do_list_channel">Канал для списка дел</string>
     <string name="you_have_scheduled_for_today">Вы запланировали на сегодня:</string>
     <string name="channel_to_remind_about_to_do_list">Канал для напоминания о списке дел на текущий день</string>
+    <string name="for_women">Для женщин</string>
 </resources>
