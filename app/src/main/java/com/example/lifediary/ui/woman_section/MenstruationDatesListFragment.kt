@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.R
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.MenstruationDatesListAdapter
 import com.example.lifediary.databinding.FragmentMenstruationDatesListBinding
@@ -31,6 +32,7 @@ class MenstruationDatesListFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupMenstruationDatesListRecycler()
+        setupClearMenstruationDatesListConfirmationDialog()
         return binding.root
     }
 
@@ -42,6 +44,22 @@ class MenstruationDatesListFragment : BaseFragment() {
         viewModel.menstruationDatesList.observe(viewLifecycleOwner) { menstruationDatesList ->
             menstruationDatesListAdapter.submitList(menstruationDatesList)
         }
+    }
+
+    private fun setupClearMenstruationDatesListConfirmationDialog() {
+        viewModel.showClearMenstruationDatesListConfirmationDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showClearMenstruationDatesListConfirmationDialog()
+        }
+    }
+
+    private fun showClearMenstruationDatesListConfirmationDialog() {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.clear_menstruation_dates_list_confirmation,
+            positiveButtonTextRes = R.string.clear,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = viewModel::onClearMenstruationDatesListConfirmed,
+            onCancelled = viewModel::onClearMenstruationDatesListCancelled
+        )
     }
 
     override fun onDestroyView() {

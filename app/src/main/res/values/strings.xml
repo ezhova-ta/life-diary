@@ -11,6 +11,7 @@
     <string name="delete_post_address_confirmation">Are you sure you want to delete this address?</string>
     <string name="clear_memorable_dates_confirmation">Are you sure you want to delete all dates?</string>
     <string name="delete_memorable_date_confirmation">Are you sure you want to delete this date?</string>
+    <string name="clear_menstruation_dates_list_confirmation">Are you sure you want to clear menstruation list?</string>
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
