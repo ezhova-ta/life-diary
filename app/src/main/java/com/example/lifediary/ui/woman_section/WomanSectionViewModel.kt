@@ -3,14 +3,28 @@ package com.example.lifediary.ui.woman_section
 import androidx.core.util.Pair
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
+import com.example.lifediary.R
+import com.example.lifediary.data.domain.MenstruationDates
+import com.example.lifediary.data.repositories.MenstruationDatesRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.Text
 import com.example.lifediary.utils.toCalendar
-import com.example.lifediary.utils.toDateString
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import toothpick.Toothpick
+import javax.inject.Inject
 
 class WomanSectionViewModel : BaseViewModel() {
-    val addedMenstruationDates = MutableLiveData<String>()
+    @Inject lateinit var menstruationDatesRepository: MenstruationDatesRepository
+    val menstruationDatesList: LiveData<List<MenstruationDates>> by lazy {
+        menstruationDatesRepository.getAllMenstruationDates()
+    }
+    val lastMenstruationDates: LiveData<MenstruationDates?> by lazy {
+        menstruationDatesList.map { it.maxByOrNull { it.startDate } }
+    }
 
     private val _showMenstruationDatesPicker = MutableLiveData(false)
     val showMenstruationDatesPicker: LiveData<Boolean>
@@ -34,11 +48,25 @@ class WomanSectionViewModel : BaseViewModel() {
     }
 
     fun onMenstruationDatesSelected(dates: Pair<Long, Long>) {
-        // TODO Save dates to DB
-        val startDateString = dates.first.toCalendar().toDateString()
-        val endDateString = dates.second.toCalendar().toDateString()
-        val datesString = "$startDateString - $endDateString"
-        addedMenstruationDates.value = datesString
+        addMenstruationDates(dates)
         _showMenstruationDatesPicker.value = false
+    }
+
+    private fun addMenstruationDates(dates: Pair<Long, Long>) {
+        val menstruationDates = MenstruationDates(
+            startDate = dates.first.toCalendar(),
+            endDate = dates.second.toCalendar()
+        )
+        addMenstruationDates(menstruationDates)
+    }
+
+    private fun addMenstruationDates(dates: MenstruationDates) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                menstruationDatesRepository.addMenstruationDates(dates)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.failed_to_save))
+            }
+        }
     }
 }

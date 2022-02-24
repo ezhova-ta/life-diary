@@ -6,7 +6,7 @@ import com.example.lifediary.data.db.entities.MenstruationDatesEntity
 
 @Dao
 interface MenstruationDatesDao {
-    @Query("SELECT * FROM menstruation_dates")
+    @Query("SELECT * FROM menstruation_dates ORDER BY start_date DESC")
     fun getAll(): LiveData<List<MenstruationDatesEntity>>
 
     @Query("SELECT * FROM menstruation_dates WHERE id = :id")
