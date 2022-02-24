@@ -1,5 +1,6 @@
 package com.example.lifediary.ui.woman_section
 
+import androidx.core.util.Pair
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.R
@@ -8,6 +9,7 @@ import com.example.lifediary.data.repositories.MenstruationDatesRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
+import com.example.lifediary.utils.toCalendar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,6 +29,10 @@ class MenstruationDatesListViewModel : BaseViewModel() {
     private val _showClearMenstruationDatesListConfirmationDialog = MutableLiveData(false)
     val showClearMenstruationDatesListConfirmationDialog: LiveData<Boolean>
         get() = _showClearMenstruationDatesListConfirmationDialog
+
+    private val _showMenstruationDatesPicker = MutableLiveData(false)
+    val showMenstruationDatesPicker: LiveData<Boolean>
+        get() = _showMenstruationDatesPicker
 
     init {
         bindScope()
@@ -81,5 +87,36 @@ class MenstruationDatesListViewModel : BaseViewModel() {
 
     fun onClearMenstruationDatesListCancelled() {
         _showClearMenstruationDatesListConfirmationDialog.value = false
+    }
+
+    fun onAddMenstruationClick() {
+        _showMenstruationDatesPicker.value = true
+    }
+
+    fun onMenstruationDatesSelected(dates: Pair<Long, Long>) {
+        addMenstruationDates(dates)
+        _showMenstruationDatesPicker.value = false
+    }
+
+    private fun addMenstruationDates(dates: Pair<Long, Long>) {
+        val menstruationDates = MenstruationDates(
+            startDate = dates.first.toCalendar(),
+            endDate = dates.second.toCalendar()
+        )
+        addMenstruationDates(menstruationDates)
+    }
+
+    private fun addMenstruationDates(dates: MenstruationDates) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                menstruationDatesRepository.addMenstruationDates(dates)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.failed_to_save))
+            }
+        }
+    }
+
+    fun onMenstruationDatesPickerCancelled() {
+        _showMenstruationDatesPicker.value = false
     }
 }

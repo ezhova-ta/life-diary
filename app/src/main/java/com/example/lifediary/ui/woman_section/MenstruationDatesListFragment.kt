@@ -11,6 +11,7 @@ import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.MenstruationDatesListAdapter
 import com.example.lifediary.databinding.FragmentMenstruationDatesListBinding
 import com.example.lifediary.ui.BaseFragment
+import com.google.android.material.datepicker.MaterialDatePicker
 
 class MenstruationDatesListFragment : BaseFragment() {
     override val viewModel: MenstruationDatesListViewModel by viewModels()
@@ -34,6 +35,7 @@ class MenstruationDatesListFragment : BaseFragment() {
         setupMenstruationDatesListRecycler()
         setupDeleteMenstruationDatesConfirmationDialog()
         setupClearMenstruationDatesListConfirmationDialog()
+        setupMenstruationDatesPickerShowing()
         return binding.root
     }
 
@@ -77,6 +79,29 @@ class MenstruationDatesListFragment : BaseFragment() {
             onConfirmed = viewModel::onClearMenstruationDatesListConfirmed,
             onCancelled = viewModel::onClearMenstruationDatesListCancelled
         )
+    }
+
+    private fun setupMenstruationDatesPickerShowing() {
+        viewModel.showMenstruationDatesPicker.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow) showMenstruationDatesPicker()
+        }
+    }
+
+    private fun showMenstruationDatesPicker() {
+        MaterialDatePicker
+            .Builder
+            .dateRangePicker()
+            .setTitleText(R.string.select_time_interval)
+            .build()
+            .apply {
+                addOnPositiveButtonClickListener { dates -> viewModel.onMenstruationDatesSelected(dates) }
+                addOnNegativeButtonClickListener { viewModel.onMenstruationDatesPickerCancelled() }
+                addOnCancelListener { viewModel.onMenstruationDatesPickerCancelled() }
+                addOnDismissListener { viewModel.onMenstruationDatesPickerCancelled() }
+            }
+            .show(requireActivity().supportFragmentManager,
+                WomanSectionFragment.DATE_PICKER_FRAGMENT_TAG
+            )
     }
 
     override fun onDestroyView() {

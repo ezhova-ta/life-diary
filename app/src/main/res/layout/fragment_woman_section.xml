@@ -44,15 +44,5 @@
             android:background="@drawable/icon_list_blue"
             android:onClick="@{() -> viewModel.onShowMenstruationDatesListClick()}" />
 
-        <Button
-            android:id="@+id/addMenstruationDatesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{() -> viewModel.onAddMenstruationClick()}"
-            android:text="@string/add_menstruation_dates" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
