@@ -7,7 +7,7 @@ import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.data.db.entities.*
 
 @Database(
-    version = 15,
+    version = 16,
     exportSchema = true,
     entities = [
         ShoppingListItemEntity::class,
@@ -17,13 +17,15 @@ import com.example.lifediary.data.db.entities.*
         PostAddressEntity::class,
         MainNoteEntity::class,
         ToDoListItemEntity::class,
-        MemorableDateEntity::class
+        MemorableDateEntity::class,
+        MenstruationDatesEntity::class
     ],
     autoMigrations = [
         AutoMigration(from = 11, to = 12),
         AutoMigration(from = 12, to = 13),
         AutoMigration(from = 13, to = 14),
-        AutoMigration(from = 14, to = 15)
+        AutoMigration(from = 14, to = 15),
+        AutoMigration(from = 15, to = 16)
     ]
 )
 abstract class MainDataBase : RoomDatabase() {
@@ -39,4 +41,5 @@ abstract class MainDataBase : RoomDatabase() {
     abstract fun postAddressDao(): PostAddressDao
     abstract fun toDoListDao(): ToDoListDao
     abstract fun memorableDateDao(): MemorableDateDao
+    abstract fun menstruationDatesDao(): MenstruationDatesDao
 }
