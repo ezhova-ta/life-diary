@@ -2,11 +2,11 @@ package com.example.lifediary.di
 
 import android.content.Context
 import com.example.lifediary.LifeDiaryApplication
+import com.example.lifediary.NotificationScheduler
 import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
 import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.di.providers.*
-import com.example.lifediary.NotificationScheduler
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import okhttp3.OkHttpClient
@@ -30,6 +30,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(PostAddressDao::class.java).toProvider(PostAddressDaoProvider::class.java)
         bind(ToDoListDao::class.java).toProvider(ToDoListDaoProvider::class.java)
         bind(MemorableDateDao::class.java).toProvider(MemorableDateDaoProvider::class.java)
+        bind(MenstruationDatesDao::class.java).toProvider(MenstruationDatesDaoProvider::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())
