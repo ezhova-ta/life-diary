@@ -12,6 +12,12 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="Text.ScreenSubtitle" />
+
+    <style name="Text.MediumGray">
+        <item name="android:textColor">@color/app_medium_gray</item>
+    </style>
+
     <style name="Text.SettingsTitle">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/app_blue</item>
