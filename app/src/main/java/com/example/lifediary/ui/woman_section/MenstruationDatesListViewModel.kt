@@ -20,6 +20,10 @@ class MenstruationDatesListViewModel : BaseViewModel() {
         menstruationDatesRepository.getAllMenstruationDates()
     }
 
+    private val _showDeleteMenstruationDatesConfirmationDialog = MutableLiveData<Long?>(null)
+    val showDeleteMenstruationDatesConfirmationDialog: LiveData<Long?>
+        get() = _showDeleteMenstruationDatesConfirmationDialog
+
     private val _showClearMenstruationDatesListConfirmationDialog = MutableLiveData(false)
     val showClearMenstruationDatesListConfirmationDialog: LiveData<Boolean>
         get() = _showClearMenstruationDatesListConfirmationDialog
@@ -34,7 +38,26 @@ class MenstruationDatesListViewModel : BaseViewModel() {
     }
 
     fun onDeleteMenstruationDatesClick(dates: MenstruationDates) {
-        TODO()
+        _showDeleteMenstruationDatesConfirmationDialog.value = dates.id
+    }
+
+    fun onDeleteMenstruationDatesConfirmed(datesId: Long) {
+        _showDeleteMenstruationDatesConfirmationDialog.value = null
+        deleteMenstruationDates(datesId)
+    }
+
+    private fun deleteMenstruationDates(datesId: Long) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                menstruationDatesRepository.deleteMenstruationDates(datesId)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.deleting_item_error))
+            }
+        }
+    }
+
+    fun onDeleteMenstruationDatesCancelled() {
+        _showDeleteMenstruationDatesConfirmationDialog.value = null
     }
 
     fun onClearMenstruationDatesListClick() {

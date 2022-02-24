@@ -32,6 +32,7 @@ class MenstruationDatesListFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupMenstruationDatesListRecycler()
+        setupDeleteMenstruationDatesConfirmationDialog()
         setupClearMenstruationDatesListConfirmationDialog()
         return binding.root
     }
@@ -44,6 +45,22 @@ class MenstruationDatesListFragment : BaseFragment() {
         viewModel.menstruationDatesList.observe(viewLifecycleOwner) { menstruationDatesList ->
             menstruationDatesListAdapter.submitList(menstruationDatesList)
         }
+    }
+
+    private fun setupDeleteMenstruationDatesConfirmationDialog() {
+        viewModel.showDeleteMenstruationDatesConfirmationDialog.observe(viewLifecycleOwner) { datesId ->
+            if(datesId != null) showDeleteMenstruationDatesConfirmationDialog(datesId)
+        }
+    }
+
+    private fun showDeleteMenstruationDatesConfirmationDialog(datesId: Long) {
+        showDefaultConfirmationDialog(
+            messageRes = R.string.delete_menstruation_dates_confirmation,
+            positiveButtonTextRes = R.string.delete,
+            negativeButtonRes = R.string.cancel,
+            onConfirmed = { viewModel.onDeleteMenstruationDatesConfirmed(datesId) },
+            onCancelled = viewModel::onDeleteMenstruationDatesCancelled
+        )
     }
 
     private fun setupClearMenstruationDatesListConfirmationDialog() {
