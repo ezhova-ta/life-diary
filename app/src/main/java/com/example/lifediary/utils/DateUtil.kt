@@ -7,12 +7,12 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
 
-const val DATE_FORMAT_WITH_YEAR = "dd.MM.yyyy"
-const val DATE_FORMAT_WITHOUT_YEAR = "dd.MM"
-const val DATE_TIME_FORMAT_WITH_MILLIS = "dd.MM.yyyy HH:mm:ss"
-const val DATE_TIME_FORMAT_WITHOUT_MILLIS = "dd.MM.yyyy HH:mm"
-const val TIME_FORMAT_WITH_MILLIS = "HH:mm:ss"
-const val TIME_FORMAT_WITHOUT_MILLIS = "HH:mm"
+private const val DATE_FORMAT_WITH_YEAR = "dd.MM.yyyy"
+private const val DATE_FORMAT_WITHOUT_YEAR = "dd.MM"
+private const val DATE_TIME_FORMAT_WITH_MILLIS = "dd.MM.yyyy HH:mm:ss"
+private const val DATE_TIME_FORMAT_WITHOUT_MILLIS = "dd.MM.yyyy HH:mm"
+private const val TIME_FORMAT_WITH_MILLIS = "HH:mm:ss"
+private const val TIME_FORMAT_WITHOUT_MILLIS = "HH:mm"
 
 fun Calendar.toLong(): Long {
     return timeInMillis
