@@ -90,4 +90,6 @@
     <string name="you_have_scheduled_for_today">Вы запланировали на сегодня:</string>
     <string name="channel_to_remind_about_to_do_list">Канал для напоминания о списке дел на текущий день</string>
     <string name="for_women">Для женщин</string>
+    <string name="select_time_interval">Выберите отрезок времени</string>
+    <string name="add_menstruation_dates">Добавить даты менструации</string>
 </resources>

@@ -1,13 +1,16 @@
 package com.example.lifediary.ui.woman_section
 
+import androidx.core.util.Pair
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
-import com.github.terrakok.cicerone.Router
 import toothpick.Toothpick
-import javax.inject.Inject
 
 class WomanSectionViewModel : BaseViewModel() {
-    @Inject lateinit var router: Router
+    private val _showMenstruationDatesPicker = MutableLiveData(false)
+    val showMenstruationDatesPicker: LiveData<Boolean>
+        get() = _showMenstruationDatesPicker
 
     init {
         bindScope()
@@ -16,5 +19,18 @@ class WomanSectionViewModel : BaseViewModel() {
     override fun bindScope() {
         val womanSectionScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.WOMAN_SECTION_SCOPE)
         Toothpick.inject(this, womanSectionScope)
+    }
+
+    fun onAddMenstruationClick() {
+        _showMenstruationDatesPicker.value = true
+    }
+
+    fun onCancelMenstruationDatesPicker() {
+        _showMenstruationDatesPicker.value = false
+    }
+
+    fun onMenstruationDatesSelected(dates: Pair<Long, Long>) {
+        // TODO
+        _showMenstruationDatesPicker.value = false
     }
 }
