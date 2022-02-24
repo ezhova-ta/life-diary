@@ -16,21 +16,33 @@
         <TextView
             android:id="@+id/lastMenstruationTitle"
             style="@style/Text.ScreenSubtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/menstruationDatesListButton"
             android:text="@string/last_menstruation" />
 
         <TextView
             android:id="@+id/lastMenstruationDates"
             style="@style/Text.MediumGray"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/lastMenstruationTitle"
             app:layout_constraintStart_toStartOf="@id/lastMenstruationTitle"
+            app:layout_constraintEnd_toStartOf="@id/menstruationDatesListButton"
             tools:text="19.02.2022 - 24.02.2022"
             android:text="@{viewModel.lastMenstruationDates.toOutputFormattedString()}" />
+
+        <ImageButton
+            android:id="@+id/menstruationDatesListButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="@id/lastMenstruationTitle"
+            app:layout_constraintBottom_toBottomOf="@id/lastMenstruationDates"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/icon_list_blue"
+            android:onClick="@{() -> viewModel.onShowMenstruationDatesListClick()}" />
 
         <Button
             android:id="@+id/addMenstruationDatesButton"
