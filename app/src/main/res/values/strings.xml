@@ -92,7 +92,7 @@
     <string name="to_do_list_channel">To-do list channel</string>
     <string name="you_have_scheduled_for_today">You have scheduled for today:</string>
     <string name="channel_to_remind_about_to_do_list">Channel to remind you about the to-do list for the current day</string>
-    <string name="for_women">For women</string>
+    <string name="section_for_women">Section for women</string>
     <string name="select_time_interval">Select time interval</string>
     <string name="last_menstruation">Last menstruation:</string>
     <string name="menses">Menses</string>

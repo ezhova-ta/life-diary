@@ -91,7 +91,7 @@
     <string name="to_do_list_channel">Канал для списка дел</string>
     <string name="you_have_scheduled_for_today">Вы запланировали на сегодня:</string>
     <string name="channel_to_remind_about_to_do_list">Канал для напоминания о списке дел на текущий день</string>
-    <string name="for_women">Для женщин</string>
+    <string name="section_for_women">Раздел для женщин</string>
     <string name="select_time_interval">Выберите отрезок времени</string>
     <string name="last_menstruation">Последняя менструация:</string>
     <string name="menses">Менструации</string>

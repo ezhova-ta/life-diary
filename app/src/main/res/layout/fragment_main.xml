@@ -134,7 +134,7 @@
             app:layout_constraintTop_toBottomOf="@id/memorableDatesView"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"
-            android:text="@string/for_women"
+            android:text="@string/section_for_women"
             android:onClick="@{() -> viewModel.onWomanSectionClick()}"
             app:booleanVisibility="@{viewModel.isWomanSectionVisible()}" />
 
