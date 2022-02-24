@@ -93,4 +93,5 @@
     <string name="for_women">For women</string>
     <string name="select_time_interval">Select time interval</string>
     <string name="add_menstruation_dates">Add menstruation dates</string>
+    <string name="last_menstruation">Last menstruation:</string>
 </resources>

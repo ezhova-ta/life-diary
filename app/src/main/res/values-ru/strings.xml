@@ -92,4 +92,5 @@
     <string name="for_women">Для женщин</string>
     <string name="select_time_interval">Выберите отрезок времени</string>
     <string name="add_menstruation_dates">Добавить даты менструации</string>
+    <string name="last_menstruation">Последняя менструация:</string>
 </resources>

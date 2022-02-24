@@ -25,12 +25,7 @@ fun Long.toCalendar(): Calendar {
 }
 
 fun Day.toDateString(withYear: Boolean = true): String {
-    val format = if(withYear) {
-        SimpleDateFormat(DATE_FORMAT_WITH_YEAR, Locale.getDefault())
-    } else {
-        SimpleDateFormat(DATE_FORMAT_WITHOUT_YEAR, Locale.getDefault())
-    }
-    return format.format(this.toCalendar().time)
+    return toCalendar().toDateString(withYear)
 }
 
 fun Day.toDateTimeString(withMilliseconds: Boolean = false): String {
@@ -43,6 +38,14 @@ fun Calendar.toTimeString(withMilliseconds: Boolean = false): String {
     val pattern = if(withMilliseconds) TIME_FORMAT_WITH_MILLIS else TIME_FORMAT_WITHOUT_MILLIS
     val format = SimpleDateFormat(pattern, Locale.getDefault())
     return format.format(this.time)
+}
+
+fun Calendar.toDateString(withYear: Boolean = true): String {
+    val format = SimpleDateFormat(
+        if(withYear) DATE_FORMAT_WITH_YEAR else DATE_FORMAT_WITHOUT_YEAR,
+        Locale.getDefault()
+    )
+    return format.format(time)
 }
 
 fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {

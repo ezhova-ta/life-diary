@@ -5,9 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.toCalendar
+import com.example.lifediary.utils.toDateString
 import toothpick.Toothpick
 
 class WomanSectionViewModel : BaseViewModel() {
+    val addedMenstruationDates = MutableLiveData<String>()
+
     private val _showMenstruationDatesPicker = MutableLiveData(false)
     val showMenstruationDatesPicker: LiveData<Boolean>
         get() = _showMenstruationDatesPicker
@@ -30,7 +34,11 @@ class WomanSectionViewModel : BaseViewModel() {
     }
 
     fun onMenstruationDatesSelected(dates: Pair<Long, Long>) {
-        // TODO
+        // TODO Save dates to DB
+        val startDateString = dates.first.toCalendar().toDateString()
+        val endDateString = dates.second.toCalendar().toDateString()
+        val datesString = "$startDateString - $endDateString"
+        addedMenstruationDates.value = datesString
         _showMenstruationDatesPicker.value = false
     }
 }
