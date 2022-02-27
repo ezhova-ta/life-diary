@@ -31,6 +31,9 @@ class DurationOfMenstrualCycleDialog: DialogFragment() {
 	private fun setupDurationPicker() {
 		binding.durationPicker.minValue = 15
 		binding.durationPicker.maxValue = 50
+		viewModel.durationOfMenstrualCycle.value?.let { durationOfMenstrualCycle ->
+			setDurationPickerValue(durationOfMenstrualCycle)
+		}
 	}
 
 	private fun createDialog(): AlertDialog {
@@ -49,6 +52,10 @@ class DurationOfMenstrualCycleDialog: DialogFragment() {
 
 	private fun getDurationPickerValue(): Int =
 		binding.durationPicker.value
+
+	private fun setDurationPickerValue(value: Int) {
+		binding.durationPicker.value = value
+	}
 
 	override fun onDestroyView() {
 		super.onDestroyView()
