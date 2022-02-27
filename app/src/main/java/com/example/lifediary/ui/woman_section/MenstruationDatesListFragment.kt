@@ -19,6 +19,8 @@ class MenstruationDatesListFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     companion object {
+        const val DATE_PICKER_FRAGMENT_TAG = "com.example.lifediary.ui.woman_section.date_picker"
+
         fun getInstance(): Fragment {
             return MenstruationDatesListFragment()
         }
@@ -100,7 +102,7 @@ class MenstruationDatesListFragment : BaseFragment() {
                 addOnDismissListener { viewModel.onMenstruationDatesPickerCancelled() }
             }
             .show(requireActivity().supportFragmentManager,
-                WomanSectionFragment.DATE_PICKER_FRAGMENT_TAG
+                DATE_PICKER_FRAGMENT_TAG
             )
     }
 

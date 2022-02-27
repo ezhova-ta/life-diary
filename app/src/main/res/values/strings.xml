@@ -16,7 +16,7 @@
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="delete">Delete</string>
-    <string name="ok">Хорошо</string>
+    <string name="ok">OK</string>
     <string name="what_do_you_want_to_buy">What to buy?</string>
     <string name="enter_ful_name_your_location">Enter the full name of your location:</string>
     <string name="for_example_st_petersburg">For example, St. Petersburg</string>
@@ -60,7 +60,7 @@
     <string name="display_section_shopping_list">Display section Shopping list</string>
     <string name="display_section_post_addresses">Display section Post addresses</string>
     <string name="display_section_memorable_dates">Display section Memorable dates</string>
-    <string name="display_section_for_women">Display section For women</string>
+    <string name="display_section_for_women">Display section for women</string>
     <string name="calendar">Calendar</string>
     <string name="main_screen">Main screen</string>
     <string name="clear_notes_in_calendar">Clear calendar notes</string>
@@ -96,4 +96,7 @@
     <string name="select_time_interval">Select time interval</string>
     <string name="last_menstruation">Last menstruation:</string>
     <string name="menses">Menses</string>
+    <string name="length_of_menstrual_cycle">Length of menstrual cycle:</string>
+    <string name="n_days">%d days</string>
+    <string name="set">Set</string>
 </resources>

@@ -16,7 +16,7 @@
     <string name="cancel">Закрыть</string>
     <string name="clear">Очистить</string>
     <string name="delete">Удалить</string>
-    <string name="ok">OK</string>
+    <string name="ok">Хорошо</string>
     <string name="what_do_you_want_to_buy">Что купить?</string>
     <string name="enter_ful_name_your_location">Введите полное название вашего местоположения:</string>
     <string name="for_example_st_petersburg">Например, Санкт-Петербург</string>
@@ -59,7 +59,7 @@
     <string name="display_section_shopping_list">Отображать раздел Список покупок</string>
     <string name="display_section_post_addresses">Отображать раздел Почтовые адреса</string>
     <string name="display_section_memorable_dates">Отображать раздел Памятные даты</string>
-    <string name="display_section_for_women">Отображать раздел Для женщин</string>
+    <string name="display_section_for_women">Отображать раздел для женщин</string>
     <string name="calendar">Календарь</string>
     <string name="main_screen">Главный экран</string>
     <string name="clear_notes_in_calendar">Очистить заметки в календаре</string>
@@ -95,4 +95,7 @@
     <string name="select_time_interval">Выберите отрезок времени</string>
     <string name="last_menstruation">Последняя менструация:</string>
     <string name="menses">Менструации</string>
+    <string name="length_of_menstrual_cycle">Продолжительность менструального цикла:</string>
+    <string name="n_days">%d дн.</string>
+    <string name="set">Задать</string>
 </resources>
