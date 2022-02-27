@@ -9,11 +9,13 @@ import com.example.lifediary.data.repositories.WomanSectionRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
+import com.example.lifediary.utils.isDayAfter
 import com.example.lifediary.utils.toCalendar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
+import java.util.*
 import javax.inject.Inject
 
 class MenstruationDatesListViewModel : BaseViewModel() {
@@ -107,6 +109,13 @@ class MenstruationDatesListViewModel : BaseViewModel() {
     }
 
     private fun addMenstruationDates(dates: MenstruationDates) {
+        val today = Calendar.getInstance()
+
+        if(dates.startDate.isDayAfter(today)) {
+            showMessage(Text.TextResource(R.string.start_menstruation_must_be_no_later_than_today))
+            return
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 womanSectionRepository.addMenstruationDates(dates)

@@ -98,4 +98,5 @@
     <string name="duration_of_menstrual_cycle">Продолжительность менструального цикла:</string>
     <string name="n_days">%d дн.</string>
     <string name="set">Задать</string>
+    <string name="start_menstruation_must_be_no_later_than_today">Дата начала менструации должна быть не позднее, чем сегодня</string>
 </resources>

@@ -88,6 +88,16 @@ private fun Calendar.getMonthNumber(): Int {
     return get(Calendar.MONTH) + 1
 }
 
+fun Calendar.isSameDay(date: Calendar): Boolean {
+    return get(Calendar.DATE) == date.get(Calendar.DATE) &&
+           get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
+           get(Calendar.YEAR) == date.get(Calendar.YEAR)
+}
+
+fun Calendar.isDayAfter(date: Calendar): Boolean {
+    return timeInMillis > date.timeInMillis && !isSameDay(date)
+}
+
 fun CalendarDay.toDomain(): Day {
     return Day(date.dayOfMonth, date.monthValue, date.year)
 }
