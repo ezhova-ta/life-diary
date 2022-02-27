@@ -47,38 +47,38 @@
             android:onClick="@{() -> viewModel.onShowMenstruationDatesListClick()}" />
 
         <TextView
-            android:id="@+id/lengthOfMenstrualCycleTitle"
+            android:id="@+id/durationOfMenstrualCycleTitle"
             style="@style/Text.ScreenSubtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/lastMenstruationDates"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/editLengthOfMenstrualCycleButton"
+            app:layout_constraintEnd_toStartOf="@id/editDurationOfMenstrualCycleButton"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/length_of_menstrual_cycle" />
+            android:text="@string/duration_of_menstrual_cycle" />
 
         <TextView
-            android:id="@+id/lengthOfMenstrualCycle"
+            android:id="@+id/durationOfMenstrualCycle"
             style="@style/Text.MediumGray"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/lengthOfMenstrualCycleTitle"
-            app:layout_constraintStart_toStartOf="@id/lengthOfMenstrualCycleTitle"
-            app:layout_constraintEnd_toStartOf="@id/editLengthOfMenstrualCycleButton"
+            app:layout_constraintTop_toBottomOf="@id/durationOfMenstrualCycleTitle"
+            app:layout_constraintStart_toStartOf="@id/durationOfMenstrualCycleTitle"
+            app:layout_constraintEnd_toStartOf="@id/editDurationOfMenstrualCycleButton"
             android:layout_marginEnd="8dp"
             tools:text="28 дн."
-            android:text="@{String.format(@string/n_days, viewModel.lengthOfMenstrualCycle)}" />
+            android:text="@{String.format(@string/n_days, viewModel.durationOfMenstrualCycle)}" />
 
         <ImageButton
-            android:id="@+id/editLengthOfMenstrualCycleButton"
+            android:id="@+id/editDurationOfMenstrualCycleButton"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            app:layout_constraintTop_toTopOf="@id/lengthOfMenstrualCycleTitle"
+            app:layout_constraintTop_toTopOf="@id/durationOfMenstrualCycleTitle"
             app:layout_constraintStart_toStartOf="@id/menstruationDatesListButton"
             app:layout_constraintEnd_toEndOf="@id/menstruationDatesListButton"
             android:background="@drawable/icon_edit_blue"
-            android:onClick="@{() -> viewModel.onSetLengthOfMenstrualCycleClick()}" />
+            android:onClick="@{() -> viewModel.onSetDurationOfMenstrualCycleClick()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

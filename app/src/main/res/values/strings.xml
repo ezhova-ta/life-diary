@@ -96,7 +96,7 @@
     <string name="select_time_interval">Select time interval</string>
     <string name="last_menstruation">Last menstruation:</string>
     <string name="menses">Menses</string>
-    <string name="length_of_menstrual_cycle">Length of menstrual cycle:</string>
+    <string name="duration_of_menstrual_cycle">Duration of menstrual cycle:</string>
     <string name="n_days">%d days</string>
     <string name="set">Set</string>
 </resources>

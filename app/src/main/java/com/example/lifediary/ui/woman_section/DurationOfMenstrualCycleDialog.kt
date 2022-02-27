@@ -7,30 +7,30 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.lifediary.R
-import com.example.lifediary.databinding.DialogLengthOfMenstrualCycleBinding
+import com.example.lifediary.databinding.DialogDurationOfMenstrualCycleBinding
 
-class LengthOfMenstrualCycleDialog: DialogFragment() {
+class DurationOfMenstrualCycleDialog: DialogFragment() {
 	val viewModel: WomanSectionViewModel by activityViewModels()
-	private var _binding: DialogLengthOfMenstrualCycleBinding? = null
+	private var _binding: DialogDurationOfMenstrualCycleBinding? = null
 	private val binding get() = _binding!!
 
 	companion object {
-		const val FRAGMENT_TAG = "com.example.lifediary.ui.woman_section.LengthOfMenstrualCycleDialog"
+		const val FRAGMENT_TAG = "com.example.lifediary.ui.woman_section.DurationOfMenstrualCycleDialog"
 	}
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 		inflateLayout()
-		setupLengthPicker()
+		setupDurationPicker()
 		return createDialog()
 	}
 
 	private fun inflateLayout() {
-		_binding = DialogLengthOfMenstrualCycleBinding.inflate(LayoutInflater.from(context))
+		_binding = DialogDurationOfMenstrualCycleBinding.inflate(LayoutInflater.from(context))
 	}
 
-	private fun setupLengthPicker() {
-		binding.lengthPicker.minValue = 15
-		binding.lengthPicker.maxValue = 50
+	private fun setupDurationPicker() {
+		binding.durationPicker.minValue = 15
+		binding.durationPicker.maxValue = 50
 	}
 
 	private fun createDialog(): AlertDialog {
@@ -38,17 +38,17 @@ class LengthOfMenstrualCycleDialog: DialogFragment() {
 			.Builder(requireActivity())
 			.setView(binding.root)
 			.setPositiveButton(R.string.set) { _, _ ->
-				val lengthOfMenstrualCycle = getLengthPickerValue()
-				viewModel.onLengthOfMenstrualCycleHasBeenSet(lengthOfMenstrualCycle)
+				val durationOfMenstrualCycle = getDurationPickerValue()
+				viewModel.onDurationOfMenstrualCycleHasBeenSet(durationOfMenstrualCycle)
 			}
 			.setNegativeButton(R.string.cancel) { _, _ ->
-				viewModel.onSetLengthOfMenstrualCycleCancelled()
+				viewModel.onSetDurationOfMenstrualCycleCancelled()
 			}
 			.create()
 	}
 
-	private fun getLengthPickerValue(): Int =
-		binding.lengthPicker.value
+	private fun getDurationPickerValue(): Int =
+		binding.durationPicker.value
 
 	override fun onDestroyView() {
 		super.onDestroyView()

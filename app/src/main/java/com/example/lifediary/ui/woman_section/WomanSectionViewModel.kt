@@ -18,11 +18,11 @@ class WomanSectionViewModel : BaseViewModel() {
     val lastMenstruationDates: LiveData<MenstruationDates?> by lazy {
         menstruationDatesRepository.getAllMenstruationDates().map { it.maxByOrNull { it.startDate } }
     }
-    val lengthOfMenstrualCycle = MutableLiveData<Int>()
+    val durationOfMenstrualCycle = MutableLiveData<Int>()
 
-    private val _showSetLengthOfMenstrualCycleDialog = MutableLiveData(false)
-    val showSetLengthOfMenstrualCycleDialog: LiveData<Boolean>
-        get() = _showSetLengthOfMenstrualCycleDialog
+    private val _showSetDurationOfMenstrualCycleDialog = MutableLiveData(false)
+    val showSetDurationOfMenstrualCycleDialog: LiveData<Boolean>
+        get() = _showSetDurationOfMenstrualCycleDialog
 
     init {
         bindScope()
@@ -37,21 +37,21 @@ class WomanSectionViewModel : BaseViewModel() {
         router.navigateTo(Screens.getMenstruationDatesListScreen())
     }
 
-    fun onSetLengthOfMenstrualCycleClick() {
-        _showSetLengthOfMenstrualCycleDialog.value = true
+    fun onSetDurationOfMenstrualCycleClick() {
+        _showSetDurationOfMenstrualCycleDialog.value = true
     }
 
-    fun onLengthOfMenstrualCycleHasBeenSet(value: Int) {
-        _showSetLengthOfMenstrualCycleDialog.value = false
-        lengthOfMenstrualCycle.value = value
-        saveLengthOfMenstrualCycle(value)
+    fun onDurationOfMenstrualCycleHasBeenSet(value: Int) {
+        _showSetDurationOfMenstrualCycleDialog.value = false
+        durationOfMenstrualCycle.value = value
+        saveDurationOfMenstrualCycle(value)
     }
 
-    private fun saveLengthOfMenstrualCycle(value: Int) {
+    private fun saveDurationOfMenstrualCycle(value: Int) {
         // TODO
     }
 
-    fun onSetLengthOfMenstrualCycleCancelled() {
-        _showSetLengthOfMenstrualCycleDialog.value = false
+    fun onSetDurationOfMenstrualCycleCancelled() {
+        _showSetDurationOfMenstrualCycleDialog.value = false
     }
 }
