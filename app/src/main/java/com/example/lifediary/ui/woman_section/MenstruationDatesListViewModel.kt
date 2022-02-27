@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MenstruationDates
-import com.example.lifediary.data.repositories.MenstruationDatesRepository
+import com.example.lifediary.data.repositories.WomanSectionRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.Text
@@ -17,9 +17,9 @@ import toothpick.Toothpick
 import javax.inject.Inject
 
 class MenstruationDatesListViewModel : BaseViewModel() {
-    @Inject lateinit var menstruationDatesRepository: MenstruationDatesRepository
+    @Inject lateinit var womanSectionRepository: WomanSectionRepository
     val menstruationDatesList: LiveData<List<MenstruationDates>> by lazy {
-        menstruationDatesRepository.getAllMenstruationDates()
+        womanSectionRepository.getAllMenstruationDates()
     }
 
     private val _showDeleteMenstruationDatesConfirmationDialog = MutableLiveData<Long?>(null)
@@ -55,7 +55,7 @@ class MenstruationDatesListViewModel : BaseViewModel() {
     private fun deleteMenstruationDates(datesId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                menstruationDatesRepository.deleteMenstruationDates(datesId)
+                womanSectionRepository.deleteMenstruationDates(datesId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }
@@ -78,7 +78,7 @@ class MenstruationDatesListViewModel : BaseViewModel() {
     private fun clearMenstruationDatesList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                menstruationDatesRepository.clearMenstruationDatesList()
+                womanSectionRepository.clearMenstruationDatesList()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_clear_list))
             }
@@ -109,7 +109,7 @@ class MenstruationDatesListViewModel : BaseViewModel() {
     private fun addMenstruationDates(dates: MenstruationDates) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                menstruationDatesRepository.addMenstruationDates(dates)
+                womanSectionRepository.addMenstruationDates(dates)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_save))
             }

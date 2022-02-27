@@ -1,16 +1,14 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
-import com.example.lifediary.data.datasources.MenstruationDatesLocalDataSource
-import com.example.lifediary.data.db.entities.MenstruationDatesEntity
+import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
 import com.example.lifediary.data.domain.MenstruationDates
-import com.example.lifediary.utils.toDomain
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MenstruationDatesRepository @Inject constructor(
-    private val localDataSource: MenstruationDatesLocalDataSource
+class WomanSectionRepository @Inject constructor(
+    private val localDataSource: WomanSectionLocalDataSource
 ) {
     fun getAllMenstruationDates(): LiveData<List<MenstruationDates>> {
         return localDataSource.getAllMenstruationDates()
@@ -18,6 +16,10 @@ class MenstruationDatesRepository @Inject constructor(
 
     fun getMenstruationDates(id: Long): MenstruationDates? {
         return localDataSource.getMenstruationDates(id)
+    }
+
+    fun getDurationOfMenstrualCycle(): LiveData<Int> {
+        return localDataSource.getDurationOfMenstrualCycle()
     }
 
     suspend fun addMenstruationDates(dates: MenstruationDates) {
@@ -34,5 +36,9 @@ class MenstruationDatesRepository @Inject constructor(
 
     suspend fun clearMenstruationDatesList() {
         localDataSource.clearMenstruationDatesList()
+    }
+
+    suspend fun setDurationOfMenstrualCycle(value: Int) {
+        localDataSource.setDurationOfMenstrualCycle(value)
     }
 }
