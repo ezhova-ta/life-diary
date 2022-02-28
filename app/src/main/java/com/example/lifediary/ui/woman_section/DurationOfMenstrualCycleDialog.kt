@@ -1,19 +1,23 @@
 package com.example.lifediary.ui.woman_section
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.lifediary.R
 import com.example.lifediary.databinding.DialogDurationOfMenstrualCycleBinding
 import com.example.lifediary.ui.common.UiConstants
+import com.example.lifediary.utils.setDefaultButtonsStyle
 
 class DurationOfMenstrualCycleDialog: DialogFragment() {
 	val viewModel: WomanSectionViewModel by activityViewModels()
 	private var _binding: DialogDurationOfMenstrualCycleBinding? = null
 	private val binding get() = _binding!!
+	private lateinit var alertDialog: AlertDialog
 
 	companion object {
 		const val FRAGMENT_TAG = "com.example.lifediary.ui.woman_section.DurationOfMenstrualCycleDialog"
@@ -38,7 +42,7 @@ class DurationOfMenstrualCycleDialog: DialogFragment() {
 	}
 
 	private fun createDialog(): AlertDialog {
-		return AlertDialog
+		alertDialog = AlertDialog
 			.Builder(requireActivity())
 			.setView(binding.root)
 			.setPositiveButton(R.string.set) { _, _ ->
@@ -49,6 +53,7 @@ class DurationOfMenstrualCycleDialog: DialogFragment() {
 				viewModel.onSetDurationOfMenstrualCycleCancelled()
 			}
 			.create()
+		return alertDialog
 	}
 
 	private fun getDurationPickerValue(): Int =
@@ -56,6 +61,11 @@ class DurationOfMenstrualCycleDialog: DialogFragment() {
 
 	private fun setDurationPickerValue(value: Int) {
 		binding.durationPicker.value = value
+	}
+
+	override fun onResume() {
+		super.onResume()
+		alertDialog.setDefaultButtonsStyle()
 	}
 
 	override fun onDestroyView() {
