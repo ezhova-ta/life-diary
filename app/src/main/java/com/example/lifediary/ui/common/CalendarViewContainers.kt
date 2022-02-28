@@ -56,12 +56,14 @@ class CalendarDayViewContainer(view: View) : ViewContainer(view) {
     fun drawDesignations(
         day: CalendarDay,
         isNoteOrToDoListExists: Boolean,
-        isMemorableDatesExist: Boolean
+        isMemorableDatesExist: Boolean,
+        isDayOfMenstruation: Boolean
     ) {
         with(binding) {
             selectedBackground.setVisibility(day.isToday())
             noteIcon.setVisibility(isNoteOrToDoListExists)
             eventIcon.setVisibility(isMemorableDatesExist)
+            menstruationIcon.setVisibility(isDayOfMenstruation)
         }
     }
 

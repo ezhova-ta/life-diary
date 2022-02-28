@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.lifediary.data.domain.MemorableDate
+import com.example.lifediary.data.domain.MenstruationPeriod
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
 import com.example.lifediary.ui.common.CalendarMonthViewContainer
 import com.example.lifediary.utils.Day
 import com.example.lifediary.utils.isSameDay
+import com.example.lifediary.utils.isSameDayInYear
+import com.example.lifediary.utils.isWithinInterval
 import com.example.lifediary.utils.toDomain
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -32,6 +35,7 @@ class CalendarFragment : BaseFragment() {
     private val binding get() = _binding!!
     private var daysWithNotesOrToDoList = listOf<Day>()
     private var memorableDates = listOf<MemorableDate>()
+    private var menstruationPeriods = listOf<MenstruationPeriod>()
     private var lastScrolledMonth: YearMonth = YearMonth.now()
 
     companion object {
@@ -66,6 +70,7 @@ class CalendarFragment : BaseFragment() {
         }
         setupDisplayingNoteIconsInCalendar()
         setupDisplayingEventIconsInCalendar()
+        setupDisplayMenstruationPeriodsInCalendar()
     }
 
     private fun getDaysOfWeek(): Array<DayOfWeek> {
@@ -84,6 +89,8 @@ class CalendarFragment : BaseFragment() {
         return WeekFields.of(Locale.getDefault())
     }
 
+    // TODO Refactoring
+
     private fun setupDisplayingNoteIconsInCalendar() {
         viewModel.daysWithNotesOrToDoList.observe(viewLifecycleOwner) { days ->
             daysWithNotesOrToDoList = days
@@ -98,6 +105,15 @@ class CalendarFragment : BaseFragment() {
         }
     }
 
+    private fun setupDisplayMenstruationPeriodsInCalendar() {
+        viewModel.menstruationPeriodList.observe(viewLifecycleOwner) { menstruationPeriods ->
+            if(viewModel.isSectionForWomanVisible.value == true) {
+                this.menstruationPeriods = menstruationPeriods
+                binding.calendarView.notifyCalendarChanged()
+            }
+        }
+    }
+
     private fun createCalendarDayBinder() = object : DayBinder<CalendarDayViewContainer> {
         override fun create(view: View) = CalendarDayViewContainer(view)
 
@@ -107,17 +123,24 @@ class CalendarFragment : BaseFragment() {
                 container.drawDesignations(
                     day,
                     isNoteOrToDoListExistsFor(day),
-                    isMemorableDatesExistFor(day)
+                    isMemorableDatesExistFor(day),
+                    isDayOfMenstruation(day)
                 )
             }
         }
+
+        // TODO Refactoring (suspend?)
 
         private suspend fun isNoteOrToDoListExistsFor(day: CalendarDay): Boolean {
             return daysWithNotesOrToDoList.find { it.isSameDay(day) } != null
         }
 
         private suspend fun isMemorableDatesExistFor(day: CalendarDay): Boolean {
-            return memorableDates.find { day.isSameDay(it) } != null
+            return memorableDates.find { day.isSameDayInYear(it) } != null
+        }
+
+        private suspend fun isDayOfMenstruation(day: CalendarDay): Boolean {
+            return menstruationPeriods.find { day.isWithinInterval(it.startDate, it.endDate) } != null
         }
     }
 

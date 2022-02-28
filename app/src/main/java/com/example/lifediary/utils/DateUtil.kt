@@ -115,8 +115,30 @@ fun CalendarDay.isToday(): Boolean {
     return date.isEqual(today)
 }
 
-fun CalendarDay.isSameDay(memorableDate: MemorableDate): Boolean {
+fun CalendarDay.isSameDayInYear(memorableDate: MemorableDate): Boolean {
     return date.dayOfMonth == memorableDate.dayNumber && date.monthValue == memorableDate.monthNumber
+}
+
+fun CalendarDay.isWithinInterval(start: Calendar, end: Calendar): Boolean {
+    val timeInMillis = Calendar.getInstance().apply {
+        set(Calendar.DATE, date.dayOfMonth)
+        set(Calendar.MONTH, date.monthValue - 1)
+        set(Calendar.YEAR, date.year)
+    }.timeInMillis
+
+    val startTimeInMillis = start.apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+    }.timeInMillis
+
+    val endTimeInMillis = end.apply {
+        set(Calendar.HOUR_OF_DAY, 23)
+        set(Calendar.MINUTE, 59)
+        set(Calendar.SECOND, 59)
+    }.timeInMillis
+
+    return timeInMillis in startTimeInMillis..endTimeInMillis
 }
 
 fun MemorableDate.isToday(): Boolean {

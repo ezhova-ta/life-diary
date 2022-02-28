@@ -102,4 +102,5 @@
     <string name="start_menstruation_must_be_no_later_than_today">Дата начала менструации должна быть не позднее, чем сегодня</string>
     <string name="no_added_menses">Нет добавленных</string>
     <string name="no_added_menses_yet">Пока нет добавленных менструаций</string>
+    <string name="period_of_menstruation">Период менструации</string>
 </resources>

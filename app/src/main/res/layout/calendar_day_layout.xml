@@ -48,4 +48,12 @@
         android:background="@drawable/calendar_day_note_icon_view"
         android:visibility="invisible" />
 
+    <View
+        android:id="@+id/menstruationIcon"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/icon_leaf_lilac"
+        android:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

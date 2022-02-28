@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.data.repositories.DateNoteRepository
-import com.example.lifediary.data.repositories.MemorableDatesRepository
-import com.example.lifediary.data.repositories.ToDoListRepository
+import com.example.lifediary.data.domain.MenstruationPeriod
+import com.example.lifediary.data.repositories.*
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
@@ -20,8 +19,14 @@ class CalendarViewModel : BaseViewModel() {
 	@Inject lateinit var noteRepository: DateNoteRepository
 	@Inject lateinit var doToDoListRepository: ToDoListRepository
 	@Inject lateinit var memorableDatesRepository: MemorableDatesRepository
+	@Inject lateinit var womanSectionRepository: WomanSectionRepository
+	@Inject lateinit var settingsRepository: SettingsRepository
 	val daysWithNotesOrToDoList = MediatorLiveData<List<Day>>()
 	val memorableDates: LiveData<List<MemorableDate>> by lazy { memorableDatesRepository.getDates() }
+	val menstruationPeriodList: LiveData<List<MenstruationPeriod>> by lazy {
+		womanSectionRepository.getAllMenstruationPeriods()
+	}
+	val isSectionForWomanVisible: LiveData<Boolean> by lazy { settingsRepository.getWomanSectionEnabled() }
 
 	init {
 		bindScope()
