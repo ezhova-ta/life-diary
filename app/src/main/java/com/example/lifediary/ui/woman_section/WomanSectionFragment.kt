@@ -42,15 +42,14 @@ class WomanSectionFragment : BaseFragment() {
     }
 
     private fun showSetDurationOfMenstrualCycleDialog() {
-        val fragmentManager = requireActivity().supportFragmentManager
         with(DurationOfMenstrualCycleDialog()) {
             isCancelable = false
-            show(fragmentManager, FRAGMENT_TAG)
+            show(this@WomanSectionFragment.childFragmentManager, FRAGMENT_TAG)
         }
     }
 
     private fun isSetDurationOfMenstrualCycleDialogCurrentlyDisplayed(): Boolean {
-        return requireActivity().supportFragmentManager.findFragmentByTag(FRAGMENT_TAG) != null
+        return childFragmentManager.findFragmentByTag(FRAGMENT_TAG) != null
     }
 
     override fun onDestroyView() {

@@ -44,7 +44,27 @@
             android:layout_marginBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="vertical"
-            tools:listitem="@layout/menstruation_dates_list_item" />
+            tools:listitem="@layout/menstruation_dates_list_item"
+            app:booleanVisibility="@{viewModel.isMenstruationDatesListVisible()}" />
+
+        <LinearLayout
+            android:id="@+id/createToDoListTitleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/clearAllButton"
+            app:layout_constraintBottom_toTopOf="@id/addMenstruationDatesButton"
+            android:orientation="vertical"
+            app:booleanVisibility="@{!viewModel.isMenstruationDatesListVisible()}">
+            <TextView
+                style="@style/Text.ExplanatoryMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_added_menses_yet" />
+
+            <ImageView
+                style="@style/ExplanatoryMessageIcon"
+                android:src="@drawable/icon_date_range_blue" />
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/addMenstruationDatesButton"

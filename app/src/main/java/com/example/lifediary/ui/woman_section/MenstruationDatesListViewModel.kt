@@ -3,6 +3,7 @@ package com.example.lifediary.ui.woman_section
 import androidx.core.util.Pair
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MenstruationDates
 import com.example.lifediary.data.repositories.WomanSectionRepository
@@ -22,6 +23,9 @@ class MenstruationDatesListViewModel : BaseViewModel() {
     @Inject lateinit var womanSectionRepository: WomanSectionRepository
     val menstruationDatesList: LiveData<List<MenstruationDates>> by lazy {
         womanSectionRepository.getAllMenstruationDates()
+    }
+    val isMenstruationDatesListVisible: LiveData<Boolean> by lazy {
+        menstruationDatesList.map { it.isNotEmpty() }
     }
 
     private val _showDeleteMenstruationDatesConfirmationDialog = MutableLiveData<Long?>(null)

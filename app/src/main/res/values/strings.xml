@@ -100,4 +100,6 @@
     <string name="n_days">%d days</string>
     <string name="set">Set</string>
     <string name="start_menstruation_must_be_no_later_than_today">Start date of menstruation must be no later than today</string>
+    <string name="no_added_menses">No added menses</string>
+    <string name="no_added_menses_yet">No added menses yet</string>
 </resources>
