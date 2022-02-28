@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.lifediary.R
-import com.example.lifediary.databinding.DialogDurationOfMenstrualCycleBinding
+import com.example.lifediary.databinding.NumberPickerDialogBinding
 import com.example.lifediary.utils.setDefaultButtonsStyle
 
 abstract class NumberPickerDialog: DialogFragment() {
-    private var _binding: DialogDurationOfMenstrualCycleBinding? = null
+    private var _binding: NumberPickerDialogBinding? = null
     private val binding get() = _binding!!
     private lateinit var alertDialog: AlertDialog
 
@@ -30,7 +30,7 @@ abstract class NumberPickerDialog: DialogFragment() {
     }
 
     private fun inflateLayout() {
-        _binding = DialogDurationOfMenstrualCycleBinding.inflate(LayoutInflater.from(context))
+        _binding = NumberPickerDialogBinding.inflate(LayoutInflater.from(context))
     }
 
     private fun setupDurationPicker(
@@ -38,8 +38,8 @@ abstract class NumberPickerDialog: DialogFragment() {
         maxValue: Int,
         defaultValue: Int?
     ) {
-        binding.durationPicker.minValue = minValue
-        binding.durationPicker.maxValue = maxValue
+        binding.numberPicker.minValue = minValue
+        binding.numberPicker.maxValue = maxValue
         defaultValue?.let { setDurationPickerValue(it) }
     }
 
@@ -51,8 +51,7 @@ abstract class NumberPickerDialog: DialogFragment() {
             .Builder(requireActivity())
             .setView(binding.root)
             .setPositiveButton(getOkButtonTextResId() ?: R.string.set) { _, _ ->
-                val durationOfMenstrualCycle = getDurationPickerValue()
-                onNumberHasBeenSet(durationOfMenstrualCycle)
+                onNumberHasBeenSet(getDurationPickerValue())
             }
             .setNegativeButton(getCancelButtonTextResId() ?: R.string.cancel) { _, _ ->
                 onSetCancelled()
@@ -67,10 +66,10 @@ abstract class NumberPickerDialog: DialogFragment() {
     }
 
     private fun getDurationPickerValue(): Int =
-        binding.durationPicker.value
+        binding.numberPicker.value
 
     private fun setDurationPickerValue(value: Int) {
-        binding.durationPicker.value = value
+        binding.numberPicker.value = value
     }
 
     override fun onResume() {
