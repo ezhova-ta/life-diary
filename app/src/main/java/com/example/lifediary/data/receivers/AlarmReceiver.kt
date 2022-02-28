@@ -43,7 +43,7 @@ class AlarmReceiver : BroadcastReceiver() {
 			.setContentTitle(context.getString(R.string.you_have_scheduled_for_today))
 			.setContentText(todoListItemText)
 			.setStyle(NotificationCompat.BigTextStyle().bigText(todoListItemText))
-			.setPriority(NotificationCompat.PRIORITY_HIGH)
+			.setPriority(NotificationCompat.PRIORITY_MAX)
 			.setContentIntent(createShowCurrentToDoListIntent(context))
 			.setAutoCancel(true)
 			.build()

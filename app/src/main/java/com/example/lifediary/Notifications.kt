@@ -47,7 +47,7 @@ object Notifications {
 		override val id: String = TO_DO_LIST_CHANNEL_ID
 		@StringRes override val nameRes: Int = TO_DO_LIST_CHANNEL_NAME
 		@StringRes override val descriptionRes: Int = R.string.channel_to_remind_about_to_do_list
-		override val importance: Int = NotificationManager.IMPORTANCE_HIGH
+		override val importance: Int = NotificationManager.IMPORTANCE_MAX
 		override val lockScreenVisibility: Int = Notification.VISIBILITY_PUBLIC
 	}
 }
