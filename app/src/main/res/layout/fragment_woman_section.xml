@@ -20,38 +20,38 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/menstruationDatesListButton"
+            app:layout_constraintEnd_toStartOf="@id/menstruationPeriodListButton"
             android:layout_marginEnd="8dp"
             android:text="@string/last_menstruation" />
 
         <TextView
-            android:id="@+id/lastMenstruationDates"
+            android:id="@+id/lastMenstruationPeriod"
             style="@style/Text.MediumGray"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/lastMenstruationTitle"
             app:layout_constraintStart_toStartOf="@id/lastMenstruationTitle"
-            app:layout_constraintEnd_toStartOf="@id/menstruationDatesListButton"
+            app:layout_constraintEnd_toStartOf="@id/menstruationPeriodListButton"
             android:layout_marginEnd="8dp"
             tools:text="19.02.2022 - 24.02.2022"
-            android:text="@{viewModel.lastMenstruationDates.toOutputFormattedString() ?? @string/no_added_menses}" />
+            android:text="@{viewModel.lastMenstruationPeriod.toOutputFormattedString() ?? @string/no_added_menses}" />
 
         <ImageButton
-            android:id="@+id/menstruationDatesListButton"
+            android:id="@+id/menstruationPeriodListButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             app:layout_constraintTop_toTopOf="@id/lastMenstruationTitle"
-            app:layout_constraintBottom_toBottomOf="@id/lastMenstruationDates"
+            app:layout_constraintBottom_toBottomOf="@id/lastMenstruationPeriod"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/icon_list_blue"
-            android:onClick="@{() -> viewModel.onShowMenstruationDatesListClick()}" />
+            android:onClick="@{() -> viewModel.onShowMenstruationPeriodListClick()}" />
 
         <TextView
             android:id="@+id/durationOfMenstrualCycleTitle"
             style="@style/Text.ScreenSubtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/lastMenstruationDates"
+            app:layout_constraintTop_toBottomOf="@id/lastMenstruationPeriod"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/editDurationOfMenstrualCycleButton"
             android:layout_marginTop="16dp"
@@ -75,8 +75,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             app:layout_constraintTop_toTopOf="@id/durationOfMenstrualCycleTitle"
-            app:layout_constraintStart_toStartOf="@id/menstruationDatesListButton"
-            app:layout_constraintEnd_toEndOf="@id/menstruationDatesListButton"
+            app:layout_constraintStart_toStartOf="@id/menstruationPeriodListButton"
+            app:layout_constraintEnd_toEndOf="@id/menstruationPeriodListButton"
             android:background="@drawable/icon_edit_blue"
             android:onClick="@{() -> viewModel.onSetDurationOfMenstrualCycleClick()}" />
 

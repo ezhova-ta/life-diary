@@ -6,13 +6,13 @@
     <string name="clear_shopping_list_confirmation">Вы уверены, что хотите очистить список покупок?</string>
     <string name="clear_note_list_confirmation">Вы уверены, что хотите удалить все заметки?</string>
     <string name="delete_note_confirmation">Вы уверены, что хотите удалить эту заметку?</string>
-    <string name="delete_menstruation_dates_confirmation">Вы уверены, что хотите удалить менструацию?</string>
+    <string name="delete_menstruation_period_confirmation">Вы уверены, что хотите удалить менструацию?</string>
     <string name="clear_to_do_list_confirmation">Вы уверены, что хотите очистить список дел?</string>
     <string name="clear_post_addresses_confirmation">Вы уверены, что хотите удалить все почтовые адреса?</string>
     <string name="delete_post_address_confirmation">Вы уверены, что хотите удалить этот адрес?</string>
     <string name="clear_memorable_dates_confirmation">Вы уверены, что хотите удалить все даты?</string>
     <string name="delete_memorable_date_confirmation">Вы уверены, что хотите удалить эту дату?</string>
-    <string name="clear_menstruation_dates_list_confirmation">Вы уверены, что хотите очистить список менструаций?</string>
+    <string name="clear_menstruation_period_list_confirmation">Вы уверены, что хотите очистить список менструаций?</string>
     <string name="cancel">Закрыть</string>
     <string name="clear">Очистить</string>
     <string name="delete">Удалить</string>

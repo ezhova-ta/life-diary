@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.data.domain.MenstruationDates
-import com.example.lifediary.databinding.MenstruationDatesListItemBinding
+import com.example.lifediary.data.domain.MenstruationPeriod
+import com.example.lifediary.databinding.MenstruationPeriodListItemBinding
 
-class MenstruationDatesListAdapter(
-    private val onDeleteItemClickListener: ListItemClickListener<MenstruationDates>
-) : ListAdapter<MenstruationDates, MenstruationDatesListAdapter.ViewHolder>(MenstruationDatesListItemDiffCallBack()) {
+class MenstruationPeriodListAdapter(
+    private val onDeleteItemClickListener: ListItemClickListener<MenstruationPeriod>
+) : ListAdapter<MenstruationPeriod, MenstruationPeriodListAdapter.ViewHolder>(MenstruationPeriodListItemDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder.getInstance(parent)
 
@@ -19,37 +19,37 @@ class MenstruationDatesListAdapter(
         holder.bind(item, onDeleteItemClickListener)
     }
 
-    class MenstruationDatesListItemViewModel(menstruationDates: MenstruationDates) {
-        val outputFormattedMenstruationDates = menstruationDates.toOutputFormattedString()
+    class MenstruationPeriodListItemViewModel(menstruationPeriod: MenstruationPeriod) {
+        val outputFormattedMenstruationPeriod = menstruationPeriod.toOutputFormattedString()
     }
 
     class ViewHolder private constructor(
-        private val binding: MenstruationDatesListItemBinding
+        private val binding: MenstruationPeriodListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         companion object {
             fun getInstance(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding =
-                    MenstruationDatesListItemBinding.inflate(layoutInflater, parent, false)
+                    MenstruationPeriodListItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
 
         fun bind(
-            item: MenstruationDates,
-            onDeleteItemClickListener: ListItemClickListener<MenstruationDates>
+            item: MenstruationPeriod,
+            onDeleteItemClickListener: ListItemClickListener<MenstruationPeriod>
         ) {
-            binding.viewModel = MenstruationDatesListItemViewModel(item)
+            binding.viewModel = MenstruationPeriodListItemViewModel(item)
             binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
             binding.executePendingBindings()
         }
     }
 }
 
-class MenstruationDatesListItemDiffCallBack : DiffUtil.ItemCallback<MenstruationDates>() {
-    override fun areItemsTheSame(oldItem: MenstruationDates, newItem: MenstruationDates) =
+class MenstruationPeriodListItemDiffCallBack : DiffUtil.ItemCallback<MenstruationPeriod>() {
+    override fun areItemsTheSame(oldItem: MenstruationPeriod, newItem: MenstruationPeriod) =
         oldItem.startDate == newItem.startDate && oldItem.endDate == newItem.endDate
 
-    override fun areContentsTheSame(oldItem: MenstruationDates, newItem: MenstruationDates) =
+    override fun areContentsTheSame(oldItem: MenstruationPeriod, newItem: MenstruationPeriod) =
         oldItem == newItem
 }

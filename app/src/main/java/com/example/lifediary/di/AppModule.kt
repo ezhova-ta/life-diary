@@ -30,7 +30,7 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(PostAddressDao::class.java).toProvider(PostAddressDaoProvider::class.java)
         bind(ToDoListDao::class.java).toProvider(ToDoListDaoProvider::class.java)
         bind(MemorableDateDao::class.java).toProvider(MemorableDateDaoProvider::class.java)
-        bind(MenstruationDatesDao::class.java).toProvider(MenstruationDatesDaoProvider::class.java)
+        bind(MenstruationPeriodDao::class.java).toProvider(MenstruationPeriodDaoProvider::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())

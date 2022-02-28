@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.woman_section.MenstruationDatesListViewModel" />
+            type="com.example.lifediary.ui.woman_section.MenstruationPeriodListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/icon_delete_sweep_color_link"
-            android:onClick="@{() -> viewModel.onClearMenstruationDatesListClick()}" />
+            android:onClick="@{() -> viewModel.onClearMenstruationPeriodListClick()}" />
 
         <TextView
             android:id="@+id/title"
@@ -35,26 +35,26 @@
             android:text="@string/menses" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/menstruationDatesListView"
+            android:id="@+id/menstruationPeriodListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/clearAllButton"
-            app:layout_constraintBottom_toTopOf="@id/addMenstruationDatesButton"
+            app:layout_constraintBottom_toTopOf="@id/addMenstruationPeriodButton"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="vertical"
-            tools:listitem="@layout/menstruation_dates_list_item"
-            app:booleanVisibility="@{viewModel.isMenstruationDatesListVisible()}" />
+            tools:listitem="@layout/menstruation_period_list_item"
+            app:booleanVisibility="@{viewModel.isMenstruationPeriodListVisible()}" />
 
         <LinearLayout
             android:id="@+id/createToDoListTitleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/clearAllButton"
-            app:layout_constraintBottom_toTopOf="@id/addMenstruationDatesButton"
+            app:layout_constraintBottom_toTopOf="@id/addMenstruationPeriodButton"
             android:orientation="vertical"
-            app:booleanVisibility="@{!viewModel.isMenstruationDatesListVisible()}">
+            app:booleanVisibility="@{!viewModel.isMenstruationPeriodListVisible()}">
             <TextView
                 style="@style/Text.ExplanatoryMessage"
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/addMenstruationDatesButton"
+            android:id="@+id/addMenstruationPeriodButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             app:layout_constraintBottom_toBottomOf="parent"

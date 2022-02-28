@@ -18,7 +18,7 @@ import com.example.lifediary.data.db.entities.*
         MainNoteEntity::class,
         ToDoListItemEntity::class,
         MemorableDateEntity::class,
-        MenstruationDatesEntity::class
+        MenstruationPeriodEntity::class
     ],
     autoMigrations = [
         AutoMigration(from = 11, to = 12),
@@ -41,5 +41,5 @@ abstract class MainDataBase : RoomDatabase() {
     abstract fun postAddressDao(): PostAddressDao
     abstract fun toDoListDao(): ToDoListDao
     abstract fun memorableDateDao(): MemorableDateDao
-    abstract fun menstruationDatesDao(): MenstruationDatesDao
+    abstract fun menstruationPeriodDao(): MenstruationPeriodDao
 }

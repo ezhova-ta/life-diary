@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.adapters.MenstruationDatesListAdapter.MenstruationDatesListItemViewModel" />
+            type="com.example.lifediary.adapters.MenstruationPeriodListAdapter.MenstruationPeriodListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
             android:layout_marginEnd="8dp"
             android:gravity="start|center_vertical"
             tools:text="19.02.2022 - 24.02.2022"
-            android:text="@{viewModel.outputFormattedMenstruationDates}" />
+            android:text="@{viewModel.outputFormattedMenstruationPeriod}" />
 
         <ImageButton
             android:id="@+id/deleteButton"

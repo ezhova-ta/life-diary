@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.MenstruationDates
+import com.example.lifediary.data.domain.MenstruationPeriod
 import com.example.lifediary.data.repositories.WomanSectionRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
@@ -20,8 +20,8 @@ import javax.inject.Inject
 class WomanSectionViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var womanSectionRepository: WomanSectionRepository
-    val lastMenstruationDates: LiveData<MenstruationDates?> by lazy {
-        womanSectionRepository.getAllMenstruationDates().map { it.maxByOrNull { it.startDate } }
+    val lastMenstruationPeriod: LiveData<MenstruationPeriod?> by lazy {
+        womanSectionRepository.getAllMenstruationPeriods().map { it.maxByOrNull { it.startDate } }
     }
     val durationOfMenstrualCycle: LiveData<Int> by lazy {
         womanSectionRepository.getDurationOfMenstrualCycle()
@@ -40,8 +40,8 @@ class WomanSectionViewModel : BaseViewModel() {
         Toothpick.inject(this, womanSectionScope)
     }
 
-    fun onShowMenstruationDatesListClick() {
-        router.navigateTo(Screens.getMenstruationDatesListScreen())
+    fun onShowMenstruationPeriodListClick() {
+        router.navigateTo(Screens.getMenstruationPeriodListScreen())
     }
 
     fun onSetDurationOfMenstrualCycleClick() {

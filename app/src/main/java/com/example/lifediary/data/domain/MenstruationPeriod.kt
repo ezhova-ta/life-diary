@@ -3,7 +3,7 @@ package com.example.lifediary.data.domain
 import com.example.lifediary.utils.toDateString
 import java.util.*
 
-data class MenstruationDates(
+data class MenstruationPeriod(
     val id: Long? = null,
     var startDate: Calendar,
     var endDate: Calendar

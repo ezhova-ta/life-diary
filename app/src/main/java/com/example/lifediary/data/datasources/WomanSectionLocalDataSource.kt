@@ -3,21 +3,21 @@ package com.example.lifediary.data.datasources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.WomanSectionDataStoreManager
-import com.example.lifediary.data.db.dao.MenstruationDatesDao
-import com.example.lifediary.data.db.entities.MenstruationDatesEntity
-import com.example.lifediary.data.domain.MenstruationDates
+import com.example.lifediary.data.db.dao.MenstruationPeriodDao
+import com.example.lifediary.data.db.entities.MenstruationPeriodEntity
+import com.example.lifediary.data.domain.MenstruationPeriod
 import com.example.lifediary.utils.toDomain
 import javax.inject.Inject
 
 class WomanSectionLocalDataSource @Inject constructor(
-    private val dao: MenstruationDatesDao,
+    private val dao: MenstruationPeriodDao,
     private val womanSectionDataStoreManager: WomanSectionDataStoreManager
 ) {
-    fun getAllMenstruationDates(): LiveData<List<MenstruationDates>> {
+    fun getAllMenstruationPeriods(): LiveData<List<MenstruationPeriod>> {
         return dao.getAll().toDomain()
     }
 
-    fun getMenstruationDates(id: Long): MenstruationDates? {
+    fun getMenstruationPeriod(id: Long): MenstruationPeriod? {
         return dao.get(id)?.toDomain()
     }
 
@@ -25,19 +25,19 @@ class WomanSectionLocalDataSource @Inject constructor(
         return womanSectionDataStoreManager.durationOfMenstrualCycle.asLiveData()
     }
 
-    suspend fun addMenstruationDates(dates: MenstruationDates) {
-        dao.insert(MenstruationDatesEntity.fromDomain(dates))
+    suspend fun addMenstruationPeriod(period: MenstruationPeriod) {
+        dao.insert(MenstruationPeriodEntity.fromDomain(period))
     }
 
-    suspend fun updateMenstruationDates(dates: MenstruationDates) {
-        dao.update(MenstruationDatesEntity.fromDomain(dates))
+    suspend fun updateMenstruationPeriod(period: MenstruationPeriod) {
+        dao.update(MenstruationPeriodEntity.fromDomain(period))
     }
 
-    suspend fun deleteMenstruationDates(id: Long) {
+    suspend fun deleteMenstruationPeriod(id: Long) {
         dao.delete(id)
     }
 
-    suspend fun clearMenstruationDatesList() {
+    suspend fun clearMenstruationPeriodList() {
         dao.deleteAll()
     }
 
