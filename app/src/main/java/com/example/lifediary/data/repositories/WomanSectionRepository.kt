@@ -1,6 +1,7 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
 import com.example.lifediary.data.domain.MenstruationPeriod
 import javax.inject.Inject
@@ -22,6 +23,10 @@ class WomanSectionRepository @Inject constructor(
         return localDataSource.getDurationOfMenstrualCycle()
     }
 
+    fun getDurationOfMenstruationPeriod(): LiveData<Int> {
+        return localDataSource.getDurationOfMenstruationPeriod()
+    }
+
     suspend fun addMenstruationPeriod(period: MenstruationPeriod) {
         localDataSource.addMenstruationPeriod(period)
     }
@@ -40,5 +45,9 @@ class WomanSectionRepository @Inject constructor(
 
     suspend fun setDurationOfMenstrualCycle(value: Int) {
         localDataSource.setDurationOfMenstrualCycle(value)
+    }
+
+    suspend fun setDurationOfMenstruationPeriod(value: Int) {
+        localDataSource.setDurationOfMenstruationPeriod(value)
     }
 }

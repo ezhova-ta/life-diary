@@ -80,5 +80,39 @@
             android:background="@drawable/icon_edit_blue"
             android:onClick="@{() -> viewModel.onSetDurationOfMenstrualCycleClick()}" />
 
+        <TextView
+            android:id="@+id/durationOfMenstruationPeriodTitle"
+            style="@style/Text.ScreenSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/durationOfMenstrualCycle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/editDurationOfMenstruationPeriodButton"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/duration_of_menstruation" />
+
+        <TextView
+            android:id="@+id/durationOfMenstruationPeriod"
+            style="@style/Text.MediumGray"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/durationOfMenstruationPeriodTitle"
+            app:layout_constraintStart_toStartOf="@id/durationOfMenstruationPeriodTitle"
+            app:layout_constraintEnd_toStartOf="@id/editDurationOfMenstruationPeriodButton"
+            android:layout_marginEnd="8dp"
+            tools:text="5 дн."
+            android:text="@{String.format(@string/n_days, viewModel.durationOfMenstruationPeriod)}" />
+
+        <ImageButton
+            android:id="@+id/editDurationOfMenstruationPeriodButton"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            app:layout_constraintTop_toTopOf="@id/durationOfMenstruationPeriodTitle"
+            app:layout_constraintStart_toStartOf="@id/menstruationPeriodListButton"
+            app:layout_constraintEnd_toEndOf="@id/menstruationPeriodListButton"
+            android:background="@drawable/icon_edit_blue"
+            android:onClick="@{() -> viewModel.onSetDurationOfMenstruationPeriodClick()}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

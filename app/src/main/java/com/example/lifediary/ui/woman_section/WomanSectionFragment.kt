@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.lifediary.databinding.FragmentWomanSectionBinding
 import com.example.lifediary.ui.BaseFragment
-import com.example.lifediary.ui.woman_section.DurationOfMenstrualCycleDialog.Companion.FRAGMENT_TAG
 
 class WomanSectionFragment : BaseFragment() {
     override val viewModel: WomanSectionViewModel by activityViewModels()
@@ -30,6 +29,7 @@ class WomanSectionFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupSetDurationOfMenstrualCycleDialog()
+        setupSetDurationOfMenstruationPeriodDialog()
         return binding.root
     }
 
@@ -41,15 +41,32 @@ class WomanSectionFragment : BaseFragment() {
         }
     }
 
-    private fun showSetDurationOfMenstrualCycleDialog() {
-        with(DurationOfMenstrualCycleDialog()) {
-            isCancelable = false
-            show(this@WomanSectionFragment.childFragmentManager, FRAGMENT_TAG)
+    private fun setupSetDurationOfMenstruationPeriodDialog() {
+        viewModel.showSetDurationOfMenstruationPeriodDialog.observe(viewLifecycleOwner) { needToShow ->
+            if(needToShow && !isSetDurationOfMenstruationPeriodDialogCurrentlyDisplayed()) {
+                showSetDurationOfMenstruationPeriodDialog()
+            }
         }
     }
 
+    private fun showSetDurationOfMenstrualCycleDialog() {
+        val dialog = DurationOfMenstrualCycleDialog()
+        dialog.isCancelable = false
+        dialog.show(childFragmentManager, DurationOfMenstrualCycleDialog.FRAGMENT_TAG)
+    }
+
+    private fun showSetDurationOfMenstruationPeriodDialog() {
+        val dialog = DurationOfMenstruationPeriodDialog()
+        dialog.isCancelable = false
+        dialog.show(childFragmentManager, DurationOfMenstruationPeriodDialog.FRAGMENT_TAG)
+    }
+
     private fun isSetDurationOfMenstrualCycleDialogCurrentlyDisplayed(): Boolean {
-        return childFragmentManager.findFragmentByTag(FRAGMENT_TAG) != null
+        return childFragmentManager.findFragmentByTag(DurationOfMenstrualCycleDialog.FRAGMENT_TAG) != null
+    }
+
+    private fun isSetDurationOfMenstruationPeriodDialogCurrentlyDisplayed(): Boolean {
+        return childFragmentManager.findFragmentByTag(DurationOfMenstruationPeriodDialog.FRAGMENT_TAG) != null
     }
 
     override fun onDestroyView() {

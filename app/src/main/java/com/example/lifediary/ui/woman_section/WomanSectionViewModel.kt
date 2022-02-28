@@ -27,9 +27,17 @@ class WomanSectionViewModel : BaseViewModel() {
         womanSectionRepository.getDurationOfMenstrualCycle()
     }
 
+    val durationOfMenstruationPeriod: LiveData<Int> by lazy {
+        womanSectionRepository.getDurationOfMenstruationPeriod()
+    }
+
     private val _showSetDurationOfMenstrualCycleDialog = MutableLiveData(false)
     val showSetDurationOfMenstrualCycleDialog: LiveData<Boolean>
         get() = _showSetDurationOfMenstrualCycleDialog
+
+    private val _showSetDurationOfMenstruationPeriodDialog = MutableLiveData(false)
+    val showSetDurationOfMenstruationPeriodDialog: LiveData<Boolean>
+        get() = _showSetDurationOfMenstruationPeriodDialog
 
     init {
         bindScope()
@@ -65,5 +73,28 @@ class WomanSectionViewModel : BaseViewModel() {
 
     fun onSetDurationOfMenstrualCycleCancelled() {
         _showSetDurationOfMenstrualCycleDialog.value = false
+    }
+
+    fun onSetDurationOfMenstruationPeriodClick() {
+        _showSetDurationOfMenstruationPeriodDialog.value = true
+    }
+
+    fun onDurationOfMenstruationPeriodHasBeenSet(value: Int) {
+        _showSetDurationOfMenstruationPeriodDialog.value = false
+        saveDurationOfMenstruationPeriod(value)
+    }
+
+    private fun saveDurationOfMenstruationPeriod(value: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                womanSectionRepository.setDurationOfMenstruationPeriod(value)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.failed_to_save))
+            }
+        }
+    }
+
+    fun onSetDurationOfMenstruationPeriodCancelled() {
+        _showSetDurationOfMenstruationPeriodDialog.value = false
     }
 }

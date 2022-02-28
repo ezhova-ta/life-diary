@@ -25,6 +25,10 @@ class WomanSectionLocalDataSource @Inject constructor(
         return womanSectionDataStoreManager.durationOfMenstrualCycle.asLiveData()
     }
 
+    fun getDurationOfMenstruationPeriod(): LiveData<Int> {
+        return womanSectionDataStoreManager.durationOfMenstruationPeriod.asLiveData()
+    }
+
     suspend fun addMenstruationPeriod(period: MenstruationPeriod) {
         dao.insert(MenstruationPeriodEntity.fromDomain(period))
     }
@@ -43,5 +47,9 @@ class WomanSectionLocalDataSource @Inject constructor(
 
     suspend fun setDurationOfMenstrualCycle(value: Int) {
         womanSectionDataStoreManager.setDurationOfMenstrualCycle(value)
+    }
+
+    suspend fun setDurationOfMenstruationPeriod(value: Int) {
+        womanSectionDataStoreManager.setDurationOfMenstruationPeriod(value)
     }
 }

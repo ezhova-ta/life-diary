@@ -97,6 +97,7 @@
     <string name="last_menstruation">Last menstruation:</string>
     <string name="menses">Menses</string>
     <string name="duration_of_menstrual_cycle">Duration of menstrual cycle:</string>
+    <string name="duration_of_menstruation">Duration of menstruation:</string>
     <string name="n_days">%d days</string>
     <string name="set">Set</string>
     <string name="start_menstruation_must_be_no_later_than_today">Start date of menstruation must be no later than today</string>
