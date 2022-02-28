@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.preferencesOf
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.lifediary.ui.common.UiConstants
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -33,7 +34,8 @@ class WomanSectionDataStoreManager @Inject constructor(private val context: Cont
 			"com.example.lifediary.data.DURATION_OF_MENSTRUAL_CYCLE_KEY"
 		)
 
-		const val DURATION_OF_MENSTRUAL_CYCLE_DEFAULT_VALUE = 28
+		const val DURATION_OF_MENSTRUAL_CYCLE_DEFAULT_VALUE =
+			UiConstants.WomanSection.DEFAULT_DURATION_OF_MENSTRUAL_CYCLE
 	}
 
 	suspend fun setDurationOfMenstrualCycle(value: Int) {

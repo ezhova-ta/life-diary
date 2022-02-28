@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.lifediary.R
 import com.example.lifediary.databinding.DialogDurationOfMenstrualCycleBinding
+import com.example.lifediary.ui.common.UiConstants
 
 class DurationOfMenstrualCycleDialog: DialogFragment() {
 	val viewModel: WomanSectionViewModel by activityViewModels()
@@ -29,8 +30,8 @@ class DurationOfMenstrualCycleDialog: DialogFragment() {
 	}
 
 	private fun setupDurationPicker() {
-		binding.durationPicker.minValue = 15
-		binding.durationPicker.maxValue = 50
+		binding.durationPicker.minValue = UiConstants.WomanSection.MIN_DURATION_OF_MENSTRUAL_CYCLE
+		binding.durationPicker.maxValue = UiConstants.WomanSection.MAX_DURATION_OF_MENSTRUAL_CYCLE
 		viewModel.durationOfMenstrualCycle.value?.let { durationOfMenstrualCycle ->
 			setDurationPickerValue(durationOfMenstrualCycle)
 		}
