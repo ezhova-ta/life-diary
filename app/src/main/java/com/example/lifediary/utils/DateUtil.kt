@@ -60,11 +60,7 @@ fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {
 }
 
 fun Day.toCalendar(): Calendar {
-    return Calendar.getInstance().apply {
-        set(Calendar.DATE, dayNumber)
-        set(Calendar.MONTH, monthNumber - 1)
-        set(Calendar.YEAR, year)
-    }
+    return createCalendarInstance(dayNumber, monthNumber, year)
 }
 
 fun Day.isSameDay(date: CalendarDay): Boolean {
@@ -120,25 +116,57 @@ fun CalendarDay.isSameDayInYear(memorableDate: MemorableDate): Boolean {
 }
 
 fun CalendarDay.isWithinInterval(start: Calendar, end: Calendar): Boolean {
-    val timeInMillis = Calendar.getInstance().apply {
-        set(Calendar.DATE, date.dayOfMonth)
-        set(Calendar.MONTH, date.monthValue - 1)
-        set(Calendar.YEAR, date.year)
-    }.timeInMillis
-
-    val startTimeInMillis = start.apply {
-        set(Calendar.HOUR_OF_DAY, 0)
-        set(Calendar.MINUTE, 0)
-        set(Calendar.SECOND, 0)
-    }.timeInMillis
-
-    val endTimeInMillis = end.apply {
-        set(Calendar.HOUR_OF_DAY, 23)
-        set(Calendar.MINUTE, 59)
-        set(Calendar.SECOND, 59)
-    }.timeInMillis
-
+    val timeInMillis = createCalendarInstance(date.dayOfMonth, date.monthValue, date.year)
+    val startTimeInMillis = start.specify(hourOfDay = 0, minutes = 0, seconds = 0)
+    val endTimeInMillis = end.specify(hourOfDay = 23, minutes = 59, seconds = 59)
     return timeInMillis in startTimeInMillis..endTimeInMillis
+}
+
+/**
+ * Gets a calendar using the default time zone and locale
+ *
+ * @param dayOfMonth Day number of the month. The first day of the month has value 1
+ * @param month Month number. The first month has value 1
+ * @param year Year
+ * @param hourOfDay Hour of the day. Used for the 24-hour clock. E.g., at 10:04:15.250 PM the hourOfDay is 22
+ * @param minutes Minutes within the hour. E.g., at 10:04:15.250 PM the minutes is 4
+ * @param seconds Second within the minute. E.g., at 10:04:15.250 PM the seconds is 15
+ */
+private fun createCalendarInstance(
+    dayOfMonth: Int? = null,
+    month: Int? = null,
+    year: Int? = null,
+    hourOfDay: Int? = null,
+    minutes: Int? = null,
+    seconds: Int? = null
+): Calendar {
+    return Calendar.getInstance().specify(dayOfMonth, month, year, hourOfDay, minutes, seconds)
+}
+
+/**
+ * Sets the given values for the calendar
+ *
+ * @param dayOfMonth Day number of the month. The first day of the month has value 1
+ * @param month Month number. The first month has value 1
+ * @param year Year
+ * @param hourOfDay Hour of the day. Used for the 24-hour clock. E.g., at 10:04:15.250 PM the hourOfDay is 22
+ * @param minutes Minutes within the hour. E.g., at 10:04:15.250 PM the minutes is 4
+ * @param seconds Second within the minute. E.g., at 10:04:15.250 PM the seconds is 15
+ */
+private fun Calendar.specify(
+    dayOfMonth: Int? = null,
+    month: Int? = null,
+    year: Int? = null,
+    hourOfDay: Int? = null,
+    minutes: Int? = null,
+    seconds: Int? = null
+): Calendar = apply {
+    dayOfMonth?.let { set(Calendar.DATE, it) }
+    month?.let{ set(Calendar.MONTH, it - 1) }
+    year?.let { set(Calendar.YEAR, it) }
+    hourOfDay?.let { set(Calendar.HOUR_OF_DAY, it) }
+    minutes?.let { set(Calendar.MINUTE, it) }
+    seconds?.let { set(Calendar.SECOND, it) }
 }
 
 fun MemorableDate.isToday(): Boolean {
