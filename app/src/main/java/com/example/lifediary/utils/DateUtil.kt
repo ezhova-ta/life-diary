@@ -132,7 +132,7 @@ fun CalendarDay.isWithinInterval(start: Calendar, end: Calendar): Boolean {
  * @param minutes Minutes within the hour. E.g., at 10:04:15.250 PM the minutes is 4
  * @param seconds Second within the minute. E.g., at 10:04:15.250 PM the seconds is 15
  */
-private fun createCalendarInstance(
+fun createCalendarInstance(
     dayOfMonth: Int? = null,
     month: Int? = null,
     year: Int? = null,
@@ -169,19 +169,8 @@ private fun Calendar.specify(
     seconds?.let { set(Calendar.SECOND, it) }
 }
 
-// TODO Refactoring
 fun Calendar.plusDays(amountOfDays: Int): Calendar {
-    val result = createCalendarInstance(
-        get(Calendar.DATE),
-        get(Calendar.MONTH) + 1,
-        get(Calendar.YEAR),
-        get(Calendar.HOUR_OF_DAY),
-        get(Calendar.MINUTE),
-        get(Calendar.SECOND)
-    )
-
-    result.add(Calendar.DATE, amountOfDays)
-    return result
+    return (clone() as Calendar).apply { add(Calendar.DATE, amountOfDays) }
 }
 
 fun MemorableDate.isToday(): Boolean {

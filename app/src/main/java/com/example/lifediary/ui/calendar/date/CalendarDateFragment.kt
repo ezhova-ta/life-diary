@@ -21,6 +21,7 @@ import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePicker
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICK_TIME_REQUEST_KEY
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.ToDoListItemNotificationTime
 import com.example.lifediary.utils.Day
+import com.example.lifediary.utils.createCalendarInstance
 import java.util.*
 import javax.inject.Inject
 
@@ -177,14 +178,14 @@ class CalendarDateFragment : BaseFragment() {
             if(pickedTime == null) {
                 onCancelled()
             } else {
-                val notificationTime = Calendar.getInstance().apply {
-                    set(Calendar.SECOND, 0)
-                    set(Calendar.MINUTE, pickedTime.minute)
-                    set(Calendar.HOUR_OF_DAY, pickedTime.hour)
-                    set(Calendar.DATE, toDoListItem.day.dayNumber)
-                    set(Calendar.MONTH, toDoListItem.day.monthNumber - 1)
-                    set(Calendar.YEAR, toDoListItem.day.year)
-                }
+                val notificationTime = createCalendarInstance(
+                    toDoListItem.day.dayNumber,
+                    toDoListItem.day.monthNumber,
+                    toDoListItem.day.year,
+                    pickedTime.hour,
+                    pickedTime.minute,
+                    0
+                )
                 notificationScheduler.scheduleNotification(toDoListItem, notificationTime.timeInMillis)
                 onComplete(notificationTime)
             }
