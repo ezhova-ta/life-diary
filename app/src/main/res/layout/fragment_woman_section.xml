@@ -114,5 +114,26 @@
             android:background="@drawable/icon_edit_blue"
             android:onClick="@{() -> viewModel.onSetDurationOfMenstruationPeriodClick()}" />
 
+        <TextView
+            android:id="@+id/estimatedStartOfNextMenstruationPeriodTitle"
+            style="@style/Text.ScreenSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/durationOfMenstruationPeriod"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/next_menstruation" />
+
+        <TextView
+            android:id="@+id/estimatedStartOfNextMenstruationPeriod"
+            style="@style/Text.MediumGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/estimatedStartOfNextMenstruationPeriodTitle"
+            app:layout_constraintStart_toStartOf="@id/estimatedStartOfNextMenstruationPeriodTitle"
+            android:layout_marginEnd="8dp"
+            tools:text="20.03.2022 - 25.03.2022"
+            android:text="@{viewModel.estimatedNextMenstruationPeriod.toOutputFormattedString() ?? @string/no_data}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

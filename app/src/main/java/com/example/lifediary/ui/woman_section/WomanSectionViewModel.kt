@@ -2,7 +2,6 @@ package com.example.lifediary.ui.woman_section
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MenstruationPeriod
 import com.example.lifediary.data.repositories.WomanSectionRepository
@@ -21,7 +20,7 @@ class WomanSectionViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var womanSectionRepository: WomanSectionRepository
     val lastMenstruationPeriod: LiveData<MenstruationPeriod?> by lazy {
-        womanSectionRepository.getAllMenstruationPeriods().map { it.maxByOrNull { it.startDate } }
+        womanSectionRepository.getLastMenstruationPeriod()
     }
     val durationOfMenstrualCycle: LiveData<Int> by lazy {
         womanSectionRepository.getDurationOfMenstrualCycle()
@@ -29,6 +28,9 @@ class WomanSectionViewModel : BaseViewModel() {
 
     val durationOfMenstruationPeriod: LiveData<Int> by lazy {
         womanSectionRepository.getDurationOfMenstruationPeriod()
+    }
+    val estimatedNextMenstruationPeriod: LiveData<MenstruationPeriod?> by lazy {
+        womanSectionRepository.getEstimatedNextMenstruationPeriod()
     }
 
     private val _showSetDurationOfMenstrualCycleDialog = MutableLiveData(false)

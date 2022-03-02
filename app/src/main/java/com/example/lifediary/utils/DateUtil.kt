@@ -169,6 +169,21 @@ private fun Calendar.specify(
     seconds?.let { set(Calendar.SECOND, it) }
 }
 
+// TODO Refactoring
+fun Calendar.plusDays(amountOfDays: Int): Calendar {
+    val result = createCalendarInstance(
+        get(Calendar.DATE),
+        get(Calendar.MONTH) + 1,
+        get(Calendar.YEAR),
+        get(Calendar.HOUR_OF_DAY),
+        get(Calendar.MINUTE),
+        get(Calendar.SECOND)
+    )
+
+    result.add(Calendar.DATE, amountOfDays)
+    return result
+}
+
 fun MemorableDate.isToday(): Boolean {
     val nowDayNumber = getNowDayNumber()
     val nowMonthNumber = getNowMonthNumber()
