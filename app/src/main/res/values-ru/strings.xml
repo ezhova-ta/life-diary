@@ -103,6 +103,7 @@
     <string name="no_added_menses">Нет добавленных</string>
     <string name="no_added_menses_yet">Пока нет добавленных менструаций</string>
     <string name="period_of_menstruation">Период менструации</string>
+    <string name="next_period_of_menstruation">Следующий период менструации</string>
     <string name="next_menstruation">Следующая менструация:</string>
     <string name="no_data">Нет данных</string>
 </resources>

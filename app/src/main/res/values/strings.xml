@@ -104,6 +104,7 @@
     <string name="no_added_menses">No added menses</string>
     <string name="no_added_menses_yet">No added menses yet</string>
     <string name="period_of_menstruation">Period of menstruation</string>
+    <string name="next_period_of_menstruation">Next period of menstruation</string>
     <string name="next_menstruation">Next menstruation:</string>
     <string name="no_data">No data</string>
 </resources>

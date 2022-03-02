@@ -26,6 +26,9 @@ class CalendarViewModel : BaseViewModel() {
 	val menstruationPeriodList: LiveData<List<MenstruationPeriod>> by lazy {
 		womanSectionRepository.getAllMenstruationPeriods()
 	}
+	val estimatedNextMenstruationPeriod: LiveData<MenstruationPeriod?> by lazy {
+		womanSectionRepository.getEstimatedNextMenstruationPeriod()
+	}
 	val isSectionForWomanVisible: LiveData<Boolean> by lazy { settingsRepository.getWomanSectionEnabled() }
 
 	init {
