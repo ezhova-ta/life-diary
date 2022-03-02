@@ -16,7 +16,7 @@ class NotificationScheduler @Inject constructor(private val context: Context) {
 	fun scheduleNotification(toDoListItem: ToDoListItem, timeInMillis: Long) {
 		val alarmManager = getAlarmManager()
 		val intent = createNotificationIntent(toDoListItem) ?: return
-		alarmManager.set(
+		alarmManager.setExact(
 			AlarmManager.RTC_WAKEUP,
 			timeInMillis,
 			intent
