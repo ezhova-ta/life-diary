@@ -65,9 +65,9 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
             field = value
 
             if(value == null) {
-                binding.windContainer.isVisible = false
+                binding.windView.isVisible = false
             } else {
-                binding.windContainer.isVisible = true
+                binding.windView.isVisible = true
                 binding.windView.text = value
             }
         }
@@ -77,9 +77,9 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
             field = value
 
             if(value == null) {
-                binding.humidityContainer.isVisible = false
+                binding.humidityView.isVisible = false
             } else {
-                binding.humidityContainer.isVisible = true
+                binding.humidityView.isVisible = true
                 binding.humidityView.text = value
             }
         }
