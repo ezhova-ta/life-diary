@@ -21,10 +21,8 @@ import javax.inject.Inject
 class MemorableDatesViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var memorableDatesRepository: MemorableDatesRepository
-    val dates: LiveData<List<MemorableDate>> by lazy {
-        memorableDatesRepository.getDates().map { it.sortBasedToday() }
-    }
-    val isDatesVisible: LiveData<Boolean> by lazy { dates.map { it.isNotEmpty() } }
+    val dates by lazy { memorableDatesRepository.getDates().map { it.sortBasedToday() } }
+    val isDatesVisible by lazy { dates.map { it.isNotEmpty() } }
 
     private val _showClearDateListConfirmationDialog = MutableLiveData(false)
     val showClearDateListConfirmationDialog: LiveData<Boolean>

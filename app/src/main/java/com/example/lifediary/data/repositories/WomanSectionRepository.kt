@@ -17,10 +17,6 @@ class WomanSectionRepository @Inject constructor(
         return localDataSource.getAllMenstruationPeriods()
     }
 
-    fun getMenstruationPeriod(id: Long): MenstruationPeriod? {
-        return localDataSource.getMenstruationPeriod(id)
-    }
-
     fun getDurationOfMenstrualCycle(): LiveData<Int> {
         return localDataSource.getDurationOfMenstrualCycle()
     }
@@ -92,10 +88,6 @@ class WomanSectionRepository @Inject constructor(
 
     suspend fun addMenstruationPeriod(period: MenstruationPeriod) {
         localDataSource.addMenstruationPeriod(period)
-    }
-
-    suspend fun updateMenstruationPeriod(period: MenstruationPeriod) {
-        localDataSource.updateMenstruationPeriod(period)
     }
 
     suspend fun deleteMenstruationPeriod(id: Long) {

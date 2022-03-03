@@ -15,9 +15,6 @@ interface LocationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(location: LocationEntity)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(location: LocationEntity)
-
     @Query("DELETE FROM location")
     suspend fun delete()
 }

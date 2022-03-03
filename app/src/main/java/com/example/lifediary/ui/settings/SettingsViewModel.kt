@@ -20,18 +20,10 @@ class SettingsViewModel : BaseViewModel() {
     @Inject lateinit var dateNoteRepository: DateNoteRepository
     @Inject lateinit var toDoListRepository: ToDoListRepository
 
-    val isShoppingListSectionEnabled: LiveData<Boolean> by lazy {
-        settingsRepository.getShoppingListSectionEnabled()
-    }
-    val isPostAddressesSectionEnabled: LiveData<Boolean> by lazy {
-        settingsRepository.getPostAddressesSectionEnabled()
-    }
-    val isMemorableDatesSectionEnabled: LiveData<Boolean> by lazy {
-        settingsRepository.getMemorableDatesSectionEnabled()
-    }
-    val isWomanSectionEnabled: LiveData<Boolean> by lazy {
-        settingsRepository.getWomanSectionEnabled()
-    }
+    val isShoppingListSectionEnabled by lazy { settingsRepository.getShoppingListSectionEnabled() }
+    val isPostAddressesSectionEnabled by lazy { settingsRepository.getPostAddressesSectionEnabled() }
+    val isMemorableDatesSectionEnabled by lazy { settingsRepository.getMemorableDatesSectionEnabled() }
+    val isWomanSectionEnabled by lazy { settingsRepository.getWomanSectionEnabled() }
 
     private val _showClearCalendarNotesConfirmationDialog = MutableLiveData(false)
     val showClearCalendarNotesConfirmationDialog: LiveData<Boolean>

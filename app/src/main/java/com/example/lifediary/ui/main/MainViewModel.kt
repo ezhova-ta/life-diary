@@ -2,7 +2,6 @@ package com.example.lifediary.ui.main
 
 import androidx.lifecycle.*
 import com.example.lifediary.data.domain.Location
-import com.example.lifediary.data.domain.Weather
 import com.example.lifediary.data.repositories.SettingsRepository
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.di.DiScopes
@@ -18,14 +17,14 @@ class MainViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var weatherRepository: WeatherRepository
     @Inject lateinit var settingsRepository: SettingsRepository
-    val currentWeather: LiveData<Weather?> by lazy { weatherRepository.getCurrentWeather() }
-    private val location: LiveData<Location?> by lazy { weatherRepository.getLocationLiveData() }
-    val locationName: LiveData<String?> by lazy { location.map { it?.name } }
-    val isCurrentWeatherViewVisible: LiveData<Boolean> by lazy { location.map { it != null } }
-    val isShoppingListSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getShoppingListSectionEnabled() }
-    val isPostAddressesSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getPostAddressesSectionEnabled() }
-    val isMemorableDatesSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getMemorableDatesSectionEnabled() }
-    val isWomanSectionVisible: LiveData<Boolean> by lazy { settingsRepository.getWomanSectionEnabled() }
+    val currentWeather by lazy { weatherRepository.getCurrentWeather() }
+    private val location by lazy { weatherRepository.getLocationLiveData() }
+    val locationName by lazy { location.map { it?.name } }
+    val isCurrentWeatherViewVisible by lazy { location.map { it != null } }
+    val isShoppingListSectionVisible by lazy { settingsRepository.getShoppingListSectionEnabled() }
+    val isPostAddressesSectionVisible by lazy { settingsRepository.getPostAddressesSectionEnabled() }
+    val isMemorableDatesSectionVisible by lazy { settingsRepository.getMemorableDatesSectionEnabled() }
+    val isWomanSectionVisible by lazy { settingsRepository.getWomanSectionEnabled() }
 
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>

@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 class ShoppingListViewModel: BaseViewModel() {
     @Inject lateinit var shoppingListRepository: ShoppingListRepository
-    val shoppingList: LiveData<List<ShoppingListItem>> by lazy { shoppingListRepository.getShoppingList() }
-    val isShoppingListVisible: LiveData<Boolean> by lazy { shoppingList.map { it.isNotEmpty() } }
+    val shoppingList by lazy { shoppingListRepository.getShoppingList() }
+    val isShoppingListVisible by lazy { shoppingList.map { it.isNotEmpty() } }
     val newShoppingListItemText = MutableLiveData("")
 
     private val _showClearShoppingListConfirmationDialog = MutableLiveData(false)

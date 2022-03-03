@@ -22,8 +22,7 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 	private var existingNote: MainNote? = null
 
 	private val _inputNeedsFocus = MutableLiveData(true)
-	val inputNeedsFocus: LiveData<Boolean>
-		get() = _inputNeedsFocus
+	val inputNeedsFocus: LiveData<Boolean> get() = _inputNeedsFocus
 
 	private val _showDeleteNoteConfirmationDialog = MutableLiveData<Long?>(null)
 	val showDeleteNoteConfirmationDialog: LiveData<Long?>

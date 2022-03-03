@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.MenstruationPeriod
 import com.example.lifediary.data.repositories.WomanSectionRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
@@ -20,25 +19,12 @@ import javax.inject.Inject
 class WomanSectionViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var womanSectionRepository: WomanSectionRepository
-    val lastMenstruationPeriod: LiveData<MenstruationPeriod?> by lazy {
-        womanSectionRepository.getLastMenstruationPeriod()
-    }
-    val durationOfMenstrualCycle: LiveData<Int> by lazy {
-        womanSectionRepository.getDurationOfMenstrualCycle()
-    }
-
-    val durationOfMenstruationPeriod: LiveData<Int> by lazy {
-        womanSectionRepository.getDurationOfMenstruationPeriod()
-    }
-    val estimatedNextMenstruationPeriod: LiveData<MenstruationPeriod?> by lazy {
-        womanSectionRepository.getEstimatedNextMenstruationPeriod()
-    }
-    val delayOfMenstruation: LiveData<Long?> by lazy {
-        womanSectionRepository.getDelayOfMenstruation()
-    }
-    val delayOfMenstruationVisibility: LiveData<Boolean> by lazy {
-        delayOfMenstruation.map { it != null && it != 0L }
-    }
+    val lastMenstruationPeriod by lazy { womanSectionRepository.getLastMenstruationPeriod() }
+    val durationOfMenstrualCycle by lazy { womanSectionRepository.getDurationOfMenstrualCycle() }
+    val durationOfMenstruationPeriod by lazy { womanSectionRepository.getDurationOfMenstruationPeriod() }
+    val estimatedNextMenstruationPeriod by lazy { womanSectionRepository.getEstimatedNextMenstruationPeriod() }
+    val delayOfMenstruation by lazy { womanSectionRepository.getDelayOfMenstruation() }
+    val delayOfMenstruationVisibility by lazy { delayOfMenstruation.map { it != null && it != 0L } }
 
     private val _showSetDurationOfMenstrualCycleDialog = MutableLiveData(false)
     val showSetDurationOfMenstrualCycleDialog: LiveData<Boolean>

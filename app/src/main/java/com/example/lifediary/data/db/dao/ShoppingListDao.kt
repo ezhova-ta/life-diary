@@ -18,9 +18,6 @@ interface ShoppingListDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: ShoppingListItemEntity)
 
-    @Delete
-    suspend fun delete(item: ShoppingListItemEntity)
-
     @Query("DELETE FROM shopping_list WHERE id = :id")
     suspend fun delete(id: Long)
 

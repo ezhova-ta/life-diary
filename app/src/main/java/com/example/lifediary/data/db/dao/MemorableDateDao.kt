@@ -21,9 +21,6 @@ interface MemorableDateDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: MemorableDateEntity)
 
-    @Delete
-    suspend fun delete(item: MemorableDateEntity)
-
     @Query("DELETE FROM memorable_date WHERE id = :id")
     suspend fun delete(id: Long)
 

@@ -2,8 +2,6 @@ package com.example.lifediary.ui.calendar.date
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.WeatherForecast
 import com.example.lifediary.data.repositories.*
@@ -28,18 +26,17 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var womanSectionRepository: WomanSectionRepository
 	@Inject lateinit var settingsRepository: SettingsRepository
 	val title = day.toDateString()
-	val toDoList: LiveData<List<ToDoListItem>> by lazy { toDoListRepository.getToDoList(day) }
-	val isToDoListVisible: LiveData<Boolean> by lazy { toDoList.map { it.isNotEmpty() } }
-	private val note: LiveData<DateNote?> by lazy { noteRepository.getNoteLiveData(day) }
-	val noteText: LiveData<String?> by lazy { note.map { it?.text } }
-	val isNoteVisible: LiveData<Boolean> by lazy { note.map { it != null } }
+	val toDoList by lazy { toDoListRepository.getToDoList(day) }
+	val isToDoListVisible by lazy { toDoList.map { it.isNotEmpty() } }
+	private val note by lazy { noteRepository.getNoteLiveData(day) }
+	val noteText by lazy { note.map { it?.text } }
+	val isNoteVisible by lazy { note.map { it != null } }
 	val newToDoListItemText = MutableLiveData("")
-	val memorableDates: LiveData<List<MemorableDate>> by lazy { memorableDatesRepository.getDates(day) }
-	val isMemorableDatesVisible: LiveData<Boolean> by lazy { memorableDates.map { it.isNotEmpty() } }
-
-	val isMenstruationIconVisible: LiveData<Boolean> by lazy { getMenstruationIconVisibility() }
-	val isEstimatedMenstruationIconVisible: LiveData<Boolean> by lazy { getEstimatedMenstruationIconVisibility() }
-	val isCalendarIconVisible: LiveData<Boolean> by lazy { getCalendarIconVisibility() }
+	val memorableDates by lazy { memorableDatesRepository.getDates(day) }
+	val isMemorableDatesVisible by lazy { memorableDates.map { it.isNotEmpty() } }
+	val isMenstruationIconVisible by lazy { getMenstruationIconVisibility() }
+	val isEstimatedMenstruationIconVisible by lazy { getEstimatedMenstruationIconVisibility() }
+	val isCalendarIconVisible by lazy { getCalendarIconVisibility() }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->

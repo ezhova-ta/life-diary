@@ -18,7 +18,7 @@ import javax.inject.Inject
 class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var router: Router
 	@Inject lateinit var noteRepository: DateNoteRepository
-	val isAddButtonVisible: LiveData<Boolean> by lazy { noteRepository.getNoteLiveData(day).map { it == null } }
+	val isAddButtonVisible by lazy { noteRepository.getNoteLiveData(day).map { it == null } }
 	val noteText = MutableLiveData("")
 	private var existingNote: DateNote? = null
 

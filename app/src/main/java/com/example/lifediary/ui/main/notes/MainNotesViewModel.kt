@@ -20,8 +20,8 @@ import javax.inject.Inject
 class MainNotesViewModel : BaseViewModel() {
 	@Inject lateinit var router: Router
 	@Inject lateinit var notesRepository: MainNotesRepository
-	val noteList: LiveData<List<MainNote>> by lazy { notesRepository.getNotes() }
-	val isNotesVisible: LiveData<Boolean> by lazy { noteList.map { it.isNotEmpty() } }
+	val noteList by lazy { notesRepository.getNotes() }
+	val isNotesVisible by lazy { noteList.map { it.isNotEmpty() } }
 
 	private val _showClearNoteListConfirmationDialog = MutableLiveData(false)
 	val showClearNoteListConfirmationDialog: LiveData<Boolean>

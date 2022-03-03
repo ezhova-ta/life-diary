@@ -18,9 +18,6 @@ interface MainNotesDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: MainNoteEntity)
 
-    @Delete
-    suspend fun delete(item: MainNoteEntity)
-
     @Query("DELETE FROM main_note WHERE id = :id")
     suspend fun delete(id: Long)
 

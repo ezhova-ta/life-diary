@@ -21,12 +21,8 @@ import javax.inject.Inject
 
 class MenstruationPeriodListViewModel : BaseViewModel() {
     @Inject lateinit var womanSectionRepository: WomanSectionRepository
-    val menstruationPeriodList: LiveData<List<MenstruationPeriod>> by lazy {
-        womanSectionRepository.getAllMenstruationPeriods()
-    }
-    val isMenstruationPeriodListVisible: LiveData<Boolean> by lazy {
-        menstruationPeriodList.map { it.isNotEmpty() }
-    }
+    val menstruationPeriodList by lazy { womanSectionRepository.getAllMenstruationPeriods() }
+    val isMenstruationPeriodListVisible by lazy { menstruationPeriodList.map { it.isNotEmpty() } }
 
     private val _showDeleteMenstruationPeriodConfirmationDialog = MutableLiveData<Long?>(null)
     val showDeleteMenstruationPeriodConfirmationDialog: LiveData<Long?>

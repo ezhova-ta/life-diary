@@ -21,8 +21,8 @@ import javax.inject.Inject
 class PostAddressesViewModel: BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var postAddressRepository: PostAddressRepository
-    val addresses: LiveData<List<PostAddress>> by lazy { postAddressRepository.getAllAddresses() }
-    val isAddressListVisible: LiveData<Boolean> by lazy { addresses.map { it.isNotEmpty() } }
+    val addresses by lazy { postAddressRepository.getAllAddresses() }
+    val isAddressListVisible by lazy { addresses.map { it.isNotEmpty() } }
 
     private val _isAddButtonVisible = MutableLiveData<Boolean>()
     val isAddButtonVisible: LiveData<Boolean>
