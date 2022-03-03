@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
 import com.example.lifediary.data.domain.MenstruationPeriod
-import com.example.lifediary.utils.ThreeSourceLiveData
-import com.example.lifediary.utils.getDaysBetween
-import com.example.lifediary.utils.plusDays
+import com.example.lifediary.utils.*
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -67,6 +65,28 @@ class WomanSectionRepository @Inject constructor(
             val now = Calendar.getInstance()
             if(now.before(startNextMenstruationPeriod)) return@map null
             getDaysBetween(startNextMenstruationPeriod, now)
+        }
+    }
+
+    fun isDayOfMenstruationPeriod(day: Day): LiveData<Boolean> {
+        return getAllMenstruationPeriods().map { menstruationPeriods ->
+            menstruationPeriods.find { day.isWithinInterval(it.startDate, it.endDate) } != null
+        }
+    }
+
+    fun isDayOfEstimatedMenstruationPeriod(day: Day): LiveData<Boolean> {
+        return getEstimatedNextMenstruationPeriod().map { menstruationPeriod ->
+            menstruationPeriod ?: return@map false
+            day.isWithinInterval(menstruationPeriod.startDate, menstruationPeriod.endDate)
+        }
+    }
+
+    fun isDayNotIncludedInMenstruationPeriod(day: Day): LiveData<Boolean> {
+        return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+            isDayOfMenstruationPeriod(day),
+            isDayOfEstimatedMenstruationPeriod(day)
+        ) { isDayOfMenstruationPeriod, isDayOfEstimatedMenstruationPeriod ->
+            isDayOfMenstruationPeriod != true && isDayOfEstimatedMenstruationPeriod != true
         }
     }
 

@@ -117,10 +117,18 @@ fun CalendarDay.isSameDayInYear(memorableDate: MemorableDate): Boolean {
 }
 
 fun CalendarDay.isWithinInterval(start: Calendar, end: Calendar): Boolean {
-    val timeInMillis = createCalendarInstance(date.dayOfMonth, date.monthValue, date.year)
-    val startTimeInMillis = start.specify(hourOfDay = 0, minutes = 0, seconds = 0)
-    val endTimeInMillis = end.specify(hourOfDay = 23, minutes = 59, seconds = 59)
-    return timeInMillis in startTimeInMillis..endTimeInMillis
+    val calendar = createCalendarInstance(date.dayOfMonth, date.monthValue, date.year)
+    return calendar.isWithinInterval(start, end)
+}
+
+fun Day.isWithinInterval(start: Calendar, end: Calendar): Boolean {
+    return toCalendar().isWithinInterval(start, end)
+}
+
+private fun Calendar.isWithinInterval(start: Calendar, end: Calendar): Boolean {
+    val specifiedStart = start.specify(hourOfDay = 0, minutes = 0, seconds = 0)
+    val specifiedEnd = end.specify(hourOfDay = 23, minutes = 59, seconds = 59)
+    return this in specifiedStart..specifiedEnd
 }
 
 /**

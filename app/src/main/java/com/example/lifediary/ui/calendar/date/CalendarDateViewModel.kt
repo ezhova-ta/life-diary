@@ -6,10 +6,7 @@ import com.example.lifediary.data.domain.DateNote
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.WeatherForecast
-import com.example.lifediary.data.repositories.DateNoteRepository
-import com.example.lifediary.data.repositories.MemorableDatesRepository
-import com.example.lifediary.data.repositories.ToDoListRepository
-import com.example.lifediary.data.repositories.WeatherRepository
+import com.example.lifediary.data.repositories.*
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
@@ -28,6 +25,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var noteRepository: DateNoteRepository
 	@Inject lateinit var toDoListRepository: ToDoListRepository
 	@Inject lateinit var memorableDatesRepository: MemorableDatesRepository
+	@Inject lateinit var womanSectionRepository: WomanSectionRepository
+	@Inject lateinit var settingsRepository: SettingsRepository
 	val title = day.toDateString()
 	val toDoList: LiveData<List<ToDoListItem>> by lazy { toDoListRepository.getToDoList(day) }
 	val isToDoListVisible: LiveData<Boolean> by lazy { toDoList.map { it.isNotEmpty() } }
@@ -37,6 +36,10 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val newToDoListItemText = MutableLiveData("")
 	val memorableDates: LiveData<List<MemorableDate>> by lazy { memorableDatesRepository.getDates(day) }
 	val isMemorableDatesVisible: LiveData<Boolean> by lazy { memorableDates.map { it.isNotEmpty() } }
+
+	val isMenstruationIconVisible: LiveData<Boolean> by lazy { getMenstruationIconVisibility() }
+	val isEstimatedMenstruationIconVisible: LiveData<Boolean> by lazy { getEstimatedMenstruationIconVisibility() }
+	val isCalendarIconVisible: LiveData<Boolean> by lazy { getCalendarIconVisibility() }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->
@@ -83,6 +86,34 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 				// TODO Message display temporarily removed
 //				showMessage(Text.TextResource(R.string.failed_to_get_forecast))
 			}
+		}
+	}
+
+	private fun getMenstruationIconVisibility(): LiveData<Boolean> {
+		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+			settingsRepository.getWomanSectionEnabled(),
+			womanSectionRepository.isDayOfMenstruationPeriod(day)
+		) { isWomanSectionEnabled, isDayOfMenstruationPeriod ->
+			isWomanSectionEnabled == true && isDayOfMenstruationPeriod == true
+		}
+	}
+
+	private fun getEstimatedMenstruationIconVisibility(): LiveData<Boolean> {
+		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+			settingsRepository.getWomanSectionEnabled(),
+			womanSectionRepository.isDayOfEstimatedMenstruationPeriod(day)
+		) { isWomanSectionEnabled, isDayOfEstimatedMenstruationPeriod ->
+			isWomanSectionEnabled == true && isDayOfEstimatedMenstruationPeriod == true
+		}
+	}
+
+	private fun getCalendarIconVisibility(): LiveData<Boolean> {
+		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+			settingsRepository.getWomanSectionEnabled(),
+			womanSectionRepository.isDayNotIncludedInMenstruationPeriod(day)
+		) { isWomanSectionEnabled, dayNotIncludedInMenstruationPeriod ->
+			if(isWomanSectionEnabled == false) return@TwoSourceLiveData true
+			dayNotIncludedInMenstruationPeriod == true
 		}
 	}
 

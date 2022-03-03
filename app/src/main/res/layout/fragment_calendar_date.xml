@@ -22,22 +22,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent">
-                <ImageView
-                    android:id="@+id/calendarIcon"
+                
+                <FrameLayout
+                    android:id="@+id/dayIconContainer"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/icon_calendar_logo" />
+                    app:layout_constraintStart_toStartOf="parent">
+                    <ImageView
+                        android:id="@+id/calendarIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_calendar_logo"
+                        app:booleanVisibility="@{viewModel.isCalendarIconVisible()}" />
+
+                    <ImageView
+                        android:id="@+id/menstrualPeriodIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_leaf_lilac_40"
+                        app:booleanVisibility="@{viewModel.isMenstruationIconVisible()}" />
+
+                    <ImageView
+                        android:id="@+id/estimatedMenstrualPeriodIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_leaf_light_blue"
+                        app:booleanVisibility="@{viewModel.isEstimatedMenstruationIconVisible()}" />
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/title"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/calendarIcon"
-                    app:layout_constraintBottom_toBottomOf="@+id/calendarIcon"
-                    app:layout_constraintStart_toEndOf="@id/calendarIcon"
+                    app:layout_constraintTop_toTopOf="@id/dayIconContainer"
+                    app:layout_constraintBottom_toBottomOf="@+id/dayIconContainer"
+                    app:layout_constraintStart_toEndOf="@id/dayIconContainer"
                     android:textColor="@color/app_green"
                     android:textSize="24sp"
                     tools:text="16.08.2021"
