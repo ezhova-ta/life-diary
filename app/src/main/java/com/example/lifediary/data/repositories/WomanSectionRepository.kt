@@ -5,9 +5,8 @@ import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
 import com.example.lifediary.data.domain.MenstruationPeriod
 import com.example.lifediary.utils.ThreeSourceLiveData
-import com.example.lifediary.utils.isSameDay
+import com.example.lifediary.utils.getDaysBetween
 import com.example.lifediary.utils.plusDays
-import java.time.temporal.ChronoUnit
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -67,7 +66,7 @@ class WomanSectionRepository @Inject constructor(
             val startNextMenstruationPeriod = nextMenstruationPeriod?.startDate ?: return@map null
             val now = Calendar.getInstance()
             if(now.before(startNextMenstruationPeriod)) return@map null
-            ChronoUnit.DAYS.between(startNextMenstruationPeriod.toInstant(), now.toInstant())
+            getDaysBetween(startNextMenstruationPeriod, now)
         }
     }
 

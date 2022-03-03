@@ -5,6 +5,7 @@ import com.kizitonwose.calendarview.model.CalendarDay
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 private const val DATE_FORMAT_WITH_YEAR = "dd.MM.yyyy"
@@ -131,6 +132,7 @@ fun CalendarDay.isWithinInterval(start: Calendar, end: Calendar): Boolean {
  * @param hourOfDay Hour of the day. Used for the 24-hour clock. E.g., at 10:04:15.250 PM the hourOfDay is 22
  * @param minutes Minutes within the hour. E.g., at 10:04:15.250 PM the minutes is 4
  * @param seconds Second within the minute. E.g., at 10:04:15.250 PM the seconds is 15
+ * @return Calendar object with specified fields
  */
 fun createCalendarInstance(
     dayOfMonth: Int? = null,
@@ -152,6 +154,7 @@ fun createCalendarInstance(
  * @param hourOfDay Hour of the day. Used for the 24-hour clock. E.g., at 10:04:15.250 PM the hourOfDay is 22
  * @param minutes Minutes within the hour. E.g., at 10:04:15.250 PM the minutes is 4
  * @param seconds Second within the minute. E.g., at 10:04:15.250 PM the seconds is 15
+ * @return The same Calendar object with specified fields
  */
 private fun Calendar.specify(
     dayOfMonth: Int? = null,
@@ -171,6 +174,19 @@ private fun Calendar.specify(
 
 fun Calendar.plusDays(amountOfDays: Int): Calendar {
     return (clone() as Calendar).apply { add(Calendar.DATE, amountOfDays) }
+}
+
+/**
+ * Calculates the amount of time between two dates.
+ * The result will be negative if the end is before the start
+ *
+ * @param date1 Calendar object
+ * @param date2 Other Calendar object
+ * @return The amount of days between date1 (inclusive) and date2 (exclusive).
+ * Positive if date2 is later than date1, negative if earlier
+ */
+fun getDaysBetween(date1: Calendar, date2: Calendar): Long {
+    return ChronoUnit.DAYS.between(date1.toInstant(), date2.toInstant())
 }
 
 fun MemorableDate.isToday(): Boolean {
