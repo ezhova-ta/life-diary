@@ -47,7 +47,7 @@
                         android:id="@+id/estimatedMenstrualPeriodIcon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/icon_leaf_light_blue"
+                        android:src="@drawable/icon_leaf_turquoise_40"
                         app:booleanVisibility="@{viewModel.isEstimatedMenstruationIconVisible()}" />
                 </FrameLayout>
 

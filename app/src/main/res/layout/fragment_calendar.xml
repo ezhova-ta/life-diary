@@ -65,7 +65,7 @@
                 app:layout_constraintTop_toTopOf="@id/legendEstimatedNextMenstruationPeriodText"
                 app:layout_constraintBottom_toBottomOf="@id/legendEstimatedNextMenstruationPeriodText"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/icon_leaf_light_blue"
+                android:src="@drawable/icon_leaf_turquoise_40"
                 app:booleanVisibility="@{viewModel.isSectionForWomanVisible()}" />
 
             <TextView
