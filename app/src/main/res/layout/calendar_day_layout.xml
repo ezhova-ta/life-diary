@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/icon_leaf_lilac_23"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <View
         android:id="@+id/estimatedNextMenstruationIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/icon_leaf_light_blue"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <View
         android:id="@+id/selectedBackground"
