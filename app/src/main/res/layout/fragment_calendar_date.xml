@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toTopOf="@id/dayIconContainer"
                     app:layout_constraintBottom_toBottomOf="@+id/dayIconContainer"
                     app:layout_constraintStart_toEndOf="@id/dayIconContainer"
-                    android:textColor="@color/app_green"
+                    android:textColor="@color/app_medium_dark_gray"
                     android:textSize="24sp"
                     tools:text="16.08.2021"
                     android:text="@{viewModel.title}" />
@@ -196,24 +196,16 @@
                 android:clickable="true"
                 android:onClick="@{() -> viewModel.onAddToDoListItemClick()}"/>
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/createToDoListTitleView"
+                style="@style/Text.ExplanatoryMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/addToDoListItemInput"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                app:booleanVisibility="@{!viewModel.isToDoListVisible()}">
-                <TextView
-                    style="@style/Text.ExplanatoryMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/crete_to_do_lists_title" />
-
-                <ImageView
-                    style="@style/ExplanatoryMessageIcon"
-                    android:src="@drawable/icon_checklist_blue" />
-            </LinearLayout>
+                android:text="@string/crete_to_do_lists_title"
+                app:booleanVisibility="@{!viewModel.isToDoListVisible()}"
+                app:drawableBottomCompat="@drawable/icon_checklist_blue" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/toDoListView"
