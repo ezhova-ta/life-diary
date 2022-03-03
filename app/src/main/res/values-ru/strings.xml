@@ -106,4 +106,5 @@
     <string name="next_period_of_menstruation">Следующий период менструации</string>
     <string name="next_menstruation">Следующая менструация:</string>
     <string name="no_data">Нет данных</string>
+    <string name="delay_of_menstruation">Задержка: %d дн.</string>
 </resources>
