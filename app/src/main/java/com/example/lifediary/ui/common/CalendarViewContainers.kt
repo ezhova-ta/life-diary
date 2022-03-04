@@ -9,6 +9,7 @@ import com.example.lifediary.R
 import com.example.lifediary.databinding.CalendarDayLayoutBinding
 import com.example.lifediary.databinding.CalendarMonthLayoutBinding
 import com.example.lifediary.utils.isToday
+import com.example.lifediary.utils.startWithCapitalLetter
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -83,7 +84,14 @@ class CalendarMonthViewContainer(view: View) : ViewContainer(view) {
     private val monthTextView = binding.monthTextView
 
     fun setupTitle(month: CalendarMonth) {
-        monthTextView.text = String.format("%s %d", month.yearMonth.month.name, month.year)
+        val monthString = month
+            .yearMonth
+            .month
+            .getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
+            .startWithCapitalLetter()
+
+        val year = month.year
+        monthTextView.text = String.format("%s %d", monthString, year)
     }
 
     fun setupDaysOfWeek(daysOfWeek: Array<DayOfWeek>) {

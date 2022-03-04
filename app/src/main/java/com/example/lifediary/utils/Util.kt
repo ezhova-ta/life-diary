@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.db.entities.DbEntity
 import com.example.lifediary.data.domain.MemorableDate
+import java.util.*
 
 fun Int.createStringWithPlusOrMinusSign(): String {
 	if(this < 0) return toString()
@@ -39,4 +40,16 @@ private fun <T> List<T>.splitAndSwap(splitIndex: Int): List<T> {
 	val head = this.subList(0, splitIndex)
 	val tail = this.subList(splitIndex, lastIndex + 1)
 	return tail.plus(head)
+}
+
+fun String.startWithCapitalLetter(): String {
+	return when(length) {
+		0 -> this
+		1 -> toUpperCase(Locale.getDefault())
+		else -> {
+			val firstLetterInUpperCase = substring(0, 1).toUpperCase(Locale.getDefault())
+			val otherLettersInLowercase = substring(1).toLowerCase(Locale.getDefault())
+			firstLetterInUpperCase + otherLettersInLowercase
+		}
+	}
 }
