@@ -25,7 +25,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/notificationTimeView">
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <FrameLayout
                 android:id="@+id/doneIconsContainer"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -44,7 +44,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/icon_check_green"
                     app:booleanVisibility="@{viewModel.checked}" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/titleView"

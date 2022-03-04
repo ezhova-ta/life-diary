@@ -18,7 +18,7 @@
         android:padding="8dp"
         android:background="@drawable/background_shopping_list_item">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
             android:id="@+id/doneIconsContainer"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_check_gray"
                 app:booleanVisibility="@{viewModel.checked}" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/titleView"

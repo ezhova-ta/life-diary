@@ -7,7 +7,7 @@
             type="com.example.lifediary.adapters.MainNoteListAdapter.MainNoteListItemViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,8 +18,7 @@
             android:id="@+id/noteView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
             app:text="@{viewModel.mainNoteListItem.text}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

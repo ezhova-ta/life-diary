@@ -47,24 +47,16 @@
             tools:listitem="@layout/menstruation_period_list_item"
             app:booleanVisibility="@{viewModel.isMenstruationPeriodListVisible()}" />
 
-        <LinearLayout
+        <TextView
             android:id="@+id/createToDoListTitleView"
+            style="@style/Text.ExplanatoryMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/clearAllButton"
             app:layout_constraintBottom_toTopOf="@id/addMenstruationPeriodButton"
-            android:orientation="vertical"
-            app:booleanVisibility="@{!viewModel.isMenstruationPeriodListVisible()}">
-            <TextView
-                style="@style/Text.ExplanatoryMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/no_added_menses_yet" />
-
-            <ImageView
-                style="@style/ExplanatoryMessageIcon"
-                android:src="@drawable/icon_date_range_blue" />
-        </LinearLayout>
+            android:text="@string/no_added_menses_yet"
+            app:booleanVisibility="@{!viewModel.isMenstruationPeriodListVisible()}"
+            app:drawableBottomCompat="@drawable/icon_date_range_blue" />
 
         <ImageButton
             android:id="@+id/addMenstruationPeriodButton"

@@ -32,24 +32,16 @@
             android:background="@drawable/icon_delete_sweep_color_link"
             android:onClick="@{() -> viewModel.onClearNotesClick()}" />
 
-        <LinearLayout
+        <TextView
             android:id="@+id/makeNotesTitleView"
+            style="@style/Text.ExplanatoryMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/addNoteButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical"
-            app:booleanVisibility="@{!viewModel.isNotesVisible()}">
-            <TextView
-                style="@style/Text.ExplanatoryMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/no_notes_yet" />
-
-            <ImageView
-                style="@style/ExplanatoryMessageIcon"
-                android:src="@drawable/icon_sentiment_dissatisfied_gray" />
-        </LinearLayout>
+            android:text="@string/no_notes_yet"
+            app:booleanVisibility="@{!viewModel.isNotesVisible()}"
+            app:drawableBottomCompat="@drawable/icon_sentiment_dissatisfied_gray" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/noteListView"

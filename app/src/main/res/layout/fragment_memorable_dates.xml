@@ -32,24 +32,16 @@
             android:background="@drawable/icon_delete_sweep_color_link"
             android:onClick="@{() -> viewModel.onClearDatesClick()}" />
 
-        <LinearLayout
+        <TextView
             android:id="@+id/addMemorableDatesTitleView"
+            style="@style/Text.ExplanatoryMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/addDateButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical"
-            app:booleanVisibility="@{!viewModel.isDatesVisible()}">
-            <TextView
-                style="@style/Text.ExplanatoryMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_memorable_dates_title" />
-
-            <ImageView
-                style="@style/ExplanatoryMessageIcon"
-                android:src="@drawable/icon_gift_blue" />
-        </LinearLayout>
+            android:text="@string/add_memorable_dates_title"
+            app:booleanVisibility="@{!viewModel.isDatesVisible()}"
+            app:drawableBottomCompat="@drawable/icon_gift_blue" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memorableDateListView"

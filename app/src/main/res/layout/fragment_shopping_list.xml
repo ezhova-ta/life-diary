@@ -51,24 +51,16 @@
             android:clickable="true"
             android:onClick="@{() -> viewModel.onAddShoppingListItemClick()}"/>
 
-        <LinearLayout
+        <TextView
             android:id="@+id/makeShoppingListsTitleView"
+            style="@style/Text.ExplanatoryMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/addShoppingListItemButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical"
-            app:booleanVisibility="@{!viewModel.isShoppingListVisible()}">
-            <TextView
-                style="@style/Text.ExplanatoryMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/make_shopping_lists_title" />
-
-            <ImageView
-                style="@style/ExplanatoryMessageIcon"
-                android:src="@drawable/icon_shopping_cart_blue" />
-        </LinearLayout>
+            android:text="@string/make_shopping_lists_title"
+            app:booleanVisibility="@{!viewModel.isShoppingListVisible()}"
+            app:drawableBottomCompat="@drawable/icon_shopping_cart_blue" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shoppingListView"

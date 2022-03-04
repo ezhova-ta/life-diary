@@ -18,21 +18,20 @@
         android:paddingBottom="10dp"
         android:clickable="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/addressContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/controlsContainer"
-            android:layout_marginEnd="8dp">
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/addresseeNameView"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/app_green"
                 android:text="@{viewModel.address.name}"
                 app:booleanVisibility="@{viewModel.isAddresseeNameViewVisible}"
@@ -43,8 +42,6 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/addresseeNameView"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text="@{viewModel.address.street}"
                 app:booleanVisibility="@{viewModel.isStreetViewVisible}"
                 tools:text="Литейный проспект" />
@@ -54,8 +51,6 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/streetView"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text='@{String.format("%s %s", @string/bld, viewModel.address.buildingNumber)}'
                 app:booleanVisibility="@{viewModel.isBuildingNumberViewVisible}"
                 tools:text="Дом 63" />
@@ -65,8 +60,6 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/buildingNumberView"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text='@{String.format("%s %s", @string/apt, viewModel.address.apartmentNumber)}'
                 app:booleanVisibility="@{viewModel.apartmentViewVisible}"
                 tools:text="Квартира 87" />
@@ -76,8 +69,6 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/apartmentNumberView"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text="@{viewModel.address.city}"
                 app:booleanVisibility="@{viewModel.isCityViewVisible}"
                 tools:text="Санкт-Петербург" />
@@ -87,8 +78,6 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cityView"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text="@{viewModel.address.edgeRegion}"
                 app:booleanVisibility="@{viewModel.edgeRegionViewVisible}"
                 tools:text="Ленинградская область" />
@@ -98,12 +87,10 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/edgeRegionView"
-                app:layout_constraintStart_toStartOf="parent"
                 app:booleanVisibility="@{viewModel.isPostcodeViewVisible}"
                 android:text="@{viewModel.address.postcode}"
                 tools:text="191025" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/controlsContainer"
