@@ -13,11 +13,7 @@ import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
 import com.example.lifediary.ui.common.CalendarMonthViewContainer
-import com.example.lifediary.utils.Day
-import com.example.lifediary.utils.isSameDay
-import com.example.lifediary.utils.isSameDayInYear
-import com.example.lifediary.utils.isWithinInterval
-import com.example.lifediary.utils.toDomain
+import com.example.lifediary.utils.*
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.DayBinder
@@ -33,10 +29,7 @@ class CalendarFragment : BaseFragment() {
     override val viewModel: CalendarViewModel  by viewModels()
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
-    private var daysWithNotesOrToDoList = listOf<Day>()
-    private var memorableDates = listOf<MemorableDate>()
-    private var menstruationPeriods = listOf<MenstruationPeriod>()
-    private var estimatedNextMenstruationPeriod: MenstruationPeriod? = null
+   private var calendarDaysData: CalendarDaysData? = null
     private var lastScrolledMonth: YearMonth = YearMonth.now()
 
     companion object {
@@ -69,10 +62,7 @@ class CalendarFragment : BaseFragment() {
         binding.calendarView.monthScrollListener = object : MonthScrollListener {
             override fun invoke(month: CalendarMonth) { lastScrolledMonth = month.yearMonth }
         }
-        setupDisplayingNoteIconsInCalendar()
-        setupDisplayingEventIconsInCalendar()
-        setupDisplayMenstruationPeriodsInCalendar()
-        setupDisplayNextMenstruationPeriodInCalendar()
+        setupDisplayingCalendarIcons()
     }
 
     private fun getDaysOfWeek(): Array<DayOfWeek> {
@@ -91,37 +81,11 @@ class CalendarFragment : BaseFragment() {
         return WeekFields.of(Locale.getDefault())
     }
 
-    // TODO Refactoring
-
-    private fun setupDisplayingNoteIconsInCalendar() {
-        viewModel.daysWithNotesOrToDoList.observe(viewLifecycleOwner) { days ->
-            daysWithNotesOrToDoList = days
+    private fun setupDisplayingCalendarIcons() {
+        viewModel.calendarDaysData.observe(viewLifecycleOwner) {
+            it ?: return@observe
+            calendarDaysData = it
             binding.calendarView.notifyCalendarChanged()
-        }
-    }
-
-    private fun setupDisplayingEventIconsInCalendar() {
-        viewModel.memorableDates.observe(viewLifecycleOwner) { dates ->
-            memorableDates = dates
-            binding.calendarView.notifyCalendarChanged()
-        }
-    }
-
-    private fun setupDisplayMenstruationPeriodsInCalendar() {
-        viewModel.menstruationPeriodList.observe(viewLifecycleOwner) { menstruationPeriods ->
-            if(viewModel.isSectionForWomanVisible.value == true) {
-                this.menstruationPeriods = menstruationPeriods
-                binding.calendarView.notifyCalendarChanged()
-            }
-        }
-    }
-
-    private fun setupDisplayNextMenstruationPeriodInCalendar() {
-        viewModel.estimatedNextMenstruationPeriod.observe(viewLifecycleOwner) { menstruationPeriod ->
-            if(viewModel.isSectionForWomanVisible.value == true) {
-                estimatedNextMenstruationPeriod = menstruationPeriod
-                binding.calendarView.notifyCalendarChanged()
-            }
         }
     }
 
@@ -141,22 +105,22 @@ class CalendarFragment : BaseFragment() {
             }
         }
 
-        // TODO Refactoring (suspend?)
+        // TODO Refactoring
 
         private suspend fun isNoteOrToDoListExistsFor(day: CalendarDay): Boolean {
-            return daysWithNotesOrToDoList.find { it.isSameDay(day) } != null
+            return calendarDaysData?.daysWithNotesOrToDoList?.find { it.isSameDay(day) } != null
         }
 
         private suspend fun isMemorableDatesExistFor(day: CalendarDay): Boolean {
-            return memorableDates.find { day.isSameDayInYear(it) } != null
+            return calendarDaysData?.memorableDates?.find { day.isSameDayInYear(it) } != null
         }
 
         private suspend fun isDayOfMenstruationPeriod(day: CalendarDay): Boolean {
-            return menstruationPeriods.find { day.isWithinInterval(it.startDate, it.endDate) } != null
+            return calendarDaysData?.menstruationPeriods?.find { day.isWithinInterval(it.startDate, it.endDate) } != null
         }
 
         private suspend fun isDayOfNextMenstruationPeriod(day: CalendarDay): Boolean {
-            val menstruationPeriod = estimatedNextMenstruationPeriod ?: return false
+            val menstruationPeriod = calendarDaysData?.estimatedNextMenstruationPeriod ?: return false
             return day.isWithinInterval(menstruationPeriod.startDate, menstruationPeriod.endDate)
         }
     }

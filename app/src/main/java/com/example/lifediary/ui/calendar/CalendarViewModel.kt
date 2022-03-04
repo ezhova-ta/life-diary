@@ -1,13 +1,15 @@
 package com.example.lifediary.ui.calendar
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.repositories.*
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.CalendarDaysData
 import com.example.lifediary.utils.Day
+import com.example.lifediary.utils.FourSourceLiveData
+import com.example.lifediary.utils.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -19,15 +21,11 @@ class CalendarViewModel : BaseViewModel() {
 	@Inject lateinit var memorableDatesRepository: MemorableDatesRepository
 	@Inject lateinit var womanSectionRepository: WomanSectionRepository
 	@Inject lateinit var settingsRepository: SettingsRepository
-	val daysWithNotesOrToDoList = MediatorLiveData<List<Day>>()
-	val memorableDates by lazy { memorableDatesRepository.getDates() }
-	val menstruationPeriodList by lazy { womanSectionRepository.getAllMenstruationPeriods() }
-	val estimatedNextMenstruationPeriod by lazy { womanSectionRepository.getEstimatedNextMenstruationPeriod() }
+	val calendarDaysData by lazy { createCalendarDaysData() }
 	val isSectionForWomanVisible by lazy { settingsRepository.getWomanSectionEnabled() }
 
 	init {
 		bindScope()
-		setupDaysWithNotesOrToDoList()
 	}
 
 	override fun bindScope() {
@@ -35,21 +33,34 @@ class CalendarViewModel : BaseViewModel() {
 		Toothpick.inject(this, calendarScope)
 	}
 
-	private fun setupDaysWithNotesOrToDoList() {
-		val daysWithNote = getDaysWithNote()
-		val daysWithToDoList = getDaysWithToDoList()
-		daysWithNotesOrToDoList.value = listOf()
+	private fun createCalendarDaysData(): LiveData<CalendarDaysData?> {
+		return FourSourceLiveData(
+			getDaysWithNotesOrToDoList(),
+			memorableDatesRepository.getDates(),
+			womanSectionRepository.getAllMenstruationPeriods(),
+			womanSectionRepository.getEstimatedNextMenstruationPeriod()
+		) { daysWithNotesOrToDoList, memorableDates, menstruationPeriodList, nextMenstruationPeriod ->
+			daysWithNotesOrToDoList ?: return@FourSourceLiveData null
+			memorableDates ?: return@FourSourceLiveData null
+			menstruationPeriodList ?: return@FourSourceLiveData null
 
-		daysWithNotesOrToDoList.addSource(daysWithNote) {
-			val daysWithToDoListValue = daysWithToDoList.value ?: listOf()
-			val allDays = it.plus(daysWithToDoListValue).distinct()
-			daysWithNotesOrToDoList.value = allDays
+			CalendarDaysData(
+				daysWithNotesOrToDoList,
+				memorableDates,
+				if(isSectionForWomanVisible.value == true) menstruationPeriodList else listOf(),
+				if(isSectionForWomanVisible.value == true) nextMenstruationPeriod else null
+			)
 		}
+	}
 
-		daysWithNotesOrToDoList.addSource(daysWithToDoList) {
-			val daysWithNoteValue = daysWithNote.value ?: listOf()
-			val allDays = it.plus(daysWithNoteValue).distinct()
-			daysWithNotesOrToDoList.value = allDays
+	private fun getDaysWithNotesOrToDoList(): LiveData<List<Day>> {
+		return TwoSourceLiveData(
+			getDaysWithNote(),
+			getDaysWithToDoList()
+		) { daysWithNote, daysWithToDoList ->
+			daysWithNote ?: return@TwoSourceLiveData listOf()
+			daysWithToDoList ?: return@TwoSourceLiveData listOf()
+			daysWithNote.plus(daysWithToDoList).distinct()
 		}
 	}
 
