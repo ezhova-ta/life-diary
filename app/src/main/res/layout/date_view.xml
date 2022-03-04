@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clickable="true">
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:clickable="true"
+    android:orientation="vertical">
 
     <TextClock
         android:id="@+id/dayOfMonthView"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:layout_gravity="center_horizontal"
         android:format12Hour="d"
         android:format24Hour="d"
         android:textSize="48sp"
-        android:textColor="@color/app_red"
+        android:textColor="@color/app_green"
         android:textStyle="bold"
         tools:text="20" />
 
@@ -30,14 +28,10 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/dayOfMonthView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:layout_gravity="center_horizontal"
         android:format12Hour="MMMM"
         android:format24Hour="MMMM"
         android:textSize="20sp"
         android:textColor="@color/app_medium_dark_gray"
         tools:text="July" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

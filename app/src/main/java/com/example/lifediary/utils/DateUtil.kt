@@ -197,6 +197,9 @@ fun getDaysBetween(date1: Calendar, date2: Calendar): Long {
     return ChronoUnit.DAYS.between(date1.toInstant(), date2.toInstant())
 }
 
+fun Calendar.isDayOff(): Boolean =
+    get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+
 fun MemorableDate.isToday(): Boolean {
     val nowDayNumber = getNowDayNumber()
     val nowMonthNumber = getNowMonthNumber()

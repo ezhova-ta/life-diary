@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@id/weatherIcon"
         app:layout_constraintHorizontal_chainStyle="packed"
         android:textSize="24sp"
-        android:textColor="@color/app_green"
+        android:textColor="@color/app_orange"
         android:textStyle="bold"
         tools:text="+20°C" />
 
