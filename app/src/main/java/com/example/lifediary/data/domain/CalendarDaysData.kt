@@ -1,10 +1,5 @@
 package com.example.lifediary.data.domain
 
-import com.example.lifediary.data.domain.Day
-import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.data.domain.MenstruationPeriod
-
-// TODO Is this the right class name?
 data class CalendarDaysData(
 	val daysWithNotesOrToDoList: List<Day>,
 	val memorableDates: List<MemorableDate>,

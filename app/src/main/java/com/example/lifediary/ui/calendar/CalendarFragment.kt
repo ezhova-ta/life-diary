@@ -12,6 +12,8 @@ import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer
 import com.example.lifediary.ui.common.CalendarMonthViewContainer
+import com.example.lifediary.ui.common.UiConstants.WomanSection.MONTH_NUMBER_IN_FUTURE_TO_DISPLAY_IN_CALENDAR
+import com.example.lifediary.ui.common.UiConstants.WomanSection.MONTH_NUMBER_IN_PAST_TO_DISPLAY_IN_CALENDAR
 import com.example.lifediary.utils.*
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -28,7 +30,7 @@ class CalendarFragment : BaseFragment() {
     override val viewModel: CalendarViewModel  by viewModels()
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
-   private var calendarDaysData: CalendarDaysData? = null
+    private var calendarDaysData: CalendarDaysData? = null
     private var lastScrolledMonth: YearMonth = YearMonth.now()
 
     companion object {
@@ -53,8 +55,8 @@ class CalendarFragment : BaseFragment() {
         binding.calendarView.dayBinder = createCalendarDayBinder()
         binding.calendarView.monthHeaderBinder = createCalendarMonthBinder(getDaysOfWeek())
         val currentMonth = YearMonth.now()
-        val firstMonth = currentMonth.minusMonths(15)
-        val lastMonth = currentMonth.plusMonths(15)
+        val firstMonth = currentMonth.minusMonths(MONTH_NUMBER_IN_PAST_TO_DISPLAY_IN_CALENDAR)
+        val lastMonth = currentMonth.plusMonths(MONTH_NUMBER_IN_FUTURE_TO_DISPLAY_IN_CALENDAR)
         val firstDayOfWeek = getWeekFields().firstDayOfWeek
         binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
         binding.calendarView.scrollToMonth(lastScrolledMonth)
@@ -66,14 +68,7 @@ class CalendarFragment : BaseFragment() {
 
     private fun getDaysOfWeek(): Array<DayOfWeek> {
         val firstDayOfWeek = getWeekFields().firstDayOfWeek
-        val daysOfWeek = DayOfWeek.values()
-
-        if (firstDayOfWeek != DayOfWeek.MONDAY) {
-            val rightPart = daysOfWeek.sliceArray(firstDayOfWeek.ordinal..daysOfWeek.indices.last)
-            val leftPart = daysOfWeek.sliceArray(0 until firstDayOfWeek.ordinal)
-            return rightPart + leftPart
-        }
-        return daysOfWeek
+        return DayOfWeek.values().startFrom(firstDayOfWeek)
     }
 
     private fun getWeekFields(): WeekFields {
