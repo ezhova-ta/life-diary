@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.lifediary.utils.OneTimeEvent
-import com.example.lifediary.utils.Text
+import com.example.lifediary.data.domain.Text
 
 abstract class BaseViewModel : ViewModel() {
     private val _popupMessageEvent = MutableLiveData<OneTimeEvent<Text>>()

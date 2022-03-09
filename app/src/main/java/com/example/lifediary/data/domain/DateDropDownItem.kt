@@ -1,7 +1,8 @@
-package com.example.lifediary.utils
+package com.example.lifediary.data.domain
 
 import android.content.Context
 import com.example.lifediary.R
+import com.example.lifediary.data.domain.Text
 
 enum class MonthDropDownItem(val number: Int, val text: Text) {
 	JANUARY(1, Text.TextResource(R.string.january)),

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.lifediary.data.db.dao.MemorableDateDao
 import com.example.lifediary.data.db.entities.MemorableDateEntity
 import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.utils.Day
+import com.example.lifediary.data.domain.Day
 import com.example.lifediary.utils.toDomain
 import javax.inject.Inject
 

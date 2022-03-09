@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.MemorableDatesLocalDataSource
 import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.utils.Day
+import com.example.lifediary.data.domain.Day
 import javax.inject.Inject
 import javax.inject.Singleton
 

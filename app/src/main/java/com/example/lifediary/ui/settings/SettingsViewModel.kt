@@ -8,7 +8,7 @@ import com.example.lifediary.data.repositories.SettingsRepository
 import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.Text
+import com.example.lifediary.data.domain.Text
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

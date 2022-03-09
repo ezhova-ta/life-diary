@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.utils.InsetsStyle
-import com.example.lifediary.utils.Text
+import com.example.lifediary.data.domain.Text
 import com.example.lifediary.utils.setDefaultButtonsStyle
 import com.example.lifediary.utils.setInsetsStyle
 import toothpick.Toothpick

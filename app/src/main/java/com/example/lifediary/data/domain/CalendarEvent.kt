@@ -1,4 +1,4 @@
-package com.example.lifediary.utils
+package com.example.lifediary.data.domain
 
 abstract class CalendarEvent {
     abstract var name: String

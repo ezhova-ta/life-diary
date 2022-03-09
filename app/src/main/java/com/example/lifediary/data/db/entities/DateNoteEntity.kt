@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.utils.Day
+import com.example.lifediary.data.domain.Day
 
 @Entity(tableName = "note")
 data class DateNoteEntity(

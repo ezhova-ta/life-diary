@@ -1,4 +1,4 @@
-package com.example.lifediary.utils
+package com.example.lifediary.data.domain
 
 import android.content.Context
 import androidx.annotation.StringRes

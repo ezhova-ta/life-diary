@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentAddEditDateNoteBinding
 import com.example.lifediary.ui.BaseFragment
-import com.example.lifediary.utils.Day
+import com.example.lifediary.data.domain.Day
 import com.example.lifediary.utils.clearFocusWithKeyboard
 import com.example.lifediary.utils.requestFocusWithKeyboard
 

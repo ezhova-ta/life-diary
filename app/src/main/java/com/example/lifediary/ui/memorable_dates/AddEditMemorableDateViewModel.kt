@@ -6,9 +6,9 @@ import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.repositories.MemorableDatesRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.DayNumberDropDownItem
-import com.example.lifediary.utils.MonthDropDownItem
-import com.example.lifediary.utils.Text
+import com.example.lifediary.data.domain.DayNumberDropDownItem
+import com.example.lifediary.data.domain.MonthDropDownItem
+import com.example.lifediary.data.domain.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

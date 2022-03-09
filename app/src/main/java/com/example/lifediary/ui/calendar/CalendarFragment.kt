@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.data.domain.MenstruationPeriod
+import com.example.lifediary.data.domain.CalendarDaysData
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.common.CalendarDayViewContainer

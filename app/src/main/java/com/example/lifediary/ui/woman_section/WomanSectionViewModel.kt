@@ -8,7 +8,7 @@ import com.example.lifediary.data.repositories.WomanSectionRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.Text
+import com.example.lifediary.data.domain.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

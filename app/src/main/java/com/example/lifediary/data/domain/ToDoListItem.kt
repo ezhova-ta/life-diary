@@ -1,14 +1,13 @@
 package com.example.lifediary.data.domain
 
-import com.example.lifediary.utils.Day
 import java.util.*
 
 data class ToDoListItem(
-    val id: Long? = null,
-    var text: String,
+	val id: Long? = null,
+	var text: String,
 	val day: Day,
-    var isDone: Boolean = false,
+	var isDone: Boolean = false,
 	var notificationEnabled: Boolean = false,
 	var notificationTime: Calendar = Calendar.getInstance(),
-    val createdAt: Calendar = Calendar.getInstance()
+	val createdAt: Calendar = Calendar.getInstance()
 )

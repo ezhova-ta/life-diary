@@ -1,5 +1,6 @@
-package com.example.lifediary.utils
+package com.example.lifediary.data.domain
 
+import com.example.lifediary.data.domain.Day
 import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.domain.MenstruationPeriod
 

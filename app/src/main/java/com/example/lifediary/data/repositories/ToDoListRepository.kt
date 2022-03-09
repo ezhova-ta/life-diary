@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.ToDoListLocalDataSource
 import com.example.lifediary.data.domain.ToDoListItem
-import com.example.lifediary.utils.Day
+import com.example.lifediary.data.domain.Day
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton

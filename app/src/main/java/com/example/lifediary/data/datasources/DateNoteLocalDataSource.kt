@@ -5,7 +5,7 @@ import androidx.lifecycle.map
 import com.example.lifediary.data.db.dao.DateNoteDao
 import com.example.lifediary.data.db.entities.DateNoteEntity
 import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.utils.Day
+import com.example.lifediary.data.domain.Day
 import com.example.lifediary.utils.toDomain
 import javax.inject.Inject
 

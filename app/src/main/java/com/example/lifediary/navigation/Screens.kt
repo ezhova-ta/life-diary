@@ -15,7 +15,7 @@ import com.example.lifediary.ui.settings.SettingsFragment
 import com.example.lifediary.ui.shopping_list.ShoppingListFragment
 import com.example.lifediary.ui.woman_section.MenstruationPeriodListFragment
 import com.example.lifediary.ui.woman_section.WomanSectionFragment
-import com.example.lifediary.utils.Day
+import com.example.lifediary.data.domain.Day
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {

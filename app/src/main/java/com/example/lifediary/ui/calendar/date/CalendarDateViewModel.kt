@@ -2,6 +2,8 @@ package com.example.lifediary.ui.calendar.date
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
+import com.example.lifediary.data.domain.Day
+import com.example.lifediary.data.domain.Text
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.WeatherForecast
 import com.example.lifediary.data.repositories.*
