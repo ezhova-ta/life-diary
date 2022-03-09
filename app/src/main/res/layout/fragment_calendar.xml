@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/legendEventIcon"
                 android:layout_marginStart="18dp"
-                android:text="@string/event" />
+                android:text="@string/memorable_date" />
 
             <TextView
                 android:id="@+id/legendNoteToDoListIconText"
