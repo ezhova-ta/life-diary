@@ -7,7 +7,7 @@ import com.example.lifediary.data.domain.MemorableDate
 import java.util.*
 
 fun Int.createStringWithPlusOrMinusSign(): String {
-	if(this < 0) return toString()
+	if(this < 0 || this == 0) return toString()
 	return String.format("+%d", this)
 }
 
