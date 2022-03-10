@@ -3,7 +3,9 @@ package com.example.lifediary.utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.db.entities.DbEntity
+import com.example.lifediary.data.domain.CalendarDaysData
 import com.example.lifediary.data.domain.MemorableDate
+import com.kizitonwose.calendarview.model.CalendarDay
 import java.util.*
 
 fun Int.createStringWithPlusOrMinusSign(): String {
@@ -77,4 +79,21 @@ fun String.startWithCapitalLetter(): String {
 			firstLetterInUpperCase + otherLettersInLowercase
 		}
 	}
+}
+
+fun CalendarDaysData?.containsNoteOrToDoListFor(day: CalendarDay): Boolean {
+	return this?.daysWithNotesOrToDoList?.find { it.isSameDay(day) } != null
+}
+
+fun CalendarDaysData?.containsMemorableDatesFor(day: CalendarDay): Boolean {
+	return this?.memorableDates?.find { day.isSameDayInYear(it) } != null
+}
+
+fun CalendarDaysData?.containsMenstruationPeriodIncluding(day: CalendarDay): Boolean {
+	return this?.menstruationPeriods?.find { day.isWithinInterval(it.startDate, it.endDate) } != null
+}
+
+fun CalendarDaysData?.containsNextMenstruationPeriodIncluding(day: CalendarDay): Boolean {
+	val menstruationPeriod = this?.estimatedNextMenstruationPeriod ?: return false
+	return day.isWithinInterval(menstruationPeriod.startDate, menstruationPeriod.endDate)
 }
