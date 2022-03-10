@@ -45,7 +45,7 @@ class NotificationScheduler @Inject constructor(private val context: Context) {
 			context,
 			SCHEDULE_TO_DO_LIST_ITEM_NOTIFICATION_REQUEST_CODE,
 			intent,
-			0
+			PendingIntent.FLAG_CANCEL_CURRENT
 		)
 	}
 }
