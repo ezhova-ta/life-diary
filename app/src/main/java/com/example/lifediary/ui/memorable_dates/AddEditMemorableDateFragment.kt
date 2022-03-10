@@ -22,19 +22,19 @@ class AddEditMemorableDateFragment : BaseFragment() {
 	private val binding get() = _binding!!
 
 	companion object {
-		const val DATE_ID_KEY = "com.example.lifediary.ui.main.notes.NOTE_ID_KEY"
-		const val DEFAULT_DATE_ID_VALUE = 0L
+		private const val DATE_ID_KEY = "com.example.lifediary.ui.main.notes.NOTE_ID_KEY"
+		private const val DEFAULT_DATE_ID = 0L
 
 		fun getInstance(noteId: Long?): AddEditMemorableDateFragment {
 			val fragment = AddEditMemorableDateFragment()
-			fragment.arguments = Bundle().apply{ putLong(DATE_ID_KEY, noteId ?: DEFAULT_DATE_ID_VALUE) }
+			fragment.arguments = Bundle().apply{ putLong(DATE_ID_KEY, noteId ?: DEFAULT_DATE_ID) }
 			return fragment
 		}
 	}
 
 	private fun getDateIdFromArguments(): Long? {
 		val noteId = requireArguments().getLong(DATE_ID_KEY)
-		if(noteId == DEFAULT_DATE_ID_VALUE) return null
+		if(noteId == DEFAULT_DATE_ID) return null
 		return noteId
 	}
 
@@ -46,9 +46,13 @@ class AddEditMemorableDateFragment : BaseFragment() {
 		_binding = FragmentAddEditMemorableDateBinding.inflate(inflater, container, false)
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
+		setupViews()
+		return binding.root
+	}
+
+	private fun setupViews() {
 		setupDayNumberDropDown()
 		setupMonthDropDown()
-		return binding.root
 	}
 
 	private fun setupDayNumberDropDown() {

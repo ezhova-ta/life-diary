@@ -32,10 +32,14 @@ class ShoppingListFragment : BaseFragment() {
         _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setupAddShoppingListItemInputView()
         setupShoppingListRecycler()
         setupClearShoppingListConfirmationDialog()
-        return binding.root
     }
 
     private fun setupAddShoppingListItemInputView() {
@@ -71,7 +75,7 @@ class ShoppingListFragment : BaseFragment() {
     }
 
     private fun showClearShoppingListConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.clear_shopping_list_confirmation,
             positiveButtonTextRes = R.string.clear,
             negativeButtonRes = R.string.cancel,

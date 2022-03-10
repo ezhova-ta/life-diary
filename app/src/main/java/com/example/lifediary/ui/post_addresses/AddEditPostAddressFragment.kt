@@ -76,10 +76,14 @@ class AddEditPostAddressFragment : BaseFragment() {
         _binding = FragmentAddEditPostAddressBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setUpPickContactButton()
         setupNoContactWillBeCreatedConfirmationDialog()
         setupContactWillBeDeletedConfirmationDialog()
-        return binding.root
     }
 
     private fun setUpPickContactButton() {
@@ -109,7 +113,7 @@ class AddEditPostAddressFragment : BaseFragment() {
     }
 
     private fun showNoContactWillBeCreatedConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.fields_empty_no_contact_will_be_created,
             positiveButtonTextRes = R.string.ok,
             negativeButtonRes = R.string.cancel,
@@ -125,7 +129,7 @@ class AddEditPostAddressFragment : BaseFragment() {
     }
 
     private fun showContactWillBeDeletedConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.fields_empty_contact_will_be_deleted,
             positiveButtonTextRes = R.string.ok,
             negativeButtonRes = R.string.cancel,

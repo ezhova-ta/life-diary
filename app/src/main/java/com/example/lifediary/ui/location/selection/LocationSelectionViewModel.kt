@@ -61,8 +61,9 @@ class LocationSelectionViewModel : BaseViewModel() {
         }
     }
 
-    private fun formatLocationName(name: String?) =
-            name?.trim()
+    private fun formatLocationName(name: String?): String? {
+        return name?.trim()
+    }
 
     fun onLocationListItemClick(location: Location) {
         CoroutineScope(Dispatchers.IO).launch {

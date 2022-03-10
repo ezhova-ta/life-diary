@@ -31,10 +31,14 @@ class MemorableDatesFragment : BaseFragment() {
         _binding = FragmentMemorableDatesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setupMemorableDateListView()
         setupClearNoteListConfirmationDialog()
         setupDeleteDateConfirmationDialog()
-        return binding.root
     }
 
     private fun setupMemorableDateListView() {
@@ -56,7 +60,7 @@ class MemorableDatesFragment : BaseFragment() {
     }
 
     private fun showClearDateListConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.clear_memorable_dates_confirmation,
             positiveButtonTextRes = R.string.delete,
             negativeButtonRes = R.string.cancel,
@@ -72,7 +76,7 @@ class MemorableDatesFragment : BaseFragment() {
     }
 
     private fun showDeleteDateConfirmationDialog(dateId: Long) {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.delete_memorable_date_confirmation,
             positiveButtonTextRes = R.string.delete,
             negativeButtonRes = R.string.cancel,

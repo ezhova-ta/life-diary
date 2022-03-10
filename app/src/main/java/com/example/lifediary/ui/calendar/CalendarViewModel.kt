@@ -8,8 +8,8 @@ import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.CalendarDaysData
 import com.example.lifediary.data.domain.Day
-import com.example.lifediary.utils.FourSourceLiveData
-import com.example.lifediary.utils.TwoSourceLiveData
+import com.example.lifediary.utils.livedata.FourSourceLiveData
+import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
 import toothpick.Toothpick
 import javax.inject.Inject

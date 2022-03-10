@@ -31,9 +31,13 @@ class MainNotesFragment : BaseFragment() {
         _binding = FragmentMainNotesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setupNoteListView()
         setupClearNoteListConfirmationDialog()
-        return binding.root
     }
 
     private fun setupNoteListView() {
@@ -53,7 +57,7 @@ class MainNotesFragment : BaseFragment() {
     }
 
     private fun showClearNoteListConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.clear_note_list_confirmation,
             positiveButtonTextRes = R.string.delete,
             negativeButtonRes = R.string.cancel,

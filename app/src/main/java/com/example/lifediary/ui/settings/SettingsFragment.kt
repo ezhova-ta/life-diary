@@ -29,10 +29,14 @@ class SettingsFragment : BaseFragment() {
         _binding = FragmentSettingsBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setupSwitches()
         setupClearCalendarNotesConfirmationDialog()
         setupClearToDoListsConfirmationDialog()
-        return binding.root
     }
 
     private fun setupSwitches() {
@@ -59,7 +63,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun showClearCalendarNotesConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.all_calendar_notes_will_be_cleared,
             positiveButtonTextRes = R.string.clear,
             negativeButtonRes = R.string.cancel,
@@ -75,7 +79,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun showClearToDoListsConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.all_to_do_lists_will_be_cleared,
             positiveButtonTextRes = R.string.clear,
             negativeButtonRes = R.string.cancel,

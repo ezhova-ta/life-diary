@@ -28,9 +28,13 @@ class WomanSectionFragment : BaseFragment() {
         _binding = FragmentWomanSectionBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setupSetDurationOfMenstrualCycleDialog()
         setupSetDurationOfMenstruationPeriodDialog()
-        return binding.root
     }
 
     private fun setupSetDurationOfMenstrualCycleDialog() {

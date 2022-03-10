@@ -14,13 +14,14 @@ import com.example.lifediary.R
 import com.example.lifediary.adapters.CalendarEventListAdapter
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ToDoListAdapter
+import com.example.lifediary.data.domain.Day
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICKED_TIME_BUNDLE_KEY
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICK_TIME_REQUEST_KEY
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.ToDoListItemNotificationTime
-import com.example.lifediary.data.domain.Day
+import com.example.lifediary.ui.common.UiConstants.Calendar.NOTE_VIEW_ROLLED_UP_MAX_LINES
 import com.example.lifediary.utils.createCalendarInstance
 import java.util.*
 import javax.inject.Inject
@@ -35,7 +36,6 @@ class CalendarDateFragment : BaseFragment() {
 
     companion object {
         private const val DAY_KEY = "com.example.lifediary.ui.calendar.DAY_KEY"
-        private const val NOTE_VIEW_ROLLED_UP_MAX_LINES = 5
 
         fun getInstance(day: Day): Fragment {
             val fragment = CalendarDateFragment()
@@ -56,6 +56,11 @@ class CalendarDateFragment : BaseFragment() {
         _binding = FragmentCalendarDateBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setupNoteView()
         setupToDoListView()
         setupEventListView()
@@ -63,7 +68,6 @@ class CalendarDateFragment : BaseFragment() {
         setupClearToDOListConfirmationDialog()
         setupDeleteNoteConfirmationDialog()
         setupToDoListItemNotificationScheduling()
-        return binding.root
     }
 
     private fun setupNoteView() {
@@ -76,10 +80,10 @@ class CalendarDateFragment : BaseFragment() {
 
     private fun setupToDoListView() {
         val toDoListAdapter = ToDoListAdapter(
-            onDeleteItemClickListener = ListItemClickListener { viewModel.onDeleteToDoListItemClick(it) },
-            onEnableNotificationClickListener = ListItemClickListener { viewModel.onToDoListItemNotificationClick(it) },
-            onItemClickListener = ListItemClickListener { viewModel.onToDoListItemClick(it) },
-            onItemLongClickListener = ListItemClickListener { viewModel.onToDoListItemLongClick(it) }
+            ListItemClickListener { viewModel.onDeleteToDoListItemClick(it) },
+            ListItemClickListener { viewModel.onToDoListItemNotificationClick(it) },
+            ListItemClickListener { viewModel.onToDoListItemClick(it) },
+            ListItemClickListener { viewModel.onToDoListItemLongClick(it) }
         )
         binding.toDoListView.adapter = toDoListAdapter
         viewModel.toDoList.observe(viewLifecycleOwner) { toDoList ->
@@ -115,7 +119,7 @@ class CalendarDateFragment : BaseFragment() {
     }
 
     private fun showClearToDOListConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.clear_to_do_list_confirmation,
             positiveButtonTextRes = R.string.clear,
             negativeButtonRes = R.string.cancel,
@@ -131,7 +135,7 @@ class CalendarDateFragment : BaseFragment() {
     }
 
     private fun showDeleteNoteConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.delete_note_confirmation,
             positiveButtonTextRes = R.string.delete,
             negativeButtonRes = R.string.cancel,
@@ -190,7 +194,8 @@ class CalendarDateFragment : BaseFragment() {
                 onComplete(notificationTime)
             }
 
-            clearFragmentResultListener(PICK_TIME_REQUEST_KEY) // TODO Needed?
+            // TODO Needed?
+            clearFragmentResultListener(PICK_TIME_REQUEST_KEY)
         }
     }
 

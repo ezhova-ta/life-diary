@@ -39,7 +39,7 @@ class CalendarFragment : BaseFragment() {
 
     private fun setupCalendarView() {
         val calendarDrawer: BaseCalendarDrawer = StandardCalendarDrawer(binding.calendarView)
-        calendarDrawer.setup { viewModel.onDateClick(it.toDomain()) }
+        calendarDrawer.initialize { viewModel.onDateClick(it.toDomain()) }
         calendarDrawer.onScrollMonthListener = { lastScrolledMonth = it }
         calendarDrawer.scrollToMonth(lastScrolledMonth)
 

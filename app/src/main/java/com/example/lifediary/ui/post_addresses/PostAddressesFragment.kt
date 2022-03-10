@@ -31,17 +31,21 @@ class PostAddressesFragment : BaseFragment() {
         _binding = FragmentPostAddressesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupViews()
+        return binding.root
+    }
+
+    private fun setupViews() {
         setupPostAddressListRecycler()
         setupClearPostAddressesConfirmationDialog()
         setupDeletePostAddressConfirmationDialog()
-        return binding.root
     }
 
     private fun setupPostAddressListRecycler() {
         val postAddressesAdapter = PostAddressListAdapter(
-            onDeleteItemClickListener = ListItemClickListener { viewModel.onDeletePostAddressClick(it) },
-            onEditItemClickListener = ListItemClickListener { viewModel.onEditPostAddressClick(it) },
-            onItemLongClickListener = ListItemClickListener { viewModel.onPostAddressLongClick(it) }
+            ListItemClickListener { viewModel.onDeletePostAddressClick(it) },
+            ListItemClickListener { viewModel.onEditPostAddressClick(it) },
+            ListItemClickListener { viewModel.onPostAddressLongClick(it) }
         )
         binding.postAddressListView.adapter = postAddressesAdapter
         viewModel.addresses.observe(viewLifecycleOwner) { postAddresses ->
@@ -56,7 +60,7 @@ class PostAddressesFragment : BaseFragment() {
     }
 
     private fun showClearPostAddressesConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.clear_post_addresses_confirmation,
             positiveButtonTextRes = R.string.clear,
             negativeButtonRes = R.string.cancel,
@@ -72,7 +76,7 @@ class PostAddressesFragment : BaseFragment() {
     }
 
     private fun showDeletePostAddressConfirmationDialog(addressId: Long) {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.delete_post_address_confirmation,
             positiveButtonTextRes = R.string.delete,
             negativeButtonRes = R.string.cancel,

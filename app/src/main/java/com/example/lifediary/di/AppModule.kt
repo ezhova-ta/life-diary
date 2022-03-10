@@ -19,7 +19,6 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(NavigatorHolder::class.java).toInstance(application.navigationHolder)
         bind(Router::class.java).toInstance(application.router)
         bind(Context::class.java).toInstance(application.applicationContext)
-        bind(NotificationScheduler::class.java)
 
         bind(MainDataBase::class.java).toProvider(MainDatabaseProvider::class.java).singleton()
         bind(ShoppingListDao::class.java).toProvider(ShoppingListDaoProvider::class.java)

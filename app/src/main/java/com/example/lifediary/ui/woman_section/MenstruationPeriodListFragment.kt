@@ -58,7 +58,7 @@ class MenstruationPeriodListFragment : BaseFragment() {
     }
 
     private fun showDeleteMenstruationPeriodConfirmationDialog(periodId: Long) {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.delete_menstruation_period_confirmation,
             positiveButtonTextRes = R.string.delete,
             negativeButtonRes = R.string.cancel,
@@ -74,7 +74,7 @@ class MenstruationPeriodListFragment : BaseFragment() {
     }
 
     private fun showClearMenstruationPeriodListConfirmationDialog() {
-        showDefaultConfirmationDialog(
+        showConfirmationDialog(
             messageRes = R.string.clear_menstruation_period_list_confirmation,
             positiveButtonTextRes = R.string.clear,
             negativeButtonRes = R.string.cancel,

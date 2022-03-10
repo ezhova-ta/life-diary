@@ -32,7 +32,7 @@ abstract class BaseCalendarDrawer(private val calendarView: CalendarView) {
 		calendarView.scrollToMonth(month)
 	}
 
-	fun setup(onDayClick: (CalendarDay) -> Unit) {
+	fun initialize(onDayClick: (CalendarDay) -> Unit = {}) {
 		calendarView.dayBinder = createCalendarDayBinder(onDayClick)
 		calendarView.monthHeaderBinder = createCalendarMonthBinder(getDaysOfWeek())
 		val currentMonth = YearMonth.now()

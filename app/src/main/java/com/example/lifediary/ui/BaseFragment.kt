@@ -79,7 +79,7 @@ abstract class BaseFragment : Fragment() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    protected fun showDefaultConfirmationDialog(
+    protected open fun showConfirmationDialog(
         @StringRes messageRes: Int,
         @StringRes positiveButtonTextRes: Int,
         @StringRes negativeButtonRes: Int,

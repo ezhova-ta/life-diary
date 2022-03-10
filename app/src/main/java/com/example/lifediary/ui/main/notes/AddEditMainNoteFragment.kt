@@ -20,19 +20,19 @@ class AddEditMainNoteFragment : BaseFragment() {
 	private val binding get() = _binding!!
 
 	companion object {
-		const val NOTE_ID_KEY = "com.example.lifediary.ui.main.notes.NOTE_ID_KEY"
-		const val DEFAULT_NOTE_ID_VALUE = 0L
+		private const val NOTE_ID_KEY = "com.example.lifediary.ui.main.notes.NOTE_ID_KEY"
+		private const val DEFAULT_NOTE_ID = 0L
 
 		fun getInstance(noteId: Long?): AddEditMainNoteFragment {
 			val fragment = AddEditMainNoteFragment()
-			fragment.arguments = Bundle().apply{ putLong(NOTE_ID_KEY, noteId ?: DEFAULT_NOTE_ID_VALUE) }
+			fragment.arguments = Bundle().apply{ putLong(NOTE_ID_KEY, noteId ?: DEFAULT_NOTE_ID) }
 			return fragment
 		}
 	}
 
 	private fun getNoteIdFromArguments(): Long? {
 		val noteId = requireArguments().getLong(NOTE_ID_KEY)
-		if(noteId == DEFAULT_NOTE_ID_VALUE) return null
+		if(noteId == DEFAULT_NOTE_ID) return null
 		return noteId
 	}
 
@@ -44,9 +44,13 @@ class AddEditMainNoteFragment : BaseFragment() {
 		_binding = FragmentAddEditMainNoteBinding.inflate(inflater, container, false)
 		binding.lifecycleOwner = viewLifecycleOwner
 		binding.viewModel = viewModel
+		setupViews()
+		return binding.root
+	}
+
+	private fun setupViews() {
 		setupAddEditNoteInput()
 		setupDeleteNoteConfirmationDialog()
-		return binding.root
 	}
 
 	private fun setupAddEditNoteInput() {
@@ -66,7 +70,7 @@ class AddEditMainNoteFragment : BaseFragment() {
 	}
 
 	private fun showDeleteNoteConfirmationDialog(noteId: Long) {
-		showDefaultConfirmationDialog(
+		showConfirmationDialog(
 			messageRes = R.string.delete_note_confirmation,
 			positiveButtonTextRes = R.string.delete,
 			negativeButtonRes = R.string.cancel,

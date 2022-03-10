@@ -52,11 +52,10 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 
 		if(text.isNullOrBlank()) {
 			noteText.value = ""
-			return
+		} else {
+			_inputNeedsFocus.value = false
+			saveNote(text)
 		}
-
-		_inputNeedsFocus.value = false
-		saveNote(text)
 	}
 
 	private fun saveNote(text: String) {
