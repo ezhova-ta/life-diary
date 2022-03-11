@@ -25,8 +25,8 @@
 <img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/post_addresses.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/adding_post_address.png" width="320">
 
 ### Раздел для женщин
-По умолчанию отключён. Вы можете включать и отключать этот раздел, как и любой другой, без потери добавленных данных. Добавлейяте даты ментруаци. Приложение рассчитает дату начала следующей менструации на основе указанной вами средней длительности менструального цикла и менструации.  
+По умолчанию отключён. Вы можете включать и отключать этот раздел, как и любой другой, без потери добавленных данных. Добавлейяте даты менструации. Приложение рассчитает дату начала следующей менструации на основе указанной вами средней длительности менструального цикла и менструации.  
 <img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/section_for_women.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/editing_menstrual_cycle.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/menstruations.png" width="320">  
 
-Добавленные вами и предполагаемая следующая менструации отображаются в календаре.  
+Если раздел для женщин включён, даты менструаций отображаются в календаре.  
 <img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/calendar_3.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/calendar_2.png" width="320">
