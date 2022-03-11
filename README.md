@@ -10,10 +10,10 @@
 
 ### Заметки
 Записывайте в заметки любую информацию, чтобы ничего не потерять.   
-<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/main_notes.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/editing_adding_main_note.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/deleting_main_note.png" width="320">
+<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/main_notes.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/editing_adding_main_note.png" width="320">
 
 ### Список покупок
-Отмечайте, какие покупки особенно важны и уже купленные товары.  
+Отмечайте особенно важные товары и уже купленные.  
 <img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/shopping_list.png" width="320">
 
 ### Памятные даты
@@ -23,3 +23,10 @@
 ### Почтовые адреса
 Отправляете письма, открытки или посылки? Сохраняйте в приложении почтовые адреса.  
 <img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/post_addresses.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/adding_post_address.png" width="320">
+
+### Раздел для женщин
+По умолчанию отключён. Вы можете включать и отключать этот раздел, как и любой другой, без потери добавленных данных. Добавлейяте даты ментруаци. Приложение рассчитает дату начала следующей менструации на основе указанной вами средней длительности менструального цикла и менструации.  
+<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/section_for_women.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/editing_menstrual_cycle.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/menstruations.png" width="320">  
+
+Добавленные вами и предполагаемая следующая менструации отображаются в календаре.  
+<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/calendar_3.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/screenshots/calendar_2.png" width="320">
