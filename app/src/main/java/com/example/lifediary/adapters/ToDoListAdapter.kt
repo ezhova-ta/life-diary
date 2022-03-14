@@ -70,7 +70,7 @@ class ToDoListAdapter(
 
 class ToDoItemDiffCallBack : DiffUtil.ItemCallback<ToDoListItem>() {
 	override fun areItemsTheSame(oldItem: ToDoListItem, newItem: ToDoListItem) =
-		oldItem.text == newItem.text
+		oldItem.id == newItem.id
 
 	override fun areContentsTheSame(oldItem: ToDoListItem, newItem: ToDoListItem) =
 		oldItem == newItem

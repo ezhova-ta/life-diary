@@ -58,7 +58,7 @@ class MainNoteListAdapter(
 
 class MainNoteListItemDiffCallBack : DiffUtil.ItemCallback<MainNote>() {
 	override fun areItemsTheSame(oldItem: MainNote, newItem: MainNote) =
-		oldItem.text == newItem.text
+		oldItem.id == newItem.id
 
 	override fun areContentsTheSame(oldItem: MainNote, newItem: MainNote) =
 		oldItem == newItem

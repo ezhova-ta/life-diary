@@ -63,7 +63,7 @@ class PostAddressListAdapter(
 
 class PostAddressListItemDiffCallBack : DiffUtil.ItemCallback<PostAddress>() {
 	override fun areItemsTheSame(oldItem: PostAddress, newItem: PostAddress) =
-		oldItem.name == newItem.name
+		oldItem.id == newItem.id
 
 	override fun areContentsTheSame(oldItem: PostAddress, newItem: PostAddress) =
 		oldItem == newItem

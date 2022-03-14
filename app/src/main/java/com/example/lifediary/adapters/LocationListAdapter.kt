@@ -42,7 +42,7 @@ class LocationListAdapter(private val onItemClickListener: ListItemClickListener
 
 class LocationListItemDiffCallBack : DiffUtil.ItemCallback<Location>() {
     override fun areItemsTheSame(oldItem: Location, newItem: Location) =
-        oldItem.name == newItem.name
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Location, newItem: Location) =
         oldItem == newItem

@@ -80,7 +80,7 @@ class MemorableDateListAdapter(
 
 class MemorableDateListItemDiffCallBack : DiffUtil.ItemCallback<MemorableDate>() {
     override fun areItemsTheSame(oldItem: MemorableDate, newItem: MemorableDate) =
-        oldItem.name == newItem.name
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: MemorableDate, newItem: MemorableDate) =
         oldItem == newItem

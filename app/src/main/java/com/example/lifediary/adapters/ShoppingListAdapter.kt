@@ -95,7 +95,7 @@ class ShoppingListAdapter(
 
 class ShoppingListItemDiffCallBack : DiffUtil.ItemCallback<ShoppingListItem>() {
     override fun areItemsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem) =
-        oldItem.text == newItem.text
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem) =
         oldItem == newItem

@@ -48,7 +48,7 @@ class MenstruationPeriodListAdapter(
 
 class MenstruationPeriodListItemDiffCallBack : DiffUtil.ItemCallback<MenstruationPeriod>() {
     override fun areItemsTheSame(oldItem: MenstruationPeriod, newItem: MenstruationPeriod) =
-        oldItem.startDate == newItem.startDate && oldItem.endDate == newItem.endDate
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: MenstruationPeriod, newItem: MenstruationPeriod) =
         oldItem == newItem
