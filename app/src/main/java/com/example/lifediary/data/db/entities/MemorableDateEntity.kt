@@ -2,10 +2,14 @@ package com.example.lifediary.data.db.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.lifediary.data.domain.MemorableDate
 
-@Entity(tableName = "memorable_date")
+@Entity(
+    tableName = "memorable_date",
+    indices = [Index(value = ["name", "day", "month", "year"], unique = true)]
+)
 data class MemorableDateEntity(
     @PrimaryKey
     val id: Long?,

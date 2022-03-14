@@ -1,14 +1,17 @@
 package com.example.lifediary.data.db.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
 import com.example.lifediary.data.domain.PostAddress
 import java.util.*
 
-@Entity(tableName = "post_address")
+@Entity(
+    tableName = "post_address",
+    indices = [Index(
+        value = ["name", "street", "building_number", "apartment_number", "city", "postcode", "edge_region"],
+        unique = true
+    )]
+)
 @TypeConverters(CalendarConverter::class)
 data class PostAddressEntity(
     @PrimaryKey

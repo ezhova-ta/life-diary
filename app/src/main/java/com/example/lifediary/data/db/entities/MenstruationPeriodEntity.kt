@@ -1,14 +1,14 @@
 package com.example.lifediary.data.db.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
 import com.example.lifediary.data.domain.MenstruationPeriod
 import java.util.*
 
-@Entity(tableName = "menstruation_dates")
+@Entity(
+    tableName = "menstruation_dates",
+    indices = [Index(value = ["start_date", "end_date"], unique = true)]
+)
 @TypeConverters(CalendarConverter::class)
 data class MenstruationPeriodEntity(
     @PrimaryKey
