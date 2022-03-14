@@ -6,21 +6,21 @@
     android:layout_width="36dp"
     android:layout_height="36dp">
 
-    <View
+    <ImageView
         android:id="@+id/menstruationIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/icon_leaf_lilac_23"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
-    <View
+    <ImageView
         android:id="@+id/estimatedNextMenstruationIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/icon_leaf_turquoise_23"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
-    <View
+    <ImageView
         android:id="@+id/selectedBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="@id/dayText"
         app:layout_constraintEnd_toEndOf="@id/dayText"
         android:background="@drawable/background_selected_calendar_day"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/dayText"
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="24" />
 
-    <View
+    <ImageView
         android:id="@+id/eventIcon"
         android:layout_width="6dp"
         android:layout_height="6dp"
@@ -50,9 +50,9 @@
         app:layout_constraintStart_toStartOf="@id/dayText"
         app:layout_constraintEnd_toEndOf="@id/dayText"
         android:background="@drawable/calendar_day_event_icon_view"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
-    <View
+    <ImageView
         android:id="@+id/noteIcon"
         android:layout_width="6dp"
         android:layout_height="6dp"
@@ -60,5 +60,5 @@
         app:layout_constraintStart_toStartOf="@id/dayText"
         app:layout_constraintEnd_toEndOf="@id/dayText"
         android:background="@drawable/calendar_day_note_icon_view"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
