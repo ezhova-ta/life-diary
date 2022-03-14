@@ -26,7 +26,8 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".data.receivers.AlarmReceiver" />
 
