@@ -72,7 +72,6 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
         val name = dateName.value?.trim()
         if(name.isNullOrBlank()) return
 
-        // TODO Error message for user (year should be number)
         val year = try {
             this.year.value?.trim()?.toInt()
         } catch(e: NumberFormatException) {
