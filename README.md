@@ -6,7 +6,7 @@
 
 ### Календарь
 Оставляйте заметки на каждый день, планируйте дела и отмечайте те, что уже выполнены. Чтобы ни о чём не забыть, укажите, в какое время вы хотите получить напоминание. Если есть доступ к интернету, приложение покажет прогноз погоды на выбранный день.  
-<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/calendar_1.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/calendar_date.png" width="320">
+<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/calendar_1.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/calendar_date.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/notification.png" width="320">
 
 ### Заметки
 Записывайте в заметки любую информацию, чтобы ничего не потерять.  
