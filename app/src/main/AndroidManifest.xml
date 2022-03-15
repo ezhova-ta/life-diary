@@ -15,6 +15,7 @@
 
         <activity
             android:name=".ui.activity.SplashActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:noHistory="true"
             android:theme="@style/SplashScreenTheme">
@@ -26,6 +27,7 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
 
