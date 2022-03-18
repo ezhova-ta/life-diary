@@ -14,11 +14,11 @@ fun Int.createStringWithPlusOrMinusSign(): String {
 }
 
 fun <T : DbEntity<R>, R> LiveData<List<T>>.toDomain(): LiveData<List<R>> {
-	return map { entityList ->
-		entityList.map { entity ->
-			entity.toDomain()
-		}
-	}
+	return map { entityList -> entityList.toDomain() }
+}
+
+private fun <T : DbEntity<R>, R> List<T>.toDomain(): List<R> {
+	return map { entity -> entity.toDomain() }
 }
 
 fun List<String>.isAllItemsBlank(): Boolean {

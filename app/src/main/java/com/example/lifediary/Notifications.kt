@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
-import android.os.Build
 import androidx.annotation.StringRes
 
 object Notifications {
@@ -13,9 +12,7 @@ object Notifications {
 	@StringRes private const val TO_DO_LIST_CHANNEL_NAME = R.string.to_do_list_channel
 
 	fun ensureChannel(context: Context, channel: Channel) {
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			createNotificationChannel(context, channel)
-		}
+		createNotificationChannel(context, channel)
 	}
 
 	private fun createNotificationChannel(context: Context, channel: Channel) {

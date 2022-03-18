@@ -2,7 +2,6 @@ package com.example.lifediary.di
 
 import android.content.Context
 import com.example.lifediary.LifeDiaryApplication
-import com.example.lifediary.NotificationScheduler
 import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
 import com.example.lifediary.data.db.dao.*
