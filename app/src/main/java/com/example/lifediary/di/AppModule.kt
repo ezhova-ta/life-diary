@@ -34,6 +34,5 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())
 
         bind(WeatherService::class.java).toProvider(WeatherServiceProvider::class.java).singleton()
-        bind(WeatherService::class.java).toProvider(WeatherServiceProvider::class.java).singleton()
     }
 }
