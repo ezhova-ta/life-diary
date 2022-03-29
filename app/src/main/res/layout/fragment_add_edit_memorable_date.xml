@@ -14,11 +14,10 @@
 
         <EditText
             android:id="@+id/nameInput"
-            style="@style/Input"
+            style="@style/Input.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            android:inputType="text"
             android:singleLine="true"
             android:hint="@string/what_happened_that_day"
             android:text="@={viewModel.dateName}" />

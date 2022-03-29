@@ -27,14 +27,13 @@
 
         <EditText
             android:id="@+id/addShoppingListItemInput"
-            style="@style/Input"
+            style="@style/Input.Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/clearAllButton"
             app:layout_constraintEnd_toStartOf="@id/addShoppingListItemButton"
             android:layout_marginStart="4dp"
-            android:inputType="text"
             android:singleLine="true"
             android:maxLength="70"
             android:text="@={viewModel.newShoppingListItemText}"

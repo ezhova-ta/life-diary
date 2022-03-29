@@ -167,7 +167,7 @@
 
             <EditText
                 android:id="@+id/addToDoListItemInput"
-                style="@style/Input"
+                style="@style/Input.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/noteContainer"
@@ -175,7 +175,6 @@
                 app:layout_constraintEnd_toStartOf="@id/addToDoListItemButton"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="4dp"
-                android:inputType="text"
                 android:singleLine="true"
                 android:maxLength="100"
                 android:text="@={viewModel.newToDoListItemText}"

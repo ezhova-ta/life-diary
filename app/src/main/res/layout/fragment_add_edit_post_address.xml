@@ -18,13 +18,12 @@
 
             <EditText
                 android:id="@+id/addresseeNameInput"
-                style="@style/Input"
+                style="@style/Input.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/pickContactButton"
-                android:inputType="text"
                 android:singleLine="true"
                 android:hint="@string/addressee_name"
                 android:text="@={viewModel.addresseeName}" />
@@ -40,12 +39,11 @@
 
             <EditText
                 android:id="@+id/addresseeStreetInput"
-                style="@style/Input"
+                style="@style/Input.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/addresseeNameInput"
                 android:layout_marginTop="8dp"
-                android:inputType="text"
                 android:singleLine="true"
                 android:hint="@string/street"
                 android:text="@={viewModel.addresseeStreet}" />
@@ -76,24 +74,22 @@
 
             <EditText
                 android:id="@+id/addresseeCityInput"
-                style="@style/Input"
+                style="@style/Input.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/addresseeApartmentInput"
                 android:layout_marginTop="8dp"
-                android:inputType="text"
                 android:singleLine="true"
                 android:hint="@string/settlement"
                 android:text="@={viewModel.addresseeCity}" />
 
             <EditText
                 android:id="@+id/addresseeEdgeRegionInput"
-                style="@style/Input"
+                style="@style/Input.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/addresseeCityInput"
                 android:layout_marginTop="8dp"
-                android:inputType="text"
                 android:singleLine="true"
                 android:hint="@string/edge_region_optional"
                 android:text="@={viewModel.addresseeEdgeRegion}" />
