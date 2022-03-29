@@ -105,6 +105,11 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
         }
     }
 
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.MEMORABLE_DATES_SCOPE)
+        super.onCleared()
+    }
+
     class Factory(private val dateId: Long?) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

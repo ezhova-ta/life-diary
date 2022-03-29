@@ -68,4 +68,9 @@ class MainNotesViewModel : BaseViewModel() {
 		val noteId = note.id ?: return
 		router.navigateTo(Screens.getAddEditMainNoteScreen(noteId))
 	}
+
+	override fun onCleared() {
+		Toothpick.closeScope(DiScopes.MAIN_SCREEN_SCOPE)
+		super.onCleared()
+	}
 }

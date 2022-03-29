@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/current_weather_view.xml" value="0.5385416666666667" />
+        <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/fragment_add_edit_date_note.xml" value="0.4121376811594203" />
+        <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/fragment_add_edit_main_note.xml" value="0.4121376811594203" />
+        <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/fragment_add_edit_memorable_date.xml" value="0.46875" />
+        <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/fragment_add_edit_post_address.xml" value="0.46875" />
+        <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/fragment_calendar_date.xml" value="0.46875" />
+        <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/fragment_location_selection.xml" value="0.4121376811594203" />
         <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/fragment_shopping_list.xml" value="0.4121376811594203" />
         <entry key="..\:/Users/3/AndroidStudioProjects/LifeDiary/app/src/main/res/layout/shopping_list_item.xml" value="0.4121376811594203" />
       </map>

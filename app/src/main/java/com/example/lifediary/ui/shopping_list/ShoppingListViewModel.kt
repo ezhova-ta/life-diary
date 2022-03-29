@@ -119,4 +119,9 @@ class ShoppingListViewModel: BaseViewModel() {
             }
         }
     }
+
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.SHOPPING_LIST_SCOPE)
+        super.onCleared()
+    }
 }

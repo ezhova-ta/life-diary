@@ -30,4 +30,9 @@ class MainActivityViewModel : BaseViewModel() {
         val today = Calendar.getInstance().toDomain()
         router.newChain(Screens.getCalendarScreen(), Screens.getCalendarDateScreen(today))
     }
+
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.APP_SCOPE)
+        super.onCleared()
+    }
 }

@@ -128,4 +128,9 @@ class MenstruationPeriodListViewModel : BaseViewModel() {
     fun onMenstruationPeriodPickerCancelled() {
         _showMenstruationPeriodPicker.value = false
     }
+
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.WOMAN_SECTION_SCOPE)
+        super.onCleared()
+    }
 }

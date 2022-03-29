@@ -296,4 +296,9 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 			return CalendarDateViewModel(day) as T
 		}
 	}
+
+	override fun onCleared() {
+		Toothpick.closeScope(DiScopes.CALENDAR_DATE_SCOPE)
+		super.onCleared()
+	}
 }

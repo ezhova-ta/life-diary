@@ -92,4 +92,9 @@ class WomanSectionViewModel : BaseViewModel() {
     fun onSetDurationOfMenstruationPeriodCancelled() {
         _showSetDurationOfMenstruationPeriodDialog.value = false
     }
+
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.WOMAN_SECTION_SCOPE)
+        super.onCleared()
+    }
 }

@@ -102,4 +102,9 @@ class MemorableDatesViewModel : BaseViewModel() {
         copyToClipboard(date.name)
         showMessage(Text.TextResource(R.string.text_copied))
     }
+
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.MEMORABLE_DATES_SCOPE)
+        super.onCleared()
+    }
 }

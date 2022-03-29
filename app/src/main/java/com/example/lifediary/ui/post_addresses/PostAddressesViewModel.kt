@@ -255,4 +255,9 @@ class PostAddressesViewModel: BaseViewModel() {
     fun onClearPostAddressesCancelled() {
         _showClearPostAddressesConfirmationDialog.value = false
     }
+
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.POST_ADDRESSES_SCOPE)
+        super.onCleared()
+    }
 }

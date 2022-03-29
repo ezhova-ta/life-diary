@@ -83,4 +83,9 @@ class CalendarViewModel : BaseViewModel() {
 	fun onDateClick(day: Day) {
 		router.navigateTo(Screens.getCalendarDateScreen(day))
 	}
+
+	override fun onCleared() {
+		Toothpick.closeScope(DiScopes.CALENDAR_SCOPE)
+		super.onCleared()
+	}
 }

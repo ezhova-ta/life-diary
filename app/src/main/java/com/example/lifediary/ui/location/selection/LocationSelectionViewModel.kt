@@ -75,4 +75,9 @@ class LocationSelectionViewModel : BaseViewModel() {
         }
         router.exit()
     }
+
+    override fun onCleared() {
+        Toothpick.closeScope(DiScopes.LOCATION_SELECTION_SCOPE)
+        super.onCleared()
+    }
 }

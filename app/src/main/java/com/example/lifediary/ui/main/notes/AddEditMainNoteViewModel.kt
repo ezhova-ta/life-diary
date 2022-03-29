@@ -106,6 +106,11 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 		_showDeleteNoteConfirmationDialog.value = null
 	}
 
+	override fun onCleared() {
+		Toothpick.closeScope(DiScopes.MAIN_SCREEN_SCOPE)
+		super.onCleared()
+	}
+
 	class Factory(private val noteId: Long?) : ViewModelProvider.Factory {
 		@Suppress("UNCHECKED_CAST")
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
