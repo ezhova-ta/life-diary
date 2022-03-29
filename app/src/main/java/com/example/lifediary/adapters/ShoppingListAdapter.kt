@@ -82,6 +82,7 @@ class ShoppingListAdapter(
             onItemLongClickListener: ListItemClickListener<ShoppingListItem>?,
         ) {
             binding.titleView.setOnClickListener { onItemClickListener?.onClick(item) }
+            binding.doneIconsContainer.setOnClickListener { onItemClickListener?.onClick(item) }
             binding.setHighPriorityButton.setOnClickListener { onHighPriorityClickListener.onClick(item) }
             binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
 
