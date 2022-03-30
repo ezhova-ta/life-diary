@@ -58,4 +58,9 @@ class MainActivity : AppCompatActivity() {
         navigationHolder.removeNavigator()
         super.onPause()
     }
+
+    override fun onDestroy() {
+        Toothpick.closeScope(DiScopes.APP_SCOPE)
+        super.onDestroy()
+    }
 }
