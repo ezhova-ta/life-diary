@@ -1,5 +1,7 @@
 package com.example.lifediary.ui.activity
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
@@ -11,6 +13,10 @@ import javax.inject.Inject
 
 class MainActivityViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
+
+    private val _isNetworkConnectivityAvailable = MutableLiveData(false)
+    val isNetworkConnectivityAvailable: LiveData<Boolean>
+        get() = _isNetworkConnectivityAvailable
 
     init {
         bindScope()
@@ -29,6 +35,14 @@ class MainActivityViewModel : BaseViewModel() {
     fun onShowCurrentCalendarDayActionRequested() {
         val today = Calendar.getInstance().toDomain()
         router.newChain(Screens.getCalendarScreen(), Screens.getCalendarDateScreen(today))
+    }
+
+    fun onNetworkConnectivityAvailable() {
+        _isNetworkConnectivityAvailable.value = true
+    }
+
+    fun onNetworkConnectivityLost() {
+        _isNetworkConnectivityAvailable.value = false
     }
 
     override fun onCleared() {
