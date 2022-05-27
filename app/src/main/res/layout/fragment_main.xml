@@ -6,6 +6,10 @@
         <variable
             name="viewModel"
             type="com.example.lifediary.ui.main.MainViewModel" />
+
+        <variable
+            name="activityViewModel"
+            type="com.example.lifediary.ui.activity.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,6 +73,36 @@
             app:humidity='@{String.format("%d%s", viewModel.currentWeather.humidity, "%")}'
             app:progressVisibility="@{viewModel.isCurrentWeatherProgressVisible()}" />
 
+        <LinearLayout
+            android:id="@+id/wiFiOffTextContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/weatherView"
+            app:layout_constraintStart_toStartOf="@id/weatherView"
+            app:layout_constraintEnd_toEndOf="@id/weatherView"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_wifi_off_gray" />
+
+            <TextView
+                android:id="@+id/wiFiOffText"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/data_may_be_out_of_date"
+                android:textSize="12sp"
+                android:textColor="@color/app_medium_dark_gray" />
+
+        </LinearLayout>
+
         <ImageButton
             android:id="@+id/settingsButton"
             android:layout_width="48dp"
@@ -84,7 +118,7 @@
             style="@style/Text.MainScreenSection.Notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/calendarView"
+            app:layout_constraintTop_toBottomOf="@id/wiFiOffTextContainer"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
             android:text="@string/notes"

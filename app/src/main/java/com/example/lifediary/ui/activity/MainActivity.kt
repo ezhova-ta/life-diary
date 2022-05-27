@@ -8,6 +8,7 @@ import android.net.NetworkRequest
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.lifediary.Notifications
 import com.example.lifediary.R
@@ -23,7 +24,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     @Inject lateinit var navigationHolder: NavigatorHolder
-    private val viewModel: MainActivityViewModel by viewModels()
+    private lateinit var viewModel: MainActivityViewModel
     private val navigator = AppNavigator(this, R.id.mainContainer)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         ensureToDoListNotificationChannel()
         performAction(intent?.action)
         setupNetworkConnectivityListener()
