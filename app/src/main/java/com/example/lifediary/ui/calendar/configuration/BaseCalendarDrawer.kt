@@ -1,7 +1,9 @@
-package com.example.lifediary.ui.calendar.configuration.base
+package com.example.lifediary.ui.calendar.configuration
 
 import android.view.View
 import com.example.lifediary.data.domain.CalendarDaysData
+import com.example.lifediary.ui.calendar.configuration.base.BaseCalendarDayViewContainer
+import com.example.lifediary.ui.calendar.configuration.base.BaseCalendarMonthViewContainer
 import com.example.lifediary.utils.*
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
