@@ -46,6 +46,14 @@ class MainViewModel(private val state: SavedStateHandle) : BaseViewModel() {
     }
 
     fun onScreenResumed() {
+        updateCurrentWeather()
+    }
+
+    fun onAvailabilityOfNetworkConnectivityChanged(isAvailable: Boolean) {
+        if(isAvailable) updateCurrentWeather()
+    }
+
+    private fun updateCurrentWeather() {
         location.value?.id?.let {
             updateCurrentWeather(it)
         }

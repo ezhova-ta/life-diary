@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.lifediary.databinding.FragmentMainBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.activity.MainActivityViewModel
@@ -40,6 +39,7 @@ class MainFragment : BaseFragment() {
     private fun setupNetworkConnectivityListener() {
         activityViewModel.isNetworkConnectivityAvailable.observe(viewLifecycleOwner) { isAvailable ->
             binding.wiFiOffTextContainer.isVisible = !isAvailable
+            viewModel.onAvailabilityOfNetworkConnectivityChanged(isAvailable)
         }
     }
 
