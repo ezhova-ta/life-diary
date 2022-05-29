@@ -1,4 +1,4 @@
-package com.example.lifediary.ui.calendar.configuration.standard
+package com.example.lifediary.ui.calendar
 
 import android.content.Context
 import android.view.View
@@ -8,8 +8,6 @@ import androidx.core.view.isVisible
 import com.example.lifediary.R
 import com.example.lifediary.databinding.CalendarDayLayoutBinding
 import com.example.lifediary.databinding.CalendarMonthLayoutBinding
-import com.example.lifediary.ui.calendar.configuration.base.BaseCalendarDayViewContainer
-import com.example.lifediary.ui.calendar.configuration.base.BaseCalendarMonthViewContainer
 import com.example.lifediary.utils.startWithCapitalLetter
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth

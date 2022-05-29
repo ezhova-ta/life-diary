@@ -1,4 +1,4 @@
-package com.example.lifediary.ui.common
+package com.example.lifediary.utils
 
 object UiConstants {
 	object MainScreen {

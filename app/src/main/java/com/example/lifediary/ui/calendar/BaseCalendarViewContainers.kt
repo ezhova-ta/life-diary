@@ -1,4 +1,4 @@
-package com.example.lifediary.ui.calendar.configuration.base
+package com.example.lifediary.ui.calendar
 
 import android.view.View
 import android.widget.TextView

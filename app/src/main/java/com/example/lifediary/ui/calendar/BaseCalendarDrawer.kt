@@ -1,9 +1,7 @@
-package com.example.lifediary.ui.calendar.configuration
+package com.example.lifediary.ui.calendar
 
 import android.view.View
 import com.example.lifediary.data.domain.CalendarDaysData
-import com.example.lifediary.ui.calendar.configuration.base.BaseCalendarDayViewContainer
-import com.example.lifediary.ui.calendar.configuration.base.BaseCalendarMonthViewContainer
 import com.example.lifediary.utils.*
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -56,10 +54,10 @@ abstract class BaseCalendarDrawer(private val calendarView: CalendarView) {
 				// TODO Refactoring. How? :(
 				container.drawDesignations(
 					day,
-					calendarDaysData.containsNoteOrToDoListFor(day),
-					calendarDaysData.containsMemorableDatesFor(day),
-					calendarDaysData.containsMenstruationPeriodIncluding(day),
-					calendarDaysData.containsNextMenstruationPeriodIncluding(day)
+					CalendarDayDataHolder(day, calendarDaysData).containsNoteOrToDoList(),
+					CalendarDayDataHolder(day, calendarDaysData).containsMemorableDates(),
+					CalendarDayDataHolder(day, calendarDaysData).isDayOfMenstruationPeriod(),
+					CalendarDayDataHolder(day, calendarDaysData).isDayOfNextMenstruationPeriod()
 				)
 			}
 		}

@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentCalendarBinding
 import com.example.lifediary.ui.BaseFragment
-import com.example.lifediary.ui.calendar.configuration.BaseCalendarDrawer
-import com.example.lifediary.ui.calendar.configuration.standard.StandardCalendarDrawer
 import com.example.lifediary.utils.toDomain
 import java.time.YearMonth
 

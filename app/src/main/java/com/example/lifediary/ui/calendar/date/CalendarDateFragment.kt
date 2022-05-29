@@ -24,7 +24,7 @@ import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICKED_TIME_BUNDLE_KEY
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICK_TIME_REQUEST_KEY
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.ToDoListItemNotificationTime
-import com.example.lifediary.ui.common.UiConstants.Calendar.NOTE_VIEW_ROLLED_UP_MAX_LINES
+import com.example.lifediary.utils.UiConstants.Calendar.NOTE_VIEW_ROLLED_UP_MAX_LINES
 import com.example.lifediary.utils.createCalendarInstance
 import java.util.*
 import javax.inject.Inject

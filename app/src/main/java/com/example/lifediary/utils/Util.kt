@@ -72,28 +72,28 @@ private fun <T> Array<T>.splitAndSwap(splitIndex: Int): Array<T> {
 fun String.startWithCapitalLetter(): String {
 	return when(length) {
 		0 -> this
-		1 -> toUpperCase(Locale.getDefault())
+		1 -> uppercase(Locale.getDefault())
 		else -> {
-			val firstLetterInUpperCase = substring(0, 1).toUpperCase(Locale.getDefault())
-			val otherLettersInLowercase = substring(1).toLowerCase(Locale.getDefault())
+			val firstLetterInUpperCase = substring(0, 1).uppercase(Locale.getDefault())
+			val otherLettersInLowercase = substring(1).uppercase(Locale.getDefault())
 			firstLetterInUpperCase + otherLettersInLowercase
 		}
 	}
 }
 
-fun CalendarDaysData?.containsNoteOrToDoListFor(day: CalendarDay): Boolean {
-	return this?.daysWithNotesOrToDoList?.find { it.isSameDay(day) } != null
-}
-
-fun CalendarDaysData?.containsMemorableDatesFor(day: CalendarDay): Boolean {
-	return this?.memorableDates?.find { day.isSameDayInYear(it) } != null
-}
-
-fun CalendarDaysData?.containsMenstruationPeriodIncluding(day: CalendarDay): Boolean {
-	return this?.menstruationPeriods?.find { day.isWithinInterval(it.startDate, it.endDate) } != null
-}
-
-fun CalendarDaysData?.containsNextMenstruationPeriodIncluding(day: CalendarDay): Boolean {
-	val menstruationPeriod = this?.estimatedNextMenstruationPeriod ?: return false
-	return day.isWithinInterval(menstruationPeriod.startDate, menstruationPeriod.endDate)
-}
+//fun CalendarDaysData?.containsNoteOrToDoListFor(day: CalendarDay): Boolean {
+//	return this?.daysWithNotesOrToDoList?.find { it.isSameDay(day) } != null
+//}
+//
+//fun CalendarDaysData?.containsMemorableDatesFor(day: CalendarDay): Boolean {
+//	return this?.memorableDates?.find { day.isSameDayInYear(it) } != null
+//}
+//
+//fun CalendarDaysData?.containsMenstruationPeriodIncluding(day: CalendarDay): Boolean {
+//	return this?.menstruationPeriods?.find { day.isWithinInterval(it.startDate, it.endDate) } != null
+//}
+//
+//fun CalendarDaysData?.containsNextMenstruationPeriodIncluding(day: CalendarDay): Boolean {
+//	val menstruationPeriod = this?.estimatedNextMenstruationPeriod ?: return false
+//	return day.isWithinInterval(menstruationPeriod.startDate, menstruationPeriod.endDate)
+//}

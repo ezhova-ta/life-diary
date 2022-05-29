@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.databinding.MainNoteListItemBinding
-import com.example.lifediary.ui.common.UiConstants.MainScreen.NOTE_VIEW_ROLLED_UP_MAX_LINES
+import com.example.lifediary.utils.UiConstants.MainScreen.NOTE_VIEW_ROLLED_UP_MAX_LINES
 
 class MainNoteListAdapter(
 	private val onItemLongClickListener: ListItemClickListener<MainNote>? = null

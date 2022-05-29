@@ -2,7 +2,7 @@ package com.example.lifediary.ui.woman_section
 
 import androidx.fragment.app.activityViewModels
 import com.example.lifediary.ui.common.NumberPickerDialog
-import com.example.lifediary.ui.common.UiConstants
+import com.example.lifediary.utils.UiConstants
 
 class DurationOfMenstruationPeriodDialog : NumberPickerDialog() {
     val viewModel: WomanSectionViewModel by activityViewModels()
