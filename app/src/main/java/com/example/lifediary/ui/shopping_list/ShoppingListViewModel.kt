@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.ShoppingListItem
+import com.example.lifediary.data.domain.SortMethodDropDownItem
 import com.example.lifediary.data.repositories.ShoppingListRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
@@ -20,6 +21,7 @@ class ShoppingListViewModel: BaseViewModel() {
     val shoppingList by lazy { shoppingListRepository.getShoppingList() }
     val isShoppingListVisible by lazy { shoppingList.map { it.isNotEmpty() } }
     val newShoppingListItemText = MutableLiveData("")
+    val shoppingListSortMethodId by lazy { shoppingListRepository.getShoppingListSortMethodId() }
 
     private val _showClearShoppingListConfirmationDialog = MutableLiveData(false)
     val showClearShoppingListConfirmationDialog: LiveData<Boolean>
@@ -116,6 +118,16 @@ class ShoppingListViewModel: BaseViewModel() {
                 shoppingListRepository.deleteShoppingListItem(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
+            }
+        }
+    }
+
+    fun onSortMethodSelected(sortMethod: SortMethodDropDownItem) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                shoppingListRepository.saveShoppingListSortMethodId(sortMethod.id)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.error))
             }
         }
     }

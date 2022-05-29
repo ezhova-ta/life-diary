@@ -110,4 +110,7 @@
     <string name="next_menstruation">Next menstruation:</string>
     <string name="no_data">No data</string>
     <string name="delay_of_menstruation">Delay of menstruation: %d days</string>
+    <string name="by_creation_date">By creation date</string>
+    <string name="alphabetically">Alphabetically</string>
+    <string name="important_first">Important first</string>
 </resources>

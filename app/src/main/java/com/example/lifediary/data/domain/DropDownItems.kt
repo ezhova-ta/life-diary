@@ -62,3 +62,28 @@ object DayNumberDropDownItem {
 		return allElements.indexOf(element)
 	}
 }
+
+enum class SortMethodDropDownItem(val id: Int, val text: Text) {
+	BY_CREATION_DATE(1, Text.TextResource(R.string.by_creation_date)),
+	ALPHABETICALLY(2, Text.TextResource(R.string.alphabetically)),
+	IMPORTANT_FIRST(3, Text.TextResource(R.string.important_first));
+
+	companion object {
+		private val allElements: List<SortMethodDropDownItem> by lazy {
+			listOf(BY_CREATION_DATE, ALPHABETICALLY, IMPORTANT_FIRST)
+		}
+
+		fun getAllStrings(context: Context): List<String> {
+			return allElements.map { it.text.getText(context) }
+		}
+
+		fun getFromPosition(position: Int): SortMethodDropDownItem {
+			return allElements[position]
+		}
+
+		fun getPositionFromId(id: Int): Int {
+			val element = allElements.find { it.id == id } ?: return 0
+			return allElements.indexOf(element)
+		}
+	}
+}

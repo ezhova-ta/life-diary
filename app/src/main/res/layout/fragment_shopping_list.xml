@@ -14,16 +14,15 @@
         android:layout_height="match_parent"
         style="@style/ScreenContainer">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/clearAllButton"
             android:layout_width="34dp"
             android:layout_height="34dp"
             app:layout_constraintTop_toTopOf="@id/addShoppingListItemInput"
             app:layout_constraintBottom_toBottomOf="@id/addShoppingListItemInput"
             app:layout_constraintStart_toStartOf="parent"
-            android:clickable="true"
             android:onClick="@{() -> viewModel.onClearShoppingListClick()}"
-            android:src="@drawable/icon_delete_sweep_color_link" />
+            android:background="@drawable/icon_delete_sweep_color_link" />
 
         <EditText
             android:id="@+id/addShoppingListItemInput"
@@ -39,15 +38,14 @@
             android:text="@={viewModel.newShoppingListItemText}"
             android:hint="@string/what_do_you_want_to_buy" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/addShoppingListItemButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             app:layout_constraintTop_toTopOf="@id/addShoppingListItemInput"
             app:layout_constraintBottom_toBottomOf="@id/addShoppingListItemInput"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/icon_plus_green"
-            android:clickable="true"
+            android:background="@drawable/icon_plus_green"
             android:onClick="@{() -> viewModel.onAddShoppingListItemClick()}"/>
 
         <TextView
@@ -61,11 +59,21 @@
             app:booleanVisibility="@{!viewModel.isShoppingListVisible()}"
             app:drawableBottomCompat="@drawable/icon_shopping_cart_blue" />
 
+        <Spinner
+            android:id="@+id/sortMethodDropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/addShoppingListItemInput"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/background_substrate_light_gray" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shoppingListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/addShoppingListItemInput"
+            app:layout_constraintTop_toBottomOf="@id/sortMethodDropDown"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

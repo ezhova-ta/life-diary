@@ -39,7 +39,7 @@ class SettingsDataStoreManager @Inject constructor(private val context: Context)
     }
 
     val isWomanSectionEnabled = settingsDataStore.data.map { preferences ->
-        preferences[IS_WOMAN_SECTION_ENABLED_KEY] ?: IS_WOMAN_SECTION_ENABLED__DEFAULT_VALUE
+        preferences[IS_WOMAN_SECTION_ENABLED_KEY] ?: IS_WOMAN_SECTION_ENABLED_DEFAULT_VALUE
     }
 
     companion object {
@@ -58,7 +58,7 @@ class SettingsDataStoreManager @Inject constructor(private val context: Context)
         const val IS_SHOPPING_LIST_SECTION_ENABLED_DEFAULT_VALUE = true
         const val IS_POST_ADDRESSES_SECTION_ENABLED_DEFAULT_VALUE = true
         const val IS_MEMORABLE_DATES_SECTION_ENABLED_DEFAULT_VALUE = true
-        const val IS_WOMAN_SECTION_ENABLED__DEFAULT_VALUE = false
+        const val IS_WOMAN_SECTION_ENABLED_DEFAULT_VALUE = false
     }
 
     suspend fun setShoppingListSectionEnabled(isEnabled: Boolean) {

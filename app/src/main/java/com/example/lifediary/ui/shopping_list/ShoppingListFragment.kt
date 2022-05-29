@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ShoppingListAdapter
+import com.example.lifediary.data.domain.SortMethodDropDownItem
 import com.example.lifediary.databinding.FragmentShoppingListBinding
 import com.example.lifediary.ui.BaseFragment
 
@@ -40,6 +43,7 @@ class ShoppingListFragment : BaseFragment() {
         setupAddShoppingListItemInputView()
         setupShoppingListRecycler()
         setupClearShoppingListConfirmationDialog()
+        setupSortMethodDropDown()
     }
 
     private fun setupAddShoppingListItemInputView() {
@@ -82,6 +86,31 @@ class ShoppingListFragment : BaseFragment() {
             onConfirmed = viewModel::onClearShoppingListConfirmed,
             onCancelled = viewModel::onClearShoppingListCancelled
         )
+    }
+
+    private fun setupSortMethodDropDown() {
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.sort_method_spinner_item,
+            SortMethodDropDownItem.getAllStrings(requireContext())
+        )
+
+        binding.sortMethodDropDown.adapter = adapter
+
+        binding.sortMethodDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val sortMethod = SortMethodDropDownItem.getFromPosition(position)
+                viewModel.onSortMethodSelected(sortMethod)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        viewModel.shoppingListSortMethodId.observe(viewLifecycleOwner) { sortMethodId ->
+            sortMethodId ?: return@observe
+            val position = SortMethodDropDownItem.getPositionFromId(sortMethodId)
+            binding.sortMethodDropDown.setSelection(position)
+        }
     }
 
     override fun onDestroyView() {

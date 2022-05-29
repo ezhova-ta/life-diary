@@ -109,4 +109,7 @@
     <string name="next_menstruation">Следующая менструация:</string>
     <string name="no_data">Нет данных</string>
     <string name="delay_of_menstruation">Задержка: %d дн.</string>
+    <string name="by_creation_date">По дате создания</string>
+    <string name="alphabetically">По алфавиту</string>
+    <string name="important_first">Сначала важные</string>
 </resources>

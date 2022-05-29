@@ -1,15 +1,24 @@
 package com.example.lifediary.data.datasources
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.ShoppingListDao
 import com.example.lifediary.data.db.entities.ShoppingListItemEntity
 import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.utils.toDomain
 import javax.inject.Inject
 
-class ShoppingListLocalDataSource @Inject constructor(private val dao: ShoppingListDao) {
+class ShoppingListLocalDataSource @Inject constructor(
+    private val dao: ShoppingListDao,
+    private val commonDataStoreManager: CommonDataStoreManager
+) {
     fun getShoppingList(): LiveData<List<ShoppingListItem>> {
         return dao.getAll().toDomain()
+    }
+
+    fun getShoppingListSortMethodId(): LiveData<Int?> {
+        return commonDataStoreManager.shoppingListSortMethodId.asLiveData()
     }
 
     suspend fun saveShoppingListItem(item: ShoppingListItem) {
@@ -36,5 +45,9 @@ class ShoppingListLocalDataSource @Inject constructor(private val dao: ShoppingL
 
     suspend fun deleteShoppingListItem(id: Long) {
         dao.delete(id)
+    }
+
+    suspend fun setShoppingListSortMethodId(id: Int) {
+        commonDataStoreManager.setShoppingListSortMethodId(id)
     }
 }
