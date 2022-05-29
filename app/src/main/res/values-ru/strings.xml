@@ -112,4 +112,5 @@
     <string name="by_creation_date">По дате создания</string>
     <string name="alphabetically">По алфавиту</string>
     <string name="important_first">Сначала важные</string>
+    <string name="crossed_out_last">Вычеркнутые в конце</string>
 </resources>
