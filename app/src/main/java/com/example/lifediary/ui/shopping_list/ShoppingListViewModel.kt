@@ -6,19 +6,21 @@ import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.data.domain.SortMethodDropDownItem
+import com.example.lifediary.data.domain.Text
 import com.example.lifediary.data.repositories.ShoppingListRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.data.domain.Text
+import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
+import toothpick.locators.FactoryLocator
 import javax.inject.Inject
 
 class ShoppingListViewModel: BaseViewModel() {
     @Inject lateinit var shoppingListRepository: ShoppingListRepository
-    val shoppingList by lazy { shoppingListRepository.getShoppingList() }
+    val shoppingList by lazy { getSortedShoppingList() }
     val isShoppingListVisible by lazy { shoppingList.map { it.isNotEmpty() } }
     val newShoppingListItemText = MutableLiveData("")
     val shoppingListSortMethodId by lazy { shoppingListRepository.getShoppingListSortMethodId() }
@@ -34,6 +36,17 @@ class ShoppingListViewModel: BaseViewModel() {
     override fun bindScope() {
         val shoppingListScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.SHOPPING_LIST_SCOPE)
         Toothpick.inject(this, shoppingListScope)
+    }
+
+    private fun getSortedShoppingList(): LiveData<List<ShoppingListItem>> {
+        return TwoSourceLiveData<List<ShoppingListItem>, Int?, List<ShoppingListItem>>(
+            shoppingListRepository.getShoppingList(),
+            shoppingListRepository.getShoppingListSortMethodId()
+        ) { originalList, sortMethodId ->
+            originalList ?: return@TwoSourceLiveData emptyList<ShoppingListItem>()
+            val sorter = ShoppingListSorter.Factory.getInstance(sortMethodId)
+            sorter.sort(originalList)
+        }
     }
 
     fun onAddShoppingListItemClick() {
@@ -123,6 +136,10 @@ class ShoppingListViewModel: BaseViewModel() {
     }
 
     fun onSortMethodSelected(sortMethod: SortMethodDropDownItem) {
+        saveShoppingListSortMethod(sortMethod)
+    }
+
+    private fun saveShoppingListSortMethod(sortMethod: SortMethodDropDownItem) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 shoppingListRepository.saveShoppingListSortMethodId(sortMethod.id)
