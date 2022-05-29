@@ -38,14 +38,14 @@
             android:text="@={viewModel.locationName}"
             android:hint="@string/for_example_st_petersburg" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/searchLocationButton"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             app:layout_constraintTop_toTopOf="@id/searchLocationInput"
             app:layout_constraintBottom_toBottomOf="@id/searchLocationInput"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/icon_check_green"
+            android:background="@drawable/icon_check_green"
             android:clickable="true"
             android:onClick="@{() -> viewModel.onSearchLocationClick()}"/>
 
