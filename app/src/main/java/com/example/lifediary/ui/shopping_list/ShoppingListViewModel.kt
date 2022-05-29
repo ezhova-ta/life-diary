@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.ShoppingListItem
-import com.example.lifediary.data.domain.SortMethodDropDownItem
+import com.example.lifediary.data.domain.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.data.domain.Text
 import com.example.lifediary.data.repositories.ShoppingListRepository
 import com.example.lifediary.di.DiScopes
@@ -15,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
-import toothpick.locators.FactoryLocator
 import javax.inject.Inject
 
 class ShoppingListViewModel: BaseViewModel() {
@@ -24,6 +23,7 @@ class ShoppingListViewModel: BaseViewModel() {
     val isShoppingListVisible by lazy { shoppingList.map { it.isNotEmpty() } }
     val newShoppingListItemText = MutableLiveData("")
     val shoppingListSortMethodId by lazy { shoppingListRepository.getShoppingListSortMethodId() }
+    val isShoppingListSortMethodDropDownVisible by lazy { shoppingList.map { it.isNotEmpty() } }
 
     private val _showClearShoppingListConfirmationDialog = MutableLiveData(false)
     val showClearShoppingListConfirmationDialog: LiveData<Boolean>
@@ -43,7 +43,7 @@ class ShoppingListViewModel: BaseViewModel() {
             shoppingListRepository.getShoppingList(),
             shoppingListRepository.getShoppingListSortMethodId()
         ) { originalList, sortMethodId ->
-            originalList ?: return@TwoSourceLiveData emptyList<ShoppingListItem>()
+            originalList ?: return@TwoSourceLiveData emptyList()
             val sorter = ShoppingListSorter.Factory.getInstance(sortMethodId)
             sorter.sort(originalList)
         }
@@ -135,11 +135,11 @@ class ShoppingListViewModel: BaseViewModel() {
         }
     }
 
-    fun onSortMethodSelected(sortMethod: SortMethodDropDownItem) {
+    fun onSortMethodSelected(sortMethod: ShoppingListSortMethodDropDownItem) {
         saveShoppingListSortMethod(sortMethod)
     }
 
-    private fun saveShoppingListSortMethod(sortMethod: SortMethodDropDownItem) {
+    private fun saveShoppingListSortMethod(sortMethod: ShoppingListSortMethodDropDownItem) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 shoppingListRepository.saveShoppingListSortMethodId(sortMethod.id)

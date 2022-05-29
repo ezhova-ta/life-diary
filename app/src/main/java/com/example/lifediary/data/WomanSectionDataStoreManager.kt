@@ -11,7 +11,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.example.lifediary.ui.common.UiConstants
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class WomanSectionDataStoreManager @Inject constructor(private val context: Context) {
 	private val Context.womanSectionDataStore: DataStore<Preferences> by preferencesDataStore(
 		name = "woman_section_data_store",

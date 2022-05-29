@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
@@ -16,6 +18,7 @@ import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ToDoListAdapter
 import com.example.lifediary.data.domain.Day
 import com.example.lifediary.data.domain.ToDoListItem
+import com.example.lifediary.data.domain.ToDoListSortMethodDropDownItem
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICKED_TIME_BUNDLE_KEY
@@ -68,6 +71,7 @@ class CalendarDateFragment : BaseFragment() {
         setupClearToDOListConfirmationDialog()
         setupDeleteNoteConfirmationDialog()
         setupToDoListItemNotificationScheduling()
+        setupSortMethodDropDown()
     }
 
     private fun setupNoteView() {
@@ -208,6 +212,31 @@ class CalendarDateFragment : BaseFragment() {
 
     private fun cancelScheduledNotification(toDoListItem: ToDoListItem) {
         notificationScheduler.cancelScheduledNotification(toDoListItem)
+    }
+
+    private fun setupSortMethodDropDown() {
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.sort_method_spinner_item,
+            ToDoListSortMethodDropDownItem.getAllStrings(requireContext())
+        )
+
+        binding.sortMethodDropDown.adapter = adapter
+
+        binding.sortMethodDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val sortMethod = ToDoListSortMethodDropDownItem.getFromPosition(position)
+                viewModel.onSortMethodSelected(sortMethod)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        viewModel.toDoListSortMethodId.observe(viewLifecycleOwner) { sortMethodId ->
+            sortMethodId ?: return@observe
+            val position = ToDoListSortMethodDropDownItem.getPositionFromId(sortMethodId)
+            binding.sortMethodDropDown.setSelection(position)
+        }
     }
 
     override fun onDestroyView() {

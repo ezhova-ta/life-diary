@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.ShoppingListAdapter
-import com.example.lifediary.data.domain.SortMethodDropDownItem
+import com.example.lifediary.data.domain.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.databinding.FragmentShoppingListBinding
 import com.example.lifediary.ui.BaseFragment
 
@@ -92,14 +92,14 @@ class ShoppingListFragment : BaseFragment() {
         val adapter = ArrayAdapter(
             requireContext(),
             R.layout.sort_method_spinner_item,
-            SortMethodDropDownItem.getAllStrings(requireContext())
+            ShoppingListSortMethodDropDownItem.getAllStrings(requireContext())
         )
 
         binding.sortMethodDropDown.adapter = adapter
 
         binding.sortMethodDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val sortMethod = SortMethodDropDownItem.getFromPosition(position)
+                val sortMethod = ShoppingListSortMethodDropDownItem.getFromPosition(position)
                 viewModel.onSortMethodSelected(sortMethod)
             }
 
@@ -108,7 +108,7 @@ class ShoppingListFragment : BaseFragment() {
 
         viewModel.shoppingListSortMethodId.observe(viewLifecycleOwner) { sortMethodId ->
             sortMethodId ?: return@observe
-            val position = SortMethodDropDownItem.getPositionFromId(sortMethodId)
+            val position = ShoppingListSortMethodDropDownItem.getPositionFromId(sortMethodId)
             binding.sortMethodDropDown.setSelection(position)
         }
     }

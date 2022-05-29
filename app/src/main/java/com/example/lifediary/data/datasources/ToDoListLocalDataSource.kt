@@ -1,6 +1,8 @@
 package com.example.lifediary.data.datasources
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.ToDoListDao
 import com.example.lifediary.data.db.entities.ToDoListItemEntity
 import com.example.lifediary.data.domain.ToDoListItem
@@ -9,13 +11,20 @@ import com.example.lifediary.utils.toDomain
 import java.util.*
 import javax.inject.Inject
 
-class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) {
+class ToDoListLocalDataSource @Inject constructor(
+	private val dao: ToDoListDao,
+	private val commonDataStoreManager: CommonDataStoreManager
+) {
 	fun getToDoList(day: Day): LiveData<List<ToDoListItem>> {
 		return dao.getAll(day.dayNumber, day.monthNumber, day.year).toDomain()
 	}
 
 	fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
 		return dao.getAll().toDomain()
+	}
+
+	fun getToDoListSortMethodId(): LiveData<Int?> {
+		return commonDataStoreManager.toDoListSortMethodId.asLiveData()
 	}
 
 	suspend fun getToDoListItem(id: Long) : ToDoListItem? {
@@ -60,5 +69,9 @@ class ToDoListLocalDataSource @Inject constructor(private val dao: ToDoListDao) 
 
 	suspend fun clearToDoLists() {
 		dao.deleteAll()
+	}
+
+	suspend fun setToDoListSortMethodId(id: Int) {
+		commonDataStoreManager.setToDoListSortMethodId(id)
 	}
 }

@@ -10,7 +10,9 @@ import androidx.datastore.preferences.core.preferencesOf
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SettingsDataStoreManager @Inject constructor(private val context: Context) {
     private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(
         name = "settings_data_store",

@@ -2,10 +2,7 @@ package com.example.lifediary.ui.calendar.date
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.Day
-import com.example.lifediary.data.domain.Text
-import com.example.lifediary.data.domain.ToDoListItem
-import com.example.lifediary.data.domain.WeatherForecast
+import com.example.lifediary.data.domain.*
 import com.example.lifediary.data.repositories.*
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
@@ -29,7 +26,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var womanSectionRepository: WomanSectionRepository
 	@Inject lateinit var settingsRepository: SettingsRepository
 	val title = day.toDateString()
-	val toDoList by lazy { toDoListRepository.getToDoList(day) }
+	val toDoList by lazy { getSortedToDoList() }
 	val isToDoListVisible by lazy { toDoList.map { it.isNotEmpty() } }
 	private val note by lazy { noteRepository.getNoteLiveData(day) }
 	val noteText by lazy { note.map { it?.text } }
@@ -40,6 +37,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val isMenstruationIconVisible by lazy { getMenstruationIconVisibility() }
 	val isEstimatedMenstruationIconVisible by lazy { getEstimatedMenstruationIconVisibility() }
 	val isCalendarIconVisible by lazy { getCalendarIconVisibility() }
+	val toDoListSortMethodId by lazy { toDoListRepository.getToDoListSortMethodId() }
+	val isDoListSortMethodDropDownVisible by lazy { toDoList.map { it.isNotEmpty() } }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->
@@ -86,6 +85,17 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 				// TODO Message display temporarily removed
 //				showMessage(Text.TextResource(R.string.failed_to_get_forecast))
 			}
+		}
+	}
+
+	private fun getSortedToDoList(): LiveData<List<ToDoListItem>> {
+		return TwoSourceLiveData<List<ToDoListItem>, Int?, List<ToDoListItem>>(
+			toDoListRepository.getToDoList(day),
+			toDoListRepository.getToDoListSortMethodId()
+		) { originalList, sortMethodId ->
+			originalList ?: return@TwoSourceLiveData emptyList()
+			val sorter = ToDoListSorter.Factory.getInstance(sortMethodId)
+			sorter.sort(originalList)
 		}
 	}
 
@@ -290,15 +300,29 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		showMessage(Text.TextResource(R.string.text_copied))
 	}
 
-	class Factory(private val day: Day) : ViewModelProvider.Factory {
-		@Suppress("UNCHECKED_CAST")
-		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-			return CalendarDateViewModel(day) as T
+	fun onSortMethodSelected(sortMethod: ToDoListSortMethodDropDownItem) {
+		saveToDoListSortMethod(sortMethod)
+	}
+
+	private fun saveToDoListSortMethod(sortMethod: ToDoListSortMethodDropDownItem) {
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				toDoListRepository.saveToDoListSortMethodId(sortMethod.id)
+			} catch(e: Exception) {
+				showMessage(Text.TextResource(R.string.error))
+			}
 		}
 	}
 
 	override fun onCleared() {
 		Toothpick.closeScope(DiScopes.CALENDAR_DATE_SCOPE)
 		super.onCleared()
+	}
+
+	class Factory(private val day: Day) : ViewModelProvider.Factory {
+		@Suppress("UNCHECKED_CAST")
+		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+			return CalendarDateViewModel(day) as T
+		}
 	}
 }

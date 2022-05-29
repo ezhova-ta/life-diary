@@ -1,6 +1,7 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.datasources.ToDoListLocalDataSource
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.Day
@@ -18,6 +19,10 @@ class ToDoListRepository @Inject constructor(
 
 	fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
 		return localDataSource.getAllToDoLists()
+	}
+
+	fun getToDoListSortMethodId(): LiveData<Int?> {
+		return localDataSource.getToDoListSortMethodId()
 	}
 
 	suspend fun getToDoListItem(id: Long) : ToDoListItem? {
@@ -51,5 +56,9 @@ class ToDoListRepository @Inject constructor(
 
 	suspend fun clearToDoLists() {
 		localDataSource.clearToDoLists()
+	}
+
+	suspend fun saveToDoListSortMethodId(id: Int) {
+		localDataSource.setToDoListSortMethodId(id)
 	}
 }
