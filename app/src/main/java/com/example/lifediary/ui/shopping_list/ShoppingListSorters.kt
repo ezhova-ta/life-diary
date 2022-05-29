@@ -11,7 +11,7 @@ sealed interface ShoppingListSorter {
 			fun getInstance(sortMethodId: Int?): ShoppingListSorter {
 				return when(sortMethodId) {
 					SortMethodDropDownItem.ALPHABETICALLY.id -> ShoppingListSorterAlphabetically
-					SortMethodDropDownItem.IMPORTANT_AT_FIRST.id -> ShoppingListSorterImportantAtFirst
+					SortMethodDropDownItem.IMPORTANT_FIRST.id -> ShoppingListSorterImportantFirst
 					SortMethodDropDownItem.CROSSED_OUT_LAST.id -> ShoppingListSorterCrossedOutLast
 					else -> ShoppingListSorterByCreationDate
 				}
@@ -32,7 +32,7 @@ object ShoppingListSorterAlphabetically : ShoppingListSorter {
 	}
 }
 
-object ShoppingListSorterImportantAtFirst : ShoppingListSorter {
+object ShoppingListSorterImportantFirst : ShoppingListSorter {
 	override fun sort(list: List<ShoppingListItem>): List<ShoppingListItem> {
 		return list.sortedByDescending { it.isHighPriority }
 	}

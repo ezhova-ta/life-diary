@@ -65,12 +65,12 @@ object DayNumberDropDownItem {
 enum class SortMethodDropDownItem(val id: Int, val text: Text) {
 	BY_CREATION_DATE(1, Text.TextResource(R.string.by_creation_date)),
 	ALPHABETICALLY(2, Text.TextResource(R.string.alphabetically)),
-	IMPORTANT_AT_FIRST(3, Text.TextResource(R.string.important_first)),
+	IMPORTANT_FIRST(3, Text.TextResource(R.string.important_first)),
 	CROSSED_OUT_LAST(4, Text.TextResource(R.string.crossed_out_last));
 
 	companion object {
 		private val allElements: List<SortMethodDropDownItem> by lazy {
-			listOf(BY_CREATION_DATE, ALPHABETICALLY, IMPORTANT_AT_FIRST, CROSSED_OUT_LAST)
+			listOf(BY_CREATION_DATE, ALPHABETICALLY, IMPORTANT_FIRST, CROSSED_OUT_LAST)
 		}
 
 		fun getAllStrings(context: Context): List<String> {
