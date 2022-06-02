@@ -66,7 +66,7 @@ enum class ShoppingListSortMethodDropDownItem(val id: Int, val text: Text) {
 	BY_CREATION_DATE(1, Text.TextResource(R.string.by_creation_date)),
 	ALPHABETICALLY(2, Text.TextResource(R.string.alphabetically)),
 	IMPORTANT_FIRST(3, Text.TextResource(R.string.important_first)),
-	CROSSED_OUT_LAST(4, Text.TextResource(R.string.crossed_out_last));
+	CROSSED_OUT_LAST(4, Text.TextResource(R.string.bought_last));
 
 	companion object {
 		private val allElements: List<ShoppingListSortMethodDropDownItem> by lazy {

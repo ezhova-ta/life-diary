@@ -113,6 +113,6 @@
     <string name="by_creation_date">By creation date</string>
     <string name="alphabetically">Alphabetically</string>
     <string name="important_first">Important first</string>
-    <string name="crossed_out_last">Crossed out last</string>
+    <string name="bought_last">Bought last</string>
     <string name="completed_last">Completed last</string>
 </resources>
