@@ -4,11 +4,11 @@ import java.util.*
 
 data class MemorableDate(
 	val id: Long? = null,
-	override var name: String,
-	override var dayNumber: Int,
-	override var monthNumber: Int,
-	override var year: Int? = null
-) : CalendarEvent() {
+	var name: String,
+	var dayNumber: Int,
+	var monthNumber: Int,
+	var year: Int? = null
+) {
 	fun howManyYearsAgo(): Int? {
 		val year = year ?: return null
 		val thisYear = Calendar.getInstance().get(Calendar.YEAR)

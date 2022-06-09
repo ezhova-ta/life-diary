@@ -19,6 +19,7 @@ import com.example.lifediary.adapters.ToDoListAdapter
 import com.example.lifediary.data.domain.Day
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.ToDoListSortMethodDropDownItem
+import com.example.lifediary.data.domain.toCalendarEventList
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.ui.BaseFragment
 import com.example.lifediary.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICKED_TIME_BUNDLE_KEY
@@ -99,7 +100,7 @@ class CalendarDateFragment : BaseFragment() {
         val calendarEventListAdapter = CalendarEventListAdapter()
         binding.eventListView.adapter = calendarEventListAdapter
         viewModel.memorableDates.observe(viewLifecycleOwner) { dateList ->
-            calendarEventListAdapter.submitList(dateList)
+            calendarEventListAdapter.submitList(dateList.toCalendarEventList())
         }
     }
 
