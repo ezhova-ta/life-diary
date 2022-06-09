@@ -6,7 +6,7 @@ import com.example.lifediary.utils.isSameDayInYear
 import com.example.lifediary.utils.isWithinInterval
 import com.kizitonwose.calendarview.model.CalendarDay
 
-class CalendarDayDataHolder(
+class CalendarDayDataUtility(
 	private val day: CalendarDay,
 	private val data: CalendarDaysData?
 ) {

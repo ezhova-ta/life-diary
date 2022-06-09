@@ -54,10 +54,10 @@ abstract class BaseCalendarDrawer(private val calendarView: CalendarView) {
 				// TODO Refactoring. How? :(
 				container.drawDesignations(
 					day,
-					CalendarDayDataHolder(day, calendarDaysData).containsNoteOrToDoList(),
-					CalendarDayDataHolder(day, calendarDaysData).containsMemorableDates(),
-					CalendarDayDataHolder(day, calendarDaysData).isDayOfMenstruationPeriod(),
-					CalendarDayDataHolder(day, calendarDaysData).isDayOfNextMenstruationPeriod()
+					CalendarDayDataUtility(day, calendarDaysData).containsNoteOrToDoList(),
+					CalendarDayDataUtility(day, calendarDaysData).containsMemorableDates(),
+					CalendarDayDataUtility(day, calendarDaysData).isDayOfMenstruationPeriod(),
+					CalendarDayDataUtility(day, calendarDaysData).isDayOfNextMenstruationPeriod()
 				)
 			}
 		}
