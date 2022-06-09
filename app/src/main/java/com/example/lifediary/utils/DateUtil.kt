@@ -2,6 +2,7 @@ package com.example.lifediary.utils
 
 import com.example.lifediary.data.domain.Day
 import com.example.lifediary.data.domain.MemorableDate
+import com.example.lifediary.utils.DayCalendarConverter.dayToCalendar
 import com.kizitonwose.calendarview.model.CalendarDay
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -25,13 +26,13 @@ fun Long.toCalendar(): Calendar {
 }
 
 fun Day.toDateString(withYear: Boolean = true): String {
-    return toCalendar().toDateString(withYear)
+    return dayToCalendar(this).toDateString(withYear)
 }
 
 fun Day.toDateTimeString(withMilliseconds: Boolean = false): String {
     val pattern = if(withMilliseconds) DATE_TIME_FORMAT_WITH_MILLIS else DATE_TIME_FORMAT_WITHOUT_MILLIS
     val format = SimpleDateFormat(pattern, Locale.getDefault())
-    return format.format(this.toCalendar().time)
+    return format.format(dayToCalendar(this).time)
 }
 
 fun Calendar.toTimeString(withMilliseconds: Boolean = false): String {
@@ -57,15 +58,6 @@ fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {
         val day = Day(dayNumber, monthNumber, year)
         day.toDateString()
     }
-}
-
-fun Day.toCalendar(): Calendar {
-//    return createCalendarInstance(dayNumber, monthNumber, year)
-    return CalendarBuilder()
-        .setDayOfMonth(dayNumber)
-        .setMonthNumber(monthNumber)
-        .setYearNumber(year)
-        .build()
 }
 
 fun Day.isSameDay(date: CalendarDay): Boolean {
@@ -101,14 +93,6 @@ fun CalendarDay.toDomain(): Day {
     return Day(date.dayOfMonth, date.monthValue, date.year)
 }
 
-fun Calendar.toDomain(): Day {
-    return Day(
-        get(Calendar.DATE),
-        get(Calendar.MONTH) + 1,
-        get(Calendar.YEAR)
-    )
-}
-
 fun CalendarDay.isToday(): Boolean {
     val today = LocalDate.now(ZoneId.systemDefault())
     return date.isEqual(today)
@@ -128,7 +112,7 @@ fun CalendarDay.isWithinInterval(start: Calendar, end: Calendar): Boolean {
 }
 
 fun Day.isWithinInterval(start: Calendar, end: Calendar): Boolean {
-    return toCalendar().isWithinInterval(start, end)
+    return dayToCalendar(this).isWithinInterval(start, end)
 }
 
 private fun Calendar.isWithinInterval(start: Calendar, end: Calendar): Boolean {

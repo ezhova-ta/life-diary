@@ -6,10 +6,9 @@ import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.CalendarBuilder
-import com.example.lifediary.utils.toDomain
+import com.example.lifediary.utils.DayCalendarConverter.calendarToDay
 import com.github.terrakok.cicerone.Router
 import toothpick.Toothpick
-import java.util.*
 import javax.inject.Inject
 
 class MainActivityViewModel : BaseViewModel() {
@@ -34,7 +33,7 @@ class MainActivityViewModel : BaseViewModel() {
     }
 
     fun onShowCurrentCalendarDayActionRequested() {
-        val today = CalendarBuilder().build().toDomain()
+        val today = calendarToDay(CalendarBuilder().build())
         router.newChain(Screens.getCalendarScreen(), Screens.getCalendarDateScreen(today))
     }
 
