@@ -10,6 +10,7 @@ import android.widget.TimePicker
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
+import com.example.lifediary.utils.CalendarBuilder
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
@@ -21,7 +22,7 @@ class ToDoListItemNotificationTimePickerFragment : DialogFragment(), TimePickerD
 	}
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-		val now = Calendar.getInstance()
+		val now = CalendarBuilder().build()
 		val hour = now.get(Calendar.HOUR_OF_DAY)
 		val minute = now.get(Calendar.MINUTE)
 		return TimePickerDialog(activity, this, hour, minute, DateFormat.is24HourFormat(activity))

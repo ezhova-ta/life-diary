@@ -21,9 +21,7 @@ fun Calendar.toLong(): Long {
 }
 
 fun Long.toCalendar(): Calendar {
-    val calendar = Calendar.getInstance()
-    calendar.timeInMillis = this
-    return calendar
+    return CalendarBuilder(this).build()
 }
 
 fun Day.toDateString(withYear: Boolean = true): String {
@@ -52,7 +50,7 @@ fun Calendar.toDateString(withYear: Boolean = true): String {
 
 fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {
     return if(year == null) {
-        val thisYear = Calendar.getInstance().get(Calendar.YEAR)
+        val thisYear = CalendarBuilder().build().get(Calendar.YEAR)
         val day = Day(dayNumber, monthNumber, thisYear)
         day.toDateString(false)
     } else {
@@ -78,9 +76,7 @@ fun Day.isSameDay(date: CalendarDay): Boolean {
 
 fun Day.isSameDay(dateInSeconds: Long): Boolean {
     val dateInMillis = dateInSeconds * 1000
-    val date = Calendar.getInstance().apply {
-        timeInMillis = dateInMillis
-    }
+    val date = CalendarBuilder(dateInMillis).build()
 
     return dayNumber == date.get(Calendar.DATE) &&
         monthNumber == date.getMonthNumber() &&
@@ -168,9 +164,9 @@ fun MemorableDate.isToday(): Boolean {
 }
 
 fun getNowDayNumber(): Int {
-    return Calendar.getInstance().get(Calendar.DATE)
+    return CalendarBuilder().build().get(Calendar.DATE)
 }
 
 fun getNowMonthNumber(): Int {
-    return Calendar.getInstance().get(Calendar.MONTH) + 1
+    return CalendarBuilder().build().get(Calendar.MONTH) + 1
 }

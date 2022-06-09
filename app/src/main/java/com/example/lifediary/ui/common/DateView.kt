@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.example.lifediary.R
 import com.example.lifediary.databinding.DateViewBinding
+import com.example.lifediary.utils.CalendarBuilder
 import com.example.lifediary.utils.isDayOff
 import java.util.*
 
@@ -19,7 +20,7 @@ class DateView(context: Context, attrs: AttributeSet) : FrameLayout(context, att
 
     private fun setupDayOfMonthView() {
         binding.dayOfMonthView.setTextColor(
-            if(Calendar.getInstance().isDayOff()) {
+            if(CalendarBuilder().build().isDayOff()) {
                 context.resources.getColor(R.color.app_red, context.theme)
             } else {
                 context.resources.getColor(R.color.app_green, context.theme)

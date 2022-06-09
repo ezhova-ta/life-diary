@@ -61,7 +61,7 @@ class WomanSectionRepository @Inject constructor(
     fun getDelayOfMenstruation(): LiveData<Long?> {
         return getEstimatedNextMenstruationPeriod().map { nextMenstruationPeriod ->
             val startNextMenstruationPeriod = nextMenstruationPeriod?.startDate ?: return@map null
-            val now = Calendar.getInstance()
+            val now = CalendarBuilder().build()
             if(now.before(startNextMenstruationPeriod)) return@map null
             getDaysBetween(startNextMenstruationPeriod, now)
         }

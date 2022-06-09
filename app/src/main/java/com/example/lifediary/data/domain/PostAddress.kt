@@ -1,5 +1,6 @@
 package com.example.lifediary.data.domain
 
+import com.example.lifediary.utils.CalendarBuilder
 import java.util.*
 
 data class PostAddress(
@@ -11,7 +12,7 @@ data class PostAddress(
 	val city: String,
 	val postcode: String,
 	val edgeRegion: String,
-	var createdAt: Calendar = Calendar.getInstance()
+	var createdAt: Calendar = CalendarBuilder().build()
 ) {
 	override fun toString() =
 		String.format(

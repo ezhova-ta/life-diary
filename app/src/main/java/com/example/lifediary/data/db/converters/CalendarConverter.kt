@@ -1,6 +1,7 @@
 package com.example.lifediary.data.db.converters
 
 import androidx.room.TypeConverter
+import com.example.lifediary.utils.CalendarBuilder
 import com.example.lifediary.utils.toCalendar
 import com.example.lifediary.utils.toLong
 import java.util.*
@@ -13,7 +14,7 @@ class CalendarConverter {
 
     @TypeConverter
     fun longToCalendar(long: Long): Calendar {
-        if(long == 0L) return Calendar.getInstance()
+        if(long == 0L) return CalendarBuilder().build()
         return long.toCalendar()
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
+import com.example.lifediary.utils.CalendarBuilder
 import com.example.lifediary.utils.toDomain
 import com.github.terrakok.cicerone.Router
 import toothpick.Toothpick
@@ -33,7 +34,7 @@ class MainActivityViewModel : BaseViewModel() {
     }
 
     fun onShowCurrentCalendarDayActionRequested() {
-        val today = Calendar.getInstance().toDomain()
+        val today = CalendarBuilder().build().toDomain()
         router.newChain(Screens.getCalendarScreen(), Screens.getCalendarDateScreen(today))
     }
 

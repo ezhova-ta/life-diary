@@ -1,5 +1,6 @@
 package com.example.lifediary.data.domain
 
+import com.example.lifediary.utils.CalendarBuilder
 import java.util.*
 
 data class ToDoListItem(
@@ -8,6 +9,6 @@ data class ToDoListItem(
 	val day: Day,
 	var isDone: Boolean = false,
 	var notificationEnabled: Boolean = false,
-	var notificationTime: Calendar = Calendar.getInstance(),
-	val createdAt: Calendar = Calendar.getInstance()
+	var notificationTime: Calendar = CalendarBuilder().build(),
+	val createdAt: Calendar = CalendarBuilder().build()
 )

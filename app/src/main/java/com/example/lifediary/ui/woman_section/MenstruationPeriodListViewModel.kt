@@ -10,6 +10,7 @@ import com.example.lifediary.data.repositories.WomanSectionRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.Text
+import com.example.lifediary.utils.CalendarBuilder
 import com.example.lifediary.utils.isDayAfter
 import com.example.lifediary.utils.toCalendar
 import kotlinx.coroutines.CoroutineScope
@@ -109,7 +110,7 @@ class MenstruationPeriodListViewModel : BaseViewModel() {
     }
 
     private fun addMenstruationPeriod(period: MenstruationPeriod) {
-        val today = Calendar.getInstance()
+        val today = CalendarBuilder().build()
 
         if(period.startDate.isDayAfter(today)) {
             showMessage(Text.TextResource(R.string.start_menstruation_must_be_no_later_than_today))
