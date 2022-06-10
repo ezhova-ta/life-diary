@@ -1,6 +1,6 @@
 package com.example.lifediary.data.domain
 
-import com.example.lifediary.utils.CalendarBuilder
+import com.example.lifediary.utils.dates.CalendarBuilder
 import java.util.*
 
 data class ShoppingListItem(

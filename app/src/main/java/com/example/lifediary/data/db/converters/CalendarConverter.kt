@@ -1,9 +1,9 @@
 package com.example.lifediary.data.db.converters
 
 import androidx.room.TypeConverter
-import com.example.lifediary.utils.CalendarBuilder
-import com.example.lifediary.utils.toCalendar
-import com.example.lifediary.utils.toLong
+import com.example.lifediary.utils.dates.CalendarBuilder
+import com.example.lifediary.utils.dates.toCalendar
+import com.example.lifediary.utils.dates.toLong
 import java.util.*
 
 class CalendarConverter {

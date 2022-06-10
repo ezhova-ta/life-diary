@@ -1,6 +1,6 @@
 package com.example.lifediary.data.domain
 
-import com.example.lifediary.utils.toDateString
+import com.example.lifediary.utils.dates.toDateString
 import java.util.*
 
 data class MenstruationPeriod(

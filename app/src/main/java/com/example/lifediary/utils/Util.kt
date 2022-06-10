@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.db.entities.DbEntity
 import com.example.lifediary.data.domain.MemorableDate
+import com.example.lifediary.utils.dates.getNowDayNumber
+import com.example.lifediary.utils.dates.getNowMonthNumber
 import java.util.*
 
 fun Int.createStringWithPlusOrMinusSign(): String {

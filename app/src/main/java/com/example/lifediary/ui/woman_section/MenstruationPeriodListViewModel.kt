@@ -10,14 +10,13 @@ import com.example.lifediary.data.repositories.WomanSectionRepository
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.Text
-import com.example.lifediary.utils.CalendarBuilder
-import com.example.lifediary.utils.isDayAfter
-import com.example.lifediary.utils.toCalendar
+import com.example.lifediary.utils.dates.CalendarBuilder
+import com.example.lifediary.utils.dates.isDayAfter
+import com.example.lifediary.utils.dates.toCalendar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
-import java.util.*
 import javax.inject.Inject
 
 class MenstruationPeriodListViewModel : BaseViewModel() {

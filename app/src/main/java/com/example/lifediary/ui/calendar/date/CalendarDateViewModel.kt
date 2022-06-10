@@ -8,6 +8,8 @@ import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.*
+import com.example.lifediary.utils.dates.isSameDay
+import com.example.lifediary.utils.dates.toDateString
 import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope

@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.CalendarBuilder
-import com.example.lifediary.utils.DayCalendarConverter.calendarToDay
+import com.example.lifediary.utils.dates.CalendarBuilder
+import com.example.lifediary.utils.dates.DatesConverter.calendarToDay
 import com.github.terrakok.cicerone.Router
 import toothpick.Toothpick
 import javax.inject.Inject

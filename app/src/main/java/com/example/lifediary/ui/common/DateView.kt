@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.example.lifediary.R
 import com.example.lifediary.databinding.DateViewBinding
-import com.example.lifediary.utils.CalendarBuilder
-import com.example.lifediary.utils.isDayOff
-import java.util.*
+import com.example.lifediary.utils.dates.CalendarBuilder
+import com.example.lifediary.utils.dates.isDayOff
 
 class DateView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
     private var binding = DateViewBinding.inflate(LayoutInflater.from(context))

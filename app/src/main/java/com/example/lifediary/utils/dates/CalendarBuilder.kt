@@ -1,4 +1,4 @@
-package com.example.lifediary.utils
+package com.example.lifediary.utils.dates
 
 import java.util.*
 

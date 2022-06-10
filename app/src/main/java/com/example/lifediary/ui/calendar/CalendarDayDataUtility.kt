@@ -1,9 +1,9 @@
 package com.example.lifediary.ui.calendar
 
 import com.example.lifediary.data.domain.CalendarDaysData
-import com.example.lifediary.utils.isSameDay
-import com.example.lifediary.utils.isSameDayInYear
-import com.example.lifediary.utils.isWithinInterval
+import com.example.lifediary.utils.dates.isSameDay
+import com.example.lifediary.utils.dates.isSameDayInYear
+import com.example.lifediary.utils.dates.isWithinInterval
 import com.kizitonwose.calendarview.model.CalendarDay
 
 class CalendarDayDataUtility(

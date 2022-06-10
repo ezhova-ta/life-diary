@@ -2,7 +2,7 @@ package com.example.lifediary.ui.calendar
 
 import android.view.View
 import android.widget.TextView
-import com.example.lifediary.utils.isToday
+import com.example.lifediary.utils.dates.isToday
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.ViewContainer
