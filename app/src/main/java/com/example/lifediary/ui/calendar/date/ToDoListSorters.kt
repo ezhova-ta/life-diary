@@ -1,7 +1,8 @@
 package com.example.lifediary.ui.calendar.date
 
 import com.example.lifediary.data.domain.ToDoListItem
-import com.example.lifediary.data.domain.ToDoListSortMethodDropDownItem
+import com.example.lifediary.data.domain.ToDoListSortMethodDropDownItem.ALPHABETICALLY
+import com.example.lifediary.data.domain.ToDoListSortMethodDropDownItem.COMPLETED_LAST
 
 sealed interface ToDoListSorter {
 	fun sort(list: List<ToDoListItem>): List<ToDoListItem>
@@ -10,8 +11,8 @@ sealed interface ToDoListSorter {
 		companion object {
 			fun getInstance(sortMethodId: Int?): ToDoListSorter {
 				return when(sortMethodId) {
-					ToDoListSortMethodDropDownItem.ALPHABETICALLY.id -> ToDoListSorterAlphabetically
-					ToDoListSortMethodDropDownItem.COMPLETED_LAST.id -> ToDoListSorterCompletedLast
+					ALPHABETICALLY.id -> ToDoListSorterAlphabetically
+					COMPLETED_LAST.id -> ToDoListSorterCompletedLast
 					else ->ToDoListSorterByCreationDate
 				}
 			}

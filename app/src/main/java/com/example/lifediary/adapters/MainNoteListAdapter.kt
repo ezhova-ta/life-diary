@@ -20,7 +20,9 @@ class MainNoteListAdapter(
 		holder.bind(item, onItemLongClickListener)
 	}
 
-	class MainNoteListItemViewModel(val mainNoteListItem: MainNote)
+	class MainNoteListItemViewModel(mainNoteListItem: MainNote) {
+		val noteText = mainNoteListItem.text
+	}
 
 	class ViewHolder private constructor(
 		private val binding: MainNoteListItemBinding

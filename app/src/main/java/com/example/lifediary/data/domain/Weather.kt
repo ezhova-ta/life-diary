@@ -15,7 +15,7 @@ data class Weather(
     val windSpeed: Double,
     val gustSpeed: Double
 ) {
-    val iconUrl = String.format("%s%s@2x.png", BuildConfig.WEATHER_API_ICON_URL, icon)
+    val iconUrl = "${BuildConfig.WEATHER_API_ICON_URL}$icon@2x.png"
     val temperatureString = temperature.createStringWithPlusOrMinusSign()
     val temperatureFeelsLikeString = temperatureFeelsLike.createStringWithPlusOrMinusSign()
 }

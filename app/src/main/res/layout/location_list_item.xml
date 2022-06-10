@@ -32,7 +32,7 @@
             android:singleLine="true"
             android:textSize="20sp"
             tools:text="Санкт-Петербург"
-            android:text="@{viewModel.location.name}" />
+            android:text="@{viewModel.locationName}" />
 
         <ImageView
             android:id="@+id/locationIcon"
@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="12sp"
             tools:text="59.8944, 30.2642"
-            android:text="@{viewModel.location.formattedCoordinatesString}" />
+            android:text="@{viewModel.coordinates}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

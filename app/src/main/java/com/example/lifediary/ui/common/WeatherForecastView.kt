@@ -33,11 +33,13 @@ class WeatherForecastView(context: Context, attrs: AttributeSet) : FrameLayout(c
         set(value) {
             field = value
 
-            if(value == null) {
-                binding.windView.isVisible = false
-            } else {
-                binding.windView.isVisible = true
-                binding.windView.text = value
+            with(binding.windView) {
+                if(value == null) {
+                    isVisible = false
+                } else {
+                    isVisible = true
+                    text = value
+                }
             }
         }
 
@@ -45,11 +47,13 @@ class WeatherForecastView(context: Context, attrs: AttributeSet) : FrameLayout(c
         set(value) {
             field = value
 
-            if(value == null) {
-                binding.descriptionView.isVisible = false
-            } else {
-                binding.descriptionView.text = value
-                binding.descriptionView.isVisible = true
+            with(binding.descriptionView) {
+                if (value == null) {
+                    isVisible = false
+                } else {
+                    text = value
+                    isVisible = true
+                }
             }
         }
 
@@ -57,11 +61,13 @@ class WeatherForecastView(context: Context, attrs: AttributeSet) : FrameLayout(c
         set(value) {
             field = value
 
-            if(value == null) {
-                binding.humidityView.isVisible = false
-            } else {
-                binding.humidityView.isVisible = true
-                binding.humidityView.text = value
+            with(binding.humidityView) {
+                if (value == null) {
+                    isVisible = false
+                } else {
+                    isVisible = true
+                    text = value
+                }
             }
         }
 

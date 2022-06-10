@@ -22,7 +22,14 @@ class PostAddressListAdapter(
 		holder.bind(item, onDeleteItemClickListener, onEditItemClickListener, onItemLongClickListener)
 	}
 
-	class PostAddressListItemViewModel(val address: PostAddress) {
+	class PostAddressListItemViewModel(address: PostAddress) {
+		val addressName = address.name
+		val street = address.street
+		val buildingNumber = address.buildingNumber
+		val apartmentNumber = address.apartmentNumber
+		val city = address.city
+		val edgeRegion = address.edgeRegion
+		val postcode = address.postcode
 		val isAddresseeNameViewVisible = address.name.isNotBlank()
 		val isStreetViewVisible = address.street.isNotBlank()
 		val isBuildingNumberViewVisible = address.buildingNumber.isNotBlank()

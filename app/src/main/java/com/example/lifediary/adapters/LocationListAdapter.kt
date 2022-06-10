@@ -19,7 +19,10 @@ class LocationListAdapter(private val onItemClickListener: ListItemClickListener
         holder.bind(item, onItemClickListener)
     }
 
-    class LocationListItemViewModel(val location: Location)
+    class LocationListItemViewModel(location: Location) {
+        val locationName = location.name
+        val coordinates = location.getFormattedCoordinatesString()
+    }
 
     class ViewHolder private constructor(
         private val binding: LocationListItemBinding

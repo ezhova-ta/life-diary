@@ -51,14 +51,16 @@ abstract class BaseCalendarDrawer(private val calendarView: CalendarView) {
 
 			override fun bind(container: BaseCalendarDayViewContainer, day: CalendarDay) {
 				container.setup(day) { onDayClick(day) }
-				// TODO Refactoring. How? :(
-				container.drawDesignations(
-					day,
-					CalendarDayDataUtility(day, calendarDaysData).containsNoteOrToDoList(),
-					CalendarDayDataUtility(day, calendarDaysData).containsMemorableDates(),
-					CalendarDayDataUtility(day, calendarDaysData).isDayOfMenstruationPeriod(),
-					CalendarDayDataUtility(day, calendarDaysData).isDayOfNextMenstruationPeriod()
-				)
+
+				with(CalendarDayDataUtility(day, calendarDaysData)) {
+					container.drawDesignations(
+						day,
+						containsNoteOrToDoList(),
+						containsMemorableDates(),
+						isDayOfMenstruationPeriod(),
+						isDayOfNextMenstruationPeriod()
+					)
+				}
 			}
 		}
 

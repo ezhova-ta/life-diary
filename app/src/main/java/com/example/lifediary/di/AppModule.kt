@@ -32,7 +32,6 @@ class AppModule(application: LifeDiaryApplication) : Module() {
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())
-
         bind(WeatherService::class.java).toProvider(WeatherServiceProvider::class.java).singleton()
     }
 }

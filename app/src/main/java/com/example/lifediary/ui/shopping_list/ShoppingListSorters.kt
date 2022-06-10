@@ -1,7 +1,7 @@
 package com.example.lifediary.ui.shopping_list
 
 import com.example.lifediary.data.domain.ShoppingListItem
-import com.example.lifediary.data.domain.ShoppingListSortMethodDropDownItem
+import com.example.lifediary.data.domain.ShoppingListSortMethodDropDownItem.*
 
 sealed interface ShoppingListSorter {
 	fun sort(list: List<ShoppingListItem>): List<ShoppingListItem>
@@ -10,9 +10,9 @@ sealed interface ShoppingListSorter {
 		companion object {
 			fun getInstance(sortMethodId: Int?): ShoppingListSorter {
 				return when(sortMethodId) {
-					ShoppingListSortMethodDropDownItem.ALPHABETICALLY.id -> ShoppingListSorterAlphabetically
-					ShoppingListSortMethodDropDownItem.IMPORTANT_FIRST.id -> ShoppingListSorterImportantFirst
-					ShoppingListSortMethodDropDownItem.CROSSED_OUT_LAST.id -> ShoppingListSorterCrossedOutLast
+					ALPHABETICALLY.id -> ShoppingListSorterAlphabetically
+					IMPORTANT_FIRST.id -> ShoppingListSorterImportantFirst
+					CROSSED_OUT_LAST.id -> ShoppingListSorterCrossedOutLast
 					else -> ShoppingListSorterByCreationDate
 				}
 			}

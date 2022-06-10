@@ -8,17 +8,17 @@ import com.example.lifediary.utils.dates.getNowDayNumber
 import com.example.lifediary.utils.dates.getNowMonthNumber
 import java.util.*
 
-fun Int.createStringWithPlusOrMinusSign(): String {
-	if(this < 0 || this == 0) return toString()
-	return String.format("+%d", this)
-}
-
 fun <T : DbEntity<R>, R> LiveData<List<T>>.toDomain(): LiveData<List<R>> {
 	return map { entityList -> entityList.toDomain() }
 }
 
 private fun <T : DbEntity<R>, R> List<T>.toDomain(): List<R> {
 	return map { entity -> entity.toDomain() }
+}
+
+fun Int.createStringWithPlusOrMinusSign(): String {
+	if(this < 0 || this == 0) return toString()
+	return "+$this"
 }
 
 fun List<String>.isAllItemsBlank(): Boolean {
@@ -29,7 +29,9 @@ fun List<String>.isAllItemsBlank(): Boolean {
 fun List<MemorableDate>.sortBasedToday(): List<MemorableDate> {
 	if(isEmpty()) return this
 
-	val nearestDateInThisMonth = find { it.monthNumber == getNowMonthNumber() && it.dayNumber >= getNowDayNumber() }
+	val nearestDateInThisMonth = find {
+		it.monthNumber == getNowMonthNumber() && it.dayNumber >= getNowDayNumber()
+	}
 	nearestDateInThisMonth?.let { return splitAndSwap(indexOf(it)) }
 
 	val nearestDate = find { it.monthNumber > getNowMonthNumber() }

@@ -17,7 +17,9 @@ class CalendarEventListAdapter : ListAdapter<CalendarEvent, CalendarEventListAda
         holder.bind(item)
     }
 
-    class CalendarEventListItemViewModel(val event: CalendarEvent)
+    class CalendarEventListItemViewModel(event: CalendarEvent) {
+        val eventName = event.name
+    }
 
     class ViewHolder private constructor(
         private val binding: CalendarEventListItemBinding

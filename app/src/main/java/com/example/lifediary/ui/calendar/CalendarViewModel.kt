@@ -47,10 +47,14 @@ class CalendarViewModel : BaseViewModel() {
 			CalendarDaysData(
 				daysWithNotesOrToDoList,
 				memorableDates,
-				if(isSectionForWomanVisible.value == true) menstruationPeriodList else listOf(),
-				if(isSectionForWomanVisible.value == true) nextMenstruationPeriod else null
+				if(isSectionForWomanVisible()) menstruationPeriodList else listOf(),
+				if(isSectionForWomanVisible()) nextMenstruationPeriod else null
 			)
 		}
+	}
+
+	private fun isSectionForWomanVisible(): Boolean {
+		return isSectionForWomanVisible.value == true
 	}
 
 	private fun getDaysWithNotesOrToDoList(): LiveData<List<Day>> {

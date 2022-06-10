@@ -154,9 +154,7 @@ class CalendarDateFragment : BaseFragment() {
             val toDoListItem = event.getData() ?: return@observe
             scheduleNotification(
                 toDoListItem,
-                { time ->
-                    viewModel.onToDoListItemNotificationScheduled(toDoListItem, time)
-                },
+                { time -> viewModel.onToDoListItemNotificationScheduled(toDoListItem, time) },
                 { viewModel.onSchedulingToDoListItemNotificationCancelled(toDoListItem) }
             )
         }

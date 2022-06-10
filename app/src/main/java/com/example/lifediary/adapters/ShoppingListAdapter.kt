@@ -30,7 +30,8 @@ class ShoppingListAdapter(
         )
     }
 
-    class ShoppingListItemViewModel(val shoppingListItem: ShoppingListItem) {
+    class ShoppingListItemViewModel(shoppingListItem: ShoppingListItem) {
+        val shoppingListItemText = shoppingListItem.text
         val isChecked = shoppingListItem.isCrossedOut
     }
 

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import javax.inject.Inject
 
-class MainViewModel(private val state: SavedStateHandle) : BaseViewModel() {
+class MainViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var weatherRepository: WeatherRepository
     @Inject lateinit var settingsRepository: SettingsRepository

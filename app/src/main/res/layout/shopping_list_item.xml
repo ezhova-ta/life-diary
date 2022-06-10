@@ -53,7 +53,7 @@
             android:gravity="start|center_vertical"
             android:textColor="@{viewModel.checked ? @color/app_medium_gray : @color/app_default_text_color}"
             tools:text="Масло сливочное 2шт."
-            android:text="@{viewModel.shoppingListItem.text}" />
+            android:text="@{viewModel.shoppingListItemText}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/controls"

@@ -30,7 +30,8 @@ class ToDoListAdapter(
 		)
 	}
 
-	class ToDoListItemViewModel(val toDoListItem: ToDoListItem) {
+	class ToDoListItemViewModel(toDoListItem: ToDoListItem) {
+		val toDoListItemText = toDoListItem.text
 		val isChecked = toDoListItem.isDone
 		val notificationEnabled = toDoListItem.notificationEnabled
 		val notificationTime = toDoListItem.notificationTime.toTimeString()

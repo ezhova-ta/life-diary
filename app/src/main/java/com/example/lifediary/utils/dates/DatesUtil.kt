@@ -7,11 +7,9 @@ import java.util.*
 fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {
     return if(year == null) {
         val thisYear = CalendarBuilder().build().getYear()
-        val day = Day(dayNumber, monthNumber, thisYear)
-        day.toDateString(false)
+        Day(dayNumber, monthNumber, thisYear).toDateString(false)
     } else {
-        val day = Day(dayNumber, monthNumber, year)
-        day.toDateString()
+        Day(dayNumber, monthNumber, year).toDateString()
     }
 }
 

@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{viewModel.memorableDateListItem.name}"
+                android:text="@{viewModel.memorableDateName}"
                 toos:text="День рождения маман" />
 
             <TextView

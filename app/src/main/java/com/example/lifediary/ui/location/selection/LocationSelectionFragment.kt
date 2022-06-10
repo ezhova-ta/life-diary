@@ -30,7 +30,11 @@ class LocationSelectionFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLocationSelectionBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentLocationSelectionBinding.inflate(
+            layoutInflater,
+            container,
+            false
+        )
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         setupSearchLocationInput()

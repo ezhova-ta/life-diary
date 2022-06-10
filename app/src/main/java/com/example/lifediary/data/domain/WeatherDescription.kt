@@ -7,5 +7,5 @@ data class WeatherDescription(
     val description: String,
     val icon: String
 ) {
-	val iconUrl = String.format("%s%s@2x.png", BuildConfig.WEATHER_API_ICON_URL, icon)
+	val iconUrl = "${BuildConfig.WEATHER_API_ICON_URL}$icon@2x.png"
 }

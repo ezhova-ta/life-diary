@@ -60,7 +60,7 @@
                 android:gravity="start|center_vertical"
                 android:textColor="@{viewModel.checked ? @color/app_green : @color/app_default_text_color}"
                 tools:text="Погладить котика"
-                android:text="@{viewModel.toDoListItem.text}" />
+                android:text="@{viewModel.toDoListItemText}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton

@@ -17,7 +17,8 @@ fun CalendarDay.isToday(): Boolean {
 }
 
 fun CalendarDay.isSameDayInYear(memorableDate: MemorableDate): Boolean {
-	return date.dayOfMonth == memorableDate.dayNumber && date.monthValue == memorableDate.monthNumber
+	return date.dayOfMonth == memorableDate.dayNumber &&
+		   date.monthValue == memorableDate.monthNumber
 }
 
 fun CalendarDay.isWithinInterval(start: Calendar, end: Calendar): Boolean {

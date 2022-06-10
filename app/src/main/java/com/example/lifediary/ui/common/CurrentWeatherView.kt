@@ -30,9 +30,7 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
             if(value == null) {
                 binding.weatherIcon.setImageURI(null)
             } else {
-                Glide.with(context)
-                    .load(value)
-                    .into(binding.weatherIcon)
+                Glide.with(context).load(value).into(binding.weatherIcon)
             }
         }
 
@@ -40,11 +38,13 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
         set(value) {
             field = value
 
-            if(value == null) {
-                binding.descriptionView.isVisible = false
-            } else {
-                binding.descriptionView.text = value
-                binding.descriptionView.isVisible = true
+            with(binding.descriptionView) {
+                if(value == null) {
+                    isVisible = false
+                } else {
+                    text = value
+                    isVisible = true
+                }
             }
         }
 
@@ -52,11 +52,13 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
         set(value) {
             field = value
 
-            if(value == null) {
-                binding.feelsLikeView.isVisible = false
-            } else {
-                binding.feelsLikeView.isVisible = true
-                binding.feelsLikeView.text = value
+            with(binding.feelsLikeView) {
+                if (value == null) {
+                    isVisible = false
+                } else {
+                    isVisible = true
+                    text = value
+                }
             }
         }
 
@@ -64,11 +66,13 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
         set(value) {
             field = value
 
-            if(value == null) {
-                binding.windView.isVisible = false
-            } else {
-                binding.windView.isVisible = true
-                binding.windView.text = value
+            with(binding.windView) {
+                if (value == null) {
+                    isVisible = false
+                } else {
+                    isVisible = true
+                    text = value
+                }
             }
         }
 
@@ -76,11 +80,13 @@ class CurrentWeatherView(context: Context, attrs: AttributeSet) : FrameLayout(co
         set(value) {
             field = value
 
-            if(value == null) {
-                binding.humidityView.isVisible = false
-            } else {
-                binding.humidityView.isVisible = true
-                binding.humidityView.text = value
+            with(binding.humidityView) {
+                if (value == null) {
+                    isVisible = false
+                } else {
+                    isVisible = true
+                    text = value
+                }
             }
         }
 

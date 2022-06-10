@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:gravity="center_vertical"
-            android:text="@{viewModel.event.name}"
+            android:text="@{viewModel.eventName}"
             toos:text="День рождения маман"
             app:drawableStartCompat="@drawable/icon_speaker_blue"
             android:drawablePadding="4dp" />
