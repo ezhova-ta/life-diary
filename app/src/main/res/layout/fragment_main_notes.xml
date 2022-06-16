@@ -43,11 +43,21 @@
             app:booleanVisibility="@{!viewModel.isNotesVisible()}"
             app:drawableBottomCompat="@drawable/icon_sentiment_dissatisfied_gray" />
 
+        <Spinner
+            android:id="@+id/sortMethodDropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/clearAllButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:spinnerMode="dropdown"
+            app:booleanVisibility="@{viewModel.isNoteListSortMethodDropDownVisible()}" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/noteListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/addNoteButton"
+            app:layout_constraintTop_toBottomOf="@id/sortMethodDropDown"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

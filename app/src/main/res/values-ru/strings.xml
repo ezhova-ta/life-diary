@@ -114,4 +114,6 @@
     <string name="important_first">Сначала важные</string>
     <string name="bought_last">Купленные в конце</string>
     <string name="completed_last">Выполненные в конце</string>
+    <string name="newest_first">Сначала новые</string>
+    <string name="oldest_first">Сначала старые</string>
 </resources>

@@ -14,6 +14,10 @@ class MainNotesRepository @Inject constructor(
         return localDataSource.getNotes()
     }
 
+    fun getMainNoteListSortMethodId(): LiveData<Int?> {
+        return localDataSource.getMainNoteListSortMethodId()
+    }
+
     suspend fun getNote(id: Long): MainNote? {
         return localDataSource.getNote(id)
     }
@@ -32,5 +36,9 @@ class MainNotesRepository @Inject constructor(
 
     suspend fun deleteNote(id: Long) {
         localDataSource.deleteNote(id)
+    }
+
+    suspend fun saveMainNoteListSortMethodId(id: Int) {
+        localDataSource.setMainNoteListSortMethodId(id)
     }
 }

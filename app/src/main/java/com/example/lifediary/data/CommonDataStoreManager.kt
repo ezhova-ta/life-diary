@@ -30,6 +30,10 @@ class CommonDataStoreManager @Inject constructor(private val context: Context) {
 		preferences[TO_DO_LIST_SORT_METHOD_ID]
 	}
 
+	val mainNoteListSortMethodId = commonDataStore.data.map { preferences ->
+		preferences[MAIN_NOTE_LIST_SORT_METHOD_ID]
+	}
+
 	companion object {
 		val SHOPPING_LIST_SORT_METHOD_ID = intPreferencesKey(
 			"com.example.lifediary.data.SHOPPING_LIST_SORT_METHOD_ID"
@@ -37,6 +41,10 @@ class CommonDataStoreManager @Inject constructor(private val context: Context) {
 
 		val TO_DO_LIST_SORT_METHOD_ID = intPreferencesKey(
 			"com.example.lifediary.data.TO_DO_LIST_SORT_METHOD_ID"
+		)
+
+		val MAIN_NOTE_LIST_SORT_METHOD_ID = intPreferencesKey(
+			"com.example.lifediary.data.MAIN_NOTE_LIST_SORT_METHOD_ID"
 		)
 	}
 
@@ -49,6 +57,12 @@ class CommonDataStoreManager @Inject constructor(private val context: Context) {
 	suspend fun setToDoListSortMethodId(id: Int) {
 		commonDataStore.edit { preferences ->
 			preferences[TO_DO_LIST_SORT_METHOD_ID] = id
+		}
+	}
+
+	suspend fun setMainNoteListSortMethodId(id: Int) {
+		commonDataStore.edit { preferences ->
+			preferences[MAIN_NOTE_LIST_SORT_METHOD_ID] = id
 		}
 	}
 }

@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.adapters.ListItemClickListener
 import com.example.lifediary.adapters.MainNoteListAdapter
+import com.example.lifediary.data.domain.MainNoteListSortMethodDropDownItem
 import com.example.lifediary.databinding.FragmentMainNotesBinding
 import com.example.lifediary.ui.BaseFragment
 
@@ -38,6 +41,7 @@ class MainNotesFragment : BaseFragment() {
     private fun setupViews() {
         setupNoteListView()
         setupClearNoteListConfirmationDialog()
+        setupSortMethodDropDown()
     }
 
     private fun setupNoteListView() {
@@ -64,6 +68,25 @@ class MainNotesFragment : BaseFragment() {
             onConfirmed = viewModel::onClearNoteListConfirmed,
             onCancelled = viewModel::onClearNoteListCancelled
         )
+    }
+
+    private fun setupSortMethodDropDown() {
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.sort_method_spinner_item,
+            MainNoteListSortMethodDropDownItem.getAllStrings(requireContext())
+        )
+
+        binding.sortMethodDropDown.adapter = adapter
+
+        binding.sortMethodDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val sortMethod = MainNoteListSortMethodDropDownItem.getFromPosition(position)
+                viewModel.onSortMethodSelected(sortMethod)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 
     override fun onDestroyView() {

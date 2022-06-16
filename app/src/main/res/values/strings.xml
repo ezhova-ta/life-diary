@@ -115,4 +115,6 @@
     <string name="important_first">Important first</string>
     <string name="bought_last">Bought last</string>
     <string name="completed_last">Completed last</string>
+    <string name="newest_first">Newest first</string>
+    <string name="oldest_first">Oldest first</string>
 </resources>
