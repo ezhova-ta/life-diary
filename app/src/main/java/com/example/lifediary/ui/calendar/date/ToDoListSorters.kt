@@ -3,10 +3,9 @@ package com.example.lifediary.ui.calendar.date
 import com.example.lifediary.data.domain.ToDoListItem
 import com.example.lifediary.data.domain.ToDoListSortMethodDropDownItem.ALPHABETICALLY
 import com.example.lifediary.data.domain.ToDoListSortMethodDropDownItem.COMPLETED_LAST
+import com.example.lifediary.ui.common.ListSorter
 
-sealed interface ToDoListSorter {
-	fun sort(list: List<ToDoListItem>): List<ToDoListItem>
-
+sealed interface ToDoListSorter : ListSorter<ToDoListItem> {
 	class Factory {
 		companion object {
 			fun getInstance(sortMethodId: Int?): ToDoListSorter {

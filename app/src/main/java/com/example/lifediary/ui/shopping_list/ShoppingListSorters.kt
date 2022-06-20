@@ -2,10 +2,9 @@ package com.example.lifediary.ui.shopping_list
 
 import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.data.domain.ShoppingListSortMethodDropDownItem.*
+import com.example.lifediary.ui.common.ListSorter
 
-sealed interface ShoppingListSorter {
-	fun sort(list: List<ShoppingListItem>): List<ShoppingListItem>
-
+sealed interface ShoppingListSorter : ListSorter<ShoppingListItem> {
 	class Factory {
 		companion object {
 			fun getInstance(sortMethodId: Int?): ShoppingListSorter {

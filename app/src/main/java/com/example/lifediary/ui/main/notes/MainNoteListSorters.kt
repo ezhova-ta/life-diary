@@ -2,10 +2,9 @@ package com.example.lifediary.ui.main.notes
 
 import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.data.domain.MainNoteListSortMethodDropDownItem.OLDEST_FIRST
+import com.example.lifediary.ui.common.ListSorter
 
-sealed interface MainNoteListSorter {
-	fun sort(list: List<MainNote>): List<MainNote>
-
+sealed interface MainNoteListSorter : ListSorter<MainNote> {
 	class Factory {
 		companion object {
 			fun getInstance(sortMethodId: Int?): MainNoteListSorter {
