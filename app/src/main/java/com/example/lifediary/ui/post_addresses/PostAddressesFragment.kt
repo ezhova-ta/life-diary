@@ -1,9 +1,11 @@
 package com.example.lifediary.ui.post_addresses
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.lifediary.R
@@ -35,10 +37,16 @@ class PostAddressesFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModel.onAttach()
+    }
+
     private fun setupViews() {
         setupPostAddressListRecycler()
         setupClearPostAddressesConfirmationDialog()
         setupDeletePostAddressConfirmationDialog()
+        setupPostAddressSearchView()
     }
 
     private fun setupPostAddressListRecycler() {
@@ -83,6 +91,22 @@ class PostAddressesFragment : BaseFragment() {
             onConfirmed = { viewModel.onDeletePostAddressConfirmed(addressId) },
             onCancelled = viewModel::onDeletePostAddressCancelled
         )
+    }
+
+    private fun setupPostAddressSearchView() {
+        binding.searchPostAddressView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query ?: return false
+                viewModel.onPostAddressSearchQuerySubmit(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText ?: return false
+                viewModel.onPostAddressSearchQueryTextChanged(newText)
+                return true
+            }
+        })
     }
 
     override fun onDestroyView() {

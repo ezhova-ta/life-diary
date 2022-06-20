@@ -11,6 +11,7 @@ import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.Text
 import com.example.lifediary.utils.isAllItemsBlank
+import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +22,15 @@ import javax.inject.Inject
 class PostAddressesViewModel: BaseViewModel() {
     @Inject lateinit var router: Router
     @Inject lateinit var postAddressRepository: PostAddressRepository
-    val addresses by lazy { postAddressRepository.getAllAddresses() }
+    private val postAddressListSearchQuery = MutableLiveData("")
+    val addresses by lazy { getFilteredPostAddressList() }
     val isAddressListVisible by lazy { addresses.map { it.isNotEmpty() } }
+    val isEmptyAddressListTitleVisible by lazy {
+        postAddressRepository.getAllAddresses().map { it.isEmpty() }
+    }
+    val isPostAddressSearchViewVisible by lazy {
+        postAddressRepository.getAllAddresses().map { it.isNotEmpty() }
+    }
 
     private val _isAddButtonVisible = MutableLiveData<Boolean>()
     val isAddButtonVisible: LiveData<Boolean>
@@ -72,6 +80,22 @@ class PostAddressesViewModel: BaseViewModel() {
     override fun bindScope() {
         val postAddressesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.POST_ADDRESSES_SCOPE)
         Toothpick.inject(this, postAddressesScope)
+    }
+
+    private fun getFilteredPostAddressList(): LiveData<List<PostAddress>> {
+        return TwoSourceLiveData<List<PostAddress>, String?, List<PostAddress>>(
+            postAddressRepository.getAllAddresses(),
+            postAddressListSearchQuery
+        ) { originalList, searchQuery ->
+            originalList ?: return@TwoSourceLiveData emptyList()
+            searchQuery ?: return@TwoSourceLiveData originalList
+            PostAddressListItemSearcher().search(originalList, searchQuery)
+        }
+    }
+
+    // TODO Correct fun name (!)
+    fun onAttach() {
+        postAddressListSearchQuery.value = ""
     }
 
     fun onDeletePostAddressClick(address: PostAddress) {
@@ -254,6 +278,14 @@ class PostAddressesViewModel: BaseViewModel() {
 
     fun onClearPostAddressesCancelled() {
         _showClearPostAddressesConfirmationDialog.value = false
+    }
+
+    fun onPostAddressSearchQuerySubmit(query: String?) {
+        postAddressListSearchQuery.value = query
+    }
+
+    fun onPostAddressSearchQueryTextChanged(newText: String?) {
+        postAddressListSearchQuery.value = newText
     }
 
     override fun onCleared() {
