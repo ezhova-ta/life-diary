@@ -25,6 +25,7 @@ class MainNotesViewModel : BaseViewModel() {
 	val noteList by lazy { getSortedMainNoteList() }
 	val isNotesVisible by lazy { noteList.map { it.isNotEmpty() } }
 	val isNoteListSortMethodDropDownVisible by lazy { isNotesVisible }
+	val noteListSortMethodId by lazy { notesRepository.getMainNoteListSortMethodId() }
 
 	private val _showClearNoteListConfirmationDialog = MutableLiveData(false)
 	val showClearNoteListConfirmationDialog: LiveData<Boolean>

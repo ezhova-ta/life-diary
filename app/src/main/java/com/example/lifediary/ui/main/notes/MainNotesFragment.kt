@@ -87,6 +87,12 @@ class MainNotesFragment : BaseFragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+
+        viewModel.noteListSortMethodId.observe(viewLifecycleOwner) { sortMethodId ->
+            sortMethodId ?: return@observe
+            val position = MainNoteListSortMethodDropDownItem.getPositionFromId(sortMethodId)
+            binding.sortMethodDropDown.setSelection(position)
+        }
     }
 
     override fun onDestroyView() {
