@@ -31,7 +31,7 @@ class ShoppingListRepository @Inject constructor(
         localDataSource.inverseShoppingListItemPriority(id)
     }
 
-    suspend fun inverseListItemCrossedOut(id: Long) {
+    suspend fun inverseShoppingListItemCrossedOut(id: Long) {
         localDataSource.inverseListItemCrossedOut(id)
     }
 

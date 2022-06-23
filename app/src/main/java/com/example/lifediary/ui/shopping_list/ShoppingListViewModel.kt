@@ -101,7 +101,7 @@ class ShoppingListViewModel: BaseViewModel() {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                shoppingListRepository.inverseListItemCrossedOut(itemId)
+                shoppingListRepository.inverseShoppingListItemCrossedOut(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
