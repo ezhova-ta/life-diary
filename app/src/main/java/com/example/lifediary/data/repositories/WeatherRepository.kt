@@ -22,7 +22,7 @@ class WeatherRepository @Inject constructor(
         return localDataSource.getLocationLiveData()
     }
 
-    fun getLocation(): Location? {
+    suspend fun getLocation(): Location? {
         return localDataSource.getLocation()
     }
 

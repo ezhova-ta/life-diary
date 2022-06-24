@@ -2,12 +2,17 @@ package com.example.lifediary.ui.calendar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.example.lifediary.data.repositories.*
-import com.example.lifediary.di.DiScopes
-import com.example.lifediary.navigation.Screens
-import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.CalendarDaysData
 import com.example.lifediary.data.domain.Day
+import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.calendar.GetAllToDoListsUseCase
+import com.example.lifediary.domain.usecases.calendar.GetDateNotesUseCase
+import com.example.lifediary.domain.usecases.memorable_dates.GetMemorableDatesUseCase
+import com.example.lifediary.domain.usecases.settings.GetWomanSectionEnabledUseCase
+import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPeriodsUseCase
+import com.example.lifediary.domain.usecases.woman_section.GetEstimatedNextMenstruationPeriodUseCase
+import com.example.lifediary.navigation.Screens
+import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.livedata.FourSourceLiveData
 import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
@@ -16,13 +21,15 @@ import javax.inject.Inject
 
 class CalendarViewModel : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var noteRepository: DateNoteRepository
-	@Inject lateinit var doToDoListRepository: ToDoListRepository
-	@Inject lateinit var memorableDatesRepository: MemorableDatesRepository
-	@Inject lateinit var womanSectionRepository: WomanSectionRepository
-	@Inject lateinit var settingsRepository: SettingsRepository
+	@Inject lateinit var getDateNotesUseCase: GetDateNotesUseCase
+	@Inject lateinit var getAllToDoListsUseCase: GetAllToDoListsUseCase
+	@Inject lateinit var getMemorableDatesUseCase: GetMemorableDatesUseCase
+	@Inject lateinit var getAllMenstruationPeriodsUseCase: GetAllMenstruationPeriodsUseCase
+	@Inject lateinit var getEstimatedNextMenstruationPeriodUseCase: GetEstimatedNextMenstruationPeriodUseCase
+	@Inject lateinit var getWomanSectionEnabledUseCase: GetWomanSectionEnabledUseCase
+
 	val calendarDaysData by lazy { createCalendarDaysData() }
-	val isSectionForWomanVisible by lazy { settingsRepository.getWomanSectionEnabled() }
+	val isSectionForWomanVisible by lazy { getWomanSectionEnabledUseCase() }
 
 	init {
 		bindScope()
@@ -33,12 +40,13 @@ class CalendarViewModel : BaseViewModel() {
 		Toothpick.inject(this, calendarScope)
 	}
 
+	// TODO Move to UseCase ?
 	private fun createCalendarDaysData(): LiveData<CalendarDaysData?> {
 		return FourSourceLiveData(
 			getDaysWithNotesOrToDoList(),
-			memorableDatesRepository.getDates(),
-			womanSectionRepository.getAllMenstruationPeriods(),
-			womanSectionRepository.getEstimatedNextMenstruationPeriod()
+			getMemorableDatesUseCase(),
+			getAllMenstruationPeriodsUseCase(),
+			getEstimatedNextMenstruationPeriodUseCase()
 		) { daysWithNotesOrToDoList, memorableDates, menstruationPeriodList, nextMenstruationPeriod ->
 			daysWithNotesOrToDoList ?: return@FourSourceLiveData null
 			memorableDates ?: return@FourSourceLiveData null
@@ -69,7 +77,7 @@ class CalendarViewModel : BaseViewModel() {
 	}
 
 	private fun getDaysWithNote(): LiveData<List<Day>> {
-		return noteRepository.getAllNotes().map { noteList ->
+		return getDateNotesUseCase().map { noteList ->
 			noteList.map { note ->
 				note.day
 			}
@@ -77,7 +85,7 @@ class CalendarViewModel : BaseViewModel() {
 	}
 
 	private fun getDaysWithToDoList():  LiveData<List<Day>> {
-		return doToDoListRepository.getAllToDoLists().map { toDoList ->
+		return getAllToDoListsUseCase().map { toDoList ->
 			toDoList.map { toDoListItem ->
 				toDoListItem.day
 			}

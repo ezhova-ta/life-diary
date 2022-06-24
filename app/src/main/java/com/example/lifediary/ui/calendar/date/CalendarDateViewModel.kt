@@ -3,44 +3,61 @@ package com.example.lifediary.ui.calendar.date
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.*
-import com.example.lifediary.data.repositories.*
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.calendar.*
+import com.example.lifediary.domain.usecases.location.GetLocationUseCase
+import com.example.lifediary.domain.usecases.settings.GetWomanSectionEnabledUseCase
+import com.example.lifediary.domain.usecases.weather.GetForecastForLocationIdUseCase
+import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPeriodsUseCase
+import com.example.lifediary.domain.usecases.woman_section.GetEstimatedNextMenstruationPeriodUseCase
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.*
+import com.example.lifediary.utils.OneTimeEvent
 import com.example.lifediary.utils.dates.isSameDay
+import com.example.lifediary.utils.dates.isWithinInterval
 import com.example.lifediary.utils.dates.toDateString
 import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import toothpick.Toothpick
 import java.util.*
 import javax.inject.Inject
 
 class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var weatherRepository: WeatherRepository
-	@Inject lateinit var noteRepository: DateNoteRepository
-	@Inject lateinit var toDoListRepository: ToDoListRepository
-	@Inject lateinit var memorableDatesRepository: MemorableDatesRepository
-	@Inject lateinit var womanSectionRepository: WomanSectionRepository
-	@Inject lateinit var settingsRepository: SettingsRepository
+	@Inject lateinit var getLocationUseCase: GetLocationUseCase
+	@Inject lateinit var getForecastForLocationIdUseCase: GetForecastForLocationIdUseCase
+	@Inject lateinit var getDateNoteLiveDataUseCase: GetDateNoteLiveDataUseCase
+	@Inject lateinit var deleteDateNoteByIdUseCase: DeleteDateNoteByIdUseCase
+	@Inject lateinit var getToDoListSortMethodIdUseCase: GetToDoListSortMethodIdUseCase
+	@Inject lateinit var getSortedToDoListForDayUseCase: GetSortedToDoListForDayUseCase
+	@Inject lateinit var clearToDoListForDayUseCase: ClearToDoListForDayUseCase
+	@Inject lateinit var addToDoListItemUseCase: AddToDoListItemUseCase
+	@Inject lateinit var deleteToDoListItemByIdUseCase: DeleteToDoListItemByIdUseCase
+	@Inject lateinit var disableListItemNotificationByIdUseCase: DisableListItemNotificationByIdUseCase
+	@Inject lateinit var enableListItemNotificationByIdUseCase: EnableListItemNotificationByIdUseCase
+	@Inject lateinit var inverseListItemIsDoneByIdUseCase: InverseListItemIsDoneByIdUseCase
+	@Inject lateinit var saveToDoListSortMethodIdUseCase: SaveToDoListSortMethodIdUseCase
+	@Inject lateinit var getMemorableDatesForDayUseCase: GetMemorableDatesForDayUseCase
+	@Inject lateinit var getAllMenstruationPeriodsUseCase: GetAllMenstruationPeriodsUseCase
+	@Inject lateinit var getEstimatedNextMenstruationPeriodUseCase: GetEstimatedNextMenstruationPeriodUseCase
+	@Inject lateinit var getWomanSectionEnabledUseCase: GetWomanSectionEnabledUseCase
+
 	val title = day.toDateString()
-	val toDoList by lazy { getSortedToDoList() }
+	val toDoList by lazy { getSortedToDoListForDayUseCase(day) }
 	val isToDoListVisible by lazy { toDoList.map { it.isNotEmpty() } }
-	private val note by lazy { noteRepository.getNoteLiveData(day) }
+	private val note by lazy { getDateNoteLiveDataUseCase(day) }
 	val noteText by lazy { note.map { it?.text } }
 	val isNoteVisible by lazy { note.map { it != null } }
 	val newToDoListItemText = MutableLiveData("")
-	val memorableDates by lazy { memorableDatesRepository.getDates(day) }
+	val memorableDates by lazy { getMemorableDatesForDayUseCase(day) }
 	val isMemorableDatesVisible by lazy { memorableDates.map { it.isNotEmpty() } }
 	val isMenstruationIconVisible by lazy { getMenstruationIconVisibility() }
 	val isEstimatedMenstruationIconVisible by lazy { getEstimatedMenstruationIconVisibility() }
 	val isCalendarIconVisible by lazy { getCalendarIconVisibility() }
-	val toDoListSortMethodId by lazy { toDoListRepository.getToDoListSortMethodId() }
+	val toDoListSortMethodId by lazy { getToDoListSortMethodIdUseCase() }
 	val isDoListSortMethodDropDownVisible by lazy { toDoList.map { it.isNotEmpty() } }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
@@ -81,8 +98,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	private fun loadForecast() {
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				val locationId = weatherRepository.getLocation()?.id ?: throw NullPointerException()
-				val forecast = weatherRepository.getForecast(locationId)
+				val locationId = getLocationUseCase()?.id ?: throw NullPointerException()
+				val forecast = getForecastForLocationIdUseCase(locationId)
 				weatherForecast.postValue(forecast)
 			} catch(e: Exception) {
 				// TODO Message display temporarily removed
@@ -91,42 +108,53 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 	}
 
-	private fun getSortedToDoList(): LiveData<List<ToDoListItem>> {
-		return TwoSourceLiveData<List<ToDoListItem>, Int?, List<ToDoListItem>>(
-			toDoListRepository.getToDoList(day),
-			toDoListRepository.getToDoListSortMethodId()
-		) { originalList, sortMethodId ->
-			originalList ?: return@TwoSourceLiveData emptyList()
-			val sorter = ToDoListSorter.Factory.getInstance(sortMethodId)
-			sorter.sort(originalList)
-		}
-	}
-
 	private fun getMenstruationIconVisibility(): LiveData<Boolean> {
 		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
-			settingsRepository.getWomanSectionEnabled(),
-			womanSectionRepository.isDayOfMenstruationPeriod(day)
+			getWomanSectionEnabledUseCase(),
+			isDayOfMenstruationPeriod(day)
 		) { isWomanSectionEnabled, isDayOfMenstruationPeriod ->
 			isWomanSectionEnabled == true && isDayOfMenstruationPeriod == true
 		}
 	}
 
+	private fun isDayOfMenstruationPeriod(day: Day): LiveData<Boolean> {
+		return getAllMenstruationPeriodsUseCase().map { menstruationPeriods ->
+			menstruationPeriods.find { day.isWithinInterval(it.startDate, it.endDate) } != null
+		}
+	}
+
 	private fun getEstimatedMenstruationIconVisibility(): LiveData<Boolean> {
 		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
-			settingsRepository.getWomanSectionEnabled(),
-			womanSectionRepository.isDayOfEstimatedMenstruationPeriod(day)
+			getWomanSectionEnabledUseCase(),
+			isDayOfEstimatedMenstruationPeriod(day)
 		) { isWomanSectionEnabled, isDayOfEstimatedMenstruationPeriod ->
 			isWomanSectionEnabled == true && isDayOfEstimatedMenstruationPeriod == true
 		}
 	}
 
+	private fun isDayOfEstimatedMenstruationPeriod(day: Day): LiveData<Boolean> {
+		return getEstimatedNextMenstruationPeriodUseCase().map { menstruationPeriod ->
+			menstruationPeriod ?: return@map false
+			day.isWithinInterval(menstruationPeriod.startDate, menstruationPeriod.endDate)
+		}
+	}
+
 	private fun getCalendarIconVisibility(): LiveData<Boolean> {
 		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
-			settingsRepository.getWomanSectionEnabled(),
-			womanSectionRepository.isDayNotIncludedInMenstruationPeriod(day)
+			getWomanSectionEnabledUseCase(),
+			isDayNotIncludedInMenstruationPeriod(day)
 		) { isWomanSectionEnabled, dayNotIncludedInMenstruationPeriod ->
 			if(isWomanSectionEnabled == false) return@TwoSourceLiveData true
 			dayNotIncludedInMenstruationPeriod == true
+		}
+	}
+
+	private fun isDayNotIncludedInMenstruationPeriod(day: Day): LiveData<Boolean> {
+		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+			isDayOfMenstruationPeriod(day),
+			isDayOfEstimatedMenstruationPeriod(day)
+		) { isDayOfMenstruationPeriod, isDayOfEstimatedMenstruationPeriod ->
+			isDayOfMenstruationPeriod != true && isDayOfEstimatedMenstruationPeriod != true
 		}
 	}
 
@@ -158,7 +186,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	private fun deleteNote(noteId: Long) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				noteRepository.deleteNote(noteId)
+				deleteDateNoteByIdUseCase(noteId)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error))
 			}
@@ -195,7 +223,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	private fun clearToDoList() {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.clearToDoList(day)
+				clearToDoListForDayUseCase(day)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_clear_list))
 			}
@@ -222,7 +250,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.saveToDoListItem(item)
+				addToDoListItemUseCase(item)
 				newToDoListItemText.postValue("")
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_save))
@@ -240,7 +268,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	private fun deleteToDoListItem(itemId: Long) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.deleteToDoListItem(itemId)
+				deleteToDoListItemByIdUseCase(itemId)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.deleting_item_error))
 			}
@@ -261,7 +289,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.disableListItemNotification(itemId)
+				disableListItemNotificationByIdUseCase(itemId)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error_try_again_later))
 			}
@@ -277,7 +305,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.enableListItemNotification(itemId, time)
+				enableListItemNotificationByIdUseCase(itemId, time)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error_try_again_later))
 			}
@@ -291,7 +319,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.inverseListItemIsDone(itemId)
+				inverseListItemIsDoneByIdUseCase(itemId)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error_try_again_later))
 			}
@@ -310,7 +338,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	private fun saveToDoListSortMethod(sortMethod: ToDoListSortMethodDropDownItem) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				toDoListRepository.saveToDoListSortMethodId(sortMethod.id)
+				saveToDoListSortMethodIdUseCase(sortMethod.id)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error))
 			}

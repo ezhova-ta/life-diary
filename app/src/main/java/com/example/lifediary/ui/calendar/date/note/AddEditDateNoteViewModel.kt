@@ -3,11 +3,14 @@ package com.example.lifediary.ui.calendar.date.note
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.repositories.DateNoteRepository
-import com.example.lifediary.di.DiScopes
-import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.Day
 import com.example.lifediary.data.domain.Text
+import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.calendar.AddDateNoteByTextUseCase
+import com.example.lifediary.domain.usecases.calendar.GetDateNoteLiveDataUseCase
+import com.example.lifediary.domain.usecases.calendar.GetDateNoteUseCase
+import com.example.lifediary.domain.usecases.calendar.UpdateDateNoteUseCase
+import com.example.lifediary.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,14 +20,17 @@ import javax.inject.Inject
 
 class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var noteRepository: DateNoteRepository
-	val isAddButtonVisible by lazy { noteRepository.getNoteLiveData(day).map { it == null } }
+	@Inject lateinit var getDateNoteLiveDataUseCase: GetDateNoteLiveDataUseCase
+	@Inject lateinit var getDateNoteUseCase: GetDateNoteUseCase
+	@Inject lateinit var addDateNoteByTextUseCase: AddDateNoteByTextUseCase
+	@Inject lateinit var updateDateNoteUseCase: UpdateDateNoteUseCase
+
+	val isAddButtonVisible by lazy { getDateNoteLiveDataUseCase(day).map { it == null } }
 	val noteText = MutableLiveData("")
 	private var existingNote: DateNote? = null
 
 	private val _inputNeedsFocus = MutableLiveData(true)
-	val inputNeedsFocus: LiveData<Boolean>
-		get() = _inputNeedsFocus
+	val inputNeedsFocus: LiveData<Boolean> get() = _inputNeedsFocus
 
 	init {
 		bindScope()
@@ -39,7 +45,7 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	private fun substituteNoteTextInInput() {
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				existingNote = noteRepository.getNote(day)
+				existingNote = getDateNoteUseCase(day)
 				existingNote?.text?.let { noteText.postValue(it) }
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error))
@@ -64,10 +70,10 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 				val note = existingNote
 
 				if(note == null) {
-					noteRepository.addNote(text, day)
+					addDateNoteByTextUseCase(text, day)
 				} else {
 					note.text = text
-					noteRepository.updateNote(note)
+					updateDateNoteUseCase(note)
 				}
 
 				router.exit()

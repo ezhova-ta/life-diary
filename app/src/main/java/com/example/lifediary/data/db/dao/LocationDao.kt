@@ -7,7 +7,7 @@ import com.example.lifediary.data.db.entities.LocationEntity
 @Dao
 interface LocationDao {
     @Query("SELECT * FROM location LIMIT 1")
-    fun get(): LocationEntity?
+    suspend fun get(): LocationEntity?
 
     @Query("SELECT * FROM location LIMIT 1")
     fun getLiveData(): LiveData<LocationEntity?>

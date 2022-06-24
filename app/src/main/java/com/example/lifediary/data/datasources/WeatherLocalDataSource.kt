@@ -18,7 +18,7 @@ class WeatherLocalDataSource @Inject constructor(
         return locationDao.getLiveData().map { it?.toDomain() }
     }
 
-    fun getLocation(): Location? {
+    suspend fun getLocation(): Location? {
         return locationDao.get()?.toDomain()
     }
 

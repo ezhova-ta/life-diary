@@ -15,7 +15,7 @@ class DateNoteRepository @Inject constructor(
         return localDataSource.getNoteLiveData(day)
     }
 
-    fun getNote(day: Day): DateNote? {
+    suspend fun getNote(day: Day): DateNote? {
         return localDataSource.getNote(day)
     }
 

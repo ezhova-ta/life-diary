@@ -1,13 +1,14 @@
 package com.example.lifediary.domain.usecases.location
 
+import androidx.lifecycle.LiveData
 import com.example.lifediary.data.domain.Location
 import com.example.lifediary.data.repositories.WeatherRepository
 import javax.inject.Inject
 
-class GetLocationUseCase @Inject constructor(
+class GetLocationLiveDataUseCase @Inject constructor(
 	private val weatherRepository: WeatherRepository
 ) {
-	suspend operator fun invoke(): Location? {
-		return weatherRepository.getLocation()
+	operator fun invoke(): LiveData<Location?> {
+		return weatherRepository.getLocationLiveData()
 	}
 }
