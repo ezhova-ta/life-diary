@@ -1,8 +1,13 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.WeatherLocalDataSource
 import com.example.lifediary.data.datasources.WeatherRemoteDataSource
+import com.example.lifediary.data.repositories.mappers.LocationEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.LocationEntityMapper.toEntity
+import com.example.lifediary.data.repositories.mappers.WeatherEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.WeatherEntityMapper.toEntity
 import com.example.lifediary.domain.models.Location
 import com.example.lifediary.domain.models.Weather
 import com.example.lifediary.domain.models.WeatherForecast
@@ -20,24 +25,24 @@ class WeatherRepositoryImpl @Inject constructor(
     }
 
     override fun getLocationLiveData(): LiveData<Location?> {
-        return localDataSource.getLocationLiveData()
+        return localDataSource.getLocationLiveData().map { it?.toDomain() }
     }
 
     override suspend fun getLocation(): Location? {
-        return localDataSource.getLocation()
+        return localDataSource.getLocation()?.toDomain()
     }
 
     override suspend fun saveLocation(location: Location) {
-        localDataSource.saveLocation(location)
+        localDataSource.saveLocation(location.toEntity())
     }
 
     override fun getCurrentWeather(): LiveData<Weather?> {
-        return localDataSource.getCurrentWeather()
+        return localDataSource.getCurrentWeather().map { it?.toDomain() }
     }
 
     override suspend fun updateCurrentWeather(locationId: Long) {
         val currentWeather = remoteDataSource.getCurrentWeather(locationId)
-        localDataSource.saveCurrentWeather(currentWeather)
+        localDataSource.saveCurrentWeather(currentWeather.toEntity())
     }
 
     override suspend fun getForecast(locationId: Long): WeatherForecast {

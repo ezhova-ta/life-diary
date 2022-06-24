@@ -2,7 +2,6 @@ package com.example.lifediary.data.db.entities
 
 import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.domain.models.PostAddress
 import java.util.*
 
 @Entity(
@@ -28,34 +27,4 @@ data class PostAddressEntity(
     val edgeRegion: String,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
-) : DbEntity<PostAddress>() {
-    companion object {
-        fun fromDomain(address: PostAddress): PostAddressEntity {
-            return PostAddressEntity(
-                id = address.id,
-                name = address.name,
-                street = address.street,
-                buildingNumber = address.buildingNumber,
-                apartmentNumber = address.apartmentNumber,
-                city = address.city,
-                postcode = address.postcode,
-                edgeRegion = address.edgeRegion,
-                createdAt = address.createdAt
-            )
-        }
-    }
-
-    override fun toDomain(): PostAddress {
-        return PostAddress(
-            id = id,
-            name = name,
-            street = street,
-            buildingNumber = buildingNumber,
-            apartmentNumber = apartmentNumber,
-            city = city,
-            postcode = postcode,
-            edgeRegion = edgeRegion,
-            createdAt = createdAt
-        )
-    }
-}
+)

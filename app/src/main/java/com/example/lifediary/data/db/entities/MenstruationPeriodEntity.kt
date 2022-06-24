@@ -2,7 +2,6 @@ package com.example.lifediary.data.db.entities
 
 import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.domain.models.MenstruationPeriod
 import java.util.*
 
 @Entity(
@@ -17,22 +16,4 @@ data class MenstruationPeriodEntity(
     var startDate: Calendar,
     @ColumnInfo(name = "end_date")
     var endDate: Calendar
-) : DbEntity<MenstruationPeriod>() {
-    companion object {
-        fun fromDomain(menstruationPeriod: MenstruationPeriod): MenstruationPeriodEntity {
-            return MenstruationPeriodEntity(
-                id = menstruationPeriod.id,
-                startDate = menstruationPeriod.startDate,
-                endDate = menstruationPeriod.endDate
-            )
-        }
-    }
-
-    override fun toDomain(): MenstruationPeriod {
-        return MenstruationPeriod(
-            id = id,
-            startDate = startDate,
-            endDate = endDate
-        )
-    }
-}
+)

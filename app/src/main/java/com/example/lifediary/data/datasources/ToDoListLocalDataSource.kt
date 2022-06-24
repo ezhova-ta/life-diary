@@ -5,9 +5,6 @@ import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.ToDoListDao
 import com.example.lifediary.data.db.entities.ToDoListItemEntity
-import com.example.lifediary.domain.models.ToDoListItem
-import com.example.lifediary.domain.models.Day
-import com.example.lifediary.presentation.utils.toDomain
 import java.util.*
 import javax.inject.Inject
 
@@ -15,28 +12,28 @@ class ToDoListLocalDataSource @Inject constructor(
 	private val dao: ToDoListDao,
 	private val commonDataStoreManager: CommonDataStoreManager
 ) {
-	fun getToDoList(day: Day): LiveData<List<ToDoListItem>> {
-		return dao.getAll(day.dayNumber, day.monthNumber, day.year).toDomain()
+	fun getToDoList(dayNumber: Int, monthNumber: Int, year: Int): LiveData<List<ToDoListItemEntity>> {
+		return dao.getAll(dayNumber, monthNumber, year)
 	}
 
-	fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
-		return dao.getAll().toDomain()
+	fun getAllToDoLists(): LiveData<List<ToDoListItemEntity>> {
+		return dao.getAll()
 	}
 
 	fun getToDoListSortMethodId(): LiveData<Int?> {
 		return commonDataStoreManager.toDoListSortMethodId.asLiveData()
 	}
 
-	suspend fun getToDoListItem(id: Long) : ToDoListItem? {
-		return dao.get(id)?.toDomain()
+	suspend fun getToDoListItem(id: Long) : ToDoListItemEntity? {
+		return dao.get(id)
 	}
 
-	suspend fun addToDoListItem(item: ToDoListItem) {
-		dao.insert(ToDoListItemEntity.fromDomain(item))
+	suspend fun addToDoListItem(item: ToDoListItemEntity) {
+		dao.insert(item)
 	}
 
-	suspend fun clearToDoList(day: Day) {
-		dao.deleteAll(day.dayNumber, day.monthNumber, day.year)
+	suspend fun clearToDoList(dayNumber: Int, monthNumber: Int, year: Int) {
+		dao.deleteAll(dayNumber, monthNumber, year)
 	}
 
 	suspend fun inverseListItemIsDone(id: Long) {
@@ -59,8 +56,8 @@ class ToDoListLocalDataSource @Inject constructor(
 		dao.update(item)
 	}
 
-	suspend fun disableNotificationsFor(day: Day) {
-		dao.disableNotificationsFor(day.dayNumber, day.monthNumber, day.year)
+	suspend fun disableNotificationsFor(dayNumber: Int, monthNumber: Int, year: Int) {
+		dao.disableNotificationsFor(dayNumber, monthNumber, year)
 	}
 
 	suspend fun deleteToDoListItem(id: Long) {

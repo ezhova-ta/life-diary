@@ -5,16 +5,14 @@ import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.WomanSectionDataStoreManager
 import com.example.lifediary.data.db.dao.MenstruationPeriodDao
 import com.example.lifediary.data.db.entities.MenstruationPeriodEntity
-import com.example.lifediary.domain.models.MenstruationPeriod
-import com.example.lifediary.presentation.utils.toDomain
 import javax.inject.Inject
 
 class WomanSectionLocalDataSource @Inject constructor(
     private val dao: MenstruationPeriodDao,
     private val womanSectionDataStoreManager: WomanSectionDataStoreManager
 ) {
-    fun getAllMenstruationPeriods(): LiveData<List<MenstruationPeriod>> {
-        return dao.getAll().toDomain()
+    fun getAllMenstruationPeriods(): LiveData<List<MenstruationPeriodEntity>> {
+        return dao.getAll()
     }
 
     fun getDurationOfMenstrualCycle(): LiveData<Int> {
@@ -25,8 +23,8 @@ class WomanSectionLocalDataSource @Inject constructor(
         return womanSectionDataStoreManager.durationOfMenstruationPeriod.asLiveData()
     }
 
-    suspend fun addMenstruationPeriod(period: MenstruationPeriod) {
-        dao.insert(MenstruationPeriodEntity.fromDomain(period))
+    suspend fun addMenstruationPeriod(period: MenstruationPeriodEntity) {
+        dao.insert(period)
     }
 
     suspend fun deleteMenstruationPeriod(id: Long) {

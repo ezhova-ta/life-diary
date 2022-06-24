@@ -1,9 +1,13 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.ToDoListLocalDataSource
-import com.example.lifediary.domain.models.ToDoListItem
+import com.example.lifediary.data.db.entities.ToDoListItemEntity
+import com.example.lifediary.data.repositories.mappers.ToDoListItemEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.ToDoListItemEntityMapper.toEntity
 import com.example.lifediary.domain.models.Day
+import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.domain.repositories.ToDoListRepository
 import java.util.*
 import javax.inject.Inject
@@ -14,11 +18,19 @@ class ToDoListRepositoryImpl @Inject constructor(
 	private val localDataSource: ToDoListLocalDataSource
 ) : ToDoListRepository {
 	override fun getToDoList(day: Day): LiveData<List<ToDoListItem>> {
-		return localDataSource.getToDoList(day)
+		return localDataSource.getToDoList(day.dayNumber, day.monthNumber, day.year).toDomain()
 	}
 
 	override fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
-		return localDataSource.getAllToDoLists()
+		return localDataSource.getAllToDoLists().toDomain()
+	}
+
+	private fun LiveData<List<ToDoListItemEntity>>.toDomain(): LiveData<List<ToDoListItem>> {
+		return map { entityList -> entityList.toDomain() }
+	}
+
+	private fun List<ToDoListItemEntity>.toDomain(): List<ToDoListItem> {
+		return map { entity -> entity.toDomain() }
 	}
 
 	override fun getToDoListSortMethodId(): LiveData<Int?> {
@@ -26,16 +38,16 @@ class ToDoListRepositoryImpl @Inject constructor(
 	}
 
 	override suspend fun getToDoListItem(id: Long) : ToDoListItem? {
-		return localDataSource.getToDoListItem(id)
+		return localDataSource.getToDoListItem(id)?.toDomain()
 	}
 
 	override suspend fun addToDoListItem(item: ToDoListItem) {
-		localDataSource.addToDoListItem(item)
+		localDataSource.addToDoListItem(item.toEntity())
 	}
 
 	override suspend fun clearToDoList(day: Day) {
-		localDataSource.disableNotificationsFor(day)
-		localDataSource.clearToDoList(day)
+		localDataSource.disableNotificationsFor(day.dayNumber, day.monthNumber, day.year)
+		localDataSource.clearToDoList(day.dayNumber, day.monthNumber, day.year)
 	}
 
 	override suspend fun inverseListItemIsDone(id: Long) {

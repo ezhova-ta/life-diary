@@ -1,20 +1,9 @@
 package com.example.lifediary.presentation.utils
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
-import com.example.lifediary.data.db.entities.DbEntity
 import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.presentation.utils.dates.getNowDayNumber
 import com.example.lifediary.presentation.utils.dates.getNowMonthNumber
 import java.util.*
-
-fun <T : DbEntity<R>, R> LiveData<List<T>>.toDomain(): LiveData<List<R>> {
-	return map { entityList -> entityList.toDomain() }
-}
-
-private fun <T : DbEntity<R>, R> List<T>.toDomain(): List<R> {
-	return map { entity -> entity.toDomain() }
-}
 
 fun Int.createStringWithPlusOrMinusSign(): String {
 	if(this < 0 || this == 0) return toString()

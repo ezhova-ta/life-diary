@@ -1,9 +1,10 @@
 package com.example.lifediary.data.db.entities
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.domain.models.ToDoListItem
-import com.example.lifediary.domain.models.Day
 import java.util.*
 
 @Entity(tableName = "to_do_list")
@@ -25,32 +26,4 @@ data class ToDoListItemEntity(
     var notificationTime: Calendar,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
-) : DbEntity<ToDoListItem>() {
-    companion object {
-        fun fromDomain(toDoListItem: ToDoListItem): ToDoListItemEntity {
-            return ToDoListItemEntity(
-                id = toDoListItem.id,
-                text = toDoListItem.text,
-                dayNumber = toDoListItem.day.dayNumber,
-                monthNumber = toDoListItem.day.monthNumber,
-                year = toDoListItem.day.year,
-                isDone = toDoListItem.isDone,
-                notificationEnabled = toDoListItem.notificationEnabled,
-                notificationTime = toDoListItem.notificationTime,
-                createdAt = toDoListItem.createdAt
-            )
-        }
-    }
-
-    override fun toDomain(): ToDoListItem {
-        return ToDoListItem(
-            id = id,
-            text = text,
-            day = Day(dayNumber, monthNumber, year),
-            isDone = isDone,
-            notificationEnabled = notificationEnabled,
-            notificationTime = notificationTime,
-            createdAt = createdAt
-        )
-    }
-}
+)

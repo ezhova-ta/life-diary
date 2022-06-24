@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.domain.models.MainNote
 import java.util.*
 
 @Entity(tableName = "main_note")
@@ -16,22 +15,4 @@ data class MainNoteEntity(
     val text: String,
     @ColumnInfo(name = "created_at")
     val createdAt: Calendar
-) : DbEntity<MainNote>() {
-    companion object {
-        fun fromDomain(note: MainNote): MainNoteEntity {
-            return MainNoteEntity(
-                id = note.id,
-                text = note.text,
-                createdAt = note.createdAt
-            )
-        }
-    }
-
-    override fun toDomain(): MainNote {
-        return MainNote(
-            id = id,
-            text = text,
-            createdAt = createdAt
-        )
-    }
-}
+)

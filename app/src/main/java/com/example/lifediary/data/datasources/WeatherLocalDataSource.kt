@@ -1,38 +1,35 @@
 package com.example.lifediary.data.datasources
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.example.lifediary.data.db.dao.CurrentWeatherDao
 import com.example.lifediary.data.db.dao.LocationDao
 import com.example.lifediary.data.db.entities.LocationEntity
 import com.example.lifediary.data.db.entities.WeatherEntity
-import com.example.lifediary.domain.models.Location
-import com.example.lifediary.domain.models.Weather
 import javax.inject.Inject
 
 class WeatherLocalDataSource @Inject constructor(
     private val locationDao: LocationDao,
     private val currentWeatherDao: CurrentWeatherDao
 ) {
-    fun getLocationLiveData(): LiveData<Location?> {
-        return locationDao.getLiveData().map { it?.toDomain() }
+    fun getLocationLiveData(): LiveData<LocationEntity?> {
+        return locationDao.getLiveData()
     }
 
-    suspend fun getLocation(): Location? {
-        return locationDao.get()?.toDomain()
+    suspend fun getLocation(): LocationEntity? {
+        return locationDao.get()
     }
 
-    suspend fun saveLocation(location: Location) {
+    suspend fun saveLocation(location: LocationEntity) {
         locationDao.delete()
-        locationDao.insert(LocationEntity.fromDomain(location))
+        locationDao.insert(location)
     }
 
-    fun getCurrentWeather(): LiveData<Weather?> {
-        return currentWeatherDao.get().map { it?.toDomain() }
+    fun getCurrentWeather(): LiveData<WeatherEntity?> {
+        return currentWeatherDao.get()
     }
 
-    suspend fun saveCurrentWeather(weather: Weather) {
+    suspend fun saveCurrentWeather(weather: WeatherEntity) {
         currentWeatherDao.delete()
-        currentWeatherDao.insert(WeatherEntity.fromDomain(weather))
+        currentWeatherDao.insert(weather)
     }
 }

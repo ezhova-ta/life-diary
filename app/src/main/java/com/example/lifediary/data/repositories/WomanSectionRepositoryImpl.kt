@@ -1,7 +1,11 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
+import com.example.lifediary.data.db.entities.MenstruationPeriodEntity
+import com.example.lifediary.data.repositories.mappers.MenstruationPeriodEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.MenstruationPeriodEntityMapper.toEntity
 import com.example.lifediary.domain.models.MenstruationPeriod
 import com.example.lifediary.domain.repositories.WomanSectionRepository
 import javax.inject.Inject
@@ -12,7 +16,15 @@ class WomanSectionRepositoryImpl @Inject constructor(
     private val localDataSource: WomanSectionLocalDataSource
 ) : WomanSectionRepository {
     override fun getAllMenstruationPeriods(): LiveData<List<MenstruationPeriod>> {
-        return localDataSource.getAllMenstruationPeriods()
+        return localDataSource.getAllMenstruationPeriods().toDomain()
+    }
+
+    private fun LiveData<List<MenstruationPeriodEntity>>.toDomain(): LiveData<List<MenstruationPeriod>> {
+        return map { entityList -> entityList.toDomain() }
+    }
+
+    private fun List<MenstruationPeriodEntity>.toDomain(): List<MenstruationPeriod> {
+        return map { entity -> entity.toDomain() }
     }
 
     override fun getDurationOfMenstrualCycle(): LiveData<Int> {
@@ -24,7 +36,7 @@ class WomanSectionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addMenstruationPeriod(period: MenstruationPeriod) {
-        localDataSource.addMenstruationPeriod(period)
+        localDataSource.addMenstruationPeriod(period.toEntity())
     }
 
     override suspend fun deleteMenstruationPeriod(id: Long) {

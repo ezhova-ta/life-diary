@@ -1,9 +1,13 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.MemorableDatesLocalDataSource
-import com.example.lifediary.domain.models.MemorableDate
+import com.example.lifediary.data.db.entities.MemorableDateEntity
+import com.example.lifediary.data.repositories.mappers.MemorableDateEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.MemorableDateEntityMapper.toEntity
 import com.example.lifediary.domain.models.Day
+import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.repositories.MemorableDatesRepository
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,23 +17,31 @@ class MemorableDatesRepositoryImpl @Inject constructor(
     private val localDataSource: MemorableDatesLocalDataSource
 ) : MemorableDatesRepository {
     override fun getDates(): LiveData<List<MemorableDate>> {
-        return localDataSource.getDates()
+        return localDataSource.getDates().toDomain()
     }
 
     override fun getDates(day: Day): LiveData<List<MemorableDate>> {
-        return localDataSource.getDates(day)
+        return localDataSource.getDates(day.dayNumber, day.monthNumber).toDomain()
+    }
+
+    private fun LiveData<List<MemorableDateEntity>>.toDomain(): LiveData<List<MemorableDate>> {
+        return map { entityList -> entityList.toDomain() }
+    }
+
+    private fun List<MemorableDateEntity>.toDomain(): List<MemorableDate> {
+        return map { entity -> entity.toDomain() }
     }
 
     override suspend fun getDate(id: Long): MemorableDate? {
-        return localDataSource.getDate(id)
+        return localDataSource.getDate(id)?.toDomain()
     }
 
     override suspend fun addDate(item: MemorableDate) {
-        localDataSource.addDate(item)
+        localDataSource.addDate(item.toEntity())
     }
 
     override suspend fun updateDate(item: MemorableDate) {
-        localDataSource.updateDate(item)
+        localDataSource.updateDate(item.toEntity())
     }
 
     override suspend fun clearDates() {
