@@ -2,13 +2,15 @@ package com.example.lifediary.ui.memorable_dates
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.data.repositories.MemorableDatesRepository
-import com.example.lifediary.di.DiScopes
-import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.DayNumberDropDownItem
+import com.example.lifediary.data.domain.MemorableDate
 import com.example.lifediary.data.domain.MonthDropDownItem
 import com.example.lifediary.data.domain.Text
+import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.memorable_dates.AddMemorableDateUseCase
+import com.example.lifediary.domain.usecases.memorable_dates.GetMemorableDateByIdUseCase
+import com.example.lifediary.domain.usecases.memorable_dates.UpdateMemorableDateUseCase
+import com.example.lifediary.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +20,10 @@ import javax.inject.Inject
 
 class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseViewModel() {
     @Inject lateinit var router: Router
-    @Inject lateinit var memorableDatesRepository: MemorableDatesRepository
+    @Inject lateinit var getMemorableDateByIdUseCase: GetMemorableDateByIdUseCase
+    @Inject lateinit var addMemorableDateUseCase: AddMemorableDateUseCase
+    @Inject lateinit var updateMemorableDateUseCase: UpdateMemorableDateUseCase
+
     val isAddButtonVisible = dateId == null
     val dateName = MutableLiveData("")
     private var dayNumber: Int = DayNumberDropDownItem.allElements.first()
@@ -47,7 +52,7 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                existingDate = memorableDatesRepository.getDate(dateId)
+                existingDate = getMemorableDateByIdUseCase(dateId)
                 existingDate?.let {
                     dateName.postValue(it.name)
                     _existingDateDayNumber.postValue(it.dayNumber)
@@ -87,7 +92,7 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
                 val date = existingDate
 
                 if(date == null) {
-                    memorableDatesRepository.addDate(MemorableDate(
+                    addMemorableDateUseCase(MemorableDate(
                         name = name, dayNumber = dayNumber, monthNumber = monthNumber, year = year
                     ))
                 } else {
@@ -95,7 +100,7 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
                     date.dayNumber = dayNumber
                     date.monthNumber = monthNumber
                     date.year = year
-                    memorableDatesRepository.updateDate(date)
+                    updateMemorableDateUseCase(date)
                 }
 
                 router.exit()

@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.data.repositories.MemorableDatesRepository
+import com.example.lifediary.data.domain.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.memorable_dates.ClearMemorableDateListUseCase
+import com.example.lifediary.domain.usecases.memorable_dates.DeleteMemorableDateFromIdUseCase
+import com.example.lifediary.domain.usecases.memorable_dates.GetSortedMemorableDatesUseCase
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.data.domain.Text
-import com.example.lifediary.utils.sortBasedToday
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +21,11 @@ import javax.inject.Inject
 
 class MemorableDatesViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
-    @Inject lateinit var memorableDatesRepository: MemorableDatesRepository
-    val dates by lazy { memorableDatesRepository.getDates().map { it.sortBasedToday() } }
+    @Inject lateinit var clearMemorableDateListUseCase: ClearMemorableDateListUseCase
+    @Inject lateinit var deleteMemorableDateFromIdUseCase: DeleteMemorableDateFromIdUseCase
+    @Inject lateinit var getSortedMemorableDatesUseCase: GetSortedMemorableDatesUseCase
+
+    val dates by lazy { getSortedMemorableDatesUseCase() }
     val isDatesVisible by lazy { dates.map { it.isNotEmpty() } }
 
     private val _showClearDateListConfirmationDialog = MutableLiveData(false)
@@ -58,7 +62,7 @@ class MemorableDatesViewModel : BaseViewModel() {
     private fun clearDateList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                memorableDatesRepository.clearDates()
+                clearMemorableDateListUseCase()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_clear_list))
             }
@@ -87,7 +91,7 @@ class MemorableDatesViewModel : BaseViewModel() {
     private fun deleteDate(dateId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                memorableDatesRepository.deleteDate(dateId)
+                deleteMemorableDateFromIdUseCase(dateId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }

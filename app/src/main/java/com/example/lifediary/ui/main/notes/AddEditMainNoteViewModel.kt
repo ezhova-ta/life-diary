@@ -6,8 +6,8 @@ import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.data.domain.Text
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.notes.AddMainNoteFromTextUseCase
-import com.example.lifediary.domain.usecases.notes.DeleteMainNoteFromIdUseCase
-import com.example.lifediary.domain.usecases.notes.GetMainNoteFromIdUseCase
+import com.example.lifediary.domain.usecases.notes.DeleteMainNoteByIdUseCase
+import com.example.lifediary.domain.usecases.notes.GetMainNoteByIdUseCase
 import com.example.lifediary.domain.usecases.notes.UpdateMainNoteUseCase
 import com.example.lifediary.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
@@ -19,10 +19,10 @@ import javax.inject.Inject
 
 class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var getMainNoteFromIdUseCase: GetMainNoteFromIdUseCase
+	@Inject lateinit var getMainNoteByIdUseCase: GetMainNoteByIdUseCase
 	@Inject lateinit var addMainNoteFromTextUseCase: AddMainNoteFromTextUseCase
 	@Inject lateinit var updateMainNoteUseCase: UpdateMainNoteUseCase
-	@Inject lateinit var deleteMainNoteFromIdUseCase: DeleteMainNoteFromIdUseCase
+	@Inject lateinit var deleteMainNoteByIdUseCase: DeleteMainNoteByIdUseCase
 
 	val noteText = MutableLiveData("")
 	val isAddButtonVisible = noteId == null
@@ -50,7 +50,7 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				existingNote = getMainNoteFromIdUseCase(noteId)
+				existingNote = getMainNoteByIdUseCase(noteId)
 				existingNote?.text?.let { noteText.postValue(it) }
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error))
@@ -101,7 +101,7 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 	private fun deleteNote(noteId: Long) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				deleteMainNoteFromIdUseCase(noteId)
+				deleteMainNoteByIdUseCase(noteId)
 				router.exit()
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.deleting_item_error))
