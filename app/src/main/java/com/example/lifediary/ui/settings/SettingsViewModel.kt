@@ -3,12 +3,12 @@ package com.example.lifediary.ui.settings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.R
+import com.example.lifediary.data.domain.Text
 import com.example.lifediary.data.repositories.DateNoteRepository
-import com.example.lifediary.data.repositories.SettingsRepository
 import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.settings.*
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.data.domain.Text
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,14 +16,22 @@ import toothpick.Toothpick
 import javax.inject.Inject
 
 class SettingsViewModel : BaseViewModel() {
-    @Inject lateinit var settingsRepository: SettingsRepository
+    @Inject lateinit var getShoppingListSectionEnabledUseCase: GetShoppingListSectionEnabledUseCase
+    @Inject lateinit var getPostAddressesSectionEnabledUseCase: GetPostAddressesSectionEnabledUseCase
+    @Inject lateinit var getMemorableDatesSectionEnabledUseCase: GetMemorableDatesSectionEnabledUseCase
+    @Inject lateinit var getWomanSectionEnabledUseCase: GetWomanSectionEnabledUseCase
+    @Inject lateinit var setShoppingListSectionEnabledUseCase: SetShoppingListSectionEnabledUseCase
+    @Inject lateinit var setPostAddressesSectionEnabledUseCase: SetPostAddressesSectionEnabledUseCase
+    @Inject lateinit var setMemorableDatesSectionEnabledUseCase: SetMemorableDatesSectionEnabledUseCase
+    @Inject lateinit var setWomanSectionEnabledUseCase: SetWomanSectionEnabledUseCase
+
     @Inject lateinit var dateNoteRepository: DateNoteRepository
     @Inject lateinit var toDoListRepository: ToDoListRepository
 
-    val isShoppingListSectionEnabled by lazy { settingsRepository.getShoppingListSectionEnabled() }
-    val isPostAddressesSectionEnabled by lazy { settingsRepository.getPostAddressesSectionEnabled() }
-    val isMemorableDatesSectionEnabled by lazy { settingsRepository.getMemorableDatesSectionEnabled() }
-    val isWomanSectionEnabled by lazy { settingsRepository.getWomanSectionEnabled() }
+    val isShoppingListSectionEnabled by lazy { getShoppingListSectionEnabledUseCase() }
+    val isPostAddressesSectionEnabled by lazy { getPostAddressesSectionEnabledUseCase() }
+    val isMemorableDatesSectionEnabled by lazy { getMemorableDatesSectionEnabledUseCase() }
+    val isWomanSectionEnabled by lazy { getWomanSectionEnabledUseCase() }
 
     private val _showClearCalendarNotesConfirmationDialog = MutableLiveData(false)
     val showClearCalendarNotesConfirmationDialog: LiveData<Boolean>
@@ -65,7 +73,7 @@ class SettingsViewModel : BaseViewModel() {
     private fun saveShoppingListSectionEnabled(isEnabled: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                settingsRepository.setShoppingListSectionEnabled(isEnabled)
+                setShoppingListSectionEnabledUseCase(isEnabled)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
@@ -75,7 +83,7 @@ class SettingsViewModel : BaseViewModel() {
     private fun savePostAddressesSectionEnabled(isEnabled: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                settingsRepository.setPostAddressesSectionEnabled(isEnabled)
+                setPostAddressesSectionEnabledUseCase(isEnabled)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
@@ -85,7 +93,7 @@ class SettingsViewModel : BaseViewModel() {
     private fun saveMemorableDatesSectionEnabled(isEnabled: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                settingsRepository.setMemorableDatesSectionEnabled(isEnabled)
+                setMemorableDatesSectionEnabledUseCase(isEnabled)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
@@ -95,7 +103,7 @@ class SettingsViewModel : BaseViewModel() {
     private fun saveWomanSectionEnabled(isEnabled: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                settingsRepository.setWomanSectionEnabled(isEnabled)
+                setWomanSectionEnabledUseCase(isEnabled)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
