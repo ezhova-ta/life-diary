@@ -1,7 +1,6 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.datasources.ShoppingListLocalDataSource
 import com.example.lifediary.data.domain.ShoppingListItem
 import javax.inject.Inject
@@ -19,8 +18,8 @@ class ShoppingListRepository @Inject constructor(
         return localDataSource.getShoppingListSortMethodId()
     }
 
-    suspend fun saveShoppingListItem(item: ShoppingListItem) {
-        localDataSource.saveShoppingListItem(item)
+    suspend fun addShoppingListItem(item: ShoppingListItem) {
+        localDataSource.addShoppingListItem(item)
     }
 
     suspend fun clearShoppingList() {

@@ -7,10 +7,9 @@ import com.example.lifediary.R
 import com.example.lifediary.data.domain.ShoppingListItem
 import com.example.lifediary.data.domain.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.data.domain.Text
-import com.example.lifediary.data.repositories.ShoppingListRepository
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.shopping_list.*
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,11 +17,19 @@ import toothpick.Toothpick
 import javax.inject.Inject
 
 class ShoppingListViewModel: BaseViewModel() {
-    @Inject lateinit var shoppingListRepository: ShoppingListRepository
-    val shoppingList by lazy { getSortedShoppingList() }
+    @Inject lateinit var getShoppingListSortMethodIdUseCase: GetShoppingListSortMethodIdUseCase
+    @Inject lateinit var getSortedShoppingListUseCase: GetSortedShoppingListUseCase
+    @Inject lateinit var addShoppingListItemUseCase: AddShoppingListItemUseCase
+    @Inject lateinit var clearShoppingListUseCase: ClearShoppingListUseCase
+    @Inject lateinit var inverseShoppingListItemCrossedOutByIdUseCase: InverseShoppingListItemCrossedOutByIdUseCase
+    @Inject lateinit var inverseShoppingListItemPriorityByIdUseCase: InverseShoppingListItemPriorityByIdUseCase
+    @Inject lateinit var deleteShoppingListItemByIdUseCase: DeleteShoppingListItemByIdUseCase
+    @Inject lateinit var saveShoppingListSortMethodIdUseCase: SaveShoppingListSortMethodIdUseCase
+
+    val shoppingList by lazy { getSortedShoppingListUseCase() }
     val isShoppingListVisible by lazy { shoppingList.map { it.isNotEmpty() } }
     val newShoppingListItemText = MutableLiveData("")
-    val shoppingListSortMethodId by lazy { shoppingListRepository.getShoppingListSortMethodId() }
+    val shoppingListSortMethodId by lazy { getShoppingListSortMethodIdUseCase() }
     val isShoppingListSortMethodDropDownVisible by lazy { shoppingList.map { it.isNotEmpty() } }
 
     private val _showClearShoppingListConfirmationDialog = MutableLiveData(false)
@@ -36,17 +43,6 @@ class ShoppingListViewModel: BaseViewModel() {
     override fun bindScope() {
         val shoppingListScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.SHOPPING_LIST_SCOPE)
         Toothpick.inject(this, shoppingListScope)
-    }
-
-    private fun getSortedShoppingList(): LiveData<List<ShoppingListItem>> {
-        return TwoSourceLiveData<List<ShoppingListItem>, Int?, List<ShoppingListItem>>(
-            shoppingListRepository.getShoppingList(),
-            shoppingListRepository.getShoppingListSortMethodId()
-        ) { originalList, sortMethodId ->
-            originalList ?: return@TwoSourceLiveData emptyList()
-            val sorter = ShoppingListSorter.Factory.getInstance(sortMethodId)
-            sorter.sort(originalList)
-        }
     }
 
     fun onAddShoppingListItemClick() {
@@ -65,7 +61,7 @@ class ShoppingListViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                shoppingListRepository.saveShoppingListItem(item)
+                addShoppingListItemUseCase(item)
                 newShoppingListItemText.postValue("")
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_save))
@@ -86,7 +82,7 @@ class ShoppingListViewModel: BaseViewModel() {
     private fun clearShoppingList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                shoppingListRepository.clearShoppingList()
+                clearShoppingListUseCase()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_clear_list))
             }
@@ -101,7 +97,7 @@ class ShoppingListViewModel: BaseViewModel() {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                shoppingListRepository.inverseShoppingListItemCrossedOut(itemId)
+                inverseShoppingListItemCrossedOutByIdUseCase(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
@@ -117,7 +113,7 @@ class ShoppingListViewModel: BaseViewModel() {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                shoppingListRepository.inverseShoppingListItemPriority(itemId)
+                inverseShoppingListItemPriorityByIdUseCase(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
@@ -128,7 +124,7 @@ class ShoppingListViewModel: BaseViewModel() {
         val itemId = item.id ?: return
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                shoppingListRepository.deleteShoppingListItem(itemId)
+                deleteShoppingListItemByIdUseCase(itemId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }
@@ -142,7 +138,7 @@ class ShoppingListViewModel: BaseViewModel() {
     private fun saveShoppingListSortMethod(sortMethod: ShoppingListSortMethodDropDownItem) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                shoppingListRepository.saveShoppingListSortMethodId(sortMethod.id)
+                saveShoppingListSortMethodIdUseCase(sortMethod.id)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }

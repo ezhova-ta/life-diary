@@ -21,7 +21,7 @@ class ShoppingListLocalDataSource @Inject constructor(
         return commonDataStoreManager.shoppingListSortMethodId.asLiveData()
     }
 
-    suspend fun saveShoppingListItem(item: ShoppingListItem) {
+    suspend fun addShoppingListItem(item: ShoppingListItem) {
         dao.insert(ShoppingListItemEntity.fromDomain(item))
     }
 
