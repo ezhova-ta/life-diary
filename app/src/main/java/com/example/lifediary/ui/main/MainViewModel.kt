@@ -2,9 +2,14 @@ package com.example.lifediary.ui.main
 
 import androidx.lifecycle.*
 import com.example.lifediary.data.domain.Location
-import com.example.lifediary.data.repositories.SettingsRepository
-import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.location.GetLocationLiveDataUseCase
+import com.example.lifediary.domain.usecases.settings.GetMemorableDatesSectionEnabledUseCase
+import com.example.lifediary.domain.usecases.settings.GetPostAddressesSectionEnabledUseCase
+import com.example.lifediary.domain.usecases.settings.GetShoppingListSectionEnabledUseCase
+import com.example.lifediary.domain.usecases.settings.GetWomanSectionEnabledUseCase
+import com.example.lifediary.domain.usecases.weather.GetCurrentWeatherUseCase
+import com.example.lifediary.domain.usecases.weather.UpdateCurrentWeatherUseCase
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
@@ -15,16 +20,22 @@ import javax.inject.Inject
 
 class MainViewModel : BaseViewModel() {
     @Inject lateinit var router: Router
-    @Inject lateinit var weatherRepository: WeatherRepository
-    @Inject lateinit var settingsRepository: SettingsRepository
-    val currentWeather by lazy { weatherRepository.getCurrentWeather() }
-    private val location by lazy { weatherRepository.getLocationLiveData() }
+    @Inject lateinit var getLocationLiveDataUseCase: GetLocationLiveDataUseCase
+    @Inject lateinit var getCurrentWeatherUseCase: GetCurrentWeatherUseCase
+    @Inject lateinit var updateCurrentWeatherUseCase: UpdateCurrentWeatherUseCase
+    @Inject lateinit var getShoppingListSectionEnabledUseCase: GetShoppingListSectionEnabledUseCase
+    @Inject lateinit var getPostAddressesSectionEnabledUseCase: GetPostAddressesSectionEnabledUseCase
+    @Inject lateinit var getMemorableDatesSectionEnabledUseCase: GetMemorableDatesSectionEnabledUseCase
+    @Inject lateinit var getWomanSectionEnabledUseCase: GetWomanSectionEnabledUseCase
+
+    val currentWeather by lazy { getCurrentWeatherUseCase() }
+    private val location by lazy { getLocationLiveDataUseCase() }
     val locationName by lazy { location.map { it?.name } }
     val isCurrentWeatherViewVisible by lazy { location.map { it != null } }
-    val isShoppingListSectionVisible by lazy { settingsRepository.getShoppingListSectionEnabled() }
-    val isPostAddressesSectionVisible by lazy { settingsRepository.getPostAddressesSectionEnabled() }
-    val isMemorableDatesSectionVisible by lazy { settingsRepository.getMemorableDatesSectionEnabled() }
-    val isWomanSectionVisible by lazy { settingsRepository.getWomanSectionEnabled() }
+    val isShoppingListSectionVisible by lazy { getShoppingListSectionEnabledUseCase() }
+    val isPostAddressesSectionVisible by lazy { getPostAddressesSectionEnabledUseCase() }
+    val isMemorableDatesSectionVisible by lazy { getMemorableDatesSectionEnabledUseCase() }
+    val isWomanSectionVisible by lazy { getWomanSectionEnabledUseCase() }
 
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
@@ -64,7 +75,7 @@ class MainViewModel : BaseViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                weatherRepository.updateCurrentWeather(locationId)
+                updateCurrentWeatherUseCase(locationId)
             } catch(e: Exception) {
                 // TODO Message display temporarily removed
 //                showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
