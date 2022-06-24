@@ -1,6 +1,6 @@
 package com.example.lifediary.domain.usecases.shopping_list
 
-import com.example.lifediary.data.domain.ShoppingListItem
+import com.example.lifediary.domain.models.ShoppingListItem
 import com.example.lifediary.data.repositories.ShoppingListRepository
 import javax.inject.Inject
 

@@ -1,7 +1,6 @@
 package com.example.lifediary.domain.usecases.calendar
 
-import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.domain.Day
+import com.example.lifediary.domain.models.DateNote
 import com.example.lifediary.data.repositories.DateNoteRepository
 import javax.inject.Inject
 

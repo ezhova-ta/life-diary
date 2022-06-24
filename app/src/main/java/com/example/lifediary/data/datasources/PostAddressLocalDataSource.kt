@@ -3,8 +3,8 @@ package com.example.lifediary.data.datasources
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.db.dao.PostAddressDao
 import com.example.lifediary.data.db.entities.PostAddressEntity
-import com.example.lifediary.data.domain.PostAddress
-import com.example.lifediary.utils.toDomain
+import com.example.lifediary.domain.models.PostAddress
+import com.example.lifediary.presentation.utils.toDomain
 import javax.inject.Inject
 
 class PostAddressLocalDataSource @Inject constructor(private val dao: PostAddressDao) {

@@ -5,9 +5,9 @@ import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.ToDoListDao
 import com.example.lifediary.data.db.entities.ToDoListItemEntity
-import com.example.lifediary.data.domain.ToDoListItem
-import com.example.lifediary.data.domain.Day
-import com.example.lifediary.utils.toDomain
+import com.example.lifediary.domain.models.ToDoListItem
+import com.example.lifediary.domain.models.Day
+import com.example.lifediary.presentation.utils.toDomain
 import java.util.*
 import javax.inject.Inject
 

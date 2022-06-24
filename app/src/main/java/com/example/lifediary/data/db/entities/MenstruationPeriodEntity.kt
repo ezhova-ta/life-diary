@@ -2,7 +2,7 @@ package com.example.lifediary.data.db.entities
 
 import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.data.domain.MenstruationPeriod
+import com.example.lifediary.domain.models.MenstruationPeriod
 import java.util.*
 
 @Entity(

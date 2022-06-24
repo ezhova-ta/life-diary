@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.data.domain.MainNote
+import com.example.lifediary.domain.models.MainNote
 import java.util.*
 
 @Entity(tableName = "main_note")

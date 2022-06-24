@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.calendar.date.CalendarDateViewModel" />
+            type="com.example.lifediary.presentation.ui.calendar.date.CalendarDateViewModel" />
     </data>
 
     <ScrollView
@@ -64,7 +64,7 @@
                     tools:text="16.08.2021"
                     android:text="@{viewModel.title}" />
 
-                <com.example.lifediary.ui.common.WeatherForecastView
+                <com.example.lifediary.presentation.ui.common.WeatherForecastView
                     android:id="@+id/weatherForecastView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:booleanVisibility="@{viewModel.noteVisible}">
-                    <com.example.lifediary.ui.common.RollOutTextPanel
+                    <com.example.lifediary.presentation.ui.common.RollOutTextPanel
                         android:id="@+id/noteView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

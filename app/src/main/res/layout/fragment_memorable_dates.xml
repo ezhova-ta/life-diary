@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.memorable_dates.MemorableDatesViewModel" />
+            type="com.example.lifediary.presentation.ui.memorable_dates.MemorableDatesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

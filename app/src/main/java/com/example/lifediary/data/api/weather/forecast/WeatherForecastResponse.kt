@@ -1,6 +1,6 @@
 package com.example.lifediary.data.api.weather.forecast
 
-import com.example.lifediary.data.domain.WeatherForecast
+import com.example.lifediary.domain.models.WeatherForecast
 import com.google.gson.annotations.SerializedName
 
 data class WeatherForecastResponse(

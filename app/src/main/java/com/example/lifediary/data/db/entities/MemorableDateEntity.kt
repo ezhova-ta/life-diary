@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.lifediary.data.domain.MemorableDate
+import com.example.lifediary.domain.models.MemorableDate
 
 @Entity(
     tableName = "memorable_date",

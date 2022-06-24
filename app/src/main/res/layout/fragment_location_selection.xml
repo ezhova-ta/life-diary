@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.location.selection.LocationSelectionViewModel" />
+            type="com.example.lifediary.presentation.ui.location.selection.LocationSelectionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

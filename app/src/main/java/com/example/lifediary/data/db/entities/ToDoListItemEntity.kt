@@ -2,8 +2,8 @@ package com.example.lifediary.data.db.entities
 
 import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.data.domain.ToDoListItem
-import com.example.lifediary.data.domain.Day
+import com.example.lifediary.domain.models.ToDoListItem
+import com.example.lifediary.domain.models.Day
 import java.util.*
 
 @Entity(tableName = "to_do_list")

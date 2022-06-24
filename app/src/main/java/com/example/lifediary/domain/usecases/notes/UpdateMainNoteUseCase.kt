@@ -1,6 +1,6 @@
 package com.example.lifediary.domain.usecases.notes
 
-import com.example.lifediary.data.domain.MainNote
+import com.example.lifediary.domain.models.MainNote
 import com.example.lifediary.data.repositories.MainNotesRepository
 import javax.inject.Inject
 

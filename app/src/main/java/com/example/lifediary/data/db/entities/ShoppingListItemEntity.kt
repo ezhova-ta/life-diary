@@ -2,7 +2,7 @@ package com.example.lifediary.data.db.entities
 
 import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
-import com.example.lifediary.data.domain.ShoppingListItem
+import com.example.lifediary.domain.models.ShoppingListItem
 import java.util.*
 
 @Entity(tableName = "shopping_list", indices = [Index(value = ["text"], unique = true)])

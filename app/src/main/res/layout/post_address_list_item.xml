@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.adapters.PostAddressListAdapter.PostAddressListItemViewModel" />
+            type="com.example.lifediary.presentation.adapters.PostAddressListAdapter.PostAddressListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

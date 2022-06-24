@@ -3,9 +3,9 @@ package com.example.lifediary.data.datasources
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.db.dao.MemorableDateDao
 import com.example.lifediary.data.db.entities.MemorableDateEntity
-import com.example.lifediary.data.domain.MemorableDate
-import com.example.lifediary.data.domain.Day
-import com.example.lifediary.utils.toDomain
+import com.example.lifediary.domain.models.MemorableDate
+import com.example.lifediary.domain.models.Day
+import com.example.lifediary.presentation.utils.toDomain
 import javax.inject.Inject
 
 class MemorableDatesLocalDataSource @Inject constructor(private val dao: MemorableDateDao) {

@@ -1,6 +1,6 @@
 package com.example.lifediary.domain.usecases.weather
 
-import com.example.lifediary.data.domain.WeatherForecast
+import com.example.lifediary.domain.models.WeatherForecast
 import com.example.lifediary.data.repositories.WeatherRepository
 import javax.inject.Inject
 

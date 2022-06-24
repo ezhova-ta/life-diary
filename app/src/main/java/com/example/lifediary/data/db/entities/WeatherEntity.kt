@@ -3,7 +3,7 @@ package com.example.lifediary.data.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.lifediary.data.domain.Weather
+import com.example.lifediary.domain.models.Weather
 
 @Entity(tableName = "current_weather")
 data class WeatherEntity(

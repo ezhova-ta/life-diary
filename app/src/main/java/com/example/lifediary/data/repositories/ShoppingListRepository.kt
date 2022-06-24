@@ -2,7 +2,7 @@ package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.ShoppingListLocalDataSource
-import com.example.lifediary.data.domain.ShoppingListItem
+import com.example.lifediary.domain.models.ShoppingListItem
 import javax.inject.Inject
 import javax.inject.Singleton
 

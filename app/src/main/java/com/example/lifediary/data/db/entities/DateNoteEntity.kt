@@ -3,8 +3,8 @@ package com.example.lifediary.data.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.domain.Day
+import com.example.lifediary.domain.models.DateNote
+import com.example.lifediary.domain.models.Day
 
 @Entity(tableName = "note")
 data class DateNoteEntity(

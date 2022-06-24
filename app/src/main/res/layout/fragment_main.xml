@@ -5,11 +5,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.main.MainViewModel" />
+            type="com.example.lifediary.presentation.ui.main.MainViewModel" />
 
         <variable
             name="activityViewModel"
-            type="com.example.lifediary.ui.activity.MainActivityViewModel" />
+            type="com.example.lifediary.presentation.ui.activity.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +47,7 @@
                 android:text="@{viewModel.locationName ?? @string/location_not_selected}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.example.lifediary.ui.common.DateView
+        <com.example.lifediary.presentation.ui.common.DateView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:layout_marginTop="8dp"
             android:onClick="@{() -> viewModel.onDateClick()}" />
 
-        <com.example.lifediary.ui.common.CurrentWeatherView
+        <com.example.lifediary.presentation.ui.common.CurrentWeatherView
             android:id="@+id/weatherView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

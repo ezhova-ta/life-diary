@@ -1,9 +1,9 @@
 package com.example.lifediary.data.datasources
 
 import com.example.lifediary.data.api.weather.WeatherService
-import com.example.lifediary.data.domain.Location
-import com.example.lifediary.data.domain.Weather
-import com.example.lifediary.data.domain.WeatherForecast
+import com.example.lifediary.domain.models.Location
+import com.example.lifediary.domain.models.Weather
+import com.example.lifediary.domain.models.WeatherForecast
 import javax.inject.Inject
 
 class WeatherRemoteDataSource @Inject constructor(

@@ -3,9 +3,9 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.WeatherLocalDataSource
 import com.example.lifediary.data.datasources.WeatherRemoteDataSource
-import com.example.lifediary.data.domain.Location
-import com.example.lifediary.data.domain.Weather
-import com.example.lifediary.data.domain.WeatherForecast
+import com.example.lifediary.domain.models.Location
+import com.example.lifediary.domain.models.Weather
+import com.example.lifediary.domain.models.WeatherForecast
 import javax.inject.Inject
 import javax.inject.Singleton
 

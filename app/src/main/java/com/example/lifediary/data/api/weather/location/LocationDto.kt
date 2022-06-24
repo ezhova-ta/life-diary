@@ -1,6 +1,6 @@
 package com.example.lifediary.data.api.weather.location
 
-import com.example.lifediary.data.domain.Location
+import com.example.lifediary.domain.models.Location
 import com.google.gson.annotations.SerializedName
 
 data class LocationDto(

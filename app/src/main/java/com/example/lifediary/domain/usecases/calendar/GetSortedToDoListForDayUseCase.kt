@@ -1,11 +1,11 @@
 package com.example.lifediary.domain.usecases.calendar
 
 import androidx.lifecycle.LiveData
-import com.example.lifediary.data.domain.Day
-import com.example.lifediary.data.domain.ToDoListItem
+import com.example.lifediary.domain.models.Day
+import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.data.repositories.ToDoListRepository
-import com.example.lifediary.ui.calendar.date.ToDoListSorter
-import com.example.lifediary.utils.livedata.TwoSourceLiveData
+import com.example.lifediary.presentation.ToDoListSorter
+import com.example.lifediary.presentation.utils.livedata.TwoSourceLiveData
 import javax.inject.Inject
 
 class GetSortedToDoListForDayUseCase @Inject constructor(

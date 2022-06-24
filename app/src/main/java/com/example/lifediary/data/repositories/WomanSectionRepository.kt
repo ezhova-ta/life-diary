@@ -1,13 +1,8 @@
 package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
-import com.example.lifediary.data.domain.MenstruationPeriod
-import com.example.lifediary.utils.dates.CalendarBuilder
-import com.example.lifediary.utils.dates.getDaysBetween
-import com.example.lifediary.utils.dates.plusDays
-import com.example.lifediary.utils.livedata.ThreeSourceLiveData
+import com.example.lifediary.domain.models.MenstruationPeriod
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -6,8 +6,8 @@ import com.example.lifediary.data.db.dao.CurrentWeatherDao
 import com.example.lifediary.data.db.dao.LocationDao
 import com.example.lifediary.data.db.entities.LocationEntity
 import com.example.lifediary.data.db.entities.WeatherEntity
-import com.example.lifediary.data.domain.Location
-import com.example.lifediary.data.domain.Weather
+import com.example.lifediary.domain.models.Location
+import com.example.lifediary.domain.models.Weather
 import javax.inject.Inject
 
 class WeatherLocalDataSource @Inject constructor(

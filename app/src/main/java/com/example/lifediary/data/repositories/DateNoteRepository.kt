@@ -2,8 +2,8 @@ package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.DateNoteLocalDataSource
-import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.domain.Day
+import com.example.lifediary.domain.models.DateNote
+import com.example.lifediary.domain.models.Day
 import javax.inject.Inject
 import javax.inject.Singleton
 

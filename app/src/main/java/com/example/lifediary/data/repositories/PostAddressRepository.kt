@@ -2,7 +2,7 @@ package com.example.lifediary.data.repositories
 
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.PostAddressLocalDataSource
-import com.example.lifediary.data.domain.PostAddress
+import com.example.lifediary.domain.models.PostAddress
 import javax.inject.Inject
 import javax.inject.Singleton
 

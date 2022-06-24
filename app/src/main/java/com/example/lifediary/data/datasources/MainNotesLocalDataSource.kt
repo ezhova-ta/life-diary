@@ -5,8 +5,8 @@ import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.MainNotesDao
 import com.example.lifediary.data.db.entities.MainNoteEntity
-import com.example.lifediary.data.domain.MainNote
-import com.example.lifediary.utils.toDomain
+import com.example.lifediary.domain.models.MainNote
+import com.example.lifediary.presentation.utils.toDomain
 import javax.inject.Inject
 
 class MainNotesLocalDataSource @Inject constructor(

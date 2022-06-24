@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.adapters.LocationListAdapter.LocationListItemViewModel" />
+            type="com.example.lifediary.presentation.adapters.LocationListAdapter.LocationListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

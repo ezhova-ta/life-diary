@@ -3,7 +3,7 @@ package com.example.lifediary.data.db.entities
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.lifediary.data.domain.Location
+import com.example.lifediary.domain.models.Location
 
 @Entity(tableName = "location", indices = [Index(value = ["name"], unique = true)])
 data class LocationEntity(

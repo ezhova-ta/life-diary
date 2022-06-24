@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.adapters.MemorableDateListAdapter.MemorableDateListItemViewModel" />
+            type="com.example.lifediary.presentation.adapters.MemorableDateListAdapter.MemorableDateListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

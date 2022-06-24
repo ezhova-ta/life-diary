@@ -1,8 +1,8 @@
 package com.example.lifediary.data.api.weather.forecast
 
 import com.example.lifediary.data.api.weather.WeatherDescriptionDto
-import com.example.lifediary.data.domain.WeatherDescription
-import com.example.lifediary.data.domain.WeatherForecastItem
+import com.example.lifediary.domain.models.WeatherDescription
+import com.example.lifediary.domain.models.WeatherForecastItem
 import com.google.gson.annotations.SerializedName
 
 data class WeatherForecastItemDto(

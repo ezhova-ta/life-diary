@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.adapters.MenstruationPeriodListAdapter.MenstruationPeriodListItemViewModel" />
+            type="com.example.lifediary.presentation.adapters.MenstruationPeriodListAdapter.MenstruationPeriodListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

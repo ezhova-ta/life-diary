@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.db.dao.DateNoteDao
 import com.example.lifediary.data.db.entities.DateNoteEntity
-import com.example.lifediary.data.domain.DateNote
-import com.example.lifediary.data.domain.Day
-import com.example.lifediary.utils.toDomain
+import com.example.lifediary.domain.models.DateNote
+import com.example.lifediary.domain.models.Day
+import com.example.lifediary.presentation.utils.toDomain
 import javax.inject.Inject
 
 class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) {

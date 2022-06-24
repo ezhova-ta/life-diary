@@ -1,6 +1,6 @@
 package com.example.lifediary.domain.usecases.location
 
-import com.example.lifediary.data.domain.Location
+import com.example.lifediary.domain.models.Location
 import com.example.lifediary.data.repositories.WeatherRepository
 import javax.inject.Inject
 

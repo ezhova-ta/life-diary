@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.lifediary.ui.settings.SettingsViewModel" />
+            type="com.example.lifediary.presentation.ui.settings.SettingsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
