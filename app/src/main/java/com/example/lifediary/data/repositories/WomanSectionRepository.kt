@@ -27,45 +27,6 @@ class WomanSectionRepository @Inject constructor(
         return localDataSource.getDurationOfMenstruationPeriod()
     }
 
-    fun getLastMenstruationPeriod(): LiveData<MenstruationPeriod?> {
-        return getAllMenstruationPeriods().map {
-            it.maxByOrNull { period -> period.startDate }
-        }
-    }
-
-    fun getEstimatedNextMenstruationPeriod(): LiveData<MenstruationPeriod?> {
-        return ThreeSourceLiveData(
-            getLastMenstruationPeriod(),
-            getDurationOfMenstrualCycle(),
-            getDurationOfMenstruationPeriod()
-        ) { lastMenstruationPeriod, durationOfMenstrualCycle, durationOfMenstruationPeriod ->
-            lastMenstruationPeriod ?: return@ThreeSourceLiveData null
-            durationOfMenstrualCycle ?: return@ThreeSourceLiveData null
-            durationOfMenstruationPeriod ?: return@ThreeSourceLiveData null
-
-            val startDateOfNextMenstruationPeriod = lastMenstruationPeriod.startDate.plusDays(
-                durationOfMenstrualCycle
-            )
-            val endDateOfNextMenstruationPeriod = startDateOfNextMenstruationPeriod.plusDays(
-                durationOfMenstruationPeriod - 1
-            )
-
-            MenstruationPeriod(
-                startDate = startDateOfNextMenstruationPeriod,
-                endDate = endDateOfNextMenstruationPeriod
-            )
-        }
-    }
-
-    fun getDelayOfMenstruation(): LiveData<Long?> {
-        return getEstimatedNextMenstruationPeriod().map { nextMenstruationPeriod ->
-            val startNextMenstruationPeriod = nextMenstruationPeriod?.startDate ?: return@map null
-            val now = CalendarBuilder().build()
-            if(now.before(startNextMenstruationPeriod)) return@map null
-            getDaysBetween(startNextMenstruationPeriod, now)
-        }
-    }
-
     suspend fun addMenstruationPeriod(period: MenstruationPeriod) {
         localDataSource.addMenstruationPeriod(period)
     }

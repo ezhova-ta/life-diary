@@ -1,13 +1,22 @@
 package com.example.lifediary.domain.usecases.woman_section
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.lifediary.data.repositories.WomanSectionRepository
+import com.example.lifediary.utils.dates.CalendarBuilder
+import com.example.lifediary.utils.dates.getDaysBetween
 import javax.inject.Inject
 
 class GetDelayOfMenstruationUseCase @Inject constructor(
-	private val womanSectionRepository: WomanSectionRepository
+	private val womanSectionRepository: WomanSectionRepository,
+	private val getEstimatedNextMenstruationPeriodUseCase: GetEstimatedNextMenstruationPeriodUseCase
 ) {
 	operator fun invoke(): LiveData<Long?> {
-		return womanSectionRepository.getDelayOfMenstruation()
+		return getEstimatedNextMenstruationPeriodUseCase().map { nextMenstruationPeriod ->
+			val startNextMenstruationPeriod = nextMenstruationPeriod?.startDate ?: return@map null
+			val now = CalendarBuilder().build()
+			if(now.before(startNextMenstruationPeriod)) return@map null
+			getDaysBetween(startNextMenstruationPeriod, now)
+		}
 	}
 }

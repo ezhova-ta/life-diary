@@ -23,8 +23,8 @@ class WomanSectionViewModel : BaseViewModel() {
     @Inject lateinit var getDurationOfMenstruationPeriodUseCase: GetDurationOfMenstruationPeriodUseCase
     @Inject lateinit var getEstimatedNextMenstruationPeriodUseCase: GetEstimatedNextMenstruationPeriodUseCase
     @Inject lateinit var getDelayOfMenstruationUseCase: GetDelayOfMenstruationUseCase
-    @Inject lateinit var setDurationOfMenstrualCycleUseCase: SetDurationOfMenstrualCycleUseCase
-    @Inject lateinit var setDurationOfMenstruationPeriodUseCase: SetDurationOfMenstruationPeriodUseCase
+    @Inject lateinit var saveDurationOfMenstrualCycleUseCase: SaveDurationOfMenstrualCycleUseCase
+    @Inject lateinit var saveDurationOfMenstruationPeriodUseCase: SaveDurationOfMenstruationPeriodUseCase
 
     val lastMenstruationPeriod by lazy { getLastMenstruationPeriodUseCase() }
     val durationOfMenstrualCycle by lazy { getDurationOfMenstrualCycleUseCase() }
@@ -66,7 +66,7 @@ class WomanSectionViewModel : BaseViewModel() {
     private fun saveDurationOfMenstrualCycle(value: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                setDurationOfMenstrualCycleUseCase(value)
+                saveDurationOfMenstrualCycleUseCase(value)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_save))
             }
@@ -89,7 +89,7 @@ class WomanSectionViewModel : BaseViewModel() {
     private fun saveDurationOfMenstruationPeriod(value: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                setDurationOfMenstruationPeriodUseCase(value)
+                saveDurationOfMenstruationPeriodUseCase(value)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_save))
             }
