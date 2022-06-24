@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.Text
-import com.example.lifediary.data.repositories.DateNoteRepository
-import com.example.lifediary.data.repositories.ToDoListRepository
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.calendar.ClearAllToDoListsUseCase
+import com.example.lifediary.domain.usecases.calendar.ClearAllDateNotesUseCase
 import com.example.lifediary.domain.usecases.settings.*
 import com.example.lifediary.ui.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -24,9 +24,8 @@ class SettingsViewModel : BaseViewModel() {
     @Inject lateinit var setPostAddressesSectionEnabledUseCase: SetPostAddressesSectionEnabledUseCase
     @Inject lateinit var setMemorableDatesSectionEnabledUseCase: SetMemorableDatesSectionEnabledUseCase
     @Inject lateinit var setWomanSectionEnabledUseCase: SetWomanSectionEnabledUseCase
-
-    @Inject lateinit var dateNoteRepository: DateNoteRepository
-    @Inject lateinit var toDoListRepository: ToDoListRepository
+    @Inject lateinit var clearAllDateNotesUseCase: ClearAllDateNotesUseCase
+    @Inject lateinit var clearAllToDoListsUseCase: ClearAllToDoListsUseCase
 
     val isShoppingListSectionEnabled by lazy { getShoppingListSectionEnabledUseCase() }
     val isPostAddressesSectionEnabled by lazy { getPostAddressesSectionEnabledUseCase() }
@@ -122,7 +121,7 @@ class SettingsViewModel : BaseViewModel() {
     private fun clearCalendarNotes() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                dateNoteRepository.clearNotes()
+                clearAllDateNotesUseCase()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
@@ -145,7 +144,7 @@ class SettingsViewModel : BaseViewModel() {
     private fun clearToDoListsNotes() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                toDoListRepository.clearToDoLists()
+                clearAllToDoListsUseCase()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }

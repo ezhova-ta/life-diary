@@ -34,7 +34,7 @@ class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) 
         dao.delete(id)
     }
 
-    suspend fun clearNotes() {
+    suspend fun clearAllNotes() {
         dao.deleteAll()
     }
 }
