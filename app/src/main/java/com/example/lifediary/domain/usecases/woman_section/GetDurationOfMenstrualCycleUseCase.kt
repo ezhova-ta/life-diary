@@ -1,7 +1,7 @@
 package com.example.lifediary.domain.usecases.woman_section
 
 import androidx.lifecycle.LiveData
-import com.example.lifediary.data.repositories.WomanSectionRepository
+import com.example.lifediary.domain.repositories.WomanSectionRepository
 import javax.inject.Inject
 
 class GetDurationOfMenstrualCycleUseCase @Inject constructor(

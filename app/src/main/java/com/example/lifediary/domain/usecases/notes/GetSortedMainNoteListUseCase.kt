@@ -2,7 +2,7 @@ package com.example.lifediary.domain.usecases.notes
 
 import androidx.lifecycle.LiveData
 import com.example.lifediary.domain.models.MainNote
-import com.example.lifediary.data.repositories.MainNotesRepository
+import com.example.lifediary.domain.repositories.MainNotesRepository
 import com.example.lifediary.presentation.MainNoteListSorter
 import com.example.lifediary.presentation.utils.livedata.TwoSourceLiveData
 import javax.inject.Inject

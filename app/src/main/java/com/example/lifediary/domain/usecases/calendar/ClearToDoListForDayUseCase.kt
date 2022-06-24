@@ -1,7 +1,7 @@
 package com.example.lifediary.domain.usecases.calendar
 
 import com.example.lifediary.domain.models.Day
-import com.example.lifediary.data.repositories.ToDoListRepository
+import com.example.lifediary.domain.repositories.ToDoListRepository
 import javax.inject.Inject
 
 class ClearToDoListForDayUseCase @Inject constructor(

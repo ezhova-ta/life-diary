@@ -3,42 +3,43 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.ShoppingListLocalDataSource
 import com.example.lifediary.domain.models.ShoppingListItem
+import com.example.lifediary.domain.repositories.ShoppingListRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ShoppingListRepository @Inject constructor(
+class ShoppingListRepositoryImpl @Inject constructor(
     private val localDataSource: ShoppingListLocalDataSource
-) {
-    fun getShoppingList(): LiveData<List<ShoppingListItem>> {
+) : ShoppingListRepository {
+    override fun getShoppingList(): LiveData<List<ShoppingListItem>> {
         return localDataSource.getShoppingList()
     }
 
-    fun getShoppingListSortMethodId(): LiveData<Int?> {
+    override fun getShoppingListSortMethodId(): LiveData<Int?> {
         return localDataSource.getShoppingListSortMethodId()
     }
 
-    suspend fun addShoppingListItem(item: ShoppingListItem) {
+    override suspend fun addShoppingListItem(item: ShoppingListItem) {
         localDataSource.addShoppingListItem(item)
     }
 
-    suspend fun clearShoppingList() {
+    override suspend fun clearShoppingList() {
         localDataSource.clearShoppingList()
     }
 
-    suspend fun inverseShoppingListItemPriority(id: Long) {
+    override suspend fun inverseShoppingListItemPriority(id: Long) {
         localDataSource.inverseShoppingListItemPriority(id)
     }
 
-    suspend fun inverseShoppingListItemCrossedOut(id: Long) {
+    override suspend fun inverseShoppingListItemCrossedOut(id: Long) {
         localDataSource.inverseListItemCrossedOut(id)
     }
 
-    suspend fun deleteShoppingListItem(id: Long) {
+    override suspend fun deleteShoppingListItem(id: Long) {
         localDataSource.deleteShoppingListItem(id)
     }
 
-    suspend fun saveShoppingListSortMethodId(id: Int) {
+    override suspend fun saveShoppingListSortMethodId(id: Int) {
         localDataSource.setShoppingListSortMethodId(id)
     }
 }

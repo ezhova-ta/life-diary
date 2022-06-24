@@ -1,7 +1,7 @@
 package com.example.lifediary.domain.usecases.location
 
 import com.example.lifediary.domain.models.Location
-import com.example.lifediary.data.repositories.WeatherRepository
+import com.example.lifediary.domain.repositories.WeatherRepository
 import javax.inject.Inject
 
 class FindLocationsUseCase @Inject constructor(

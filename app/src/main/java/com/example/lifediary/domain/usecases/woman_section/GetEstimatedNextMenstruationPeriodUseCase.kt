@@ -2,7 +2,7 @@ package com.example.lifediary.domain.usecases.woman_section
 
 import androidx.lifecycle.LiveData
 import com.example.lifediary.domain.models.MenstruationPeriod
-import com.example.lifediary.data.repositories.WomanSectionRepository
+import com.example.lifediary.domain.repositories.WomanSectionRepository
 import com.example.lifediary.presentation.utils.dates.plusDays
 import com.example.lifediary.presentation.utils.livedata.ThreeSourceLiveData
 import javax.inject.Inject

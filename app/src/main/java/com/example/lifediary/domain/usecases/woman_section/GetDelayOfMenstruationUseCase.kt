@@ -2,7 +2,7 @@ package com.example.lifediary.domain.usecases.woman_section
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.example.lifediary.data.repositories.WomanSectionRepository
+import com.example.lifediary.domain.repositories.WomanSectionRepository
 import com.example.lifediary.presentation.utils.dates.CalendarBuilder
 import com.example.lifediary.presentation.utils.dates.getDaysBetween
 import javax.inject.Inject

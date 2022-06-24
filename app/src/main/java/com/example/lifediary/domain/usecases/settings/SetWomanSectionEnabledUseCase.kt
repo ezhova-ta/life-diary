@@ -1,6 +1,6 @@
 package com.example.lifediary.domain.usecases.settings
 
-import com.example.lifediary.data.repositories.SettingsRepository
+import com.example.lifediary.domain.repositories.SettingsRepository
 import javax.inject.Inject
 
 class SetWomanSectionEnabledUseCase @Inject constructor(

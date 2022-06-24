@@ -1,11 +1,13 @@
 package com.example.lifediary.di
 
 import android.content.Context
-import com.example.lifediary.presentation.LifeDiaryApplication
 import com.example.lifediary.data.api.weather.WeatherService
 import com.example.lifediary.data.db.MainDataBase
 import com.example.lifediary.data.db.dao.*
+import com.example.lifediary.data.repositories.*
 import com.example.lifediary.di.providers.*
+import com.example.lifediary.domain.repositories.*
+import com.example.lifediary.presentation.LifeDiaryApplication
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import okhttp3.OkHttpClient
@@ -29,6 +31,16 @@ class AppModule(application: LifeDiaryApplication) : Module() {
         bind(ToDoListDao::class.java).toProvider(ToDoListDaoProvider::class.java)
         bind(MemorableDateDao::class.java).toProvider(MemorableDateDaoProvider::class.java)
         bind(MenstruationPeriodDao::class.java).toProvider(MenstruationPeriodDaoProvider::class.java)
+
+        bind(DateNoteRepository::class.java).to(DateNoteRepositoryImpl::class.java)
+        bind(MainNotesRepository::class.java).to(MainNotesRepositoryImpl::class.java)
+        bind(MemorableDatesRepository::class.java).to(MemorableDatesRepositoryImpl::class.java)
+        bind(PostAddressRepository::class.java).to(PostAddressRepositoryImpl::class.java)
+        bind(SettingsRepository::class.java).to(SettingsRepositoryImpl::class.java)
+        bind(ShoppingListRepository::class.java).to(ShoppingListRepositoryImpl::class.java)
+        bind(ToDoListRepository::class.java).to(ToDoListRepositoryImpl::class.java)
+        bind(WeatherRepository::class.java).to(WeatherRepositoryImpl::class.java)
+        bind(WomanSectionRepository::class.java).to(WomanSectionRepositoryImpl::class.java)
 
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java)
         bind(Converter.Factory::class.java).toInstance(GsonConverterFactory.create())

@@ -4,38 +4,39 @@ import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.DateNoteLocalDataSource
 import com.example.lifediary.domain.models.DateNote
 import com.example.lifediary.domain.models.Day
+import com.example.lifediary.domain.repositories.DateNoteRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DateNoteRepository @Inject constructor(
+class DateNoteRepositoryImpl @Inject constructor(
     private val localDataSource: DateNoteLocalDataSource
-) {
-    fun getNoteLiveData(day: Day): LiveData<DateNote?> {
+) : DateNoteRepository {
+    override fun getNoteLiveData(day: Day): LiveData<DateNote?> {
         return localDataSource.getNoteLiveData(day)
     }
 
-    suspend fun getNote(day: Day): DateNote? {
+    override suspend fun getNote(day: Day): DateNote? {
         return localDataSource.getNote(day)
     }
 
-    fun getAllNotes(): LiveData<List<DateNote>> {
+    override fun getAllNotes(): LiveData<List<DateNote>> {
         return localDataSource.getAllNotes()
     }
 
-    suspend fun addNote(text: String, day: Day) {
+    override suspend fun addNote(text: String, day: Day) {
         localDataSource.addNote(DateNote(text = text, day = day))
     }
 
-    suspend fun updateNote(note: DateNote) {
+    override suspend fun updateNote(note: DateNote) {
         localDataSource.updateNote(note)
     }
 
-    suspend fun deleteNote(id: Long) {
+    override suspend fun deleteNote(id: Long) {
         localDataSource.deleteNote(id)
     }
 
-    suspend fun clearAllNotes() {
+    override suspend fun clearAllNotes() {
         localDataSource.clearAllNotes()
     }
 }

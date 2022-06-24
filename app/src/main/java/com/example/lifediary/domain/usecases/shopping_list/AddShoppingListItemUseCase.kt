@@ -1,7 +1,7 @@
 package com.example.lifediary.domain.usecases.shopping_list
 
 import com.example.lifediary.domain.models.ShoppingListItem
-import com.example.lifediary.data.repositories.ShoppingListRepository
+import com.example.lifediary.domain.repositories.ShoppingListRepository
 import javax.inject.Inject
 
 class AddShoppingListItemUseCase @Inject constructor(

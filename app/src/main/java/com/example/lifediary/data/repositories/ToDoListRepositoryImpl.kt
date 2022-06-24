@@ -4,60 +4,61 @@ import androidx.lifecycle.LiveData
 import com.example.lifediary.data.datasources.ToDoListLocalDataSource
 import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.domain.models.Day
+import com.example.lifediary.domain.repositories.ToDoListRepository
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ToDoListRepository @Inject constructor(
+class ToDoListRepositoryImpl @Inject constructor(
 	private val localDataSource: ToDoListLocalDataSource
-) {
-	fun getToDoList(day: Day): LiveData<List<ToDoListItem>> {
+) : ToDoListRepository {
+	override fun getToDoList(day: Day): LiveData<List<ToDoListItem>> {
 		return localDataSource.getToDoList(day)
 	}
 
-	fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
+	override fun getAllToDoLists(): LiveData<List<ToDoListItem>> {
 		return localDataSource.getAllToDoLists()
 	}
 
-	fun getToDoListSortMethodId(): LiveData<Int?> {
+	override fun getToDoListSortMethodId(): LiveData<Int?> {
 		return localDataSource.getToDoListSortMethodId()
 	}
 
-	suspend fun getToDoListItem(id: Long) : ToDoListItem? {
+	override suspend fun getToDoListItem(id: Long) : ToDoListItem? {
 		return localDataSource.getToDoListItem(id)
 	}
 
-	suspend fun addToDoListItem(item: ToDoListItem) {
+	override suspend fun addToDoListItem(item: ToDoListItem) {
 		localDataSource.addToDoListItem(item)
 	}
 
-	suspend fun clearToDoList(day: Day) {
+	override suspend fun clearToDoList(day: Day) {
 		localDataSource.disableNotificationsFor(day)
 		localDataSource.clearToDoList(day)
 	}
 
-	suspend fun inverseListItemIsDone(id: Long) {
+	override suspend fun inverseListItemIsDone(id: Long) {
 		localDataSource.inverseListItemIsDone(id)
 	}
 
-	suspend fun enableListItemNotification(id: Long, time: Calendar) {
+	override suspend fun enableListItemNotification(id: Long, time: Calendar) {
 		localDataSource.enableListItemNotification(id, time)
 	}
 
-	suspend fun disableListItemNotification(id: Long) {
+	override suspend fun disableListItemNotification(id: Long) {
 		localDataSource.disableListItemNotification(id)
 	}
 
-	suspend fun deleteToDoListItem(id: Long) {
+	override suspend fun deleteToDoListItem(id: Long) {
 		localDataSource.deleteToDoListItem(id)
 	}
 
-	suspend fun clearToDoLists() {
+	override suspend fun clearToDoLists() {
 		localDataSource.clearToDoLists()
 	}
 
-	suspend fun saveToDoListSortMethodId(id: Int) {
+	override suspend fun saveToDoListSortMethodId(id: Int) {
 		localDataSource.setToDoListSortMethodId(id)
 	}
 }
