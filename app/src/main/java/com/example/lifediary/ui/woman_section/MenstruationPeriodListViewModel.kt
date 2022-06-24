@@ -6,10 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MenstruationPeriod
-import com.example.lifediary.data.repositories.WomanSectionRepository
-import com.example.lifediary.di.DiScopes
-import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.Text
+import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.woman_section.AddMenstruationPeriodUseCase
+import com.example.lifediary.domain.usecases.woman_section.ClearMenstruationPeriodListUseCase
+import com.example.lifediary.domain.usecases.woman_section.DeleteMenstruationPeriodByIdUseCase
+import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPeriodsUseCase
+import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.utils.dates.CalendarBuilder
 import com.example.lifediary.utils.dates.isDayAfter
 import com.example.lifediary.utils.dates.toCalendar
@@ -20,8 +23,12 @@ import toothpick.Toothpick
 import javax.inject.Inject
 
 class MenstruationPeriodListViewModel : BaseViewModel() {
-    @Inject lateinit var womanSectionRepository: WomanSectionRepository
-    val menstruationPeriodList by lazy { womanSectionRepository.getAllMenstruationPeriods() }
+    @Inject lateinit var getAllMenstruationPeriodsUseCase: GetAllMenstruationPeriodsUseCase
+    @Inject lateinit var deleteMenstruationPeriodByIdUseCase: DeleteMenstruationPeriodByIdUseCase
+    @Inject lateinit var clearMenstruationPeriodListUseCase: ClearMenstruationPeriodListUseCase
+    @Inject lateinit var addMenstruationPeriodUseCase: AddMenstruationPeriodUseCase
+
+    val menstruationPeriodList by lazy { getAllMenstruationPeriodsUseCase() }
     val isMenstruationPeriodListVisible by lazy { menstruationPeriodList.map { it.isNotEmpty() } }
 
     private val _showDeleteMenstruationPeriodConfirmationDialog = MutableLiveData<Long?>(null)
@@ -57,7 +64,7 @@ class MenstruationPeriodListViewModel : BaseViewModel() {
     private fun deleteMenstruationPeriod(periodId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                womanSectionRepository.deleteMenstruationPeriod(periodId)
+                deleteMenstruationPeriodByIdUseCase(periodId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }
@@ -80,7 +87,7 @@ class MenstruationPeriodListViewModel : BaseViewModel() {
     private fun clearMenstruationPeriodList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                womanSectionRepository.clearMenstruationPeriodList()
+                clearMenstruationPeriodListUseCase()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_clear_list))
             }
@@ -118,7 +125,7 @@ class MenstruationPeriodListViewModel : BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                womanSectionRepository.addMenstruationPeriod(period)
+                addMenstruationPeriodUseCase(period)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_save))
             }
