@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.PostAddress
-import com.example.lifediary.data.repositories.PostAddressRepository
+import com.example.lifediary.data.domain.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.post_addresses.*
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.data.domain.Text
 import com.example.lifediary.utils.isAllItemsBlank
 import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
@@ -21,16 +21,17 @@ import javax.inject.Inject
 
 class PostAddressesViewModel: BaseViewModel() {
     @Inject lateinit var router: Router
-    @Inject lateinit var postAddressRepository: PostAddressRepository
+    @Inject lateinit var getPostAddressesUseCase: GetPostAddressesUseCase
+    @Inject lateinit var deletePostAddressByIdUseCase: DeletePostAddressByIdUseCase
+    @Inject lateinit var addPostAddressUseCase: AddPostAddressUseCase
+    @Inject lateinit var updatePostAddressUseCase: UpdatePostAddressUseCase
+    @Inject lateinit var clearPostAddressListUseCase: ClearPostAddressListUseCase
+
     private val postAddressListSearchQuery = MutableLiveData("")
     val addresses by lazy { getFilteredPostAddressList() }
     val isAddressListVisible by lazy { addresses.map { it.isNotEmpty() } }
-    val isEmptyAddressListTitleVisible by lazy {
-        postAddressRepository.getAllAddresses().map { it.isEmpty() }
-    }
-    val isPostAddressSearchViewVisible by lazy {
-        postAddressRepository.getAllAddresses().map { it.isNotEmpty() }
-    }
+    val isEmptyAddressListTitleVisible by lazy { getPostAddressesUseCase().map { it.isEmpty() } }
+    val isPostAddressSearchViewVisible by lazy { getPostAddressesUseCase().map { it.isNotEmpty() } }
 
     private val _isAddButtonVisible = MutableLiveData<Boolean>()
     val isAddButtonVisible: LiveData<Boolean>
@@ -82,9 +83,10 @@ class PostAddressesViewModel: BaseViewModel() {
         Toothpick.inject(this, postAddressesScope)
     }
 
+    // TODO Move to UseCase?
     private fun getFilteredPostAddressList(): LiveData<List<PostAddress>> {
         return TwoSourceLiveData<List<PostAddress>, String?, List<PostAddress>>(
-            postAddressRepository.getAllAddresses(),
+            getPostAddressesUseCase(),
             postAddressListSearchQuery
         ) { originalList, searchQuery ->
             originalList ?: return@TwoSourceLiveData emptyList()
@@ -111,7 +113,7 @@ class PostAddressesViewModel: BaseViewModel() {
     private fun deletePostAddress(addressId: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                postAddressRepository.deleteAddress(addressId)
+                deletePostAddressByIdUseCase(addressId)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }
@@ -220,9 +222,9 @@ class PostAddressesViewModel: BaseViewModel() {
 
     private suspend fun saveAddress(address: PostAddress) {
         if(isAddingAddressOperation()) {
-            postAddressRepository.addAddress(address)
+            addPostAddressUseCase(address)
         } else {
-            postAddressRepository.updateAddress(address)
+            updatePostAddressUseCase(address)
         }
     }
 
@@ -236,7 +238,7 @@ class PostAddressesViewModel: BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                postAddressRepository.deleteAddress(editingAddressId)
+                deletePostAddressByIdUseCase(editingAddressId)
                 router.exit()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
@@ -269,7 +271,7 @@ class PostAddressesViewModel: BaseViewModel() {
     private fun clearPostAddresses() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                postAddressRepository.clearAddresses()
+                clearPostAddressListUseCase()
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
