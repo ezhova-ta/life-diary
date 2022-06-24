@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.Location
+import com.example.lifediary.data.domain.Text
 import com.example.lifediary.data.repositories.WeatherRepository
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.location.FindLocationsUseCase
+import com.example.lifediary.domain.usecases.location.SaveLocationUseCase
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.data.domain.Text
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,18 +19,19 @@ import toothpick.Toothpick
 import javax.inject.Inject
 
 class LocationSelectionViewModel : BaseViewModel() {
-    @Inject lateinit var weatherRepository: WeatherRepository
+    @Inject lateinit var saveLocationUseCase: SaveLocationUseCase
+    @Inject lateinit var findLocationsUseCase: FindLocationsUseCase
     @Inject lateinit var router: Router
     val locationName = MutableLiveData("")
-    val isProgressVisible = MutableLiveData(false)
+
+    private val _isProgressVisible = MutableLiveData(false)
+    val isProgressVisible get() = _isProgressVisible
 
     private val _locations = MutableLiveData<List<Location>>()
-    val locations: LiveData<List<Location>>
-        get() = _locations
+    val locations: LiveData<List<Location>> get() = _locations
 
     private val _inputNeedsFocus = MutableLiveData(true)
-    val inputNeedsFocus: LiveData<Boolean>
-        get() = _inputNeedsFocus
+    val inputNeedsFocus: LiveData<Boolean> get() = _inputNeedsFocus
 
     init {
         bindScope()
@@ -47,16 +50,16 @@ class LocationSelectionViewModel : BaseViewModel() {
         _inputNeedsFocus.value = false
         val enteredLocationName = formatLocationName(locationName.value) ?: return
         if(enteredLocationName.isBlank()) return
-        isProgressVisible.value = true
+        _isProgressVisible.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val foundLocations = weatherRepository.findLocations(enteredLocationName)
+                val foundLocations = findLocationsUseCase(enteredLocationName)
                 _locations.postValue(foundLocations)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.search_location_error))
             } finally {
-                isProgressVisible.postValue(false)
+                _isProgressVisible.postValue(false)
             }
         }
     }
@@ -68,7 +71,7 @@ class LocationSelectionViewModel : BaseViewModel() {
     fun onLocationListItemClick(location: Location) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                weatherRepository.saveLocation(location)
+                saveLocationUseCase(location)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.saving_location_error))
             }
