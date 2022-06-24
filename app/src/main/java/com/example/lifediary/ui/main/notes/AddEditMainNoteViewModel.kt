@@ -3,10 +3,13 @@ package com.example.lifediary.ui.main.notes
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.data.domain.MainNote
-import com.example.lifediary.data.repositories.MainNotesRepository
-import com.example.lifediary.di.DiScopes
-import com.example.lifediary.ui.BaseViewModel
 import com.example.lifediary.data.domain.Text
+import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.notes.AddMainNoteFromTextUseCase
+import com.example.lifediary.domain.usecases.notes.DeleteMainNoteFromIdUseCase
+import com.example.lifediary.domain.usecases.notes.GetMainNoteFromIdUseCase
+import com.example.lifediary.domain.usecases.notes.UpdateMainNoteUseCase
+import com.example.lifediary.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +19,11 @@ import javax.inject.Inject
 
 class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var notesRepository: MainNotesRepository
+	@Inject lateinit var getMainNoteFromIdUseCase: GetMainNoteFromIdUseCase
+	@Inject lateinit var addMainNoteFromTextUseCase: AddMainNoteFromTextUseCase
+	@Inject lateinit var updateMainNoteUseCase: UpdateMainNoteUseCase
+	@Inject lateinit var deleteMainNoteFromIdUseCase: DeleteMainNoteFromIdUseCase
+
 	val noteText = MutableLiveData("")
 	val isAddButtonVisible = noteId == null
 	private var existingNote: MainNote? = null
@@ -43,7 +50,7 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				existingNote = notesRepository.getNote(noteId)
+				existingNote = getMainNoteFromIdUseCase(noteId)
 				existingNote?.text?.let { noteText.postValue(it) }
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error))
@@ -69,10 +76,10 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 				val note = existingNote
 
 				if(note == null) {
-					notesRepository.addNote(text)
+					addMainNoteFromTextUseCase(text)
 				} else {
 					note.text = text
-					notesRepository.updateNote(note)
+					updateMainNoteUseCase(note)
 				}
 
 				router.exit()
@@ -94,7 +101,7 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 	private fun deleteNote(noteId: Long) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				notesRepository.deleteNote(noteId)
+				deleteMainNoteFromIdUseCase(noteId)
 				router.exit()
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.deleting_item_error))

@@ -7,11 +7,13 @@ import com.example.lifediary.R
 import com.example.lifediary.data.domain.MainNote
 import com.example.lifediary.data.domain.MainNoteListSortMethodDropDownItem
 import com.example.lifediary.data.domain.Text
-import com.example.lifediary.data.repositories.MainNotesRepository
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.usecases.notes.ClearMainNoteListUseCase
+import com.example.lifediary.domain.usecases.notes.GetMainNoteListSortMethodIdUseCase
+import com.example.lifediary.domain.usecases.notes.GetSortedMainNoteListUseCase
+import com.example.lifediary.domain.usecases.notes.SaveMainNoteListSortMethodIdUseCase
 import com.example.lifediary.navigation.Screens
 import com.example.lifediary.ui.BaseViewModel
-import com.example.lifediary.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,11 +23,15 @@ import javax.inject.Inject
 
 class MainNotesViewModel : BaseViewModel() {
 	@Inject lateinit var router: Router
-	@Inject lateinit var notesRepository: MainNotesRepository
-	val noteList by lazy { getSortedMainNoteList() }
+	@Inject lateinit var getMainNoteListSortMethodIdUseCase: GetMainNoteListSortMethodIdUseCase
+	@Inject lateinit var clearMainNoteListUseCase: ClearMainNoteListUseCase
+	@Inject lateinit var saveMainNoteListSortMethodIdUseCase: SaveMainNoteListSortMethodIdUseCase
+	@Inject lateinit var getSortedMainNoteListUseCase: GetSortedMainNoteListUseCase
+
+	val noteList by lazy { getSortedMainNoteListUseCase() }
 	val isNotesVisible by lazy { noteList.map { it.isNotEmpty() } }
 	val isNoteListSortMethodDropDownVisible by lazy { isNotesVisible }
-	val noteListSortMethodId by lazy { notesRepository.getMainNoteListSortMethodId() }
+	val noteListSortMethodId by lazy { getMainNoteListSortMethodIdUseCase() }
 
 	private val _showClearNoteListConfirmationDialog = MutableLiveData(false)
 	val showClearNoteListConfirmationDialog: LiveData<Boolean>
@@ -38,17 +44,6 @@ class MainNotesViewModel : BaseViewModel() {
 	override fun bindScope() {
 		val mainScreenScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MAIN_SCREEN_SCOPE)
 		Toothpick.inject(this, mainScreenScope)
-	}
-
-	private fun getSortedMainNoteList(): LiveData<List<MainNote>> {
-		return TwoSourceLiveData<List<MainNote>, Int?, List<MainNote>>(
-			notesRepository.getNotes(),
-			notesRepository.getMainNoteListSortMethodId()
-		) { originalList, sortMethodId ->
-			originalList ?: return@TwoSourceLiveData emptyList()
-			val sorter = MainNoteListSorter.Factory.getInstance(sortMethodId)
-			sorter.sort(originalList)
-		}
 	}
 
 	fun onAddNoteClick() {
@@ -68,7 +63,7 @@ class MainNotesViewModel : BaseViewModel() {
 	private fun clearNoteList() {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				notesRepository.clearNotes()
+				clearMainNoteListUseCase()
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_clear_list))
 			}
@@ -91,7 +86,7 @@ class MainNotesViewModel : BaseViewModel() {
 	private fun saveMainNoteListSortMethod(sortMethod: MainNoteListSortMethodDropDownItem) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				notesRepository.saveMainNoteListSortMethodId(sortMethod.id)
+				saveMainNoteListSortMethodIdUseCase(sortMethod.id)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error))
 			}
