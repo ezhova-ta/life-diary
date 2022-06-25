@@ -14,6 +14,7 @@ import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var addDateNoteByTextUseCase: AddDateNoteByTextUseCase
 	@Inject lateinit var updateDateNoteUseCase: UpdateDateNoteUseCase
 
-	val isAddButtonVisible by lazy { getDateNoteLiveDataUseCase(day).map { it == null } }
+	val isAddButtonVisible by lazy { getDateNoteLiveDataUseCase(day).map { it == null }.asLiveData() }
 	val noteText = MutableLiveData("")
 	private var existingNote: DateNote? = null
 

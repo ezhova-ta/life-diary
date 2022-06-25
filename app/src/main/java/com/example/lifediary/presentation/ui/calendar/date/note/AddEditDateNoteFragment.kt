@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.databinding.FragmentAddEditDateNoteBinding
 import com.example.lifediary.presentation.ui.BaseFragment
 import com.example.lifediary.domain.models.Day
+import com.example.lifediary.presentation.ui.calendar.date.CalendarDateFragment
 import com.example.lifediary.presentation.utils.clearFocusWithKeyboard
 import com.example.lifediary.presentation.utils.requestFocusWithKeyboard
 
@@ -20,17 +21,26 @@ class AddEditDateNoteFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     companion object {
-        private const val DAY_KEY = "com.example.lifediary.presentation.ui.calendar.date.note.DAY_KEY"
+        private const val DAY_NUMBER_KEY = "com.example.lifediary.presentation.ui.calendar.date.note.DAY_NUMBER_KEY"
+        private const val MONTH_NUMBER_KEY = "com.example.lifediary.presentation.ui.calendar.date.note.MONTH_NUMBER_KEY"
+        private const val YEAR_KEY = "com.example.lifediary.presentation.ui.calendar.date.note.YEAR_KEY"
 
         fun getInstance(day: Day): Fragment {
             val fragment = AddEditDateNoteFragment()
-            fragment.arguments = Bundle().apply { putParcelable(DAY_KEY, day) }
+            fragment.arguments = Bundle().apply {
+                putInt(DAY_NUMBER_KEY, day.dayNumber)
+                putInt(MONTH_NUMBER_KEY, day.monthNumber)
+                putInt(YEAR_KEY, day.year)
+            }
             return fragment
         }
     }
 
     private fun getDayFromArguments(): Day {
-        return requireArguments().getParcelable(DAY_KEY)!!
+        val dayNumber = requireArguments().getInt(DAY_NUMBER_KEY)
+        val monthNumber = requireArguments().getInt(MONTH_NUMBER_KEY)
+        val year = requireArguments().getInt(YEAR_KEY)
+        return Day(dayNumber, monthNumber, year)
     }
 
     override fun onCreateView(

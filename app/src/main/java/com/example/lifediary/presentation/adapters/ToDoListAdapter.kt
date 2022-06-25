@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.databinding.ToDoListItemBinding
-import com.example.lifediary.presentation.utils.dates.toTimeString
+import com.example.lifediary.domain.models.ToDoListItem
+import com.example.lifediary.domain.utils.toTimeString
 
 class ToDoListAdapter(
 	private val onDeleteItemClickListener: ListItemClickListener<ToDoListItem>,

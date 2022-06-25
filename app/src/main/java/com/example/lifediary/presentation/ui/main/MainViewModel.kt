@@ -1,8 +1,9 @@
 package com.example.lifediary.presentation.ui.main
 
 import androidx.lifecycle.*
-import com.example.lifediary.domain.models.Location
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.models.Location
+import com.example.lifediary.domain.models.Weather
 import com.example.lifediary.domain.usecases.location.GetLocationLiveDataUseCase
 import com.example.lifediary.domain.usecases.settings.GetMemorableDatesSectionEnabledUseCase
 import com.example.lifediary.domain.usecases.settings.GetPostAddressesSectionEnabledUseCase
@@ -12,6 +13,10 @@ import com.example.lifediary.domain.usecases.weather.GetCurrentWeatherUseCase
 import com.example.lifediary.domain.usecases.weather.UpdateCurrentWeatherUseCase
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
+import com.example.lifediary.presentation.utils.createStringWithPlusOrMinusSign
+import com.example.lifediary.presentation.utils.iconUrl
+import com.example.lifediary.presentation.utils.temperatureFeelsLikeString
+import com.example.lifediary.presentation.utils.temperatureString
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,14 +33,17 @@ class MainViewModel : BaseViewModel() {
     @Inject lateinit var getMemorableDatesSectionEnabledUseCase: GetMemorableDatesSectionEnabledUseCase
     @Inject lateinit var getWomanSectionEnabledUseCase: GetWomanSectionEnabledUseCase
 
-    val currentWeather by lazy { getCurrentWeatherUseCase() }
-    private val location by lazy { getLocationLiveDataUseCase() }
+    val currentWeather by lazy { getCurrentWeatherUseCase().asLiveData() }
+    val currentTemperature by lazy { currentWeather.map { it?.temperatureString } }
+    val currentTemperatureFeelsLike by lazy { currentWeather.map { it?.temperatureFeelsLikeString} }
+    val currentWeatherIconUrl by lazy { currentWeather.map { it?.iconUrl } }
+    private val location by lazy { getLocationLiveDataUseCase().asLiveData() }
     val locationName by lazy { location.map { it?.name } }
     val isCurrentWeatherViewVisible by lazy { location.map { it != null } }
-    val isShoppingListSectionVisible by lazy { getShoppingListSectionEnabledUseCase() }
-    val isPostAddressesSectionVisible by lazy { getPostAddressesSectionEnabledUseCase() }
-    val isMemorableDatesSectionVisible by lazy { getMemorableDatesSectionEnabledUseCase() }
-    val isWomanSectionVisible by lazy { getWomanSectionEnabledUseCase() }
+    val isShoppingListSectionVisible by lazy { getShoppingListSectionEnabledUseCase().asLiveData() }
+    val isPostAddressesSectionVisible by lazy { getPostAddressesSectionEnabledUseCase().asLiveData() }
+    val isMemorableDatesSectionVisible by lazy { getMemorableDatesSectionEnabledUseCase().asLiveData() }
+    val isWomanSectionVisible by lazy { getWomanSectionEnabledUseCase().asLiveData() }
 
     private val _isCurrentWeatherProgressVisible = MutableLiveData(false)
     val isCurrentWeatherProgressVisible: LiveData<Boolean>

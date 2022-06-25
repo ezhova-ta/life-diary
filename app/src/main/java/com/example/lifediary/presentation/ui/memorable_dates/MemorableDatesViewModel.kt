@@ -2,14 +2,15 @@ package com.example.lifediary.presentation.ui.memorable_dates
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.domain.models.MemorableDate
-import com.example.lifediary.presentation.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.usecases.memorable_dates.ClearMemorableDateListUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.DeleteMemorableDateFromIdUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.GetSortedMemorableDatesUseCase
+import com.example.lifediary.presentation.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
@@ -25,7 +26,7 @@ class MemorableDatesViewModel : BaseViewModel() {
     @Inject lateinit var deleteMemorableDateFromIdUseCase: DeleteMemorableDateFromIdUseCase
     @Inject lateinit var getSortedMemorableDatesUseCase: GetSortedMemorableDatesUseCase
 
-    val dates by lazy { getSortedMemorableDatesUseCase() }
+    val dates by lazy { getSortedMemorableDatesUseCase().asLiveData() }
     val isDatesVisible by lazy { dates.map { it.isNotEmpty() } }
 
     private val _showClearDateListConfirmationDialog = MutableLiveData(false)

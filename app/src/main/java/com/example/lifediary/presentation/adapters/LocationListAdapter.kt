@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.domain.models.Location
 import com.example.lifediary.databinding.LocationListItemBinding
+import com.example.lifediary.domain.models.Location
+import com.example.lifediary.presentation.utils.getFormattedCoordinatesString
 
 class LocationListAdapter(private val onItemClickListener: ListItemClickListener<Location>) :
         ListAdapter<Location, LocationListAdapter.ViewHolder>(LocationListItemDiffCallBack()) {

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.domain.models.MainNote
 import com.example.lifediary.databinding.MainNoteListItemBinding
+import com.example.lifediary.domain.models.MainNote
 import com.example.lifediary.presentation.utils.UiConstants.MainScreen.NOTE_VIEW_ROLLED_UP_MAX_LINES
 
 class MainNoteListAdapter(

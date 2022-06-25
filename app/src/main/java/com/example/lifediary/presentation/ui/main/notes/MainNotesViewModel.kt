@@ -2,6 +2,7 @@ package com.example.lifediary.presentation.ui.main.notes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.domain.models.MainNote
@@ -17,6 +18,7 @@ import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -28,10 +30,10 @@ class MainNotesViewModel : BaseViewModel() {
 	@Inject lateinit var saveMainNoteListSortMethodIdUseCase: SaveMainNoteListSortMethodIdUseCase
 	@Inject lateinit var getSortedMainNoteListUseCase: GetSortedMainNoteListUseCase
 
-	val noteList by lazy { getSortedMainNoteListUseCase() }
+	val noteList by lazy { getSortedMainNoteListUseCase().asLiveData() }
 	val isNotesVisible by lazy { noteList.map { it.isNotEmpty() } }
 	val isNoteListSortMethodDropDownVisible by lazy { isNotesVisible }
-	val noteListSortMethodId by lazy { getMainNoteListSortMethodIdUseCase() }
+	val noteListSortMethodId by lazy { getMainNoteListSortMethodIdUseCase().asLiveData() }
 
 	private val _showClearNoteListConfirmationDialog = MutableLiveData(false)
 	val showClearNoteListConfirmationDialog: LiveData<Boolean>

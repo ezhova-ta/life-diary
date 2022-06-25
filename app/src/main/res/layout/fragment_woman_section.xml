@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toStartOf="@id/menstruationPeriodListButton"
             android:layout_marginEnd="8dp"
             tools:text="19.02.2022 - 24.02.2022"
-            android:text="@{viewModel.lastMenstruationPeriod.toOutputFormattedString() ?? @string/no_added_menses}" />
+            android:text="@{viewModel.lastMenstruationPeriodString ?? @string/no_added_menses}" />
 
         <ImageButton
             android:id="@+id/menstruationPeriodListButton"
@@ -131,7 +131,7 @@
             app:layout_constraintTop_toBottomOf="@id/estimatedStartOfNextMenstruationPeriodTitle"
             app:layout_constraintStart_toStartOf="@id/estimatedStartOfNextMenstruationPeriodTitle"
             tools:text="20.03.2022 - 25.03.2022"
-            android:text="@{viewModel.estimatedNextMenstruationPeriod.toOutputFormattedString() ?? @string/no_data}" />
+            android:text="@{viewModel.estimatedNextMenstruationPeriodString ?? @string/no_data}" />
 
         <TextView
             android:id="@+id/delayOfMenstruation"

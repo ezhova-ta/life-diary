@@ -2,13 +2,14 @@ package com.example.lifediary.presentation.ui.shopping_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
+import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.models.ShoppingListItem
+import com.example.lifediary.domain.usecases.shopping_list.*
 import com.example.lifediary.presentation.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.presentation.Text
-import com.example.lifediary.di.DiScopes
-import com.example.lifediary.domain.usecases.shopping_list.*
 import com.example.lifediary.presentation.ui.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,10 +27,10 @@ class ShoppingListViewModel: BaseViewModel() {
     @Inject lateinit var deleteShoppingListItemByIdUseCase: DeleteShoppingListItemByIdUseCase
     @Inject lateinit var saveShoppingListSortMethodIdUseCase: SaveShoppingListSortMethodIdUseCase
 
-    val shoppingList by lazy { getSortedShoppingListUseCase() }
+    val shoppingList by lazy { getSortedShoppingListUseCase().asLiveData() }
     val isShoppingListVisible by lazy { shoppingList.map { it.isNotEmpty() } }
     val newShoppingListItemText = MutableLiveData("")
-    val shoppingListSortMethodId by lazy { getShoppingListSortMethodIdUseCase() }
+    val shoppingListSortMethodId by lazy { getShoppingListSortMethodIdUseCase().asLiveData() }
     val isShoppingListSortMethodDropDownVisible by lazy { shoppingList.map { it.isNotEmpty() } }
 
     private val _showClearShoppingListConfirmationDialog = MutableLiveData(false)

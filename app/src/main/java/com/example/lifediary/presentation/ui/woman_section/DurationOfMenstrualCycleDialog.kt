@@ -9,13 +9,15 @@ class DurationOfMenstrualCycleDialog: NumberPickerDialog() {
 
 	companion object {
 		const val FRAGMENT_TAG = "com.example.lifediary.presentation.ui.woman_section.DurationOfMenstrualCycleDialog"
+		private const val MIN_DURATION_OF_MENSTRUAL_CYCLE = 15
+		private const val MAX_DURATION_OF_MENSTRUAL_CYCLE = 50
 	}
 
 	override fun getMinValue() =
-		UiConstants.WomanSection.MIN_DURATION_OF_MENSTRUAL_CYCLE
+		MIN_DURATION_OF_MENSTRUAL_CYCLE
 
 	override fun getMaxValue() =
-		UiConstants.WomanSection.MAX_DURATION_OF_MENSTRUAL_CYCLE
+		MAX_DURATION_OF_MENSTRUAL_CYCLE
 
 	override fun getDefaultValue() =
 		viewModel.durationOfMenstrualCycle.value

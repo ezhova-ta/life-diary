@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lifediary.R
-import com.example.lifediary.domain.models.ShoppingListItem
 import com.example.lifediary.databinding.ShoppingListItemBinding
+import com.example.lifediary.domain.models.ShoppingListItem
 
 class ShoppingListAdapter(
 	private val onHighPriorityClickListener: ListItemClickListener<ShoppingListItem>,

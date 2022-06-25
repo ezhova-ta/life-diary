@@ -2,16 +2,19 @@ package com.example.lifediary.presentation.ui.woman_section
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.presentation.Text
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.woman_section.*
+import com.example.lifediary.presentation.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
+import com.example.lifediary.presentation.utils.toOutputFormattedString
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -26,11 +29,15 @@ class WomanSectionViewModel : BaseViewModel() {
     @Inject lateinit var saveDurationOfMenstrualCycleUseCase: SaveDurationOfMenstrualCycleUseCase
     @Inject lateinit var saveDurationOfMenstruationPeriodUseCase: SaveDurationOfMenstruationPeriodUseCase
 
-    val lastMenstruationPeriod by lazy { getLastMenstruationPeriodUseCase() }
-    val durationOfMenstrualCycle by lazy { getDurationOfMenstrualCycleUseCase() }
-    val durationOfMenstruationPeriod by lazy { getDurationOfMenstruationPeriodUseCase() }
-    val estimatedNextMenstruationPeriod by lazy { getEstimatedNextMenstruationPeriodUseCase() }
-    val delayOfMenstruation by lazy { getDelayOfMenstruationUseCase() }
+    val lastMenstruationPeriodString by lazy {
+        getLastMenstruationPeriodUseCase().map { it?.toOutputFormattedString() }.asLiveData()
+    }
+    val estimatedNextMenstruationPeriodString by lazy {
+        getEstimatedNextMenstruationPeriodUseCase().map { it?.toOutputFormattedString() }.asLiveData()
+    }
+    val durationOfMenstrualCycle by lazy { getDurationOfMenstrualCycleUseCase().asLiveData() }
+    val durationOfMenstruationPeriod by lazy { getDurationOfMenstruationPeriodUseCase().asLiveData() }
+    val delayOfMenstruation by lazy { getDelayOfMenstruationUseCase().asLiveData() }
     val delayOfMenstruationVisibility by lazy { delayOfMenstruation.map { it != null && it != 0L } }
 
     private val _showSetDurationOfMenstrualCycleDialog = MutableLiveData(false)

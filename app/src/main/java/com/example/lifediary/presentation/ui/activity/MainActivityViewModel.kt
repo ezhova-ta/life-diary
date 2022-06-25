@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
-import com.example.lifediary.presentation.utils.dates.CalendarBuilder
+import com.example.lifediary.domain.utils.CalendarBuilder
 import com.example.lifediary.presentation.utils.dates.DatesConverter.calendarToDay
 import com.github.terrakok.cicerone.Router
 import toothpick.Toothpick

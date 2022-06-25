@@ -3,19 +3,20 @@ package com.example.lifediary.presentation.ui.woman_section
 import androidx.core.util.Pair
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.domain.models.MenstruationPeriod
-import com.example.lifediary.presentation.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.models.MenstruationPeriod
 import com.example.lifediary.domain.usecases.woman_section.AddMenstruationPeriodUseCase
 import com.example.lifediary.domain.usecases.woman_section.ClearMenstruationPeriodListUseCase
 import com.example.lifediary.domain.usecases.woman_section.DeleteMenstruationPeriodByIdUseCase
 import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPeriodsUseCase
+import com.example.lifediary.domain.utils.CalendarBuilder
+import com.example.lifediary.domain.utils.isDayAfter
+import com.example.lifediary.domain.utils.toCalendar
+import com.example.lifediary.presentation.Text
 import com.example.lifediary.presentation.ui.BaseViewModel
-import com.example.lifediary.presentation.utils.dates.CalendarBuilder
-import com.example.lifediary.presentation.utils.dates.isDayAfter
-import com.example.lifediary.presentation.utils.dates.toCalendar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class MenstruationPeriodListViewModel : BaseViewModel() {
     @Inject lateinit var clearMenstruationPeriodListUseCase: ClearMenstruationPeriodListUseCase
     @Inject lateinit var addMenstruationPeriodUseCase: AddMenstruationPeriodUseCase
 
-    val menstruationPeriodList by lazy { getAllMenstruationPeriodsUseCase() }
+    val menstruationPeriodList by lazy { getAllMenstruationPeriodsUseCase().asLiveData() }
     val isMenstruationPeriodListVisible by lazy { menstruationPeriodList.map { it.isNotEmpty() } }
 
     private val _showDeleteMenstruationPeriodConfirmationDialog = MutableLiveData<Long?>(null)

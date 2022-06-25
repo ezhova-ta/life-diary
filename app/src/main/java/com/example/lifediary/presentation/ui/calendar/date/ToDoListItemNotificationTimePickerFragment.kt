@@ -10,7 +10,7 @@ import android.widget.TimePicker
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
-import com.example.lifediary.presentation.utils.dates.CalendarBuilder
+import com.example.lifediary.domain.utils.CalendarBuilder
 import kotlinx.parcelize.Parcelize
 import java.util.*
 

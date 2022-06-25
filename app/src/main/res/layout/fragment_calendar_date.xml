@@ -71,8 +71,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:booleanVisibility="@{viewModel.isWeatherForecastContainerVisible()}"
-                    app:dayTemperature='@{String.format("%s°C", viewModel.weatherForecastForDate.temperature.dayString)}'
-                    app:nightTemperature='@{String.format("%s°C", viewModel.weatherForecastForDate.temperature.nightString)}'
+                    app:dayTemperature='@{String.format("%s°C", viewModel.dayTemperature)}'
+                    app:nightTemperature='@{String.format("%s°C", viewModel.nightTemperature)}'
                     app:weatherIconUrl="@{viewModel.weatherForecastIconUrl}"
                     app:description="@{viewModel.weatherForecastDescription}"
                     app:windSpeed='@{String.format("%.1f%s", viewModel.weatherForecastForDate.windSpeed, @string/meters_per_second)}'

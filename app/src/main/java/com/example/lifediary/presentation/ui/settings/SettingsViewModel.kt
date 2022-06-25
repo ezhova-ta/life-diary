@@ -2,6 +2,7 @@ package com.example.lifediary.presentation.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.example.lifediary.R
 import com.example.lifediary.presentation.Text
 import com.example.lifediary.di.DiScopes
@@ -27,10 +28,10 @@ class SettingsViewModel : BaseViewModel() {
     @Inject lateinit var clearAllDateNotesUseCase: ClearAllDateNotesUseCase
     @Inject lateinit var clearAllToDoListsUseCase: ClearAllToDoListsUseCase
 
-    val isShoppingListSectionEnabled by lazy { getShoppingListSectionEnabledUseCase() }
-    val isPostAddressesSectionEnabled by lazy { getPostAddressesSectionEnabledUseCase() }
-    val isMemorableDatesSectionEnabled by lazy { getMemorableDatesSectionEnabledUseCase() }
-    val isWomanSectionEnabled by lazy { getWomanSectionEnabledUseCase() }
+    val isShoppingListSectionEnabled by lazy { getShoppingListSectionEnabledUseCase().asLiveData() }
+    val isPostAddressesSectionEnabled by lazy { getPostAddressesSectionEnabledUseCase().asLiveData() }
+    val isMemorableDatesSectionEnabled by lazy { getMemorableDatesSectionEnabledUseCase().asLiveData() }
+    val isWomanSectionEnabled by lazy { getWomanSectionEnabledUseCase().asLiveData() }
 
     private val _showClearCalendarNotesConfirmationDialog = MutableLiveData(false)
     val showClearCalendarNotesConfirmationDialog: LiveData<Boolean>

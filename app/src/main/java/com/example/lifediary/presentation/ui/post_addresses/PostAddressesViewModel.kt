@@ -2,20 +2,22 @@ package com.example.lifediary.presentation.ui.post_addresses
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.domain.models.PostAddress
-import com.example.lifediary.presentation.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.models.PostAddress
 import com.example.lifediary.domain.usecases.post_addresses.*
+import com.example.lifediary.domain.utils.searchers.PostAddressListItemSearcher
+import com.example.lifediary.presentation.Text
 import com.example.lifediary.presentation.navigation.Screens
-import com.example.lifediary.presentation.PostAddressListItemSearcher
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.example.lifediary.presentation.utils.isAllItemsBlank
 import com.example.lifediary.presentation.utils.livedata.TwoSourceLiveData
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -31,8 +33,8 @@ class PostAddressesViewModel: BaseViewModel() {
     private val postAddressListSearchQuery = MutableLiveData("")
     val addresses by lazy { getFilteredPostAddressList() }
     val isAddressListVisible by lazy { addresses.map { it.isNotEmpty() } }
-    val isEmptyAddressListTitleVisible by lazy { getPostAddressesUseCase().map { it.isEmpty() } }
-    val isPostAddressSearchViewVisible by lazy { getPostAddressesUseCase().map { it.isNotEmpty() } }
+    val isEmptyAddressListTitleVisible by lazy { getPostAddressesUseCase().map { it.isEmpty() }.asLiveData() }
+    val isPostAddressSearchViewVisible by lazy { getPostAddressesUseCase().map { it.isNotEmpty() }.asLiveData() }
 
     private val _isAddButtonVisible = MutableLiveData<Boolean>()
     val isAddButtonVisible: LiveData<Boolean>
@@ -87,7 +89,7 @@ class PostAddressesViewModel: BaseViewModel() {
     // TODO Move to UseCase?
     private fun getFilteredPostAddressList(): LiveData<List<PostAddress>> {
         return TwoSourceLiveData<List<PostAddress>, String?, List<PostAddress>>(
-            getPostAddressesUseCase(),
+            getPostAddressesUseCase().asLiveData(),
             postAddressListSearchQuery
         ) { originalList, searchQuery ->
             originalList ?: return@TwoSourceLiveData emptyList()

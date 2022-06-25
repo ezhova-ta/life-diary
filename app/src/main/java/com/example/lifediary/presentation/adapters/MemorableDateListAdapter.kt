@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.databinding.MemorableDateListItemBinding
-import com.example.lifediary.presentation.utils.dates.getDateString
+import com.example.lifediary.domain.models.MemorableDate
+import com.example.lifediary.domain.utils.howManyYearsAgo
+import com.example.lifediary.domain.utils.isToday
+import com.example.lifediary.presentation.utils.getDateString
 
 class MemorableDateListAdapter(
 	private val onEditItemClickListener: ListItemClickListener<MemorableDate>,

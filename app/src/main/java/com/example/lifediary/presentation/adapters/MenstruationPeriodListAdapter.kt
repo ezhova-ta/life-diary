@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lifediary.domain.models.MenstruationPeriod
 import com.example.lifediary.databinding.MenstruationPeriodListItemBinding
+import com.example.lifediary.domain.models.MenstruationPeriod
+import com.example.lifediary.presentation.utils.toOutputFormattedString
 
 class MenstruationPeriodListAdapter(
     private val onDeleteItemClickListener: ListItemClickListener<MenstruationPeriod>

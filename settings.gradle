@@ -1,2 +1,4 @@
 include ':app'
 rootProject.name = "Life Diary"
+include ':data'
+include ':domain'

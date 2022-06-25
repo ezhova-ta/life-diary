@@ -20,10 +20,15 @@ import com.example.lifediary.presentation.utils.OneTimeEvent
 import com.example.lifediary.presentation.utils.dates.isSameDay
 import com.example.lifediary.presentation.utils.dates.isWithinInterval
 import com.example.lifediary.presentation.utils.dates.toDateString
-import com.example.lifediary.presentation.utils.livedata.TwoSourceLiveData
+import com.example.lifediary.presentation.utils.dayString
+import com.example.lifediary.presentation.utils.iconUrl
+import com.example.lifediary.presentation.utils.nightString
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import java.util.*
@@ -50,24 +55,26 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var getWomanSectionEnabledUseCase: GetWomanSectionEnabledUseCase
 
 	val title = day.toDateString()
-	val toDoList by lazy { getSortedToDoListForDayUseCase(day) }
+	val toDoList by lazy { getSortedToDoListForDayUseCase(day).asLiveData() }
 	val isToDoListVisible by lazy { toDoList.map { it.isNotEmpty() } }
-	private val note by lazy { getDateNoteLiveDataUseCase(day) }
+	private val note by lazy { getDateNoteLiveDataUseCase(day).asLiveData() }
 	val noteText by lazy { note.map { it?.text } }
 	val isNoteVisible by lazy { note.map { it != null } }
 	val newToDoListItemText = MutableLiveData("")
-	val memorableDates by lazy { getMemorableDatesForDayUseCase(day) }
+	val memorableDates by lazy { getMemorableDatesForDayUseCase(day).asLiveData() }
 	val isMemorableDatesVisible by lazy { memorableDates.map { it.isNotEmpty() } }
 	val isMenstruationIconVisible by lazy { getMenstruationIconVisibility() }
 	val isEstimatedMenstruationIconVisible by lazy { getEstimatedMenstruationIconVisibility() }
 	val isCalendarIconVisible by lazy { getCalendarIconVisibility() }
-	val toDoListSortMethodId by lazy { getToDoListSortMethodIdUseCase() }
+	val toDoListSortMethodId by lazy { getToDoListSortMethodIdUseCase().asLiveData() }
 	val isDoListSortMethodDropDownVisible by lazy { toDoList.map { it.isNotEmpty() } }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
 	val weatherForecastForDate = weatherForecast.map { forecast ->
 		forecast.items.find { day.isSameDay(it.dateInSeconds) }
 	}
+	val dayTemperature = weatherForecastForDate.map { it?.temperature?.dayString }
+	val nightTemperature = weatherForecastForDate.map { it?.temperature?.nightString }
 
 	val isWeatherForecastContainerVisible = weatherForecastForDate.map { it != null }
 	val weatherForecastIconUrl = weatherForecastForDate.map { it?.weather?.firstOrNull()?.iconUrl }
@@ -113,30 +120,30 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	private fun getMenstruationIconVisibility(): LiveData<Boolean> {
-		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+		return combine(
 			getWomanSectionEnabledUseCase(),
 			isDayOfMenstruationPeriod(day)
 		) { isWomanSectionEnabled, isDayOfMenstruationPeriod ->
-			isWomanSectionEnabled == true && isDayOfMenstruationPeriod == true
-		}
+			isWomanSectionEnabled && isDayOfMenstruationPeriod
+		}.asLiveData()
 	}
 
-	private fun isDayOfMenstruationPeriod(day: Day): LiveData<Boolean> {
+	private fun isDayOfMenstruationPeriod(day: Day): Flow<Boolean> {
 		return getAllMenstruationPeriodsUseCase().map { menstruationPeriods ->
 			menstruationPeriods.find { day.isWithinInterval(it.startDate, it.endDate) } != null
 		}
 	}
 
 	private fun getEstimatedMenstruationIconVisibility(): LiveData<Boolean> {
-		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+		return combine(
 			getWomanSectionEnabledUseCase(),
 			isDayOfEstimatedMenstruationPeriod(day)
 		) { isWomanSectionEnabled, isDayOfEstimatedMenstruationPeriod ->
-			isWomanSectionEnabled == true && isDayOfEstimatedMenstruationPeriod == true
-		}
+			isWomanSectionEnabled && isDayOfEstimatedMenstruationPeriod
+		}.asLiveData()
 	}
 
-	private fun isDayOfEstimatedMenstruationPeriod(day: Day): LiveData<Boolean> {
+	private fun isDayOfEstimatedMenstruationPeriod(day: Day): Flow<Boolean> {
 		return getEstimatedNextMenstruationPeriodUseCase().map { menstruationPeriod ->
 			menstruationPeriod ?: return@map false
 			day.isWithinInterval(menstruationPeriod.startDate, menstruationPeriod.endDate)
@@ -144,21 +151,20 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	private fun getCalendarIconVisibility(): LiveData<Boolean> {
-		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+		return combine(
 			getWomanSectionEnabledUseCase(),
 			isDayNotIncludedInMenstruationPeriod(day)
 		) { isWomanSectionEnabled, dayNotIncludedInMenstruationPeriod ->
-			if(isWomanSectionEnabled == false) return@TwoSourceLiveData true
-			dayNotIncludedInMenstruationPeriod == true
-		}
+			!isWomanSectionEnabled || dayNotIncludedInMenstruationPeriod
+		}.asLiveData()
 	}
 
-	private fun isDayNotIncludedInMenstruationPeriod(day: Day): LiveData<Boolean> {
-		return TwoSourceLiveData<Boolean, Boolean, Boolean>(
+	private fun isDayNotIncludedInMenstruationPeriod(day: Day): Flow<Boolean> {
+		return combine(
 			isDayOfMenstruationPeriod(day),
 			isDayOfEstimatedMenstruationPeriod(day)
 		) { isDayOfMenstruationPeriod, isDayOfEstimatedMenstruationPeriod ->
-			isDayOfMenstruationPeriod != true && isDayOfEstimatedMenstruationPeriod != true
+			!isDayOfMenstruationPeriod && !isDayOfEstimatedMenstruationPeriod
 		}
 	}
 

@@ -65,10 +65,10 @@
             app:layout_constraintStart_toEndOf="@id/calendarView"
             app:layout_constraintEnd_toEndOf="parent"
             app:booleanVisibility="@{viewModel.isCurrentWeatherViewVisible()}"
-            app:temperature='@{String.format("%s°C", viewModel.currentWeather.temperatureString)}'
-            app:weatherIconUrl="@{viewModel.currentWeather.iconUrl}"
+            app:temperature='@{String.format("%s°C", viewModel.currentTemperature)}'
+            app:weatherIconUrl="@{viewModel.currentWeatherIconUrl}"
             app:description="@{viewModel.currentWeather.description}"
-            app:temperatureFeelsLike='@{String.format("%s %s°C", @string/feels_like, viewModel.currentWeather.temperatureFeelsLikeString)}'
+            app:temperatureFeelsLike='@{String.format("%s %s°C", @string/feels_like, viewModel.currentTemperatureFeelsLike)}'
             app:windSpeed='@{String.format("%.1f%s", viewModel.currentWeather.windSpeed, @string/meters_per_second)}'
             app:humidity='@{String.format("%d%s", viewModel.currentWeather.humidity, "%")}'
             app:progressVisibility="@{viewModel.isCurrentWeatherProgressVisible()}" />

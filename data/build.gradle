@@ -1,0 +1,85 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 30
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 30
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
+            buildConfigField "String", "WEATHER_API_ICON_URL", "\"https://openweathermap.org/img/wn/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
+            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
+        }
+
+        demo {
+            debuggable false
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
+            buildConfigField "String", "WEATHER_API_ICON_URL", "\"https://openweathermap.org/img/wn/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
+            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
+        }
+
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
+            buildConfigField "String", "WEATHER_API_ICON_URL", "\"https://openweathermap.org/img/wn/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
+            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(path: ':domain')
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    implementation "androidx.room:room-runtime:2.4.0-alpha04"
+    implementation "androidx.room:room-ktx:2.4.0-alpha04"
+    kapt "androidx.room:room-compiler:2.4.0-alpha04"
+
+    implementation 'com.github.stephanenicolas.toothpick:ktp:3.1.0'
+    kapt 'com.github.stephanenicolas.toothpick:toothpick-compiler:3.1.0'
+}
