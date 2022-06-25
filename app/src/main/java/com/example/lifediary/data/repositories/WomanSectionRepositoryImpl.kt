@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
-import com.example.lifediary.data.db.entities.MenstruationPeriodEntity
+import com.example.lifediary.data.db.models.MenstruationPeriodEntity
 import com.example.lifediary.data.repositories.mappers.MenstruationPeriodEntityMapper.toDomain
 import com.example.lifediary.data.repositories.mappers.MenstruationPeriodEntityMapper.toEntity
 import com.example.lifediary.domain.models.MenstruationPeriod

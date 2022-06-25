@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.MemorableDatesLocalDataSource
-import com.example.lifediary.data.db.entities.MemorableDateEntity
+import com.example.lifediary.data.db.models.MemorableDateEntity
 import com.example.lifediary.data.repositories.mappers.MemorableDateEntityMapper.toDomain
 import com.example.lifediary.data.repositories.mappers.MemorableDateEntityMapper.toEntity
 import com.example.lifediary.domain.models.Day

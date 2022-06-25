@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.MenstruationPeriodEntity
+import com.example.lifediary.data.db.models.MenstruationPeriodEntity
 import com.example.lifediary.domain.models.MenstruationPeriod
 
 object MenstruationPeriodEntityMapper : EntityMapper<MenstruationPeriodEntity, MenstruationPeriod> {

@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.PostAddressEntity
+import com.example.lifediary.data.db.models.PostAddressEntity
 import com.example.lifediary.domain.models.PostAddress
 
 object PostAddressEntityMapper : EntityMapper<PostAddressEntity, PostAddress> {

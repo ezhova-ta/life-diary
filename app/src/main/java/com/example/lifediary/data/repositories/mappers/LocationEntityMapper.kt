@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.LocationEntity
+import com.example.lifediary.data.db.models.LocationEntity
 import com.example.lifediary.domain.models.Location
 
 object LocationEntityMapper : EntityMapper<LocationEntity, Location> {

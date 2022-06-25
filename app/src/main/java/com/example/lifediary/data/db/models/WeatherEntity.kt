@@ -1,4 +1,4 @@
-package com.example.lifediary.data.db.entities
+package com.example.lifediary.data.db.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

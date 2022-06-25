@@ -2,7 +2,7 @@ package com.example.lifediary.data.datasources
 
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.db.dao.DateNoteDao
-import com.example.lifediary.data.db.entities.DateNoteEntity
+import com.example.lifediary.data.db.models.DateNoteEntity
 import javax.inject.Inject
 
 class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) {

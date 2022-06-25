@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.ShoppingListItemEntity
+import com.example.lifediary.data.db.models.ShoppingListItemEntity
 import com.example.lifediary.domain.models.ShoppingListItem
 
 object ShoppingListItemEntityMapper : EntityMapper<ShoppingListItemEntity, ShoppingListItem> {

@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.MemorableDateEntity
+import com.example.lifediary.data.db.models.MemorableDateEntity
 import com.example.lifediary.domain.models.MemorableDate
 
 object MemorableDateEntityMapper : EntityMapper<MemorableDateEntity, MemorableDate> {

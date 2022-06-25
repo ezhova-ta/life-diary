@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.ShoppingListLocalDataSource
-import com.example.lifediary.data.db.entities.ShoppingListItemEntity
+import com.example.lifediary.data.db.models.ShoppingListItemEntity
 import com.example.lifediary.data.repositories.mappers.ShoppingListItemEntityMapper.toDomain
 import com.example.lifediary.data.repositories.mappers.ShoppingListItemEntityMapper.toEntity
 import com.example.lifediary.domain.models.ShoppingListItem

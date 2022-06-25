@@ -2,7 +2,7 @@ package com.example.lifediary.data.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.lifediary.data.db.entities.MemorableDateEntity
+import com.example.lifediary.data.db.models.MemorableDateEntity
 
 @Dao
 interface MemorableDateDao {

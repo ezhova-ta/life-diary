@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.ShoppingListDao
-import com.example.lifediary.data.db.entities.ShoppingListItemEntity
+import com.example.lifediary.data.db.models.ShoppingListItemEntity
 import javax.inject.Inject
 
 class ShoppingListLocalDataSource @Inject constructor(

@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.DateNoteEntity
+import com.example.lifediary.data.db.models.DateNoteEntity
 import com.example.lifediary.domain.models.DateNote
 import com.example.lifediary.domain.models.Day
 

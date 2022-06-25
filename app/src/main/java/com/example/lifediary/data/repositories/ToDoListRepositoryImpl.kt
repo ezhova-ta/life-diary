@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.ToDoListLocalDataSource
-import com.example.lifediary.data.db.entities.ToDoListItemEntity
+import com.example.lifediary.data.db.models.ToDoListItemEntity
 import com.example.lifediary.data.repositories.mappers.ToDoListItemEntityMapper.toDomain
 import com.example.lifediary.data.repositories.mappers.ToDoListItemEntityMapper.toEntity
 import com.example.lifediary.domain.models.Day

@@ -4,7 +4,7 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.lifediary.data.db.dao.*
-import com.example.lifediary.data.db.entities.*
+import com.example.lifediary.data.db.models.*
 
 @Database(
     version = 17,

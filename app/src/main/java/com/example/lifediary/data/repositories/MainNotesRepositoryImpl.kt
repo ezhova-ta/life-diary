@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.MainNotesLocalDataSource
-import com.example.lifediary.data.db.entities.MainNoteEntity
+import com.example.lifediary.data.db.models.MainNoteEntity
 import com.example.lifediary.data.repositories.mappers.MainNoteEntityMapper.toDomain
 import com.example.lifediary.data.repositories.mappers.MainNoteEntityMapper.toEntity
 import com.example.lifediary.domain.models.MainNote

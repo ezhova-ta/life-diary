@@ -3,7 +3,7 @@ package com.example.lifediary.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.lifediary.data.datasources.PostAddressLocalDataSource
-import com.example.lifediary.data.db.entities.PostAddressEntity
+import com.example.lifediary.data.db.models.PostAddressEntity
 import com.example.lifediary.data.repositories.mappers.PostAddressEntityMapper.toDomain
 import com.example.lifediary.data.repositories.mappers.PostAddressEntityMapper.toEntity
 import com.example.lifediary.domain.models.PostAddress

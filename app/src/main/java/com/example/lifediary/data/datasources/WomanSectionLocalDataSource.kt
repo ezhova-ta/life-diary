@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.WomanSectionDataStoreManager
 import com.example.lifediary.data.db.dao.MenstruationPeriodDao
-import com.example.lifediary.data.db.entities.MenstruationPeriodEntity
+import com.example.lifediary.data.db.models.MenstruationPeriodEntity
 import javax.inject.Inject
 
 class WomanSectionLocalDataSource @Inject constructor(

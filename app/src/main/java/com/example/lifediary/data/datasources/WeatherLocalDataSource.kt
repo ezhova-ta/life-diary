@@ -3,8 +3,8 @@ package com.example.lifediary.data.datasources
 import androidx.lifecycle.LiveData
 import com.example.lifediary.data.db.dao.CurrentWeatherDao
 import com.example.lifediary.data.db.dao.LocationDao
-import com.example.lifediary.data.db.entities.LocationEntity
-import com.example.lifediary.data.db.entities.WeatherEntity
+import com.example.lifediary.data.db.models.LocationEntity
+import com.example.lifediary.data.db.models.WeatherEntity
 import javax.inject.Inject
 
 class WeatherLocalDataSource @Inject constructor(

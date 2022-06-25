@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.ToDoListDao
-import com.example.lifediary.data.db.entities.ToDoListItemEntity
+import com.example.lifediary.data.db.models.ToDoListItemEntity
 import java.util.*
 import javax.inject.Inject
 

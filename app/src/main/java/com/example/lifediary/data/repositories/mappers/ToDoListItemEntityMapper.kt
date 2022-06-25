@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.ToDoListItemEntity
+import com.example.lifediary.data.db.models.ToDoListItemEntity
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.models.ToDoListItem
 

@@ -1,6 +1,6 @@
 package com.example.lifediary.data.repositories.mappers
 
-import com.example.lifediary.data.db.entities.MainNoteEntity
+import com.example.lifediary.data.db.models.MainNoteEntity
 import com.example.lifediary.domain.models.MainNote
 
 object MainNoteEntityMapper : EntityMapper<MainNoteEntity, MainNote> {

@@ -2,7 +2,7 @@ package com.example.lifediary.data.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.lifediary.data.db.entities.PostAddressEntity
+import com.example.lifediary.data.db.models.PostAddressEntity
 
 @Dao
 interface PostAddressDao {
