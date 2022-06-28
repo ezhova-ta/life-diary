@@ -5,20 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.domain.models.MainNote
-import com.example.lifediary.presentation.MainNoteListSortMethodDropDownItem
-import com.example.lifediary.presentation.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.MainNoteListSortMethod
+import com.example.lifediary.domain.models.MainNote
 import com.example.lifediary.domain.usecases.notes.ClearMainNoteListUseCase
 import com.example.lifediary.domain.usecases.notes.GetMainNoteListSortMethodIdUseCase
 import com.example.lifediary.domain.usecases.notes.GetSortedMainNoteListUseCase
 import com.example.lifediary.domain.usecases.notes.SaveMainNoteListSortMethodIdUseCase
+import com.example.lifediary.presentation.MainNoteListDropDownItemSortMethodMapper.toSortMethod
+import com.example.lifediary.presentation.MainNoteListSortMethodDropDownItem
+import com.example.lifediary.presentation.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -81,11 +82,12 @@ class MainNotesViewModel : BaseViewModel() {
 		router.navigateTo(Screens.getAddEditMainNoteScreen(noteId))
 	}
 
-	fun onSortMethodSelected(sortMethod: MainNoteListSortMethodDropDownItem) {
+	fun onSortMethodSelected(dropDownItem: MainNoteListSortMethodDropDownItem) {
+		val sortMethod = dropDownItem.toSortMethod()
 		saveMainNoteListSortMethod(sortMethod)
 	}
 
-	private fun saveMainNoteListSortMethod(sortMethod: MainNoteListSortMethodDropDownItem) {
+	private fun saveMainNoteListSortMethod(sortMethod: MainNoteListSortMethod) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				saveMainNoteListSortMethodIdUseCase(sortMethod.id)

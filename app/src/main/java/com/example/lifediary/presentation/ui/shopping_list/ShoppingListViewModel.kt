@@ -6,8 +6,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.ShoppingListSortMethod
 import com.example.lifediary.domain.models.ShoppingListItem
 import com.example.lifediary.domain.usecases.shopping_list.*
+import com.example.lifediary.presentation.ShoppingListDropDownItemSortMethodMapper.toSortMethod
 import com.example.lifediary.presentation.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.presentation.Text
 import com.example.lifediary.presentation.ui.BaseViewModel
@@ -132,11 +134,12 @@ class ShoppingListViewModel: BaseViewModel() {
         }
     }
 
-    fun onSortMethodSelected(sortMethod: ShoppingListSortMethodDropDownItem) {
+    fun onSortMethodSelected(dropDownItem: ShoppingListSortMethodDropDownItem) {
+        val sortMethod = dropDownItem.toSortMethod()
         saveShoppingListSortMethod(sortMethod)
     }
 
-    private fun saveShoppingListSortMethod(sortMethod: ShoppingListSortMethodDropDownItem) {
+    private fun saveShoppingListSortMethod(sortMethod: ShoppingListSortMethod) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 saveShoppingListSortMethodIdUseCase(sortMethod.id)
