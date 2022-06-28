@@ -86,7 +86,6 @@ class PostAddressesViewModel: BaseViewModel() {
         Toothpick.inject(this, postAddressesScope)
     }
 
-    // TODO Move to UseCase?
     private fun getFilteredPostAddressList(): LiveData<List<PostAddress>> {
         return TwoSourceLiveData<List<PostAddress>, String?, List<PostAddress>>(
             getPostAddressesUseCase().asLiveData(),
