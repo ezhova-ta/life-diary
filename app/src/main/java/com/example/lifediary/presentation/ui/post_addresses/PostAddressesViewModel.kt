@@ -8,8 +8,9 @@ import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.models.PostAddress
 import com.example.lifediary.domain.usecases.post_addresses.*
+import com.example.lifediary.domain.utils.CalendarBuilder
 import com.example.lifediary.domain.utils.searchers.PostAddressListItemSearcher
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.example.lifediary.presentation.utils.isAllItemsBlank
@@ -97,7 +98,7 @@ class PostAddressesViewModel: BaseViewModel() {
         }
     }
 
-    // TODO Correct fun name (!)
+    // TODO Correct fun name
     fun onAttach() {
         postAddressListSearchQuery.value = ""
     }
@@ -178,16 +179,16 @@ class PostAddressesViewModel: BaseViewModel() {
 
     private fun createAddress(): PostAddress? {
         val addressId = editingAddress?.id
-        val addresseeName = this.addresseeName.value ?: return null
-        val addresseeStreet = this.addresseeStreet.value ?: return null
-        val addresseeBuildingNumber = this.addresseeBuildingNumber.value ?: return null
-        val addresseeApartmentNumber = this.addresseeApartmentNumber.value ?: return null
-        val addresseeCity = this.addresseeCity.value ?: return null
-        val addresseePostcode = this.addresseePostcode.value ?: return null
-        val addresseeEdgeRegion = this.addresseeEdgeRegion.value ?: return null
+        val addresseeName = addresseeName.value ?: return null
+        val addresseeStreet = addresseeStreet.value ?: return null
+        val addresseeBuildingNumber = addresseeBuildingNumber.value ?: return null
+        val addresseeApartmentNumber = addresseeApartmentNumber.value ?: return null
+        val addresseeCity = addresseeCity.value ?: return null
+        val addresseePostcode = addresseePostcode.value ?: return null
+        val addresseeEdgeRegion = addresseeEdgeRegion.value ?: return null
         val createdAt = editingAddress?.createdAt
 
-        val address = PostAddress(
+        return PostAddress(
             id = addressId,
             name = addresseeName,
             street = addresseeStreet,
@@ -195,11 +196,9 @@ class PostAddressesViewModel: BaseViewModel() {
             apartmentNumber = addresseeApartmentNumber,
             city = addresseeCity,
             postcode = addresseePostcode,
-            edgeRegion = addresseeEdgeRegion
+            edgeRegion = addresseeEdgeRegion,
+            createdAt = createdAt ?: CalendarBuilder().build()
         )
-
-        createdAt?.let { address.createdAt = it }
-        return address
     }
 
     private fun PostAddress.isEmpty(): Boolean {

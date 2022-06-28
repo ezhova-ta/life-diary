@@ -14,18 +14,20 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentCalendarDateBinding
 import com.example.lifediary.domain.models.Day
+import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.domain.utils.CalendarBuilder
+import com.example.lifediary.presentation.models.CalendarEvent
 import com.example.lifediary.presentation.NotificationScheduler
-import com.example.lifediary.presentation.ToDoListSortMethodDropDownItem
 import com.example.lifediary.presentation.adapters.CalendarEventListAdapter
 import com.example.lifediary.presentation.adapters.ListItemClickListener
 import com.example.lifediary.presentation.adapters.ToDoListAdapter
-import com.example.lifediary.presentation.toCalendarEventList
 import com.example.lifediary.presentation.ui.BaseFragment
 import com.example.lifediary.presentation.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICKED_TIME_BUNDLE_KEY
 import com.example.lifediary.presentation.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.Companion.PICK_TIME_REQUEST_KEY
 import com.example.lifediary.presentation.ui.calendar.date.ToDoListItemNotificationTimePickerFragment.ToDoListItemNotificationTime
+import com.example.lifediary.presentation.models.MemorableDateToCalendarEventAdapter
+import com.example.lifediary.presentation.models.dropdowns.ToDoListSortMethodDropDownItem
 import com.example.lifediary.presentation.utils.UiConstants.Calendar.NOTE_VIEW_ROLLED_UP_MAX_LINES
 import java.util.*
 import javax.inject.Inject
@@ -111,6 +113,14 @@ class CalendarDateFragment : BaseFragment() {
         viewModel.memorableDates.observe(viewLifecycleOwner) { dateList ->
             calendarEventListAdapter.submitList(dateList.toCalendarEventList())
         }
+    }
+
+    private fun List<MemorableDate>.toCalendarEventList(): List<CalendarEvent> {
+        return map { it.toCalendarEvent() }
+    }
+
+    private fun MemorableDate.toCalendarEvent(): CalendarEvent {
+        return MemorableDateToCalendarEventAdapter(this)
     }
 
     private fun setupAddToDoListItemInputView() {

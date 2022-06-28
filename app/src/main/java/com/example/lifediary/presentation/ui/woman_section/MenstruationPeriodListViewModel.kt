@@ -15,7 +15,7 @@ import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPer
 import com.example.lifediary.domain.utils.CalendarBuilder
 import com.example.lifediary.domain.utils.isDayAfter
 import com.example.lifediary.domain.utils.toCalendar
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.ui.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

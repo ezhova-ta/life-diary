@@ -1,6 +1,5 @@
 package com.example.lifediary.domain.utils.sorters
 
-import com.example.lifediary.domain.ToDoListSortMethod
 import com.example.lifediary.domain.models.ToDoListItem
 
 sealed interface ToDoListSorter : ListSorter<ToDoListItem> {

@@ -12,5 +12,5 @@ data class PostAddress(
 	val city: String,
 	val postcode: String,
 	val edgeRegion: String,
-	var createdAt: Calendar = CalendarBuilder().build()
+	val createdAt: Calendar = CalendarBuilder().build()
 )

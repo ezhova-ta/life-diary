@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.domain.models.DateNote
 import com.example.lifediary.domain.models.Day
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.calendar.AddDateNoteByTextUseCase
 import com.example.lifediary.domain.usecases.calendar.GetDateNoteLiveDataUseCase

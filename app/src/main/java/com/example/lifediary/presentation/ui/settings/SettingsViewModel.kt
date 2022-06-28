@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.R
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.calendar.ClearAllToDoListsUseCase
 import com.example.lifediary.domain.usecases.calendar.ClearAllDateNotesUseCase

@@ -7,7 +7,7 @@ import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.woman_section.*
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.example.lifediary.presentation.utils.toOutputFormattedString
@@ -38,7 +38,7 @@ class WomanSectionViewModel : BaseViewModel() {
     val durationOfMenstrualCycle by lazy { getDurationOfMenstrualCycleUseCase().asLiveData() }
     val durationOfMenstruationPeriod by lazy { getDurationOfMenstruationPeriodUseCase().asLiveData() }
     val delayOfMenstruation by lazy { getDelayOfMenstruationUseCase().asLiveData() }
-    val delayOfMenstruationVisibility by lazy { delayOfMenstruation.map { it != null && it != 0L } }
+    val delayOfMenstruationVisibility by lazy { delayOfMenstruation.map { isDelayOfMenstruationValid(it) } }
 
     private val _showSetDurationOfMenstrualCycleDialog = MutableLiveData(false)
     val showSetDurationOfMenstrualCycleDialog: LiveData<Boolean>
@@ -50,6 +50,10 @@ class WomanSectionViewModel : BaseViewModel() {
 
     init {
         bindScope()
+    }
+
+    private fun isDelayOfMenstruationValid(value: Long?): Boolean {
+        return value != null && value != 0L
     }
 
     override fun bindScope() {

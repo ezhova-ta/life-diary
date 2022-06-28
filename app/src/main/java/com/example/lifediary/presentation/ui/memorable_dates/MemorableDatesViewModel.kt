@@ -10,7 +10,7 @@ import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.usecases.memorable_dates.ClearMemorableDateListUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.DeleteMemorableDateFromIdUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.GetSortedMemorableDatesUseCase
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router

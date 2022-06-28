@@ -1,4 +1,4 @@
-package com.example.lifediary.presentation
+package com.example.lifediary.presentation.models
 
 import android.content.Context
 import androidx.annotation.StringRes

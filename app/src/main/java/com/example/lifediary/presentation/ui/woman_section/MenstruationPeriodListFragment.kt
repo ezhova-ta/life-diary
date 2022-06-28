@@ -19,7 +19,7 @@ class MenstruationPeriodListFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     companion object {
-        const val DATE_PICKER_FRAGMENT_TAG = "lifediary.presentation.ui.woman_section.datePicker"
+        const val DATE_PICKER_FRAGMENT_TAG = "lifediary.presentation.ui.woman_section.DatePicker"
 
         fun getInstance(): Fragment {
             return MenstruationPeriodListFragment()

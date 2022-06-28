@@ -6,12 +6,12 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
-import com.example.lifediary.domain.ShoppingListSortMethod
+import com.example.lifediary.domain.utils.sorters.ShoppingListSortMethod
 import com.example.lifediary.domain.models.ShoppingListItem
 import com.example.lifediary.domain.usecases.shopping_list.*
-import com.example.lifediary.presentation.ShoppingListDropDownItemSortMethodMapper.toSortMethod
-import com.example.lifediary.presentation.ShoppingListSortMethodDropDownItem
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
+import com.example.lifediary.presentation.models.dropdowns.ShoppingListDropDownItemSortMethodMapper.toSortMethod
+import com.example.lifediary.presentation.models.dropdowns.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.presentation.ui.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

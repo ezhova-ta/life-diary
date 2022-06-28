@@ -3,7 +3,6 @@ package com.example.lifediary.presentation.ui.main
 import androidx.lifecycle.*
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.models.Location
-import com.example.lifediary.domain.models.Weather
 import com.example.lifediary.domain.usecases.location.GetLocationLiveDataUseCase
 import com.example.lifediary.domain.usecases.settings.GetMemorableDatesSectionEnabledUseCase
 import com.example.lifediary.domain.usecases.settings.GetPostAddressesSectionEnabledUseCase
@@ -13,7 +12,6 @@ import com.example.lifediary.domain.usecases.weather.GetCurrentWeatherUseCase
 import com.example.lifediary.domain.usecases.weather.UpdateCurrentWeatherUseCase
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
-import com.example.lifediary.presentation.utils.createStringWithPlusOrMinusSign
 import com.example.lifediary.presentation.utils.iconUrl
 import com.example.lifediary.presentation.utils.temperatureFeelsLikeString
 import com.example.lifediary.presentation.utils.temperatureString

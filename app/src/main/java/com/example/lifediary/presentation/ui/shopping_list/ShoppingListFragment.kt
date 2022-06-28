@@ -12,8 +12,8 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.presentation.adapters.ListItemClickListener
 import com.example.lifediary.presentation.adapters.ShoppingListAdapter
-import com.example.lifediary.presentation.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.databinding.FragmentShoppingListBinding
+import com.example.lifediary.presentation.models.dropdowns.ShoppingListSortMethodDropDownItem
 import com.example.lifediary.presentation.ui.BaseFragment
 
 class ShoppingListFragment : BaseFragment() {

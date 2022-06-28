@@ -1,6 +1,5 @@
 package com.example.lifediary.domain.utils.sorters
 
-import com.example.lifediary.domain.MainNoteListSortMethod
 import com.example.lifediary.domain.models.MainNote
 
 sealed interface MainNoteListSorter : ListSorter<MainNote> {

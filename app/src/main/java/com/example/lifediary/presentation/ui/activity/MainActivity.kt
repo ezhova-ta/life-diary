@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNetworkConnectivityListener() {
-        // TODO Refactoring
         val networkRequest = NetworkRequest.Builder()
             .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)

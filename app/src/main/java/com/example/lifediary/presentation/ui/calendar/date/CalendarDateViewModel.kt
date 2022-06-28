@@ -3,7 +3,7 @@ package com.example.lifediary.presentation.ui.calendar.date
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
-import com.example.lifediary.domain.ToDoListSortMethod
+import com.example.lifediary.domain.utils.sorters.ToDoListSortMethod
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.domain.models.WeatherForecast
@@ -13,9 +13,9 @@ import com.example.lifediary.domain.usecases.settings.GetWomanSectionEnabledUseC
 import com.example.lifediary.domain.usecases.weather.GetForecastForLocationIdUseCase
 import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPeriodsUseCase
 import com.example.lifediary.domain.usecases.woman_section.GetEstimatedNextMenstruationPeriodUseCase
-import com.example.lifediary.presentation.Text
-import com.example.lifediary.presentation.ToDoListDropDownItemSortMethodMapper.toSortMethod
-import com.example.lifediary.presentation.ToDoListSortMethodDropDownItem
+import com.example.lifediary.presentation.models.Text
+import com.example.lifediary.presentation.models.dropdowns.ToDoListDropDownItemSortMethodMapper.toSortMethod
+import com.example.lifediary.presentation.models.dropdowns.ToDoListSortMethodDropDownItem
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.example.lifediary.presentation.utils.OneTimeEvent

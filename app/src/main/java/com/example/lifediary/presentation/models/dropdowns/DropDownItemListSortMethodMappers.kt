@@ -1,16 +1,17 @@
-package com.example.lifediary.presentation
+package com.example.lifediary.presentation.models.dropdowns
 
-import com.example.lifediary.domain.MainNoteListSortMethod
-import com.example.lifediary.domain.ShoppingListSortMethod
-import com.example.lifediary.domain.ToDoListSortMethod
+import com.example.lifediary.domain.utils.sorters.MainNoteListSortMethod
+import com.example.lifediary.domain.utils.sorters.ShoppingListSortMethod
+import com.example.lifediary.domain.utils.sorters.SortMethod
+import com.example.lifediary.domain.utils.sorters.ToDoListSortMethod
 
 /**
  * Converts a UI drop down item to a domain sort method and vice versa
  *
- * @param T UI drop down item type
- * @param R domain sort method
+ * @param T type of sort methods dropdown list item
+ * @param R type of domain sort method
  */
-sealed interface DropDownItemSortMethodMapper<T, R> {
+sealed interface DropDownItemSortMethodMapper<T: SortMethodDropDownItem, R: SortMethod> {
 	fun T.toSortMethod(): R
 	fun R.toDropDownItem(): T
 }

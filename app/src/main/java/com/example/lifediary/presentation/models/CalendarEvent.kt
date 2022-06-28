@@ -1,4 +1,4 @@
-package com.example.lifediary.presentation
+package com.example.lifediary.presentation.models
 
 abstract class CalendarEvent {
     abstract val name: String

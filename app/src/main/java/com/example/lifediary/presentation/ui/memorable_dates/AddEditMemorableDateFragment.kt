@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.databinding.FragmentAddEditMemorableDateBinding
+import com.example.lifediary.presentation.models.dropdowns.DayNumberDropDownItem
+import com.example.lifediary.presentation.models.dropdowns.MonthDropDownItem
 import com.example.lifediary.presentation.ui.BaseFragment
-import com.example.lifediary.presentation.DayNumberDropDownItem
-import com.example.lifediary.presentation.MonthDropDownItem
 
 class AddEditMemorableDateFragment : BaseFragment() {
 	override val viewModel: AddEditMemorableDateViewModel by viewModels(

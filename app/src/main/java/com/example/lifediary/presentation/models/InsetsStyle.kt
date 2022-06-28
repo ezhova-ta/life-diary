@@ -1,4 +1,4 @@
-package com.example.lifediary.presentation.utils
+package com.example.lifediary.presentation.models
 
 import android.graphics.Color
 import androidx.annotation.ColorInt

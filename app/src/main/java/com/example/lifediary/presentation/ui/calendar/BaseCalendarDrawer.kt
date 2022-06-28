@@ -1,7 +1,7 @@
 package com.example.lifediary.presentation.ui.calendar
 
 import android.view.View
-import com.example.lifediary.presentation.CalendarDaysData
+import com.example.lifediary.presentation.models.CalendarDaysData
 import com.example.lifediary.presentation.utils.*
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay

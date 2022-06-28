@@ -2,61 +2,11 @@ package com.example.lifediary.presentation.utils
 
 import com.example.lifediary.BuildConfig
 import com.example.lifediary.domain.models.*
-import com.example.lifediary.domain.utils.*
+import com.example.lifediary.domain.utils.CalendarBuilder
+import com.example.lifediary.domain.utils.getYear
+import com.example.lifediary.domain.utils.toDateString
 import com.example.lifediary.presentation.utils.dates.toDateString
 import java.util.*
-
-fun Int.createStringWithPlusOrMinusSign(): String {
-	if(this < 0 || this == 0) return toString()
-	return "+$this"
-}
-
-fun String.startWithCapitalLetter(): String {
-	return when(length) {
-		0 -> this
-		1 -> uppercase(Locale.getDefault())
-		else -> {
-			val firstLetterInUpperCase = substring(0, 1).uppercase(Locale.getDefault())
-			val otherLettersInLowercase = substring(1).uppercase(Locale.getDefault())
-			firstLetterInUpperCase + otherLettersInLowercase
-		}
-	}
-}
-
-fun Location.getFormattedCoordinatesString() =
-	"$lat, $lon"
-
-fun MenstruationPeriod.toOutputFormattedString(): String {
-	return "${startDate.toDateString()} - ${endDate.toDateString()}"
-}
-
-fun PostAddress.toOutputFormattedString() =
-	String.format(
-		"%s%s%s%s%s%s%s",
-		name,
-		getFormattedStringFor(street),
-		getFormattedStringFor(buildingNumber),
-		getFormattedStringFor(apartmentNumber),
-		getFormattedStringFor(city),
-		getFormattedStringFor(edgeRegion),
-		getFormattedStringFor(postcode)
-	)
-
-private fun PostAddress.getFormattedStringFor(addressPart: String) =
-	if(addressPart.isBlank()) {
-		""
-	} else {
-		" $addressPart"
-	}
-
-fun getDateString(dayNumber: Int, monthNumber: Int, year: Int? = null): String {
-	return if(year == null) {
-		val thisYear = CalendarBuilder().build().getYear()
-		Day(dayNumber, monthNumber, thisYear).toDateString(false)
-	} else {
-		Day(dayNumber, monthNumber, year).toDateString()
-	}
-}
 
 val WeatherForecastTemperature.dayString
 	get() = day.createStringWithPlusOrMinusSign()
@@ -85,9 +35,57 @@ val Weather.temperatureString
 val Weather.temperatureFeelsLikeString
 	get() = temperatureFeelsLike.createStringWithPlusOrMinusSign()
 
+private fun Int.createStringWithPlusOrMinusSign(): String {
+	if(this < 0 || this == 0) return toString()
+	return "+$this"
+}
+
+fun Location.getFormattedCoordinatesString() =
+	"$lat, $lon"
+
+fun MenstruationPeriod.toOutputFormattedString(): String {
+	return "${startDate.toDateString()} - ${endDate.toDateString()}"
+}
+
+fun PostAddress.toOutputFormattedString() =
+	String.format(
+		"%s%s%s%s%s%s%s",
+		name,
+		getFormattedStringFor(street),
+		getFormattedStringFor(buildingNumber),
+		getFormattedStringFor(apartmentNumber),
+		getFormattedStringFor(city),
+		getFormattedStringFor(edgeRegion),
+		getFormattedStringFor(postcode)
+	)
+
+private fun PostAddress.getFormattedStringFor(addressPart: String) =
+	if(addressPart.isBlank()) {
+		""
+	} else {
+		" $addressPart"
+	}
+
+fun MemorableDate.toOutputFormattedString(): String {
+	year?.let { return Day(dayNumber, monthNumber, it).toDateString() }
+	val thisYear = CalendarBuilder().build().getYear()
+	return Day(dayNumber, monthNumber, thisYear).toDateString(false)
+}
+
+fun String.startWithCapitalLetter(): String {
+	return when(length) {
+		0 -> this
+		1 -> uppercase(Locale.getDefault())
+		else -> {
+			val firstLetterInUpperCase = substring(0, 1).uppercase(Locale.getDefault())
+			val otherLettersInLowercase = substring(1).lowercase(Locale.getDefault())
+			firstLetterInUpperCase + otherLettersInLowercase
+		}
+	}
+}
+
 fun List<String>.isAllItemsBlank(): Boolean {
-	forEach { if(it.isNotBlank()) return false }
-	return true
+	return all { it.isBlank() }
 }
 
 /**

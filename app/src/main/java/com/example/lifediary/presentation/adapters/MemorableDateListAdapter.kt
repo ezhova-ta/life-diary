@@ -9,7 +9,7 @@ import com.example.lifediary.databinding.MemorableDateListItemBinding
 import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.utils.howManyYearsAgo
 import com.example.lifediary.domain.utils.isToday
-import com.example.lifediary.presentation.utils.getDateString
+import com.example.lifediary.presentation.utils.toOutputFormattedString
 
 class MemorableDateListAdapter(
 	private val onEditItemClickListener: ListItemClickListener<MemorableDate>,
@@ -27,7 +27,7 @@ class MemorableDateListAdapter(
 
     class MemorableDateListItemViewModel(memorableDateListItem: MemorableDate) {
         val memorableDateName = memorableDateListItem.name
-        val dateString = memorableDateListItem.run { getDateString(dayNumber, monthNumber, year) }
+        val dateString = memorableDateListItem.toOutputFormattedString()
         val yearsAgo = memorableDateListItem.howManyYearsAgo()
         val isTodayTitleVisible = memorableDateListItem.isToday()
         val isHowManyYearsAgoViewVisible = isTodayTitleVisible && yearsAgo != null

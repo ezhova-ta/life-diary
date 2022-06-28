@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import com.example.lifediary.R
 import com.example.lifediary.presentation.adapters.ListItemClickListener
 import com.example.lifediary.presentation.adapters.MainNoteListAdapter
-import com.example.lifediary.presentation.MainNoteListSortMethodDropDownItem
 import com.example.lifediary.databinding.FragmentMainNotesBinding
+import com.example.lifediary.presentation.models.dropdowns.MainNoteListSortMethodDropDownItem
 import com.example.lifediary.presentation.ui.BaseFragment
 
 class MainNotesFragment : BaseFragment() {

@@ -10,7 +10,7 @@ import com.example.lifediary.domain.usecases.memorable_dates.GetMemorableDatesUs
 import com.example.lifediary.domain.usecases.settings.GetWomanSectionEnabledUseCase
 import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPeriodsUseCase
 import com.example.lifediary.domain.usecases.woman_section.GetEstimatedNextMenstruationPeriodUseCase
-import com.example.lifediary.presentation.CalendarDaysData
+import com.example.lifediary.presentation.models.CalendarDaysData
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
@@ -41,7 +41,6 @@ class CalendarViewModel : BaseViewModel() {
 		Toothpick.inject(this, calendarScope)
 	}
 
-	// TODO Move to UseCase ?
 	private fun createCalendarDaysData(): LiveData<CalendarDaysData?> {
 		return combine(
 			getDaysWithNotesOrToDoList(),

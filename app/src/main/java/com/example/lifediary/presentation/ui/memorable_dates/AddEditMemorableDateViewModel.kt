@@ -2,14 +2,14 @@ package com.example.lifediary.presentation.ui.memorable_dates
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.presentation.DayNumberDropDownItem
-import com.example.lifediary.domain.models.MemorableDate
-import com.example.lifediary.presentation.MonthDropDownItem
-import com.example.lifediary.presentation.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.usecases.memorable_dates.AddMemorableDateUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.GetMemorableDateByIdUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.UpdateMemorableDateUseCase
+import com.example.lifediary.presentation.models.Text
+import com.example.lifediary.presentation.models.dropdowns.DayNumberDropDownItem
+import com.example.lifediary.presentation.models.dropdowns.MonthDropDownItem
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -92,16 +92,14 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
                 val date = existingDate
 
                 if(date == null) {
-                    addMemorableDateUseCase(
-						MemorableDate(
-                        name = name, dayNumber = dayNumber, monthNumber = monthNumber, year = year
-                    )
-					)
+                    addMemorableDateUseCase(MemorableDate(null, name, dayNumber, monthNumber,year))
                 } else {
-                    date.name = name
-                    date.dayNumber = dayNumber
-                    date.monthNumber = monthNumber
-                    date.year = year
+                    date.edit()
+                        .setName(name)
+                        .setDayNumber(dayNumber)
+                        .setMonthNumber(monthNumber)
+                        .setYear(year)
+                        .apply()
                     updateMemorableDateUseCase(date)
                 }
 

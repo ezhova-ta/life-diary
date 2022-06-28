@@ -1,6 +1,6 @@
 package com.example.lifediary.presentation.ui.calendar
 
-import com.example.lifediary.presentation.CalendarDaysData
+import com.example.lifediary.presentation.models.CalendarDaysData
 import com.example.lifediary.presentation.utils.dates.isSameDay
 import com.example.lifediary.presentation.utils.dates.isSameDayInYear
 import com.example.lifediary.presentation.utils.dates.isWithinInterval

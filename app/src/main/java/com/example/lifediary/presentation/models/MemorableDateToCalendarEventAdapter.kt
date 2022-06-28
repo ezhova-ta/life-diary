@@ -1,4 +1,4 @@
-package com.example.lifediary.presentation
+package com.example.lifediary.presentation.models
 
 import com.example.lifediary.domain.models.MemorableDate
 
@@ -34,12 +34,4 @@ class MemorableDateToCalendarEventAdapter(private val memorableDate: MemorableDa
 		result = 31 * result + (year ?: 0)
 		return result
 	}
-}
-
-fun List<MemorableDate>.toCalendarEventList(): List<CalendarEvent> {
-	return map { it.toCalendarEvent() }
-}
-
-private fun MemorableDate.toCalendarEvent(): CalendarEvent {
-	return MemorableDateToCalendarEventAdapter(this)
 }

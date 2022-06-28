@@ -1,6 +1,5 @@
 package com.example.lifediary.domain.utils.sorters
 
-import com.example.lifediary.domain.ShoppingListSortMethod
 import com.example.lifediary.domain.models.ShoppingListItem
 
 sealed interface ShoppingListSorter : ListSorter<ShoppingListItem> {

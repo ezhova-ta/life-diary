@@ -3,7 +3,7 @@ package com.example.lifediary.presentation.ui.main.notes
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.domain.models.MainNote
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.notes.AddMainNoteFromTextUseCase
 import com.example.lifediary.domain.usecases.notes.DeleteMainNoteByIdUseCase

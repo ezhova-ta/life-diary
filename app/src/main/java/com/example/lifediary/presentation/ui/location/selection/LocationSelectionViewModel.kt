@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.lifediary.R
 import com.example.lifediary.domain.models.Location
-import com.example.lifediary.presentation.Text
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.location.FindLocationsUseCase
 import com.example.lifediary.domain.usecases.location.SaveLocationUseCase

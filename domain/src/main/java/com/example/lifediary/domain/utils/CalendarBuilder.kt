@@ -21,34 +21,27 @@ class CalendarBuilder(private val calendar: Calendar = Calendar.getInstance()) {
 	)
 
 	fun setDayOfMonth(value: Int): CalendarBuilder {
-		calendar.set(Calendar.DATE, value)
-		return this
+		return apply { calendar.set(Calendar.DATE, value) }
 	}
 
 	fun setMonthNumber(value: Int): CalendarBuilder {
-		CalendarBuilder(321)
-		calendar.set(Calendar.MONTH, value - 1)
-		return this
+		return apply { calendar.set(Calendar.MONTH, value - 1) }
 	}
 
 	fun setYearNumber(value: Int): CalendarBuilder {
-		calendar.set(Calendar.YEAR, value)
-		return this
+		return apply { calendar.set(Calendar.YEAR, value) }
 	}
 
 	fun setHourOfDay(value: Int): CalendarBuilder {
-		calendar.set(Calendar.HOUR_OF_DAY, value)
-		return this
+		return apply { calendar.set(Calendar.HOUR_OF_DAY, value) }
 	}
 
 	fun setMinutes(value: Int): CalendarBuilder {
-		calendar.set(Calendar.MINUTE, value)
-		return this
+		return apply { calendar.set(Calendar.MINUTE, value) }
 	}
 
 	fun setSeconds(value: Int): CalendarBuilder {
-		calendar.set(Calendar.SECOND, value)
-		return this
+		return apply { calendar.set(Calendar.SECOND, value) }
 	}
 
 	fun build(): Calendar {

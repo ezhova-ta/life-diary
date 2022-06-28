@@ -1,4 +1,4 @@
-package com.example.lifediary.presentation
+package com.example.lifediary.presentation.models
 
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.models.MemorableDate

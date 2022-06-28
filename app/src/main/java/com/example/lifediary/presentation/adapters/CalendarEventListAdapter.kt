@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lifediary.databinding.CalendarEventListItemBinding
-import com.example.lifediary.presentation.CalendarEvent
+import com.example.lifediary.presentation.models.CalendarEvent
 
 class CalendarEventListAdapter : ListAdapter<CalendarEvent, CalendarEventListAdapter.ViewHolder>(EventListItemDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
