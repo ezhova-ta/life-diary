@@ -22,7 +22,7 @@ class AddEditMemorableDateFragment : BaseFragment() {
 	private val binding get() = _binding!!
 
 	companion object {
-		private const val DATE_ID_KEY = "com.example.lifediary.presentation.ui.main.notes.NOTE_ID_KEY"
+		private const val DATE_ID_KEY = "lifediary.presentation.ui.memorable_dates.NOTE_ID_KEY"
 		private const val DEFAULT_DATE_ID = 0L
 
 		fun getInstance(noteId: Long?): AddEditMemorableDateFragment {

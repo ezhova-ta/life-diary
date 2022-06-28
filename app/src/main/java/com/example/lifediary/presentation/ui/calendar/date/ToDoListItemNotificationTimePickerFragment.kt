@@ -16,9 +16,9 @@ import java.util.*
 
 class ToDoListItemNotificationTimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 	companion object {
-		const val TAG = "com.example.lifediary.presentation.ui.calendar.date.ToDoListItemNotificationTimePickerFragment"
-		const val PICK_TIME_REQUEST_KEY = "com.example.lifediary.presentation.ui.calendar.date.PICK_TIME_REQUEST_KEY"
-		const val PICKED_TIME_BUNDLE_KEY = "com.example.lifediary.presentation.ui.calendar.date.PICKED_TIME_KEY"
+		const val TAG = "lifediary.presentation.ui.calendar.date.ToDoListItemNotificationTimePickerFragment"
+		const val PICK_TIME_REQUEST_KEY = "lifediary.presentation.ui.calendar.date.PICK_TIME_REQUEST_KEY"
+		const val PICKED_TIME_BUNDLE_KEY = "lifediary.presentation.ui.calendar.date.PICKED_TIME_KEY"
 	}
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -21,9 +21,9 @@ class AddEditDateNoteFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     companion object {
-        private const val DAY_NUMBER_KEY = "com.example.lifediary.presentation.ui.calendar.date.note.DAY_NUMBER_KEY"
-        private const val MONTH_NUMBER_KEY = "com.example.lifediary.presentation.ui.calendar.date.note.MONTH_NUMBER_KEY"
-        private const val YEAR_KEY = "com.example.lifediary.presentation.ui.calendar.date.note.YEAR_KEY"
+        private const val DAY_NUMBER_KEY = "lifediary.presentation.ui.calendar.date.note.DAY_NUMBER_KEY"
+        private const val MONTH_NUMBER_KEY = "lifediary.presentation.ui.calendar.date.note.MONTH_NUMBER_KEY"
+        private const val YEAR_KEY = "lifediary.presentation.ui.calendar.date.note.YEAR_KEY"
 
         fun getInstance(day: Day): Fragment {
             val fragment = AddEditDateNoteFragment()

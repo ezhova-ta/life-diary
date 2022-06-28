@@ -9,7 +9,7 @@ import androidx.annotation.StringRes
 import com.example.lifediary.R
 
 object Notifications {
-	private const val TO_DO_LIST_CHANNEL_ID = "com.example.lifediary.TO_DO_LIST_CHANNEL"
+	private const val TO_DO_LIST_CHANNEL_ID = "lifediary.presentation.TO_DO_LIST_CHANNEL_ID"
 	@StringRes private const val TO_DO_LIST_CHANNEL_NAME = R.string.to_do_list_channel
 
 	fun ensureChannel(context: Context, channel: Channel) {

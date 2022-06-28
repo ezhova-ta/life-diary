@@ -39,9 +39,9 @@ class CalendarDateFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     companion object {
-        private const val DAY_NUMBER_KEY = "com.example.lifediary.presentation.ui.calendar.DAY_NUMBER_KEY"
-        private const val MONTH_NUMBER_KEY = "com.example.lifediary.presentation.ui.calendar.MONTH_NUMBER_KEY"
-        private const val YEAR_KEY = "com.example.lifediary.presentation.ui.calendar.YEAR_KEY"
+        private const val DAY_NUMBER_KEY = "lifediary.presentation.ui.calendar.date.DAY_NUMBER_KEY"
+        private const val MONTH_NUMBER_KEY = "lifediary.presentation.ui.calendar.date.MONTH_NUMBER_KEY"
+        private const val YEAR_KEY = "presentation.ui.calendar.date.EAR_KEY"
 
         fun getInstance(day: Day): Fragment {
             val fragment = CalendarDateFragment()

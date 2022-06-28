@@ -20,7 +20,7 @@ class AddEditMainNoteFragment : BaseFragment() {
 	private val binding get() = _binding!!
 
 	companion object {
-		private const val NOTE_ID_KEY = "com.example.lifediary.presentation.ui.main.notes.NOTE_ID_KEY"
+		private const val NOTE_ID_KEY = "lifediary.presentation.ui.main.notes.NOTE_ID_KEY"
 		private const val DEFAULT_NOTE_ID = 0L
 
 		fun getInstance(noteId: Long?): AddEditMainNoteFragment {
