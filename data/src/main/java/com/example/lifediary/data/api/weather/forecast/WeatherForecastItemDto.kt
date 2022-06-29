@@ -1,6 +1,7 @@
 package com.example.lifediary.data.api.weather.forecast
 
 import com.example.lifediary.data.api.weather.WeatherDescriptionDto
+import com.example.lifediary.data.repositories.mappers.api.WeatherDescriptionDtoMapper.toDomain
 import com.example.lifediary.domain.models.WeatherDescription
 import com.example.lifediary.domain.models.WeatherForecastItem
 import com.google.gson.annotations.SerializedName
@@ -21,23 +22,4 @@ data class WeatherForecastItemDto(
     val gustSpeed: Double,
     val clouds: Double,
     val rain: Double
-) {
-    fun toDomain(): WeatherForecastItem {
-        return WeatherForecastItem(
-            dateInSeconds = dateInSeconds,
-            temperature = temperature.toDomain(),
-            temperatureFeelsLike = temperatureFeelsLike.toDomain(),
-            pressure = pressure,
-            humidity = humidity,
-            weather = weather.toDomain(),
-            windSpeed = windSpeed,
-            gustSpeed = gustSpeed,
-            clouds = clouds,
-            rain = rain
-        )
-    }
-
-    private fun List<WeatherDescriptionDto>.toDomain(): List<WeatherDescription> {
-        return map { it.toDomain() }
-    }
-}
+)

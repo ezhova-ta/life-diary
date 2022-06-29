@@ -2,8 +2,8 @@ package com.example.lifediary.data.repositories
 
 import com.example.lifediary.data.datasources.MainNotesLocalDataSource
 import com.example.lifediary.data.db.models.MainNoteEntity
-import com.example.lifediary.data.repositories.mappers.MainNoteEntityMapper.toDomain
-import com.example.lifediary.data.repositories.mappers.MainNoteEntityMapper.toEntity
+import com.example.lifediary.data.repositories.mappers.db.MainNoteEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.db.MainNoteEntityMapper.toEntity
 import com.example.lifediary.domain.models.MainNote
 import com.example.lifediary.domain.repositories.MainNotesRepository
 import kotlinx.coroutines.flow.Flow

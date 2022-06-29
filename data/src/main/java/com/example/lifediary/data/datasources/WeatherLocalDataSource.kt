@@ -13,7 +13,7 @@ class WeatherLocalDataSource @Inject constructor(
     private val locationDao: LocationDao,
     private val currentWeatherDao: CurrentWeatherDao
 ) {
-    fun getLocationLiveData(): Flow<LocationEntity?> {
+    fun getLocationFlow(): Flow<LocationEntity?> {
         return locationDao.getLiveData()
     }
 

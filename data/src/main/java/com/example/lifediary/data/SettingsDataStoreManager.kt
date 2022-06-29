@@ -46,16 +46,16 @@ class SettingsDataStoreManager @Inject constructor(private val context: Context)
 
     companion object {
         val IS_SHOPPING_LIST_SECTION_ENABLED_KEY = booleanPreferencesKey(
-            "com.example.lifediary.data.IS_SHOPPING_LIST_SECTION_ENABLED"
+            "lifediary.data.IS_SHOPPING_LIST_SECTION_ENABLED"
         )
         val IS_POST_ADDRESSES_SECTION_ENABLED_KEY = booleanPreferencesKey(
-            "com.example.lifediary.data.IS_POST_ADDRESSES_SECTION_ENABLED"
+            "lifediary.data.IS_POST_ADDRESSES_SECTION_ENABLED"
         )
         val IS_MEMORABLE_DATES_SECTION_ENABLED_KEY = booleanPreferencesKey(
-            "com.example.lifediary.data.IS_MEMORABLE_DATES_SECTION_ENABLED_KEY"
+            "lifediary.data.IS_MEMORABLE_DATES_SECTION_ENABLED_KEY"
         )
         val IS_WOMAN_SECTION_ENABLED_KEY = booleanPreferencesKey(
-            "com.example.lifediary.data.IS_WOMAN_SECTION_ENABLED_KEY"
+            "lifediary.data.IS_WOMAN_SECTION_ENABLED_KEY"
         )
         const val IS_SHOPPING_LIST_SECTION_ENABLED_DEFAULT_VALUE = true
         const val IS_POST_ADDRESSES_SECTION_ENABLED_DEFAULT_VALUE = true

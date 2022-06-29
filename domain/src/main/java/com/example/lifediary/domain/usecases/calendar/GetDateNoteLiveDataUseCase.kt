@@ -10,6 +10,6 @@ class GetDateNoteLiveDataUseCase @Inject constructor(
 	private val noteRepository: DateNoteRepository
 ) {
 	operator fun invoke(day: Day): Flow<DateNote?> {
-		return noteRepository.getNoteLiveData(day)
+		return noteRepository.getNoteFlow(day)
 	}
 }

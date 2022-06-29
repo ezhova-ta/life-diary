@@ -9,6 +9,6 @@ class GetLocationLiveDataUseCase @Inject constructor(
 	private val weatherRepository: WeatherRepository
 ) {
 	operator fun invoke(): Flow<Location?> {
-		return weatherRepository.getLocationLiveData()
+		return weatherRepository.getLocationFlow()
 	}
 }

@@ -36,11 +36,11 @@ class WomanSectionDataStoreManager @Inject constructor(private val context: Cont
 
 	companion object {
 		private val DURATION_OF_MENSTRUAL_CYCLE_KEY = intPreferencesKey(
-			"com.example.lifediary.data.DURATION_OF_MENSTRUAL_CYCLE_KEY"
+			"lifediary.data.DURATION_OF_MENSTRUAL_CYCLE_KEY"
 		)
 
 		private val DURATION_OF_MENSTRUATION_PERIOD_KEY = intPreferencesKey(
-			"com.example.lifediary.data.DURATION_OF_MENSTRUATION_PERIOD_KEY"
+			"lifediary.data.DURATION_OF_MENSTRUATION_PERIOD_KEY"
 		)
 
 		private const val DEFAULT_DURATION_OF_MENSTRUAL_CYCLE = 28

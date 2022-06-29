@@ -2,8 +2,8 @@ package com.example.lifediary.data.repositories
 
 import com.example.lifediary.data.datasources.MemorableDatesLocalDataSource
 import com.example.lifediary.data.db.models.MemorableDateEntity
-import com.example.lifediary.data.repositories.mappers.MemorableDateEntityMapper.toDomain
-import com.example.lifediary.data.repositories.mappers.MemorableDateEntityMapper.toEntity
+import com.example.lifediary.data.repositories.mappers.db.MemorableDateEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.db.MemorableDateEntityMapper.toEntity
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.repositories.MemorableDatesRepository

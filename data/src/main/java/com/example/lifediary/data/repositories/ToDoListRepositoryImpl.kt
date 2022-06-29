@@ -2,8 +2,8 @@ package com.example.lifediary.data.repositories
 
 import com.example.lifediary.data.datasources.ToDoListLocalDataSource
 import com.example.lifediary.data.db.models.ToDoListItemEntity
-import com.example.lifediary.data.repositories.mappers.ToDoListItemEntityMapper.toDomain
-import com.example.lifediary.data.repositories.mappers.ToDoListItemEntityMapper.toEntity
+import com.example.lifediary.data.repositories.mappers.db.ToDoListItemEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.db.ToDoListItemEntityMapper.toEntity
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.domain.repositories.ToDoListRepository

@@ -2,8 +2,8 @@ package com.example.lifediary.data.repositories
 
 import com.example.lifediary.data.datasources.ShoppingListLocalDataSource
 import com.example.lifediary.data.db.models.ShoppingListItemEntity
-import com.example.lifediary.data.repositories.mappers.ShoppingListItemEntityMapper.toDomain
-import com.example.lifediary.data.repositories.mappers.ShoppingListItemEntityMapper.toEntity
+import com.example.lifediary.data.repositories.mappers.db.ShoppingListItemEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.db.ShoppingListItemEntityMapper.toEntity
 import com.example.lifediary.domain.models.ShoppingListItem
 import com.example.lifediary.domain.repositories.ShoppingListRepository
 import kotlinx.coroutines.flow.Flow

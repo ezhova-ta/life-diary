@@ -1,4 +1,4 @@
-package com.example.lifediary.data.repositories.mappers
+package com.example.lifediary.data.repositories.mappers.db
 
 /**
  * Converts a data store entity to a domain entity and vice versa

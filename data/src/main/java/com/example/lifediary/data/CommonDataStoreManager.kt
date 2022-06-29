@@ -33,15 +33,15 @@ class CommonDataStoreManager @Inject constructor(private val context: Context) {
 
 	companion object {
 		val SHOPPING_LIST_SORT_METHOD_ID = intPreferencesKey(
-			"com.example.lifediary.data.SHOPPING_LIST_SORT_METHOD_ID"
+			"lifediary.data.SHOPPING_LIST_SORT_METHOD_ID"
 		)
 
 		val TO_DO_LIST_SORT_METHOD_ID = intPreferencesKey(
-			"com.example.lifediary.data.TO_DO_LIST_SORT_METHOD_ID"
+			"lifediary.data.TO_DO_LIST_SORT_METHOD_ID"
 		)
 
 		val MAIN_NOTE_LIST_SORT_METHOD_ID = intPreferencesKey(
-			"com.example.lifediary.data.MAIN_NOTE_LIST_SORT_METHOD_ID"
+			"lifediary.data.MAIN_NOTE_LIST_SORT_METHOD_ID"
 		)
 	}
 

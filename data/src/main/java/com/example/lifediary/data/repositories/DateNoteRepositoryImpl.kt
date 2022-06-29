@@ -2,8 +2,8 @@ package com.example.lifediary.data.repositories
 
 import com.example.lifediary.data.datasources.DateNoteLocalDataSource
 import com.example.lifediary.data.db.models.DateNoteEntity
-import com.example.lifediary.data.repositories.mappers.DateNoteEntityMapper.toDomain
-import com.example.lifediary.data.repositories.mappers.DateNoteEntityMapper.toEntity
+import com.example.lifediary.data.repositories.mappers.db.DateNoteEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.db.DateNoteEntityMapper.toEntity
 import com.example.lifediary.domain.models.DateNote
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.repositories.DateNoteRepository
@@ -16,8 +16,8 @@ import javax.inject.Singleton
 class DateNoteRepositoryImpl @Inject constructor(
     private val localDataSource: DateNoteLocalDataSource
 ) : DateNoteRepository {
-    override fun getNoteLiveData(day: Day): Flow<DateNote?> {
-        return localDataSource.getNoteLiveData(day.dayNumber, day.monthNumber, day.year).map { entity ->
+    override fun getNoteFlow(day: Day): Flow<DateNote?> {
+        return localDataSource.getNoteFlow(day.dayNumber, day.monthNumber, day.year).map { entity ->
             entity?.toDomain()
         }
     }

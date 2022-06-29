@@ -1,4 +1,4 @@
-package com.example.lifediary.data.repositories.mappers
+package com.example.lifediary.data.repositories.mappers.db
 
 import com.example.lifediary.data.db.models.MemorableDateEntity
 import com.example.lifediary.domain.models.MemorableDate

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
 	suspend fun findLocations(name: String): List<Location>
-	fun getLocationLiveData(): Flow<Location?>
+	fun getLocationFlow(): Flow<Location?>
 	suspend fun getLocation(): Location?
 	suspend fun saveLocation(location: Location)
 	fun getCurrentWeather(): Flow<Weather?>

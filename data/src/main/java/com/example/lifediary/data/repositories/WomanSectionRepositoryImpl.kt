@@ -2,8 +2,8 @@ package com.example.lifediary.data.repositories
 
 import com.example.lifediary.data.datasources.WomanSectionLocalDataSource
 import com.example.lifediary.data.db.models.MenstruationPeriodEntity
-import com.example.lifediary.data.repositories.mappers.MenstruationPeriodEntityMapper.toDomain
-import com.example.lifediary.data.repositories.mappers.MenstruationPeriodEntityMapper.toEntity
+import com.example.lifediary.data.repositories.mappers.db.MenstruationPeriodEntityMapper.toDomain
+import com.example.lifediary.data.repositories.mappers.db.MenstruationPeriodEntityMapper.toEntity
 import com.example.lifediary.domain.models.MenstruationPeriod
 import com.example.lifediary.domain.repositories.WomanSectionRepository
 import kotlinx.coroutines.flow.Flow

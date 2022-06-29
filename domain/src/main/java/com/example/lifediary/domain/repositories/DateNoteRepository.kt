@@ -5,7 +5,7 @@ import com.example.lifediary.domain.models.Day
 import kotlinx.coroutines.flow.Flow
 
 interface DateNoteRepository {
-	fun getNoteLiveData(day: Day): Flow<DateNote?>
+	fun getNoteFlow(day: Day): Flow<DateNote?>
 	suspend fun getNote(day: Day): DateNote?
 	fun getAllNotes(): Flow<List<DateNote>>
 	suspend fun addNote(text: String, day: Day)
