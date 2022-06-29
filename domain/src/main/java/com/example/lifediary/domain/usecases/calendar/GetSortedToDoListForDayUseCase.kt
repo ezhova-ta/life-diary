@@ -19,15 +19,5 @@ class GetSortedToDoListForDayUseCase @Inject constructor(
 			val sorter = ToDoListSorter.Factory.getInstance(sortMethodId)
 			sorter.sort(originalToDoList)
 		}
-
-		// TODO Remove commented code
-//		return TwoSourceLiveData<List<ToDoListItem>, Int?, List<ToDoListItem>>(
-//			toDoListRepository.getToDoList(day),
-//			toDoListRepository.getToDoListSortMethodId()
-//		) { originalList, sortMethodId ->
-//			originalList ?: return@TwoSourceLiveData emptyList()
-//			val sorter = ToDoListSorter.Factory.getInstance(sortMethodId)
-//			sorter.sort(originalList)
-//		}
 	}
 }

@@ -23,3 +23,7 @@ fun getNowDayNumber(): Int {
 fun getNowMonthNumber(): Int {
     return CalendarBuilder().build().getMonthNumber()
 }
+
+fun getNowYear(): Int {
+    return CalendarBuilder().build().getYear()
+}

@@ -11,7 +11,7 @@ data class MemorableDate(
 		return Editor(this)
 	}
 
-	class Editor (private val memorableDate: MemorableDate) {
+	class Editor(private val memorableDate: MemorableDate) {
 		fun setName(name: String): Editor {
 			return apply { memorableDate.name = name }
 		}
