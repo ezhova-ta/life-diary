@@ -1,4 +1,4 @@
-## <img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/life_diary_logo.svg" align="center" width="32"> Life Diary. Не просто ежедневник, а лучший друг и помощник
+## <img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/life_diary_logo.svg" align="center" width="32"> Life Diary. Не просто ежедневник, а друг и помощник
 <b>Планируйте дела и получайте напоминания о них, оставляйте заметки на каждый день, сохраняйте памятные даты, составляйте список покупок, записывайте почтовые адреса. Специальный раздел позволяет следить за женским здоровьем (по умолчанию отключён).</b>  
 ### Главный экран
 Выбирайте разделы, которые вы хотите использовать. Если есть доступ к интернету, приложение покажет актуальную информацию о погоде для выбранного местоположения.    
