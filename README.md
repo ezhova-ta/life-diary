@@ -2,7 +2,7 @@
 <b>Планируйте дела и получайте напоминания о них, оставляйте заметки на каждый день, сохраняйте памятные даты, составляйте список покупок, записывайте почтовые адреса. Специальный раздел позволяет следить за женским здоровьем (по умолчанию отключён).</b>  
 ### Главный экран
 Выбирайте разделы, которые вы хотите использовать. Если есть доступ к интернету, приложение покажет актуальную информацию о погоде для выбранного местоположения.    
-<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/main_screen_1.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/settings.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/main_screen_2.png" width="320">  
+<img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/main_screen_1.png" width="320"><img src="https://github.com/ezhova-ta/life-diary/blob/develop/app/src/main/assets/readme_media/settings.png" width="320">
 
 ### Календарь
 Оставляйте заметки на каждый день, планируйте дела и отмечайте те, что уже выполнены. Чтобы ни о чём не забыть, укажите, в какое время вы хотите получить напоминание. Если есть доступ к интернету, приложение покажет прогноз погоды на выбранный день.  
