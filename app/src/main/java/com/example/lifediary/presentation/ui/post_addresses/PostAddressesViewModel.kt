@@ -9,12 +9,11 @@ import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.models.PostAddress
 import com.example.lifediary.domain.usecases.post_addresses.*
 import com.example.lifediary.domain.utils.CalendarBuilder
-import com.example.lifediary.domain.utils.searchers.PostAddressListItemSearcher
 import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.example.lifediary.presentation.utils.isAllItemsBlank
-import com.example.lifediary.presentation.utils.livedata.TwoSourceLiveData
+import com.example.lifediary.presentation.utils.search
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +31,7 @@ class PostAddressesViewModel: BaseViewModel() {
     @Inject lateinit var clearPostAddressListUseCase: ClearPostAddressListUseCase
 
     private val postAddressListSearchQuery = MutableLiveData("")
-    val addresses by lazy { getFilteredPostAddressList() }
+    val addresses by lazy { getPostAddressesUseCase().asLiveData().search(postAddressListSearchQuery) }
     val isAddressListVisible by lazy { addresses.map { it.isNotEmpty() } }
     val isEmptyAddressListTitleVisible by lazy { getPostAddressesUseCase().map { it.isEmpty() }.asLiveData() }
     val isPostAddressSearchViewVisible by lazy { getPostAddressesUseCase().map { it.isNotEmpty() }.asLiveData() }
@@ -85,17 +84,6 @@ class PostAddressesViewModel: BaseViewModel() {
     override fun bindScope() {
         val postAddressesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.POST_ADDRESSES_SCOPE)
         Toothpick.inject(this, postAddressesScope)
-    }
-
-    private fun getFilteredPostAddressList(): LiveData<List<PostAddress>> {
-        return TwoSourceLiveData<List<PostAddress>, String?, List<PostAddress>>(
-            getPostAddressesUseCase().asLiveData(),
-            postAddressListSearchQuery
-        ) { originalList, searchQuery ->
-            originalList ?: return@TwoSourceLiveData emptyList()
-            searchQuery ?: return@TwoSourceLiveData originalList
-            PostAddressListItemSearcher().search(originalList, searchQuery)
-        }
     }
 
     // TODO Correct fun name

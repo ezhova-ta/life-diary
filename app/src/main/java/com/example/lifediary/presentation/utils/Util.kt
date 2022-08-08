@@ -1,11 +1,15 @@
 package com.example.lifediary.presentation.utils
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.example.lifediary.BuildConfig
 import com.example.lifediary.domain.models.*
 import com.example.lifediary.domain.utils.CalendarBuilder
 import com.example.lifediary.domain.utils.getYear
+import com.example.lifediary.domain.utils.searchers.PostAddressListItemSearcher
 import com.example.lifediary.domain.utils.toDateString
 import com.example.lifediary.presentation.utils.dates.toDateString
+import com.example.lifediary.presentation.utils.livedata.TwoSourceLiveData
 import java.util.*
 
 val WeatherForecastTemperature.dayString
@@ -111,4 +115,15 @@ private fun <T> Array<T>.splitAndSwap(splitIndex: Int): Array<T> {
 	val head = sliceArray(0 until splitIndex)
 	val tail = sliceArray(splitIndex..indices.last)
 	return tail + head
+}
+
+fun LiveData<List<PostAddress>>.search(query: LiveData<String?>): LiveData<List<PostAddress>> {
+	return TwoSourceLiveData<List<PostAddress>, String?, List<PostAddress>>(
+		this,
+		query
+	) { originalList, searchQuery ->
+		originalList ?: return@TwoSourceLiveData emptyList()
+		searchQuery ?: return@TwoSourceLiveData originalList
+		PostAddressListItemSearcher().search(originalList, searchQuery)
+	}
 }
