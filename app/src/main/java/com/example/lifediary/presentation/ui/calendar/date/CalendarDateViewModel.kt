@@ -3,6 +3,9 @@ package com.example.lifediary.presentation.ui.calendar.date
 import androidx.lifecycle.*
 import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.CALENDAR_DATE_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.utils.sorters.ToDoListSortMethod
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.models.ToDoListItem
@@ -104,7 +107,11 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	override fun bindScope() {
-		val calendarDateScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.CALENDAR_DATE_SCOPE)
+		val calendarDateScope = Toothpick.openScopes(
+			APP_SCOPE,
+			MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+			CALENDAR_DATE_VIEW_MODEL_SCOPE
+		)
 		Toothpick.inject(this, calendarDateScope)
 	}
 
@@ -359,7 +366,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	override fun onCleared() {
-		Toothpick.closeScope(DiScopes.CALENDAR_DATE_SCOPE)
+		Toothpick.closeScope(CALENDAR_DATE_VIEW_MODEL_SCOPE)
 		super.onCleared()
 	}
 

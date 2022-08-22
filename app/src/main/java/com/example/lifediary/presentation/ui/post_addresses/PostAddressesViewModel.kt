@@ -6,6 +6,9 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.POST_ADDRESSES_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.PostAddress
 import com.example.lifediary.domain.usecases.post_addresses.*
 import com.example.lifediary.domain.utils.CalendarBuilder
@@ -82,7 +85,11 @@ class PostAddressesViewModel: BaseViewModel() {
     }
 
     override fun bindScope() {
-        val postAddressesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.POST_ADDRESSES_SCOPE)
+        val postAddressesScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            POST_ADDRESSES_VIEW_MODEL_SCOPE
+        )
         Toothpick.inject(this, postAddressesScope)
     }
 
@@ -280,7 +287,7 @@ class PostAddressesViewModel: BaseViewModel() {
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.POST_ADDRESSES_SCOPE)
+        Toothpick.closeScope(POST_ADDRESSES_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 }

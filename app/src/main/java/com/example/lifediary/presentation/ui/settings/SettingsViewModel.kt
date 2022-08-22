@@ -6,6 +6,9 @@ import androidx.lifecycle.asLiveData
 import com.example.lifediary.R
 import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.SETTINGS_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.usecases.calendar.ClearAllToDoListsUseCase
 import com.example.lifediary.domain.usecases.calendar.ClearAllDateNotesUseCase
 import com.example.lifediary.domain.usecases.settings.*
@@ -46,7 +49,11 @@ class SettingsViewModel : BaseViewModel() {
     }
 
     override fun bindScope() {
-        val settingsScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.SETTINGS_SCOPE)
+        val settingsScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            SETTINGS_VIEW_MODEL_SCOPE
+        )
         Toothpick.inject(this, settingsScope)
     }
 
@@ -157,7 +164,7 @@ class SettingsViewModel : BaseViewModel() {
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.SETTINGS_SCOPE)
+        Toothpick.closeScope(SETTINGS_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 }

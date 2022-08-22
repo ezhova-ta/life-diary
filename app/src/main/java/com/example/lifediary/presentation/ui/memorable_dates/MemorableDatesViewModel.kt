@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.MEMORABLE_DATES_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.usecases.memorable_dates.ClearMemorableDateListUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.DeleteMemorableDateFromIdUseCase
@@ -42,7 +44,11 @@ class MemorableDatesViewModel : BaseViewModel() {
     }
 
     override fun bindScope() {
-        val memorableDatesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MEMORABLE_DATES_SCOPE)
+        val memorableDatesScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            MEMORABLE_DATES_VIEW_MODEL_SCOPE
+        )
         Toothpick.inject(this, memorableDatesScope)
     }
 
@@ -109,7 +115,7 @@ class MemorableDatesViewModel : BaseViewModel() {
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.MEMORABLE_DATES_SCOPE)
+        Toothpick.closeScope(MEMORABLE_DATES_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 }

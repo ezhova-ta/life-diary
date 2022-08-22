@@ -7,6 +7,9 @@ import com.example.lifediary.R
 import com.example.lifediary.domain.models.Location
 import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.LOCATION_SELECTION_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.usecases.location.FindLocationsUseCase
 import com.example.lifediary.domain.usecases.location.SaveLocationUseCase
 import com.example.lifediary.presentation.ui.BaseViewModel
@@ -37,7 +40,11 @@ class LocationSelectionViewModel : BaseViewModel() {
     }
 
     override fun bindScope() {
-        val locationSelectionScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.LOCATION_SELECTION_SCOPE)
+        val locationSelectionScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            LOCATION_SELECTION_SCOPE
+        )
         Toothpick.inject(this, locationSelectionScope)
     }
 
@@ -79,7 +86,7 @@ class LocationSelectionViewModel : BaseViewModel() {
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.LOCATION_SELECTION_SCOPE)
+        Toothpick.closeScope(LOCATION_SELECTION_SCOPE)
         super.onCleared()
     }
 }

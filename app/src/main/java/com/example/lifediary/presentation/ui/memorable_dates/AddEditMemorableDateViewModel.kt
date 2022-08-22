@@ -2,7 +2,9 @@ package com.example.lifediary.presentation.ui.memorable_dates
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.ADD_EDIT_MEMORABLE_DATE_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.MemorableDate
 import com.example.lifediary.domain.usecases.memorable_dates.AddMemorableDateUseCase
 import com.example.lifediary.domain.usecases.memorable_dates.GetMemorableDateByIdUseCase
@@ -43,7 +45,11 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
     }
 
     override fun bindScope() {
-        val memorableDatesScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MEMORABLE_DATES_SCOPE)
+        val memorableDatesScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            ADD_EDIT_MEMORABLE_DATE_VIEW_MODEL_SCOPE
+        )
         Toothpick.inject(this, memorableDatesScope)
     }
 
@@ -111,7 +117,7 @@ class AddEditMemorableDateViewModel(private val dateId: Long? = null) : BaseView
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.MEMORABLE_DATES_SCOPE)
+        Toothpick.closeScope(ADD_EDIT_MEMORABLE_DATE_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 

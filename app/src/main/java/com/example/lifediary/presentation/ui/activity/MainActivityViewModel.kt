@@ -3,6 +3,8 @@ package com.example.lifediary.presentation.ui.activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.example.lifediary.domain.utils.CalendarBuilder
@@ -24,7 +26,7 @@ class MainActivityViewModel : BaseViewModel() {
     }
 
     override fun bindScope() {
-        val appScope = Toothpick.openScope(DiScopes.APP_SCOPE)
+        val appScope = Toothpick.openScopes(APP_SCOPE, MAIN_ACTIVITY_VIEW_MODEL_SCOPE)
         Toothpick.inject(this, appScope)
     }
 
@@ -46,7 +48,7 @@ class MainActivityViewModel : BaseViewModel() {
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.APP_SCOPE)
+        Toothpick.closeScope(MAIN_ACTIVITY_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 }

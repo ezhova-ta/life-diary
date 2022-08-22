@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.WOMAN_SECTION_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.usecases.woman_section.*
 import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.navigation.Screens
@@ -57,7 +59,11 @@ class WomanSectionViewModel : BaseViewModel() {
     }
 
     override fun bindScope() {
-        val womanSectionScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.WOMAN_SECTION_SCOPE)
+        val womanSectionScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            WOMAN_SECTION_VIEW_MODEL_SCOPE
+        )
         Toothpick.inject(this, womanSectionScope)
     }
 
@@ -112,7 +118,7 @@ class WomanSectionViewModel : BaseViewModel() {
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.WOMAN_SECTION_SCOPE)
+        Toothpick.closeScope(WOMAN_SECTION_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 }

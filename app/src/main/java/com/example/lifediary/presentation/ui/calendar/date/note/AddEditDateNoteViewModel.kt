@@ -6,6 +6,9 @@ import com.example.lifediary.domain.models.DateNote
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.ADD_EDIT_DATE_NOTE_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.usecases.calendar.AddDateNoteByTextUseCase
 import com.example.lifediary.domain.usecases.calendar.GetDateNoteLiveDataUseCase
 import com.example.lifediary.domain.usecases.calendar.GetDateNoteUseCase
@@ -39,7 +42,11 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	override fun bindScope() {
-		val calendarDateScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.CALENDAR_DATE_SCOPE)
+		val calendarDateScope = Toothpick.openScopes(
+			APP_SCOPE,
+			MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+			ADD_EDIT_DATE_NOTE_VIEW_MODEL_SCOPE
+		)
 		Toothpick.inject(this, calendarDateScope)
 	}
 
@@ -82,6 +89,11 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 				showMessage(Text.TextResource(R.string.failed_to_save))
 			}
 		}
+	}
+
+	override fun onCleared() {
+		Toothpick.closeScope(ADD_EDIT_DATE_NOTE_VIEW_MODEL_SCOPE)
+		super.onCleared()
 	}
 
 	class Factory(private val day: Day) : ViewModelProvider.Factory {

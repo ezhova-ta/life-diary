@@ -16,6 +16,7 @@ abstract class BaseViewModel : ViewModel() {
         get() = _copyToClipboardEvent
 
     abstract fun bindScope()
+//    abstract fun clearScope()
 
     protected fun showMessage(text: Text) {
         _popupMessageEvent.postValue(OneTimeEvent(text))

@@ -6,6 +6,9 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.SHOPPING_LIST_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.utils.sorters.ShoppingListSortMethod
 import com.example.lifediary.domain.models.ShoppingListItem
 import com.example.lifediary.domain.usecases.shopping_list.*
@@ -44,7 +47,11 @@ class ShoppingListViewModel: BaseViewModel() {
     }
 
     override fun bindScope() {
-        val shoppingListScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.SHOPPING_LIST_SCOPE)
+        val shoppingListScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            SHOPPING_LIST_VIEW_MODEL_SCOPE
+        )
         Toothpick.inject(this, shoppingListScope)
     }
 
@@ -150,7 +157,7 @@ class ShoppingListViewModel: BaseViewModel() {
     }
 
     override fun onCleared() {
-        Toothpick.closeScope(DiScopes.SHOPPING_LIST_SCOPE)
+        Toothpick.closeScope(SHOPPING_LIST_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 }

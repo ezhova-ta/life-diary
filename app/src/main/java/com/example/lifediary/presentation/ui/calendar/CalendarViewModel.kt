@@ -3,6 +3,9 @@ package com.example.lifediary.presentation.ui.calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.CALENDAR_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.usecases.calendar.GetAllToDoListsUseCase
 import com.example.lifediary.domain.usecases.calendar.GetDateNotesUseCase
@@ -37,7 +40,11 @@ class CalendarViewModel : BaseViewModel() {
 	}
 
 	override fun bindScope() {
-		val calendarScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.CALENDAR_SCOPE)
+		val calendarScope = Toothpick.openScopes(
+			APP_SCOPE,
+			MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+			CALENDAR_VIEW_MODEL_SCOPE
+		)
 		Toothpick.inject(this, calendarScope)
 	}
 
@@ -91,7 +98,7 @@ class CalendarViewModel : BaseViewModel() {
 	}
 
 	override fun onCleared() {
-		Toothpick.closeScope(DiScopes.CALENDAR_SCOPE)
+		Toothpick.closeScope(CALENDAR_VIEW_MODEL_SCOPE)
 		super.onCleared()
 	}
 }

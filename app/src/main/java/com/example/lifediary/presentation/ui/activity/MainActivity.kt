@@ -13,6 +13,9 @@ import com.example.lifediary.presentation.Notifications
 import com.example.lifediary.R
 import com.example.lifediary.databinding.ActivityMainBinding
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.presentation.utils.IntentConstants.ToDoListItemNotification.ACTION_SHOW_CURRENT_CALENDAR_DAY
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -38,7 +41,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindAppScope() {
-        val appScope = Toothpick.openScope(DiScopes.APP_SCOPE)
+        val appScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            MAIN_ACTIVITY_SCOPE
+        )
         Toothpick.inject(this, appScope)
     }
 
@@ -95,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        Toothpick.closeScope(DiScopes.APP_SCOPE)
+        Toothpick.closeScope(MAIN_ACTIVITY_SCOPE)
         super.onDestroy()
     }
 }

@@ -5,13 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.di.DiScopes
-import com.example.lifediary.domain.utils.sorters.MainNoteListSortMethod
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_NOTES_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.MainNote
 import com.example.lifediary.domain.usecases.notes.ClearMainNoteListUseCase
 import com.example.lifediary.domain.usecases.notes.GetMainNoteListSortMethodIdUseCase
 import com.example.lifediary.domain.usecases.notes.GetSortedMainNoteListUseCase
 import com.example.lifediary.domain.usecases.notes.SaveMainNoteListSortMethodIdUseCase
+import com.example.lifediary.domain.utils.sorters.MainNoteListSortMethod
 import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.models.dropdowns.MainNoteListDropDownItemSortMethodMapper.toSortMethod
 import com.example.lifediary.presentation.models.dropdowns.MainNoteListSortMethodDropDownItem
@@ -45,7 +47,11 @@ class MainNotesViewModel : BaseViewModel() {
 	}
 
 	override fun bindScope() {
-		val mainScreenScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MAIN_SCREEN_SCOPE)
+		val mainScreenScope = Toothpick.openScopes(
+			APP_SCOPE,
+			MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+			MAIN_NOTES_VIEW_MODEL_SCOPE
+		)
 		Toothpick.inject(this, mainScreenScope)
 	}
 
@@ -98,7 +104,7 @@ class MainNotesViewModel : BaseViewModel() {
 	}
 
 	override fun onCleared() {
-		Toothpick.closeScope(DiScopes.MAIN_SCREEN_SCOPE)
+		Toothpick.closeScope(MAIN_NOTES_VIEW_MODEL_SCOPE)
 		super.onCleared()
 	}
 }

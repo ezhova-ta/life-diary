@@ -2,6 +2,9 @@ package com.example.lifediary.presentation.ui.main
 
 import androidx.lifecycle.*
 import com.example.lifediary.di.DiScopes
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_SCREEN_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.Location
 import com.example.lifediary.domain.usecases.location.GetLocationLiveDataUseCase
 import com.example.lifediary.domain.usecases.settings.GetMemorableDatesSectionEnabledUseCase
@@ -58,7 +61,11 @@ class MainViewModel : BaseViewModel() {
     }
 
     override fun bindScope() {
-        val mainScreenScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MAIN_SCREEN_SCOPE)
+        val mainScreenScope = Toothpick.openScopes(
+            APP_SCOPE,
+            MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+            MAIN_SCREEN_VIEW_MODEL_SCOPE
+        )
         Toothpick.inject(this, mainScreenScope)
     }
 
@@ -125,7 +132,7 @@ class MainViewModel : BaseViewModel() {
 
     override fun onCleared() {
         location.removeObserver(locationObserver)
-        Toothpick.closeScope(DiScopes.MAIN_SCREEN_SCOPE)
+        Toothpick.closeScope(MAIN_SCREEN_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
 }

@@ -2,13 +2,15 @@ package com.example.lifediary.presentation.ui.main.notes
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
+import com.example.lifediary.di.DiScopes.ADD_EDIT_MAIN_NOTE_VIEW_MODEL_SCOPE
+import com.example.lifediary.di.DiScopes.APP_SCOPE
+import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.MainNote
-import com.example.lifediary.presentation.models.Text
-import com.example.lifediary.di.DiScopes
 import com.example.lifediary.domain.usecases.notes.AddMainNoteFromTextUseCase
 import com.example.lifediary.domain.usecases.notes.DeleteMainNoteByIdUseCase
 import com.example.lifediary.domain.usecases.notes.GetMainNoteByIdUseCase
 import com.example.lifediary.domain.usecases.notes.UpdateMainNoteUseCase
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -41,7 +43,11 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 	}
 
 	override fun bindScope() {
-		val mainScreenScope = Toothpick.openScopes(DiScopes.APP_SCOPE, DiScopes.MAIN_SCREEN_SCOPE)
+		val mainScreenScope = Toothpick.openScopes(
+			APP_SCOPE,
+			MAIN_ACTIVITY_VIEW_MODEL_SCOPE,
+			ADD_EDIT_MAIN_NOTE_VIEW_MODEL_SCOPE
+		)
 		Toothpick.inject(this, mainScreenScope)
 	}
 
@@ -114,7 +120,7 @@ class AddEditMainNoteViewModel(private val noteId: Long? = null) : BaseViewModel
 	}
 
 	override fun onCleared() {
-		Toothpick.closeScope(DiScopes.MAIN_SCREEN_SCOPE)
+		Toothpick.closeScope(ADD_EDIT_MAIN_NOTE_VIEW_MODEL_SCOPE)
 		super.onCleared()
 	}
 
