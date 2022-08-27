@@ -1,8 +1,6 @@
 package com.example.lifediary.presentation.utils
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
-import com.example.lifediary.BuildConfig
 import com.example.lifediary.domain.models.*
 import com.example.lifediary.domain.utils.CalendarBuilder
 import com.example.lifediary.domain.utils.getYear
@@ -26,12 +24,6 @@ val WeatherForecastTemperature.minString
 
 val WeatherForecastTemperature.maxString
 	get() = max?.createStringWithPlusOrMinusSign()
-
-val Weather.iconUrl
-	get() = "${BuildConfig.WEATHER_API_ICON_URL}$icon@2x.png"
-
-val WeatherDescription.iconUrl
-	get() = "${BuildConfig.WEATHER_API_ICON_URL}$icon@2x.png"
 
 val Weather.temperatureString
 	get() = temperature.createStringWithPlusOrMinusSign()

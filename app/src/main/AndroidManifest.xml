@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon_calendar_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LifeDiary">
+        android:theme="@style/Theme.LifeDiary"
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name="com.example.lifediary.presentation.ui.activity.SplashActivity"

@@ -18,7 +18,7 @@
     <string name="delete">Удалить</string>
     <string name="ok">Хорошо</string>
     <string name="what_do_you_want_to_buy">Что купить?</string>
-    <string name="enter_ful_name_your_location">Введите полное название вашего местоположения:</string>
+    <string name="enter_ful_name_your_location">Введите название вашего местоположения:</string>
     <string name="for_example_st_petersburg">Например, Санкт-Петербург</string>
     <string name="location_not_selected">Местоположение не выбрано</string>
     <string name="feels_like">ощущается как</string>

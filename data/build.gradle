@@ -25,28 +25,22 @@ android {
     buildTypes {
         debug {
             debuggable true
-            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
-            buildConfigField "String", "WEATHER_API_ICON_URL", "\"https://openweathermap.org/img/wn/\""
-            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
-            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"http://api.weatherapi.com/v1/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"8e9f5be52a614295935122422222708\""
         }
 
         demo {
             debuggable false
-            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
-            buildConfigField "String", "WEATHER_API_ICON_URL", "\"https://openweathermap.org/img/wn/\""
-            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
-            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"http://api.weatherapi.com/v1/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"8e9f5be52a614295935122422222708\""
         }
 
         release {
             debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "WEATHER_API_BASE_URL", "\"https://community-open-weather-map.p.rapidapi.com/\""
-            buildConfigField "String", "WEATHER_API_ICON_URL", "\"https://openweathermap.org/img/wn/\""
-            buildConfigField "String", "WEATHER_API_KEY", "\"a887b82d6bmsh6ffb3f8e2cfd6dfp1381cejsnd65ae9d93061\""
-            buildConfigField "String", "WEATHER_API_HOST", "\"community-open-weather-map.p.rapidapi.com\""
+            buildConfigField "String", "WEATHER_API_BASE_URL", "\"http://api.weatherapi.com/v1/\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"8e9f5be52a614295935122422222708\""
         }
     }
     compileOptions {

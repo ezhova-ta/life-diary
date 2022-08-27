@@ -23,6 +23,8 @@ class LocationListAdapter(private val onItemClickListener: ListItemClickListener
     class LocationListItemViewModel(location: Location) {
         val locationName = location.name
         val coordinates = location.getFormattedCoordinatesString()
+        val region = location.region
+        val country = location.country
     }
 
     class ViewHolder private constructor(

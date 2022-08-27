@@ -8,8 +8,10 @@ object LocationDtoMapper : DtoMapper<LocationDto, Location> {
 		return Location(
 			id = id,
 			name = name,
-			lat = coordinates.lat,
-			lon = coordinates.lon
+			region = region,
+			country = country,
+			lat = lat,
+			lon = lon
 		)
 	}
 }

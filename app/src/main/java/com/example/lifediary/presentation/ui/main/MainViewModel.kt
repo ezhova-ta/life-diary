@@ -1,7 +1,6 @@
 package com.example.lifediary.presentation.ui.main
 
 import androidx.lifecycle.*
-import com.example.lifediary.di.DiScopes
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_SCREEN_VIEW_MODEL_SCOPE
@@ -15,7 +14,6 @@ import com.example.lifediary.domain.usecases.weather.GetCurrentWeatherUseCase
 import com.example.lifediary.domain.usecases.weather.UpdateCurrentWeatherUseCase
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
-import com.example.lifediary.presentation.utils.iconUrl
 import com.example.lifediary.presentation.utils.temperatureFeelsLikeString
 import com.example.lifediary.presentation.utils.temperatureString
 import com.github.terrakok.cicerone.Router
@@ -37,7 +35,7 @@ class MainViewModel : BaseViewModel() {
     val currentWeather by lazy { getCurrentWeatherUseCase().asLiveData() }
     val currentTemperature by lazy { currentWeather.map { it?.temperatureString } }
     val currentTemperatureFeelsLike by lazy { currentWeather.map { it?.temperatureFeelsLikeString} }
-    val currentWeatherIconUrl by lazy { currentWeather.map { it?.iconUrl } }
+    val currentWeatherIconUrl by lazy { currentWeather.map { "" /*it?.iconUrl*/ } } // TODO
     private val location by lazy { getLocationLiveDataUseCase().asLiveData() }
     val locationName by lazy { location.map { it?.name } }
     val isCurrentWeatherViewVisible by lazy { location.map { it != null } }

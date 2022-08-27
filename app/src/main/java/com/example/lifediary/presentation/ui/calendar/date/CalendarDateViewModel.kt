@@ -2,11 +2,9 @@ package com.example.lifediary.presentation.ui.calendar.date
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.di.DiScopes
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.CALENDAR_DATE_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
-import com.example.lifediary.domain.utils.sorters.ToDoListSortMethod
 import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.models.ToDoListItem
 import com.example.lifediary.domain.models.WeatherForecast
@@ -16,6 +14,7 @@ import com.example.lifediary.domain.usecases.settings.GetWomanSectionEnabledUseC
 import com.example.lifediary.domain.usecases.weather.GetForecastForLocationIdUseCase
 import com.example.lifediary.domain.usecases.woman_section.GetAllMenstruationPeriodsUseCase
 import com.example.lifediary.domain.usecases.woman_section.GetEstimatedNextMenstruationPeriodUseCase
+import com.example.lifediary.domain.utils.sorters.ToDoListSortMethod
 import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.models.dropdowns.ToDoListDropDownItemSortMethodMapper.toSortMethod
 import com.example.lifediary.presentation.models.dropdowns.ToDoListSortMethodDropDownItem
@@ -26,7 +25,6 @@ import com.example.lifediary.presentation.utils.dates.isSameDay
 import com.example.lifediary.presentation.utils.dates.isWithinInterval
 import com.example.lifediary.presentation.utils.dates.toDateString
 import com.example.lifediary.presentation.utils.dayString
-import com.example.lifediary.presentation.utils.iconUrl
 import com.example.lifediary.presentation.utils.nightString
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -82,7 +80,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val nightTemperature = weatherForecastForDate.map { it?.temperature?.nightString }
 
 	val isWeatherForecastContainerVisible = weatherForecastForDate.map { it != null }
-	val weatherForecastIconUrl = weatherForecastForDate.map { it?.weather?.firstOrNull()?.iconUrl }
+	val weatherForecastIconUrl = weatherForecastForDate.map { "" /*it?.weather?.firstOrNull()?.iconUrl*/ } // TODO
 	val weatherForecastDescription = weatherForecastForDate.map { it?.weather?.firstOrNull()?.description }
 
 	private val _showClearToDoListConfirmationDialog = MutableLiveData(false)

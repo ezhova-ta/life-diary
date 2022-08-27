@@ -10,9 +10,6 @@ import javax.inject.Provider
 
 class OkHttpClientProvider @Inject constructor() : Provider<OkHttpClient> {
     override fun get(): OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(15, TimeUnit.SECONDS)
-        .readTimeout(15, TimeUnit.SECONDS)
-        .writeTimeout(15, TimeUnit.SECONDS)
         .addInterceptor(
             HttpLoggingInterceptor { message ->
                 if(BuildConfig.DEBUG) {
@@ -20,5 +17,8 @@ class OkHttpClientProvider @Inject constructor() : Provider<OkHttpClient> {
                 }
             }
         )
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .build()
 }

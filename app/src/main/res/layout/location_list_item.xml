@@ -18,21 +18,49 @@
         android:paddingBottom="10dp"
         android:clickable="true">
 
-        <TextView
-            android:id="@+id/name"
-            style="@style/Text"
+        <LinearLayout
+            android:id="@+id/nameContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/locationIcon"
-            android:layout_marginEnd="10dp"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:textSize="20sp"
-            tools:text="Санкт-Петербург"
-            android:text="@{viewModel.locationName}" />
+            android:orientation="vertical"
+            android:layout_marginEnd="10dp">
+            <TextView
+                android:id="@+id/name"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textSize="20sp"
+                tools:text="Рубцовск"
+                android:text="@{viewModel.locationName}" />
+
+            <TextView
+                android:id="@+id/region"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textSize="12sp"
+                tools:text="Алтайский край"
+                android:text="@{viewModel.region}" />
+
+            <TextView
+                android:id="@+id/country"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textSize="12sp"
+                tools:text="Россия"
+                android:text="@{viewModel.country}" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/locationIcon"
@@ -47,8 +75,8 @@
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/name"
-            app:layout_constraintBottom_toBottomOf="@id/name"
+            app:layout_constraintTop_toTopOf="@id/nameContainer"
+            app:layout_constraintBottom_toBottomOf="@id/nameContainer"
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="12sp"
             tools:text="59.8944, 30.2642"

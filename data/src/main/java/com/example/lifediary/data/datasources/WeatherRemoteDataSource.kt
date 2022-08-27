@@ -12,7 +12,7 @@ class WeatherRemoteDataSource @Inject constructor(
     private val service: WeatherService
 ) {
     suspend fun findLocations(name: String): List<LocationDto> {
-        return service.findLocations(name).locations
+        return service.findLocations(name)
     }
 
     suspend fun getCurrentWeather(locationId: Long): CurrentWeatherResponse {
