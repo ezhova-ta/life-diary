@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="14sp"
-        tools:text="ощущается как +21°C" />
+        tools:text="Ощущается как +21°C" />
 
     <TextView
         android:id="@+id/windView"
