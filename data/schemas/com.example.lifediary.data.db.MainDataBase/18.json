@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "05c2f13e3c87360e1c67d2843798b622",
+    "identityHash": "9434d191b89dae181067a31c36f1eb72",
     "entities": [
       {
         "tableName": "shopping_list",
@@ -106,18 +106,12 @@
       },
       {
         "tableName": "current_weather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `icon_url` TEXT, `temperature` INTEGER NOT NULL, `temperature_feels_like` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `wind_speed_meters_per_second` REAL NOT NULL, `text` TEXT DEFAULT '', PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `temperature` INTEGER NOT NULL, `temperature_feels_like` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "iconUrl",
-            "columnName": "icon_url",
-            "affinity": "TEXT",
             "notNull": false
           },
           {
@@ -137,19 +131,6 @@
             "columnName": "humidity",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "windSpeedMetersPerSecond",
-            "columnName": "wind_speed_meters_per_second",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "text",
-            "columnName": "text",
-            "affinity": "TEXT",
-            "notNull": false,
-            "defaultValue": "''"
           }
         ],
         "primaryKey": {
@@ -492,7 +473,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '05c2f13e3c87360e1c67d2843798b622')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9434d191b89dae181067a31c36f1eb72')"
     ]
   }
 }
