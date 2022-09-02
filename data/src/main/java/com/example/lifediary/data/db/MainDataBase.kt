@@ -1,13 +1,12 @@
 package com.example.lifediary.data.db
 
-import androidx.room.AutoMigration
-import androidx.room.Database
-import androidx.room.RoomDatabase
+import androidx.room.*
+import androidx.room.migration.AutoMigrationSpec
 import com.example.lifediary.data.db.dao.*
 import com.example.lifediary.data.db.models.*
 
 @Database(
-    version = 17,
+    version = 18,
     exportSchema = true,
     entities = [
         ShoppingListItemEntity::class,
@@ -26,7 +25,8 @@ import com.example.lifediary.data.db.models.*
         AutoMigration(from = 13, to = 14),
         AutoMigration(from = 14, to = 15),
         AutoMigration(from = 15, to = 16),
-        AutoMigration(from = 16, to = 17)
+        AutoMigration(from = 16, to = 17),
+        AutoMigration(from = 17, to = 18, spec = MainDataBase.AutoMigrationFrom17To18::class)
     ]
 )
 abstract class MainDataBase : RoomDatabase() {
@@ -43,4 +43,12 @@ abstract class MainDataBase : RoomDatabase() {
     abstract fun toDoListDao(): ToDoListDao
     abstract fun memorableDateDao(): MemorableDateDao
     abstract fun menstruationPeriodDao(): MenstruationPeriodDao
+
+    @DeleteColumn(tableName = "current_weather", columnName = "short_description")
+    @DeleteColumn(tableName = "current_weather", columnName = "description")
+    @RenameColumn(tableName = "current_weather", fromColumnName = "icon", toColumnName = "icon_url")
+    @DeleteColumn(tableName = "current_weather", columnName = "pressure")
+    @RenameColumn(tableName = "current_weather", fromColumnName = "wind_speed", toColumnName = "wind_speed_meters_per_second")
+    @DeleteColumn(tableName = "current_weather", columnName = "gust_speed")
+    class AutoMigrationFrom17To18: AutoMigrationSpec
 }

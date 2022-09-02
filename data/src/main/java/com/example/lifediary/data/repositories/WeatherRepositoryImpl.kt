@@ -43,8 +43,8 @@ class WeatherRepositoryImpl @Inject constructor(
         return localDataSource.getCurrentWeather().map { it?.toDomain() }
     }
 
-    override suspend fun updateCurrentWeather(locationId: Long) {
-        val currentWeather = remoteDataSource.getCurrentWeather(locationId).toDomain()
+    override suspend fun updateCurrentWeather(locationName: String) {
+        val currentWeather = remoteDataSource.getCurrentWeather(locationName).toDomain()
         localDataSource.saveCurrentWeather(currentWeather.toEntity())
     }
 

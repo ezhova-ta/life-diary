@@ -36,6 +36,13 @@ private fun Int.createStringWithPlusOrMinusSign(): String {
 	return "+$this"
 }
 
+val Weather.formattedIconUrl
+	get() = iconUrl?.addHttpsToStart()
+
+private fun String.addHttpsToStart(): String {
+	return "https:$this"
+}
+
 fun Location.getFormattedCoordinatesString() =
 	"$lat, $lon"
 

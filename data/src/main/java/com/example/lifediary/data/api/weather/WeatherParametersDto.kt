@@ -3,10 +3,12 @@ package com.example.lifediary.data.api.weather
 import com.google.gson.annotations.SerializedName
 
 data class WeatherParametersDto(
-    @SerializedName("temp")
+    @SerializedName("temp_c")
     val temperature: Double,
-    @SerializedName("feels_like")
+    @SerializedName("feelslike_c")
     val temperatureFeelsLike: Double,
-    val pressure: Int,
-    val humidity: Int
+    val humidity: Int,
+    @SerializedName("wind_kph")
+    val windSpeedKmPerHour: Double,
+    val condition: WeatherConditionDto
 )

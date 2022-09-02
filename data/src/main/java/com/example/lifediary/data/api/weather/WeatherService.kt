@@ -15,12 +15,11 @@ interface WeatherService {
         @Query("key") apiKey: String = BuildConfig.WEATHER_API_KEY
     ): List<LocationDto>
 
-    @GET("weather")
+    @GET("current.json")
     suspend fun getCurrentWeather(
-        @Query("id") locationId: Long,
+        @Query("q") locationName: String,
         @Query("lang") lang: String = "ru",
-        @Query("units") units: String = "metric",
-        @Header("x-rapidapi-key") rapidApiKey: String = BuildConfig.WEATHER_API_KEY
+        @Query("key") apiKey: String = BuildConfig.WEATHER_API_KEY
     ): CurrentWeatherResponse
 
     @GET("forecast/daily")

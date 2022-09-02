@@ -14,6 +14,7 @@ import com.example.lifediary.domain.usecases.weather.GetCurrentWeatherUseCase
 import com.example.lifediary.domain.usecases.weather.UpdateCurrentWeatherUseCase
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
+import com.example.lifediary.presentation.utils.formattedIconUrl
 import com.example.lifediary.presentation.utils.temperatureFeelsLikeString
 import com.example.lifediary.presentation.utils.temperatureString
 import com.github.terrakok.cicerone.Router
@@ -35,7 +36,7 @@ class MainViewModel : BaseViewModel() {
     val currentWeather by lazy { getCurrentWeatherUseCase().asLiveData() }
     val currentTemperature by lazy { currentWeather.map { it?.temperatureString } }
     val currentTemperatureFeelsLike by lazy { currentWeather.map { it?.temperatureFeelsLikeString} }
-    val currentWeatherIconUrl by lazy { currentWeather.map { "" /*it?.iconUrl*/ } } // TODO
+    val currentWeatherIconUrl by lazy { currentWeather.map { it?.formattedIconUrl } }
     private val location by lazy { getLocationLiveDataUseCase().asLiveData() }
     val locationName by lazy { location.map { it?.name } }
     val isCurrentWeatherViewVisible by lazy { location.map { it != null } }
@@ -49,8 +50,8 @@ class MainViewModel : BaseViewModel() {
         get() = _isCurrentWeatherProgressVisible
 
     private val locationObserver = Observer<Location?> {
-        val locationId = it?.id ?: return@Observer
-        updateCurrentWeather(locationId)
+        val locationName = it?.name ?: return@Observer
+        updateCurrentWeather(locationName)
     }
 
     init {
@@ -76,17 +77,17 @@ class MainViewModel : BaseViewModel() {
     }
 
     private fun updateCurrentWeather() {
-        location.value?.id?.let {
+        location.value?.name?.let {
             updateCurrentWeather(it)
         }
     }
 
-    private fun updateCurrentWeather(locationId: Long) {
+    private fun updateCurrentWeather(locationName: String) {
         _isCurrentWeatherProgressVisible.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                updateCurrentWeatherUseCase(locationId)
+                updateCurrentWeatherUseCase(locationName)
             } catch(e: Exception) {
                 // TODO Message display temporarily removed
 //                showMessage(Text.TextResource(R.string.failed_to_update_weather_data))

@@ -6,7 +6,7 @@ import javax.inject.Inject
 class UpdateCurrentWeatherUseCase @Inject constructor(
 	private val weatherRepository: WeatherRepository
 ) {
-	suspend operator fun invoke(locationId: Long) {
-		weatherRepository.updateCurrentWeather(locationId)
+	suspend operator fun invoke(locationName: String) {
+		weatherRepository.updateCurrentWeather(locationName)
 	}
 }

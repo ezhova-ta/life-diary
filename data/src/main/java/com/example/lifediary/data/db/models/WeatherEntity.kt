@@ -8,17 +8,14 @@ import androidx.room.PrimaryKey
 data class WeatherEntity(
     @PrimaryKey
     val id: Long?,
-    @ColumnInfo(name = "short_description")
-    val shortDescription: String?,
-    val description: String?,
-    val icon: String?,
+    @ColumnInfo(name = "icon_url")
+    val iconUrl: String?,
     val temperature: Int,
     @ColumnInfo(name = "temperature_feels_like")
     val temperatureFeelsLike: Int,
-    val pressure: Int,
     val humidity: Int,
-    @ColumnInfo(name = "wind_speed")
-    val windSpeed: Double,
-    @ColumnInfo(name = "gust_speed")
-    val gustSpeed: Double
+    @ColumnInfo(name = "wind_speed_meters_per_second")
+    val windSpeedMetersPerSecond: Double,
+    @ColumnInfo(defaultValue = "")
+    val text: String?
 )
