@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/temperatureContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,25 +17,50 @@
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/dayTemperatureView"
-            style="@style/Text"
+            android:id="@+id/titleMax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="+25°C"
-            android:text='@{String.format("%s°C", viewModel.dayTemperatureForDate)}'
-            app:drawableStartCompat="@drawable/icon_day_gray"
-            android:drawablePadding="2dp" />
+            style="@style/Text.MediumGray"
+            app:layout_constraintTop_toTopOf="@id/maxTemperatureView"
+            app:layout_constraintBottom_toBottomOf="@id/maxTemperatureView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="14sp"
+            tools:text="max"
+            android:text="@string/max" />
 
         <TextView
-            android:id="@+id/nightTemperatureView"
+            android:id="@+id/titleMin"
+            style="@style/Text.MediumGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/minTemperatureView"
+            app:layout_constraintBottom_toBottomOf="@id/minTemperatureView"
+            app:layout_constraintEnd_toEndOf="@id/titleMax"
+            android:textSize="14sp"
+            tools:text="min"
+            android:text="@string/min" />
+
+        <TextView
+            android:id="@+id/maxTemperatureView"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/titleMax"
+            android:layout_marginStart="8dp"
+            tools:text="+25°C"
+            android:text='@{String.format("%s°C", viewModel.dayTemperatureForDate)}' />
+
+        <TextView
+            android:id="@+id/minTemperatureView"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/maxTemperatureView"
+            app:layout_constraintStart_toStartOf="@id/maxTemperatureView"
             tools:text="+16°C"
-            android:text='@{String.format("%s°C", viewModel.nightTemperatureForDate)}'
-            app:drawableStartCompat="@drawable/icon_night_gray"
-            android:drawablePadding="2dp" />
-    </LinearLayout>
+            android:text='@{String.format("%s°C", viewModel.nightTemperatureForDate)}' />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/weatherIcon"
@@ -56,34 +81,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="14sp"
         tools:text="облачно с прояснениями" />
-
-    <TextView
-        android:id="@+id/windView"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/descriptionView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/humidityView"
-        android:layout_marginTop="4dp"
-        android:textSize="12sp"
-        tools:text="3.5м/с"
-        app:drawableStartCompat="@drawable/icon_wind_gray"
-        android:drawablePadding="1dp" />
-
-    <TextView
-        android:id="@+id/humidityView"
-        style="@style/Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/descriptionView"
-        app:layout_constraintStart_toEndOf="@id/windView"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="4dp"
-        android:textSize="12sp"
-        tools:text="58%"
-        app:drawableStartCompat="@drawable/icon_humidity_gray"
-        android:drawablePadding="1dp" />
 
     <ProgressBar
         android:id="@+id/progressView"

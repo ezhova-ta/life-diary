@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="max" translatable="false">max</string>
+    <string name="min" translatable="false">min</string>
     <string name="shopping_list">Shopping list</string>
     <string name="clear_all">Clear all</string>
     <string name="clear_shopping_list">Clear shopping list</string>

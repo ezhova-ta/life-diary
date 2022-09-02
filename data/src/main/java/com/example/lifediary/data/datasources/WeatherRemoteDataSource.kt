@@ -19,7 +19,7 @@ class WeatherRemoteDataSource @Inject constructor(
         return service.getCurrentWeather(locationName)
     }
 
-    suspend fun getForecast(locationId: Long): WeatherForecastResponse {
-        return service.getForecast(locationId)
+    suspend fun getForecast(locationName: String): WeatherForecastResponse {
+        return service.getForecast(locationName)
     }
 }

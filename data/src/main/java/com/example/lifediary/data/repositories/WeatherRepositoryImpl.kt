@@ -48,7 +48,7 @@ class WeatherRepositoryImpl @Inject constructor(
         localDataSource.saveCurrentWeather(currentWeather.toEntity())
     }
 
-    override suspend fun getForecast(locationId: Long): WeatherForecast {
-        return remoteDataSource.getForecast(locationId).toDomain()
+    override suspend fun getForecast(locationName: String): WeatherForecast {
+        return remoteDataSource.getForecast(locationName).toDomain()
     }
 }

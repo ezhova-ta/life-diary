@@ -12,5 +12,5 @@ interface WeatherRepository {
 	suspend fun saveLocation(location: Location)
 	fun getCurrentWeather(): Flow<Weather?>
 	suspend fun updateCurrentWeather(locationName: String)
-	suspend fun getForecast(locationId: Long): WeatherForecast
+	suspend fun getForecast(locationName: String): WeatherForecast
 }

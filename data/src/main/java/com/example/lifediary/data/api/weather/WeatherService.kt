@@ -22,11 +22,11 @@ interface WeatherService {
         @Query("key") apiKey: String = BuildConfig.WEATHER_API_KEY
     ): CurrentWeatherResponse
 
-    @GET("forecast/daily")
+    @GET("forecast.json")
     suspend fun getForecast(
-        @Query("id") locationId: Long,
+        @Query("q") locationName: String,
+        @Query("days") days: Int = 10,
         @Query("lang") lang: String = "ru",
-        @Query("units") units: String = "metric",
-        @Header("x-rapidapi-key") rapidApiKey: String = BuildConfig.WEATHER_API_KEY
+        @Query("key") apiKey: String = BuildConfig.WEATHER_API_KEY
     ): WeatherForecastResponse
 }

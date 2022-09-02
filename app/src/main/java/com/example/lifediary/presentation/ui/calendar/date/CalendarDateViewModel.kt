@@ -24,8 +24,9 @@ import com.example.lifediary.presentation.utils.OneTimeEvent
 import com.example.lifediary.presentation.utils.dates.isSameDay
 import com.example.lifediary.presentation.utils.dates.isWithinInterval
 import com.example.lifediary.presentation.utils.dates.toDateString
-import com.example.lifediary.presentation.utils.dayString
-import com.example.lifediary.presentation.utils.nightString
+import com.example.lifediary.presentation.utils.formattedIconUrl
+import com.example.lifediary.presentation.utils.maxTemperatureString
+import com.example.lifediary.presentation.utils.minTemperatureString
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -76,12 +77,12 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val weatherForecastForDate = weatherForecast.map { forecast ->
 		forecast.items.find { day.isSameDay(it.dateInSeconds) }
 	}
-	val dayTemperature = weatherForecastForDate.map { it?.temperature?.dayString }
-	val nightTemperature = weatherForecastForDate.map { it?.temperature?.nightString }
+	val maxTemperature = weatherForecastForDate.map { it?.maxTemperatureString }
+	val minTemperature = weatherForecastForDate.map { it?.minTemperatureString }
 
 	val isWeatherForecastContainerVisible = weatherForecastForDate.map { it != null }
-	val weatherForecastIconUrl = weatherForecastForDate.map { "" /*it?.weather?.firstOrNull()?.iconUrl*/ } // TODO
-	val weatherForecastDescription = weatherForecastForDate.map { it?.weather?.firstOrNull()?.description }
+	val weatherForecastIconUrl = weatherForecastForDate.map { it?.formattedIconUrl }
+	val weatherForecastDescription = weatherForecastForDate.map { it?.text }
 
 	private val _showClearToDoListConfirmationDialog = MutableLiveData(false)
 	val showClearToDoListConfirmationDialog: LiveData<Boolean>
@@ -116,8 +117,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	private fun loadForecast() {
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
-				val locationId = getLocationUseCase()?.id ?: throw NullPointerException()
-				val forecast = getForecastForLocationIdUseCase(locationId)
+				val locationName = getLocationUseCase()?.name ?: throw NullPointerException()
+				val forecast = getForecastForLocationIdUseCase(locationName)
 				weatherForecast.postValue(forecast)
 			} catch(e: Exception) {
 				// TODO Message display temporarily removed

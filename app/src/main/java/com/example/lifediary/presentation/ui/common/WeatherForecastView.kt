@@ -17,30 +17,16 @@ class WeatherForecastView(context: Context, attrs: AttributeSet) : FrameLayout(c
             binding.progressView.isVisible = value
         }
 
-    var dayTemperature: String? = null
+    var maxTemperature: String? = null
         set(value) {
             field = value
-            binding.dayTemperatureView.text = value
+            binding.maxTemperatureView.text = value
         }
 
-    var nightTemperature: String? = null
+    var minTemperature: String? = null
         set(value) {
             field = value
-            binding.nightTemperatureView.text = value
-        }
-
-    var windSpeed: String? = null
-        set(value) {
-            field = value
-
-            with(binding.windView) {
-                if(value == null) {
-                    isVisible = false
-                } else {
-                    isVisible = true
-                    text = value
-                }
-            }
+            binding.minTemperatureView.text = value
         }
 
     var description: String? = null
@@ -53,20 +39,6 @@ class WeatherForecastView(context: Context, attrs: AttributeSet) : FrameLayout(c
                 } else {
                     text = value
                     isVisible = true
-                }
-            }
-        }
-
-    var humidity: String? = null
-        set(value) {
-            field = value
-
-            with(binding.humidityView) {
-                if (value == null) {
-                    isVisible = false
-                } else {
-                    isVisible = true
-                    text = value
                 }
             }
         }

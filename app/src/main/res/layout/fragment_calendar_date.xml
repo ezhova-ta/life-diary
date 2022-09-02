@@ -71,12 +71,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:booleanVisibility="@{viewModel.isWeatherForecastContainerVisible()}"
-                    app:dayTemperature='@{String.format("%s°C", viewModel.dayTemperature)}'
-                    app:nightTemperature='@{String.format("%s°C", viewModel.nightTemperature)}'
+                    app:maxTemperature='@{String.format("%s°C", viewModel.maxTemperature)}'
+                    app:minTemperature='@{String.format("%s°C", viewModel.minTemperature)}'
                     app:weatherIconUrl="@{viewModel.weatherForecastIconUrl}"
-                    app:description="@{viewModel.weatherForecastDescription}"
-                    app:windSpeed='@{String.format("%.1f%s", viewModel.weatherForecastForDate.windSpeed, @string/meters_per_second)}'
-                    app:humidity='@{String.format("%d%s", viewModel.weatherForecastForDate.humidity, "%")}' />
+                    app:description="@{viewModel.weatherForecastDescription}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/eventListView"

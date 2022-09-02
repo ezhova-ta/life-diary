@@ -10,20 +10,14 @@ import com.example.lifediary.presentation.utils.dates.toDateString
 import com.example.lifediary.presentation.utils.livedata.TwoSourceLiveData
 import java.util.*
 
-val WeatherForecastTemperature.dayString
-	get() = day.createStringWithPlusOrMinusSign()
+val WeatherForecastItem.maxTemperatureString
+	get() = maxTemperature.createStringWithPlusOrMinusSign()
 
-val WeatherForecastTemperature.nightString
-	get() = night.createStringWithPlusOrMinusSign()
+val WeatherForecastItem.minTemperatureString
+	get() = minTemperature.createStringWithPlusOrMinusSign()
 
-val WeatherForecastTemperature.morningString
-	get() = morning.createStringWithPlusOrMinusSign()
-
-val WeatherForecastTemperature.minString
-	get() = min?.createStringWithPlusOrMinusSign()
-
-val WeatherForecastTemperature.maxString
-	get() = max?.createStringWithPlusOrMinusSign()
+val WeatherForecastItem.formattedIconUrl
+	get() = iconUrl.addHttpsToStart()
 
 val Weather.temperatureString
 	get() = temperature.createStringWithPlusOrMinusSign()
