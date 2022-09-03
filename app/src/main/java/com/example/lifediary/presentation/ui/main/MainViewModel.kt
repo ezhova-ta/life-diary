@@ -1,6 +1,7 @@
 package com.example.lifediary.presentation.ui.main
 
 import androidx.lifecycle.*
+import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_SCREEN_VIEW_MODEL_SCOPE
@@ -12,6 +13,7 @@ import com.example.lifediary.domain.usecases.settings.GetShoppingListSectionEnab
 import com.example.lifediary.domain.usecases.settings.GetWomanSectionEnabledUseCase
 import com.example.lifediary.domain.usecases.weather.GetCurrentWeatherUseCase
 import com.example.lifediary.domain.usecases.weather.UpdateCurrentWeatherUseCase
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.navigation.Screens
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.example.lifediary.presentation.utils.formattedIconUrl
@@ -89,8 +91,7 @@ class MainViewModel : BaseViewModel() {
             try {
                 updateCurrentWeatherUseCase(locationName)
             } catch(e: Exception) {
-                // TODO Message display temporarily removed
-//                showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
+                showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
             } finally {
                 _isCurrentWeatherProgressVisible.postValue(false)
             }
