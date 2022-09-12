@@ -21,7 +21,10 @@
     <string name="ok">OK</string>
     <string name="what_do_you_want_to_buy">What to buy?</string>
     <string name="enter_ful_name_your_location">Enter the name of your location:</string>
+    <string name="saint_petersburg">St. Petersburg</string>
+    <string name="moscow">Moscow</string>
     <string name="for_example_st_petersburg">For example, St. Petersburg</string>
+    <string name="for_example_novosibirsk">For example, Novosibirsk</string>
     <string name="location_not_selected">Location not selected</string>
     <string name="feels_like">Feels like</string>
     <string name="meters_per_second">m/s</string>

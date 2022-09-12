@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.lifediary.databinding.FragmentLocationSelectionBinding
+import com.example.lifediary.domain.models.ProposedLocation.*
 import com.example.lifediary.presentation.adapters.ListItemClickListener
 import com.example.lifediary.presentation.adapters.LocationListAdapter
-import com.example.lifediary.databinding.FragmentLocationSelectionBinding
 import com.example.lifediary.presentation.ui.BaseFragment
 import com.example.lifediary.presentation.utils.clearFocusWithKeyboard
 import com.example.lifediary.presentation.utils.requestFocusWithKeyboard
@@ -37,9 +38,20 @@ class LocationSelectionFragment : BaseFragment() {
         )
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setupProposedLocationButtons()
         setupSearchLocationInput()
         setupLocationListRecycler()
         return binding.root
+    }
+
+    private fun setupProposedLocationButtons() {
+        binding.saintPetersburgButton.setOnClickListener {
+            viewModel.onProposedLocationClick(SAINT_PETERSBURG)
+        }
+
+        binding.moscowButton.setOnClickListener {
+            viewModel.onProposedLocationClick(MOSCOW)
+        }
     }
 
     private fun setupSearchLocationInput() {

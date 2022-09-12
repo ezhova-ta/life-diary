@@ -35,6 +35,10 @@
         <item name="singleLine">true</item>
     </style>
 
+    <style name="Text.ProposedLocationButton">
+        <item name="android:textColor">@color/app_blue</item>
+    </style>
+
     <style name="Text.CalendarDay">
         <item name="android:textSize">16sp</item>
     </style>

@@ -36,7 +36,7 @@
             android:singleLine="true"
             android:maxLength="70"
             android:text="@={viewModel.locationName}"
-            android:hint="@string/for_example_st_petersburg" />
+            android:hint="@string/for_example_novosibirsk" />
 
         <ImageButton
             android:id="@+id/searchLocationButton"
@@ -49,11 +49,37 @@
             android:clickable="true"
             android:onClick="@{() -> viewModel.onSearchLocationClick()}"/>
 
+        <TextView
+            android:id="@+id/saintPetersburgButton"
+            style="@style/Text.ProposedLocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/searchLocationInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/moscowButton"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:text="@string/saint_petersburg" />
+
+        <TextView
+            android:id="@+id/moscowButton"
+            style="@style/Text.ProposedLocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/saintPetersburgButton"
+            app:layout_constraintBottom_toBottomOf="@id/saintPetersburgButton"
+            app:layout_constraintStart_toEndOf="@id/saintPetersburgButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:clickable="true"
+            android:text="@string/moscow" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/locationListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/searchLocationInput"
+            app:layout_constraintTop_toBottomOf="@id/saintPetersburgButton"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
