@@ -52,16 +52,23 @@ class LocationSelectionViewModel : BaseViewModel() {
         onSearchLocationInputDone()
     }
 
-    // TODO Refactoring
+    fun onProposedLocationClick(proposedLocation: ProposedLocation) {
+        searchLocations(proposedLocation.name)
+    }
+
     fun onSearchLocationInputDone() {
-        _inputNeedsFocus.value = false
         val enteredLocationName = formatLocationName(locationName.value) ?: return
         if(enteredLocationName.isBlank()) return
+        searchLocations(enteredLocationName)
+    }
+
+    private fun searchLocations(locationName: String) {
+        _inputNeedsFocus.value = false
         _isProgressVisible.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val foundLocations = findLocationsUseCase(enteredLocationName)
+                val foundLocations = findLocationsUseCase(locationName)
                 _locations.postValue(foundLocations)
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.search_location_error))
@@ -84,23 +91,6 @@ class LocationSelectionViewModel : BaseViewModel() {
             }
         }
         router.exit()
-    }
-
-    // TODO Refactoring
-    fun onProposedLocationClick(proposedLocation: ProposedLocation) {
-        _inputNeedsFocus.value = false
-        _isProgressVisible.value = true
-
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val foundLocations = findLocationsUseCase(proposedLocation.name)
-                _locations.postValue(foundLocations)
-            } catch(e: Exception) {
-                showMessage(Text.TextResource(R.string.search_location_error))
-            } finally {
-                _isProgressVisible.postValue(false)
-            }
-        }
     }
 
     override fun onCleared() {
