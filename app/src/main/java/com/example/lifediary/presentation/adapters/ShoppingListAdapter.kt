@@ -81,13 +81,13 @@ class ShoppingListAdapter(
 			onDeleteItemClickListener: ListItemClickListener<ShoppingListItem>,
 			onItemClickListener: ListItemClickListener<ShoppingListItem>?,
 			onItemLongClickListener: ListItemClickListener<ShoppingListItem>?,
-        ) {
-            binding.titleView.setOnClickListener { onItemClickListener?.onClick(item) }
-            binding.doneIconsContainer.setOnClickListener { onItemClickListener?.onClick(item) }
-            binding.setHighPriorityButton.setOnClickListener { onHighPriorityClickListener.onClick(item) }
-            binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
+        ) = with(binding) {
+            titleView.setOnClickListener { onItemClickListener?.onClick(item) }
+            doneIconsContainer.setOnClickListener { onItemClickListener?.onClick(item) }
+            setHighPriorityButton.setOnClickListener { onHighPriorityClickListener.onClick(item) }
+            deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
 
-            binding.titleView.setOnLongClickListener {
+            titleView.setOnLongClickListener {
                 onItemLongClickListener?.onClick(item)
                 true
             }

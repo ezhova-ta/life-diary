@@ -32,9 +32,9 @@ class CalendarEventListAdapter : ListAdapter<CalendarEvent, CalendarEventListAda
             }
         }
 
-        fun bind(item: CalendarEvent) {
-            binding.viewModel = CalendarEventListItemViewModel(item)
-            binding.executePendingBindings()
+        fun bind(item: CalendarEvent) = with(binding) {
+            viewModel = CalendarEventListItemViewModel(item)
+            executePendingBindings()
         }
     }
 }

@@ -55,15 +55,15 @@ class PostAddressListAdapter(
 			onDeleteItemClickListener: ListItemClickListener<PostAddress>,
 			onEditItemClickListener: ListItemClickListener<PostAddress>,
 			onItemLongClickListener: ListItemClickListener<PostAddress>?
-		) {
-			binding.viewModel = PostAddressListItemViewModel(item)
-			binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
-			binding.editButton.setOnClickListener { onEditItemClickListener.onClick(item) }
-			binding.addressContainer.setOnLongClickListener {
+		) = with(binding) {
+			viewModel = PostAddressListItemViewModel(item)
+			deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
+			editButton.setOnClickListener { onEditItemClickListener.onClick(item) }
+			addressContainer.setOnLongClickListener {
 				onItemLongClickListener?.onClick(item)
 				true
 			}
-			binding.executePendingBindings()
+			executePendingBindings()
 		}
 	}
 }

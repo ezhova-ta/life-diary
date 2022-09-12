@@ -39,10 +39,10 @@ class MenstruationPeriodListAdapter(
         fun bind(
 			item: MenstruationPeriod,
 			onDeleteItemClickListener: ListItemClickListener<MenstruationPeriod>
-        ) {
-            binding.viewModel = MenstruationPeriodListItemViewModel(item)
-            binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
-            binding.executePendingBindings()
+        ) = with(binding) {
+            viewModel = MenstruationPeriodListItemViewModel(item)
+            deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
+            executePendingBindings()
         }
     }
 }

@@ -38,10 +38,10 @@ class LocationListAdapter(private val onItemClickListener: ListItemClickListener
             }
         }
 
-        fun bind(item: Location, onItemClickListener: ListItemClickListener<Location>) {
-            binding.viewModel = LocationListItemViewModel(item)
-            binding.container.setOnClickListener { onItemClickListener.onClick(item) }
-            binding.executePendingBindings()
+        fun bind(item: Location, onItemClickListener: ListItemClickListener<Location>) = with(binding) {
+            viewModel = LocationListItemViewModel(item)
+            container.setOnClickListener { onItemClickListener.onClick(item) }
+            executePendingBindings()
         }
     }
 }

@@ -65,14 +65,14 @@ class MemorableDateListAdapter(
 			onEditItemClickListener: ListItemClickListener<MemorableDate>,
 			onDeleteItemClickListener: ListItemClickListener<MemorableDate>,
 			onItemLongClickListener: ListItemClickListener<MemorableDate>?
-        ) {
-            binding.editNameButton.setOnClickListener {
+        ) = with(binding) {
+            editNameButton.setOnClickListener {
                 onEditItemClickListener.onClick(item)
             }
-            binding.deleteNameButton.setOnClickListener {
+            deleteNameButton.setOnClickListener {
                 onDeleteItemClickListener.onClick(item)
             }
-            binding.nameView.setOnClickListener {
+            nameView.setOnClickListener {
                 onItemLongClickListener?.onClick(item)
             }
         }

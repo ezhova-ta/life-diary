@@ -55,16 +55,16 @@ class ToDoListAdapter(
 			onEnableNotificationClickListener: ListItemClickListener<ToDoListItem>,
 			onItemClickListener: ListItemClickListener<ToDoListItem>?,
 			onItemLongClickListener: ListItemClickListener<ToDoListItem>?,
-		) {
-			binding.viewModel = ToDoListItemViewModel(item)
-			binding.textContainer.setOnClickListener { onItemClickListener?.onClick(item) }
-			binding.deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
-			binding.notificationButton.setOnClickListener { onEnableNotificationClickListener.onClick(item) }
-			binding.textContainer.setOnLongClickListener {
+		) = with(binding) {
+			viewModel = ToDoListItemViewModel(item)
+			textContainer.setOnClickListener { onItemClickListener?.onClick(item) }
+			deleteButton.setOnClickListener { onDeleteItemClickListener.onClick(item) }
+			notificationButton.setOnClickListener { onEnableNotificationClickListener.onClick(item) }
+			textContainer.setOnLongClickListener {
 				onItemLongClickListener?.onClick(item)
 				true
 			}
-			binding.executePendingBindings()
+			executePendingBindings()
 		}
 	}
 }
