@@ -1,5 +1,6 @@
 package com.example.lifediary.domain.models
 
-enum class ProposedLocation {
-	SAINT_PETERSBURG, MOSCOW
+enum class ProposedLocation(name: String) {
+	SAINT_PETERSBURG("saint petersburg city"),
+	MOSCOW("moscow city")
 }

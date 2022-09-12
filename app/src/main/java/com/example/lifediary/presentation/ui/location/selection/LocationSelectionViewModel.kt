@@ -9,7 +9,6 @@ import com.example.lifediary.di.DiScopes.LOCATION_SELECTION_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.domain.models.Location
 import com.example.lifediary.domain.models.ProposedLocation
-import com.example.lifediary.domain.models.ProposedLocation.*
 import com.example.lifediary.domain.usecases.location.FindLocationsUseCase
 import com.example.lifediary.domain.usecases.location.SaveLocationUseCase
 import com.example.lifediary.presentation.models.Text
@@ -53,6 +52,7 @@ class LocationSelectionViewModel : BaseViewModel() {
         onSearchLocationInputDone()
     }
 
+    // TODO Refactoring
     fun onSearchLocationInputDone() {
         _inputNeedsFocus.value = false
         val enteredLocationName = formatLocationName(locationName.value) ?: return
@@ -86,10 +86,20 @@ class LocationSelectionViewModel : BaseViewModel() {
         router.exit()
     }
 
-    fun onProposedLocationClick(location: ProposedLocation) {
-        when(location) {
-            SAINT_PETERSBURG -> TODO()
-            MOSCOW -> TODO()
+    // TODO Refactoring
+    fun onProposedLocationClick(proposedLocation: ProposedLocation) {
+        _inputNeedsFocus.value = false
+        _isProgressVisible.value = true
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val foundLocations = findLocationsUseCase(proposedLocation.name)
+                _locations.postValue(foundLocations)
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.search_location_error))
+            } finally {
+                _isProgressVisible.postValue(false)
+            }
         }
     }
 
