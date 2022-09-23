@@ -74,7 +74,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val isDoListSortMethodDropDownVisible by lazy { toDoList.map { it.isNotEmpty() } }
 
 	private val weatherForecast = MutableLiveData<WeatherForecast>()
-	val weatherForecastForDate = weatherForecast.map { forecast ->
+	private val weatherForecastForDate = weatherForecast.map { forecast ->
 		forecast.items.find { day.isSameDay(it.dateInSeconds) }
 	}
 	val maxTemperature = weatherForecastForDate.map { it?.maxTemperatureString }
@@ -100,6 +100,10 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	val toDoListItemCancelScheduledNotificationEvent: LiveData<OneTimeEvent<ToDoListItem>>
 		get() = _toDoListItemCancelScheduledNotificationEvent
 
+	private val _isWeatherForecastProgressVisible = MutableLiveData(false)
+	val isWeatherForecastProgressVisible: LiveData<Boolean>
+		get() = _isWeatherForecastProgressVisible
+
 	init {
 		bindScope()
 		loadForecast()
@@ -115,6 +119,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	private fun loadForecast() {
+		_isWeatherForecastProgressVisible.value = true
+
 		viewModelScope.launch(Dispatchers.IO) {
 			try {
 				val locationName = getLocationUseCase()?.name ?: throw NullPointerException()
@@ -122,6 +128,8 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 				weatherForecast.postValue(forecast)
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_get_forecast))
+			} finally {
+				_isWeatherForecastProgressVisible.postValue(false)
 			}
 		}
 	}

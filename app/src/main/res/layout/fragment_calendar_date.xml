@@ -74,7 +74,8 @@
                     app:maxTemperature='@{String.format("%s°C", viewModel.maxTemperature)}'
                     app:minTemperature='@{String.format("%s°C", viewModel.minTemperature)}'
                     app:weatherIconUrl="@{viewModel.weatherForecastIconUrl}"
-                    app:description="@{viewModel.weatherForecastDescription}" />
+                    app:description="@{viewModel.weatherForecastDescription}"
+                    app:progressVisibility="@{viewModel.isWeatherForecastProgressVisible()}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/eventListView"
