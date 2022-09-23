@@ -43,11 +43,6 @@ class MainFragment : BaseFragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.onScreenResumed()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

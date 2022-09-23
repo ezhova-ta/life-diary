@@ -5,7 +5,6 @@ import com.example.lifediary.R
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_SCREEN_VIEW_MODEL_SCOPE
-import com.example.lifediary.domain.models.Location
 import com.example.lifediary.domain.usecases.location.GetLocationLiveDataUseCase
 import com.example.lifediary.domain.usecases.settings.GetMemorableDatesSectionEnabledUseCase
 import com.example.lifediary.domain.usecases.settings.GetPostAddressesSectionEnabledUseCase
@@ -21,6 +20,7 @@ import com.example.lifediary.presentation.utils.temperatureFeelsLikeString
 import com.example.lifediary.presentation.utils.temperatureString
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -39,9 +39,10 @@ class MainViewModel : BaseViewModel() {
     val currentTemperature by lazy { currentWeather.map { it?.temperatureString } }
     val currentTemperatureFeelsLike by lazy { currentWeather.map { it?.temperatureFeelsLikeString} }
     val currentWeatherIconUrl by lazy { currentWeather.map { it?.formattedIconUrl } }
-    private val location by lazy { getLocationLiveDataUseCase().asLiveData() }
-    val locationName by lazy { location.map { it?.name } }
-    val isCurrentWeatherViewVisible by lazy { location.map { it != null } }
+    private val locationFlow by lazy { getLocationLiveDataUseCase() }
+    private val locationLiveData by lazy { locationFlow.asLiveData() }
+    val locationName by lazy { locationLiveData.map { it?.name } }
+    val isCurrentWeatherViewVisible by lazy { locationLiveData.map { it != null } }
     val isShoppingListSectionVisible by lazy { getShoppingListSectionEnabledUseCase().asLiveData() }
     val isPostAddressesSectionVisible by lazy { getPostAddressesSectionEnabledUseCase().asLiveData() }
     val isMemorableDatesSectionVisible by lazy { getMemorableDatesSectionEnabledUseCase().asLiveData() }
@@ -51,14 +52,17 @@ class MainViewModel : BaseViewModel() {
     val isCurrentWeatherProgressVisible: LiveData<Boolean>
         get() = _isCurrentWeatherProgressVisible
 
-    private val locationObserver = Observer<Location?> {
-        val locationName = it?.name ?: return@Observer
-        updateCurrentWeather(locationName)
-    }
-
     init {
         bindScope()
-        location.observeForever(locationObserver)
+        startListeningForLocation()
+    }
+
+    private fun startListeningForLocation() {
+        viewModelScope.launch {
+            locationFlow.collect { location ->
+                location?.name?.let { updateCurrentWeather(it) }
+            }
+        }
     }
 
     override fun bindScope() {
@@ -70,18 +74,12 @@ class MainViewModel : BaseViewModel() {
         Toothpick.inject(this, mainScreenScope)
     }
 
-    fun onScreenResumed() {
-        updateCurrentWeather()
-    }
-
     fun onAvailabilityOfNetworkConnectivityChanged(isAvailable: Boolean) {
         if(isAvailable) updateCurrentWeather()
     }
 
     private fun updateCurrentWeather() {
-        location.value?.name?.let {
-            updateCurrentWeather(it)
-        }
+        locationLiveData.value?.name?.let { updateCurrentWeather(it) }
     }
 
     private fun updateCurrentWeather(locationName: String) {
@@ -131,7 +129,6 @@ class MainViewModel : BaseViewModel() {
     }
 
     override fun onCleared() {
-        location.removeObserver(locationObserver)
         Toothpick.closeScope(MAIN_SCREEN_VIEW_MODEL_SCOPE)
         super.onCleared()
     }
