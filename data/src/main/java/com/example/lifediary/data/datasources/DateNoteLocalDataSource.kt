@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) {
     fun getNoteFlow(dayNumber: Int, monthNumber: Int, year: Int): Flow<DateNoteEntity?> {
-        return dao.getDateNoteFlow(dayNumber, monthNumber, year)
+        return dao.getFlow(dayNumber, monthNumber, year)
     }
 
     suspend fun getNote(dayNumber: Int, monthNumber: Int, year: Int): DateNoteEntity? {
@@ -17,7 +17,7 @@ class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) 
     }
 
     fun getAllNotes(): Flow<List<DateNoteEntity>> {
-        return dao.getAll()
+        return dao.getFlowAll()
     }
 
     suspend fun addNote(note: DateNoteEntity) {

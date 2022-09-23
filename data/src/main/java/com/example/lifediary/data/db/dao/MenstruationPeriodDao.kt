@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MenstruationPeriodDao {
     @Query("SELECT * FROM menstruation_dates ORDER BY start_date DESC")
-    fun getAll(): Flow<List<MenstruationPeriodEntity>>
+    fun getFlowAll(): Flow<List<MenstruationPeriodEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: MenstruationPeriodEntity)

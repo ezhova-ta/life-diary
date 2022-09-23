@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CurrentWeatherDao {
     @Query("SELECT * FROM current_weather LIMIT 1")
-    fun get(): Flow<WeatherEntity?>
+    fun getFlow(): Flow<WeatherEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(weather: WeatherEntity)

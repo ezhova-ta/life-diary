@@ -9,11 +9,11 @@ interface DateNoteDao {
     @Query("SELECT * FROM note WHERE day = :dayNumber AND month = :monthNumber AND year = :year LIMIT 1")
     suspend fun get(dayNumber: Int, monthNumber: Int, year: Int): DateNoteEntity?
 
-    @Query("SELECT * FROM note")
-    fun getAll(): Flow<List<DateNoteEntity>>
-
     @Query("SELECT * FROM note WHERE day = :dayNumber AND month = :monthNumber AND year = :year LIMIT 1")
-    fun getDateNoteFlow(dayNumber: Int, monthNumber: Int, year: Int): Flow<DateNoteEntity?>
+    fun getFlow(dayNumber: Int, monthNumber: Int, year: Int): Flow<DateNoteEntity?>
+
+    @Query("SELECT * FROM note")
+    fun getFlowAll(): Flow<List<DateNoteEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note: DateNoteEntity)

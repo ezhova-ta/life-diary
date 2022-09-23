@@ -13,7 +13,7 @@ interface LocationDao {
     suspend fun get(): LocationEntity?
 
     @Query("SELECT * FROM location LIMIT 1")
-    fun getLiveData(): Flow<LocationEntity?>
+    fun getFlow(): Flow<LocationEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(location: LocationEntity)

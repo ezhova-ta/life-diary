@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ShoppingListDao {
     @Query("SELECT * FROM shopping_list ORDER BY created_at DESC")
-    fun getAll(): Flow<List<ShoppingListItemEntity>>
+    fun getFlowAll(): Flow<List<ShoppingListItemEntity>>
 
     @Query("SELECT * FROM shopping_list WHERE id = :id")
     suspend fun get(id: Long): ShoppingListItemEntity?

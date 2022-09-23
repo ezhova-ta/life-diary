@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PostAddressDao {
     @Query("SELECT * FROM post_address ORDER BY name ASC")
-    fun getAll(): Flow<List<PostAddressEntity>>
+    fun getFlowAll(): Flow<List<PostAddressEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(address: PostAddressEntity)

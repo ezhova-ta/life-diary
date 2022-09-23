@@ -13,7 +13,7 @@ class ShoppingListLocalDataSource @Inject constructor(
     private val commonDataStoreManager: CommonDataStoreManager
 ) {
     fun getShoppingList(): Flow<List<ShoppingListItemEntity>> {
-        return dao.getAll()
+        return dao.getFlowAll()
     }
 
     fun getShoppingListSortMethodId(): Flow<Int?> {

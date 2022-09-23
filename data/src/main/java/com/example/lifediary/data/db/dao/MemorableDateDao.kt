@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MemorableDateDao {
     @Query("SELECT * FROM memorable_date ORDER BY month ASC, day ASC, year DESC")
-    fun getAll(): Flow<List<MemorableDateEntity>>
+    fun getFlowAll(): Flow<List<MemorableDateEntity>>
 
     @Query("SELECT * FROM memorable_date WHERE day = :dayNumber AND month = :monthNumber ORDER BY month ASC, day ASC, year DESC")
-    fun getAll(dayNumber: Int, monthNumber: Int): Flow<List<MemorableDateEntity>>
+    fun getFlowAll(dayNumber: Int, monthNumber: Int): Flow<List<MemorableDateEntity>>
 
     @Query("SELECT * FROM memorable_date WHERE id = :id")
     suspend fun get(id: Long): MemorableDateEntity?

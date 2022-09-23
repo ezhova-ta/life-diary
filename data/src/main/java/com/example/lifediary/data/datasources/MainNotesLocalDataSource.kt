@@ -13,7 +13,7 @@ class MainNotesLocalDataSource @Inject constructor(
     private val commonDataStoreManager: CommonDataStoreManager
     ) {
     fun getNotes(): Flow<List<MainNoteEntity>> {
-        return dao.getAll()
+        return dao.getFlowAll()
     }
 
     fun getMainNoteListSortMethodId(): Flow<Int?> {
