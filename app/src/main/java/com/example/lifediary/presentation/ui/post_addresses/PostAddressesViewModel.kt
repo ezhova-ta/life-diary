@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.di.DiScopes
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.POST_ADDRESSES_VIEW_MODEL_SCOPE
@@ -93,7 +92,6 @@ class PostAddressesViewModel: BaseViewModel() {
         Toothpick.inject(this, postAddressesScope)
     }
 
-    // TODO Correct fun name
     fun onAttach() {
         postAddressListSearchQuery.value = ""
     }

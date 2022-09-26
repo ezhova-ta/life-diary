@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.example.lifediary.R
-import com.example.lifediary.di.DiScopes
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.SHOPPING_LIST_VIEW_MODEL_SCOPE
@@ -19,6 +18,9 @@ import com.example.lifediary.presentation.ui.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import toothpick.Toothpick
 import javax.inject.Inject
 
@@ -61,20 +63,32 @@ class ShoppingListViewModel: BaseViewModel() {
 
     fun onAddShoppingListItemInputDone() {
         val text = newShoppingListItemText.value?.trim()
-
         if(text.isNullOrBlank()) {
             newShoppingListItemText.value = ""
             return
         }
 
+        addShoppingListItem(
+            text = text,
+            onSuccess = { newShoppingListItemText.value = "" },
+            onError = { showMessage(Text.TextResource(R.string.failed_to_save)) }
+        )
+    }
+
+    private fun addShoppingListItem(
+        text: String,
+        onSuccess: () -> Unit,
+        onError: (e: Throwable) -> Unit
+    ) {
         val item = ShoppingListItem(text = text)
+        val mutex = Mutex()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                addShoppingListItemUseCase(item)
-                newShoppingListItemText.postValue("")
+                mutex.withLock { addShoppingListItemUseCase(item) }
+                withContext(Dispatchers.Main) { onSuccess() }
             } catch(e: Exception) {
-                showMessage(Text.TextResource(R.string.failed_to_save))
+                withContext(Dispatchers.Main) { onError(e) }
             }
         }
     }
@@ -105,9 +119,11 @@ class ShoppingListViewModel: BaseViewModel() {
 
     fun onShoppingListItemClick(item: ShoppingListItem) {
         val itemId = item.id ?: return
+        val mutex = Mutex()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                inverseShoppingListItemCrossedOutByIdUseCase(itemId)
+                mutex.withLock { inverseShoppingListItemCrossedOutByIdUseCase(itemId) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
@@ -121,9 +137,11 @@ class ShoppingListViewModel: BaseViewModel() {
 
     fun onHighPriorityShoppingListItemClick(item: ShoppingListItem) {
         val itemId = item.id ?: return
+        val mutex = Mutex()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                inverseShoppingListItemPriorityByIdUseCase(itemId)
+                mutex.withLock { inverseShoppingListItemPriorityByIdUseCase(itemId) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error))
             }
@@ -132,9 +150,11 @@ class ShoppingListViewModel: BaseViewModel() {
 
     fun onDeleteShoppingListItemClick(item: ShoppingListItem) {
         val itemId = item.id ?: return
+        val mutex = Mutex()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                deleteShoppingListItemByIdUseCase(itemId)
+                mutex.withLock { deleteShoppingListItemByIdUseCase(itemId) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.deleting_item_error))
             }

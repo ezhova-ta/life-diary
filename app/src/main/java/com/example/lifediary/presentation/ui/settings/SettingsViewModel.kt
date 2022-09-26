@@ -16,6 +16,8 @@ import com.example.lifediary.presentation.ui.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import toothpick.Toothpick
 import javax.inject.Inject
 
@@ -78,9 +80,11 @@ class SettingsViewModel : BaseViewModel() {
     }
 
     private fun saveShoppingListSectionEnabled(isEnabled: Boolean) {
+        val mutex = Mutex()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                setShoppingListSectionEnabledUseCase(isEnabled)
+                mutex.withLock { setShoppingListSectionEnabledUseCase(isEnabled) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
@@ -88,9 +92,11 @@ class SettingsViewModel : BaseViewModel() {
     }
 
     private fun savePostAddressesSectionEnabled(isEnabled: Boolean) {
+        val mutex = Mutex()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                setPostAddressesSectionEnabledUseCase(isEnabled)
+                mutex.withLock { setPostAddressesSectionEnabledUseCase(isEnabled) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
@@ -98,9 +104,11 @@ class SettingsViewModel : BaseViewModel() {
     }
 
     private fun saveMemorableDatesSectionEnabled(isEnabled: Boolean) {
+        val mutex = Mutex()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                setMemorableDatesSectionEnabledUseCase(isEnabled)
+                mutex.withLock { setMemorableDatesSectionEnabledUseCase(isEnabled) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }
@@ -108,9 +116,11 @@ class SettingsViewModel : BaseViewModel() {
     }
 
     private fun saveWomanSectionEnabled(isEnabled: Boolean) {
+        val mutex = Mutex()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                setWomanSectionEnabledUseCase(isEnabled)
+                mutex.withLock { setWomanSectionEnabledUseCase(isEnabled) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             }

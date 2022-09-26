@@ -22,6 +22,8 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import toothpick.Toothpick
 import javax.inject.Inject
 
@@ -83,11 +85,12 @@ class MainViewModel : BaseViewModel() {
     }
 
     private fun updateCurrentWeather(locationName: String) {
+        val mutex = Mutex()
         _isCurrentWeatherProgressVisible.value = true
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                updateCurrentWeatherUseCase(locationName)
+                mutex.withLock { updateCurrentWeatherUseCase(locationName) }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.failed_to_update_weather_data))
             } finally {

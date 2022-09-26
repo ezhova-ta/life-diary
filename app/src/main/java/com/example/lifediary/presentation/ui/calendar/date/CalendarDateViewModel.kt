@@ -34,6 +34,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import toothpick.Toothpick
 import java.util.*
 import javax.inject.Inject
@@ -51,7 +53,7 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var deleteToDoListItemByIdUseCase: DeleteToDoListItemByIdUseCase
 	@Inject lateinit var disableListItemNotificationByIdUseCase: DisableListItemNotificationByIdUseCase
 	@Inject lateinit var enableListItemNotificationByIdUseCase: EnableListItemNotificationByIdUseCase
-	@Inject lateinit var inverseListItemIsDoneByIdUseCase: InverseListItemIsDoneByIdUseCase
+	@Inject lateinit var inverseToDoListItemIsDoneByIdUseCase: InverseToDoListItemIsDoneByIdUseCase
 	@Inject lateinit var saveToDoListSortMethodIdUseCase: SaveToDoListSortMethodIdUseCase
 	@Inject lateinit var getMemorableDatesForDayUseCase: GetMemorableDatesForDayUseCase
 	@Inject lateinit var getAllMenstruationPeriodsUseCase: GetAllMenstruationPeriodsUseCase
@@ -272,11 +274,14 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 		}
 
 		val item = ToDoListItem(text = text, day = day)
+		val mutex = Mutex()
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				addToDoListItemUseCase(item)
-				newToDoListItemText.postValue("")
+				mutex.withLock {
+					addToDoListItemUseCase(item)
+					newToDoListItemText.postValue("")
+				}
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_save))
 			}
@@ -291,9 +296,11 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 	}
 
 	private fun deleteToDoListItem(itemId: Long) {
+		val mutex = Mutex()
+
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				deleteToDoListItemByIdUseCase(itemId)
+				mutex.withLock { deleteToDoListItemByIdUseCase(itemId) }
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.deleting_item_error))
 			}
@@ -327,7 +334,10 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	fun onToDoListItemNotificationScheduled(item: ToDoListItem, time: Calendar) {
 		val itemId = item.id ?: return
+		enableListItemNotification(itemId, time)
+	}
 
+	private fun enableListItemNotification(itemId: Long, time: Calendar) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				enableListItemNotificationByIdUseCase(itemId, time)
@@ -341,10 +351,15 @@ class CalendarDateViewModel(private val day: Day) : BaseViewModel() {
 
 	fun onToDoListItemClick(item: ToDoListItem) {
 		val itemId = item.id ?: return
+		inverseToDoListItemIsDone(itemId)
+	}
+
+	private fun inverseToDoListItemIsDone(itemId: Long) {
+		val mutex = Mutex()
 
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				inverseListItemIsDoneByIdUseCase(itemId)
+				mutex.withLock { inverseToDoListItemIsDoneByIdUseCase(itemId) }
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.error_try_again_later))
 			}
