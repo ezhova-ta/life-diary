@@ -140,5 +140,27 @@
             android:text="@string/clear_to_do_lists"
             android:onClick="@{() -> viewModel.onClearToDoListsClick()}" />
 
+        <TextView
+            android:id="@+id/backupTitle"
+            style="@style/Text.SettingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/clearToDoListsLink"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="@string/backup" />
+
+        <TextView
+            android:id="@+id/saveDataLink"
+            style="@style/Text.Link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/backupTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/save_application_data"
+            android:onClick="@{() -> viewModel.onSaveApplicationDataClick()}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

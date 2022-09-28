@@ -173,6 +173,10 @@ class SettingsViewModel : BaseViewModel() {
         _showClearToDoListsConfirmationDialog.value = false
     }
 
+    fun onSaveApplicationDataClick() {
+        TODO()
+    }
+
     override fun onCleared() {
         Toothpick.closeScope(SETTINGS_VIEW_MODEL_SCOPE)
         super.onCleared()
