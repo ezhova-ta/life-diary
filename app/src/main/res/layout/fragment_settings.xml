@@ -159,8 +159,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            android:text="@string/save_application_data"
-            android:onClick="@{() -> viewModel.onSaveApplicationDataClick()}" />
+            android:text="@string/save_application_data" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

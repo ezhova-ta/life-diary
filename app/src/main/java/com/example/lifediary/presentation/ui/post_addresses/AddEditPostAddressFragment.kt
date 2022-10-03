@@ -32,7 +32,7 @@ class AddEditPostAddressFragment : BaseFragment() {
     }
 
     companion object {
-        const val READ_CONTACTS_PERMISSION_NAME = Manifest.permission.READ_CONTACTS
+        private const val READ_CONTACTS_PERMISSION_NAME = Manifest.permission.READ_CONTACTS
 
         fun getInstance(): Fragment {
             return AddEditPostAddressFragment()

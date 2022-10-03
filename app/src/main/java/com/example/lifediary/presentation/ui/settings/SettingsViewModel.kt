@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.R
-import com.example.lifediary.presentation.models.Text
-import com.example.lifediary.di.DiScopes
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.SETTINGS_VIEW_MODEL_SCOPE
-import com.example.lifediary.domain.usecases.calendar.ClearAllToDoListsUseCase
 import com.example.lifediary.domain.usecases.calendar.ClearAllDateNotesUseCase
+import com.example.lifediary.domain.usecases.calendar.ClearAllToDoListsUseCase
 import com.example.lifediary.domain.usecases.settings.*
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.ui.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -171,10 +170,6 @@ class SettingsViewModel : BaseViewModel() {
 
     fun onClearToDoListsCancelled() {
         _showClearToDoListsConfirmationDialog.value = false
-    }
-
-    fun onSaveApplicationDataClick() {
-        TODO()
     }
 
     override fun onCleared() {
