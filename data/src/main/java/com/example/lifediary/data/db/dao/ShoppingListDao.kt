@@ -9,6 +9,9 @@ interface ShoppingListDao {
     @Query("SELECT * FROM shopping_list ORDER BY created_at DESC")
     fun getFlowAll(): Flow<List<ShoppingListItemEntity>>
 
+    @Query("SELECT * FROM shopping_list ORDER BY created_at DESC")
+    suspend fun getAll(): List<ShoppingListItemEntity>
+
     @Query("SELECT * FROM shopping_list WHERE id = :id")
     suspend fun get(id: Long): ShoppingListItemEntity?
 

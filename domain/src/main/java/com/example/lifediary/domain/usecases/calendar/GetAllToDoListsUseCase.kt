@@ -9,6 +9,6 @@ class GetAllToDoListsUseCase @Inject constructor(
 	private val doToDoListRepository: ToDoListRepository
 ) {
 	operator fun invoke(): Flow<List<ToDoListItem>> {
-		return doToDoListRepository.getAllToDoLists()
+		return doToDoListRepository.getFlowAllToDoLists()
 	}
 }

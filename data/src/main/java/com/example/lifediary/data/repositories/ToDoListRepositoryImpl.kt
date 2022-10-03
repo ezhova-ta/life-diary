@@ -17,11 +17,15 @@ import javax.inject.Singleton
 class ToDoListRepositoryImpl @Inject constructor(
 	private val localDataSource: ToDoListLocalDataSource
 ) : ToDoListRepository {
-	override fun getToDoList(day: Day): Flow<List<ToDoListItem>> {
-		return localDataSource.getToDoList(day.dayNumber, day.monthNumber, day.year).toDomain()
+	override fun getToDoListFlow(day: Day): Flow<List<ToDoListItem>> {
+		return localDataSource.getToDoListFlow(day.dayNumber, day.monthNumber, day.year).toDomain()
 	}
 
-	override fun getAllToDoLists(): Flow<List<ToDoListItem>> {
+	override fun getFlowAllToDoLists(): Flow<List<ToDoListItem>> {
+		return localDataSource.getFlowAllToDoLists().toDomain()
+	}
+
+	override suspend fun getAllToDoLists(): List<ToDoListItem> {
 		return localDataSource.getAllToDoLists().toDomain()
 	}
 
@@ -33,8 +37,8 @@ class ToDoListRepositoryImpl @Inject constructor(
 		return map { entity -> entity.toDomain() }
 	}
 
-	override fun getToDoListSortMethodId(): Flow<Int?> {
-		return localDataSource.getToDoListSortMethodId()
+	override fun getToDoListSortMethodIdFlow(): Flow<Int?> {
+		return localDataSource.getToDoListSortMethodIdFlow()
 	}
 
 	override suspend fun getToDoListItem(id: Long) : ToDoListItem? {

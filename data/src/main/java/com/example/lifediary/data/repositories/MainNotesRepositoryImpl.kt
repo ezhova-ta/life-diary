@@ -15,8 +15,12 @@ import javax.inject.Singleton
 class MainNotesRepositoryImpl @Inject constructor(
     private val localDataSource: MainNotesLocalDataSource
 ) : MainNotesRepository {
-    override fun getNotes(): Flow<List<MainNote>> {
-        return localDataSource.getNotes().toDomain()
+    override fun getFlowAllNotes(): Flow<List<MainNote>> {
+        return localDataSource.getFlowAllNotes().toDomain()
+    }
+
+    override suspend fun getAllNotes(): List<MainNote> {
+        return localDataSource.getAllNotes().toDomain()
     }
 
     private fun Flow<List<MainNoteEntity>>.toDomain(): Flow<List<MainNote>> {

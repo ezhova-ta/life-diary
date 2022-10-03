@@ -26,7 +26,11 @@ class DateNoteRepositoryImpl @Inject constructor(
         return localDataSource.getNote(day.dayNumber, day.monthNumber, day.year)?.toDomain()
     }
 
-    override fun getAllNotes(): Flow<List<DateNote>> {
+    override fun getFlowAllNotes(): Flow<List<DateNote>> {
+        return localDataSource.getFlowAllNotes().toDomain()
+    }
+
+    override suspend fun getAllNotes(): List<DateNote> {
         return localDataSource.getAllNotes().toDomain()
     }
 

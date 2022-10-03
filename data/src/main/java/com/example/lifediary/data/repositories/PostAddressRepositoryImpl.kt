@@ -15,8 +15,12 @@ import javax.inject.Singleton
 class PostAddressRepositoryImpl @Inject constructor(
     private val localDataSource: PostAddressLocalDataSource
 ) : PostAddressRepository {
-    override fun getAllAddresses(): Flow<List<PostAddress>> {
-        return localDataSource.getAllAddresses().toDomain()
+    override fun getFlowAllAddresses(): Flow<List<PostAddress>> {
+        return localDataSource.getFlowAllAddresses().toDomain()
+    }
+
+    override suspend fun getAllAddresses(): List<PostAddress> {
+        return localDataSource.getAll().toDomain()
     }
 
     private fun Flow<List<PostAddressEntity>>.toDomain(): Flow<List<PostAddress>> {

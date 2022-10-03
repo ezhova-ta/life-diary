@@ -8,6 +8,6 @@ class GetDurationOfMenstruationPeriodUseCase @Inject constructor(
 	private val womanSectionRepository: WomanSectionRepository
 ) {
 	operator fun invoke(): Flow<Int> {
-		return womanSectionRepository.getDurationOfMenstruationPeriod()
+		return womanSectionRepository.getDurationOfMenstruationPeriodFlow()
 	}
 }

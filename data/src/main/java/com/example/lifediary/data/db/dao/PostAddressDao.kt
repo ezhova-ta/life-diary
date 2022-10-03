@@ -9,6 +9,9 @@ interface PostAddressDao {
     @Query("SELECT * FROM post_address ORDER BY name ASC")
     fun getFlowAll(): Flow<List<PostAddressEntity>>
 
+    @Query("SELECT * FROM post_address ORDER BY name ASC")
+    suspend fun getAll(): List<PostAddressEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(address: PostAddressEntity)
 

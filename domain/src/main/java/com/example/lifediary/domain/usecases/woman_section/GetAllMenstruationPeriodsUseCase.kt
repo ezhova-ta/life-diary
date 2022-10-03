@@ -9,6 +9,6 @@ class GetAllMenstruationPeriodsUseCase @Inject constructor(
 	private val womanSectionRepository: WomanSectionRepository
 ) {
 	operator fun invoke(): Flow<List<MenstruationPeriod>> {
-		return womanSectionRepository.getAllMenstruationPeriods()
+		return womanSectionRepository.getFlowAllMenstruationPeriods()
 	}
 }

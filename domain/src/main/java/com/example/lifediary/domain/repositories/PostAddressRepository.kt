@@ -4,7 +4,8 @@ import com.example.lifediary.domain.models.PostAddress
 import kotlinx.coroutines.flow.Flow
 
 interface PostAddressRepository {
-	fun getAllAddresses(): Flow<List<PostAddress>>
+	fun getFlowAllAddresses(): Flow<List<PostAddress>>
+	suspend fun getAllAddresses(): List<PostAddress>
 	suspend fun addAddress(address: PostAddress)
 	suspend fun updateAddress(address: PostAddress)
 	suspend fun deleteAddress(id: Long)

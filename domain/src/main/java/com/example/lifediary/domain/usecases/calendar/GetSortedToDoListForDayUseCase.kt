@@ -12,8 +12,8 @@ class GetSortedToDoListForDayUseCase @Inject constructor(
 	private val toDoListRepository: ToDoListRepository
 ) {
 	operator fun invoke(day: Day): Flow<List<ToDoListItem>> {
-		val originalToDoListFlow = toDoListRepository.getToDoList(day)
-		val sortMethodIdFlow = toDoListRepository.getToDoListSortMethodId()
+		val originalToDoListFlow = toDoListRepository.getToDoListFlow(day)
+		val sortMethodIdFlow = toDoListRepository.getToDoListSortMethodIdFlow()
 
 		return originalToDoListFlow.combine(sortMethodIdFlow) { originalToDoList, sortMethodId ->
 			val sorter = ToDoListSorter.Factory.getInstance(sortMethodId)

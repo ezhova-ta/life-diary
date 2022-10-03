@@ -9,6 +9,9 @@ interface MainNotesDao {
     @Query("SELECT * FROM main_note ORDER BY created_at DESC")
     fun getFlowAll(): Flow<List<MainNoteEntity>>
 
+    @Query("SELECT * FROM main_note ORDER BY created_at DESC")
+    suspend fun getAll(): List<MainNoteEntity>
+
     @Query("SELECT * FROM main_note WHERE id = :id")
     suspend fun get(id: Long): MainNoteEntity?
 

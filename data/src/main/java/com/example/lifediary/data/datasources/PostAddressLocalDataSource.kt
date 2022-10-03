@@ -8,8 +8,12 @@ import javax.inject.Singleton
 
 @Singleton
 class PostAddressLocalDataSource @Inject constructor(private val dao: PostAddressDao) {
-    fun getAllAddresses(): Flow<List<PostAddressEntity>> {
+    fun getFlowAllAddresses(): Flow<List<PostAddressEntity>> {
         return dao.getFlowAll()
+    }
+
+    suspend fun getAll(): List<PostAddressEntity> {
+        return dao.getAll()
     }
 
     suspend fun addAddress(address: PostAddressEntity) {

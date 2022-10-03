@@ -15,6 +15,9 @@ interface DateNoteDao {
     @Query("SELECT * FROM note")
     fun getFlowAll(): Flow<List<DateNoteEntity>>
 
+    @Query("SELECT * FROM note")
+    suspend fun getAll(): List<DateNoteEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note: DateNoteEntity)
 

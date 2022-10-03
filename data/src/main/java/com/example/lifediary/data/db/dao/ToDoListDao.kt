@@ -12,6 +12,9 @@ interface ToDoListDao {
     @Query("SELECT * FROM to_do_list")
     fun getFlowAll(): Flow<List<ToDoListItemEntity>>
 
+    @Query("SELECT * FROM to_do_list")
+    suspend fun getAll(): List<ToDoListItemEntity>
+
     @Query("SELECT * FROM to_do_list WHERE id = :id")
     suspend fun get(id: Long): ToDoListItemEntity?
 

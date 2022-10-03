@@ -9,6 +9,6 @@ class GetPostAddressesUseCase @Inject constructor(
 	private val postAddressRepository: PostAddressRepository
 ) {
 	operator fun invoke(): Flow<List<PostAddress>> {
-		return postAddressRepository.getAllAddresses()
+		return postAddressRepository.getFlowAllAddresses()
 	}
 }

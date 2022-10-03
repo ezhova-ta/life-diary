@@ -16,8 +16,12 @@ class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) 
         return dao.get(dayNumber, monthNumber, year)
     }
 
-    fun getAllNotes(): Flow<List<DateNoteEntity>> {
+    fun getFlowAllNotes(): Flow<List<DateNoteEntity>> {
         return dao.getFlowAll()
+    }
+
+    suspend fun getAllNotes(): List<DateNoteEntity> {
+        return dao.getAll()
     }
 
     suspend fun addNote(note: DateNoteEntity) {

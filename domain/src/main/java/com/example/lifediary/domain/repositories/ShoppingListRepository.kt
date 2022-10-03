@@ -4,7 +4,8 @@ import com.example.lifediary.domain.models.ShoppingListItem
 import kotlinx.coroutines.flow.Flow
 
 interface ShoppingListRepository {
-	fun getShoppingList(): Flow<List<ShoppingListItem>>
+	fun getFlowShoppingList(): Flow<List<ShoppingListItem>>
+	suspend fun getShoppingList(): List<ShoppingListItem>
 	fun getShoppingListSortMethodId(): Flow<Int?>
 	suspend fun addShoppingListItem(item: ShoppingListItem)
 	suspend fun clearShoppingList()

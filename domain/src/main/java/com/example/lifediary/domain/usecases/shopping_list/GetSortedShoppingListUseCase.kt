@@ -11,7 +11,7 @@ class GetSortedShoppingListUseCase @Inject constructor(
 	private val shoppingListRepository: ShoppingListRepository
 ) {
 	operator fun invoke(): Flow<List<ShoppingListItem>> {
-		val originalShoppingListFlow = shoppingListRepository.getShoppingList()
+		val originalShoppingListFlow = shoppingListRepository.getFlowShoppingList()
 		val sortMethodIdFlow = shoppingListRepository.getShoppingListSortMethodId()
 
 		return originalShoppingListFlow.combine(sortMethodIdFlow) { originalShoppingList, sortMethodId ->

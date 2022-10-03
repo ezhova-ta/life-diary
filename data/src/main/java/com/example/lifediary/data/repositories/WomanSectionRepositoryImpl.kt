@@ -15,7 +15,11 @@ import javax.inject.Singleton
 class WomanSectionRepositoryImpl @Inject constructor(
     private val localDataSource: WomanSectionLocalDataSource
 ) : WomanSectionRepository {
-    override fun getAllMenstruationPeriods(): Flow<List<MenstruationPeriod>> {
+    override fun getFlowAllMenstruationPeriods(): Flow<List<MenstruationPeriod>> {
+        return localDataSource.getFlowAllMenstruationPeriods().toDomain()
+    }
+
+    override suspend fun getAllMenstruationPeriods(): List<MenstruationPeriod> {
         return localDataSource.getAllMenstruationPeriods().toDomain()
     }
 
@@ -27,12 +31,12 @@ class WomanSectionRepositoryImpl @Inject constructor(
         return map { entity -> entity.toDomain() }
     }
 
-    override fun getDurationOfMenstrualCycle(): Flow<Int> {
-        return localDataSource.getDurationOfMenstrualCycle()
+    override fun getDurationOfMenstrualCycleFlow(): Flow<Int> {
+        return localDataSource.getDurationOfMenstrualCycleFlow()
     }
 
-    override fun getDurationOfMenstruationPeriod(): Flow<Int> {
-        return localDataSource.getDurationOfMenstruationPeriod()
+    override fun getDurationOfMenstruationPeriodFlow(): Flow<Int> {
+        return localDataSource.getDurationOfMenstruationPeriodFlow()
     }
 
     override suspend fun addMenstruationPeriod(period: MenstruationPeriod) {

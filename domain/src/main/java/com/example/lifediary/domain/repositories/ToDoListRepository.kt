@@ -6,9 +6,10 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 interface ToDoListRepository {
-	fun getToDoList(day: Day): Flow<List<ToDoListItem>>
-	fun getAllToDoLists(): Flow<List<ToDoListItem>>
-	fun getToDoListSortMethodId(): Flow<Int?>
+	fun getToDoListFlow(day: Day): Flow<List<ToDoListItem>>
+	fun getFlowAllToDoLists(): Flow<List<ToDoListItem>>
+	suspend fun getAllToDoLists(): List<ToDoListItem>
+	fun getToDoListSortMethodIdFlow(): Flow<Int?>
 	suspend fun getToDoListItem(id: Long) : ToDoListItem?
 	suspend fun addToDoListItem(item: ToDoListItem)
 	suspend fun clearToDoList(day: Day)

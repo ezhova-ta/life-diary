@@ -11,7 +11,7 @@ class GetSortedMainNoteListUseCase @Inject constructor(
 	private val notesRepository: MainNotesRepository
 ) {
 	operator fun invoke(): Flow<List<MainNote>> {
-		val originalMainNoteListFlow = notesRepository.getNotes()
+		val originalMainNoteListFlow = notesRepository.getFlowAllNotes()
 		val sortMethodIdFlow = notesRepository.getSortMethodId()
 
 		return originalMainNoteListFlow.combine(sortMethodIdFlow) { originalMainNoteList, sortMethodId ->

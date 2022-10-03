@@ -12,6 +12,9 @@ interface MenstruationPeriodDao {
     @Query("SELECT * FROM menstruation_dates ORDER BY start_date DESC")
     fun getFlowAll(): Flow<List<MenstruationPeriodEntity>>
 
+    @Query("SELECT * FROM menstruation_dates ORDER BY start_date DESC")
+    suspend fun getAll(): List<MenstruationPeriodEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: MenstruationPeriodEntity)
 

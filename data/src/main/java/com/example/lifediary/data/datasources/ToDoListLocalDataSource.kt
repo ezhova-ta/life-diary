@@ -13,15 +13,19 @@ class ToDoListLocalDataSource @Inject constructor(
 	private val dao: ToDoListDao,
 	private val commonDataStoreManager: CommonDataStoreManager
 ) {
-	fun getToDoList(dayNumber: Int, monthNumber: Int, year: Int): Flow<List<ToDoListItemEntity>> {
+	fun getToDoListFlow(dayNumber: Int, monthNumber: Int, year: Int): Flow<List<ToDoListItemEntity>> {
 		return dao.getFlowAll(dayNumber, monthNumber, year)
 	}
 
-	fun getAllToDoLists(): Flow<List<ToDoListItemEntity>> {
+	fun getFlowAllToDoLists(): Flow<List<ToDoListItemEntity>> {
 		return dao.getFlowAll()
 	}
 
-	fun getToDoListSortMethodId(): Flow<Int?> {
+	suspend fun getAllToDoLists(): List<ToDoListItemEntity> {
+		return dao.getAll()
+	}
+
+	fun getToDoListSortMethodIdFlow(): Flow<Int?> {
 		return commonDataStoreManager.toDoListSortMethodId
 	}
 

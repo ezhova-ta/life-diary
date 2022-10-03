@@ -12,7 +12,7 @@ class MemorableDatesLocalDataSource @Inject constructor(private val dao: Memorab
         return dao.getFlowAll()
     }
 
-    fun getDates(): List<MemorableDateEntity> {
+    suspend fun getDates(): List<MemorableDateEntity> {
         return dao.getAll()
     }
 

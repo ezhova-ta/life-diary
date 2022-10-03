@@ -12,15 +12,19 @@ class WomanSectionLocalDataSource @Inject constructor(
     private val dao: MenstruationPeriodDao,
     private val womanSectionDataStoreManager: WomanSectionDataStoreManager
 ) {
-    fun getAllMenstruationPeriods(): Flow<List<MenstruationPeriodEntity>> {
+    fun getFlowAllMenstruationPeriods(): Flow<List<MenstruationPeriodEntity>> {
         return dao.getFlowAll()
     }
 
-    fun getDurationOfMenstrualCycle(): Flow<Int> {
+    suspend fun getAllMenstruationPeriods(): List<MenstruationPeriodEntity> {
+        return dao.getAll()
+    }
+
+    fun getDurationOfMenstrualCycleFlow(): Flow<Int> {
         return womanSectionDataStoreManager.durationOfMenstrualCycle
     }
 
-    fun getDurationOfMenstruationPeriod(): Flow<Int> {
+    fun getDurationOfMenstruationPeriodFlow(): Flow<Int> {
         return womanSectionDataStoreManager.durationOfMenstruationPeriod
     }
 

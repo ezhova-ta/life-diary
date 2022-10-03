@@ -14,8 +14,8 @@ class GetEstimatedNextMenstruationPeriodUseCase @Inject constructor(
 	operator fun invoke(): Flow<MenstruationPeriod?> {
 		return combine(
 			getLastMenstruationPeriodUseCase(),
-			womanSectionRepository.getDurationOfMenstrualCycle(),
-			womanSectionRepository.getDurationOfMenstruationPeriod()
+			womanSectionRepository.getDurationOfMenstrualCycleFlow(),
+			womanSectionRepository.getDurationOfMenstruationPeriodFlow()
 		) { lastMenstruationPeriod, durationOfMenstrualCycle, durationOfMenstruationPeriod ->
 			lastMenstruationPeriod ?: return@combine null
 

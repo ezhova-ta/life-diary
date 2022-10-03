@@ -12,8 +12,12 @@ class MainNotesLocalDataSource @Inject constructor(
     private val dao: MainNotesDao,
     private val commonDataStoreManager: CommonDataStoreManager
     ) {
-    fun getNotes(): Flow<List<MainNoteEntity>> {
+    fun getFlowAllNotes(): Flow<List<MainNoteEntity>> {
         return dao.getFlowAll()
+    }
+
+    suspend fun getAllNotes(): List<MainNoteEntity> {
+        return dao.getAll()
     }
 
     fun getMainNoteListSortMethodId(): Flow<Int?> {

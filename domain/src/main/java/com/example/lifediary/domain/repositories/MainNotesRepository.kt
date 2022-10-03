@@ -4,7 +4,8 @@ import com.example.lifediary.domain.models.MainNote
 import kotlinx.coroutines.flow.Flow
 
 interface MainNotesRepository {
-	fun getNotes(): Flow<List<MainNote>>
+	fun getFlowAllNotes(): Flow<List<MainNote>>
+	suspend fun getAllNotes(): List<MainNote>
 	fun getSortMethodId(): Flow<Int?>
 	suspend fun getNote(id: Long): MainNote?
 	suspend fun addNote(text: String)

@@ -10,7 +10,7 @@ interface MemorableDateDao {
     fun getFlowAll(): Flow<List<MemorableDateEntity>>
 
     @Query("SELECT * FROM memorable_date ORDER BY month ASC, day ASC, year DESC")
-    fun getAll(): List<MemorableDateEntity>
+    suspend fun getAll(): List<MemorableDateEntity>
 
     @Query("SELECT * FROM memorable_date WHERE day = :dayNumber AND month = :monthNumber ORDER BY month ASC, day ASC, year DESC")
     fun getFlowAll(dayNumber: Int, monthNumber: Int): Flow<List<MemorableDateEntity>>

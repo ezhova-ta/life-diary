@@ -15,7 +15,11 @@ import javax.inject.Singleton
 class ShoppingListRepositoryImpl @Inject constructor(
     private val localDataSource: ShoppingListLocalDataSource
 ) : ShoppingListRepository {
-    override fun getShoppingList(): Flow<List<ShoppingListItem>> {
+    override fun getFlowShoppingList(): Flow<List<ShoppingListItem>> {
+        return localDataSource.getFlowShoppingList().toDomain()
+    }
+
+    override suspend fun getShoppingList(): List<ShoppingListItem> {
         return localDataSource.getShoppingList().toDomain()
     }
 

@@ -8,6 +8,6 @@ class GetToDoListSortMethodIdUseCase @Inject constructor(
 	private val toDoListRepository: ToDoListRepository
 ) {
 	operator fun invoke(): Flow<Int?> {
-		return toDoListRepository.getToDoListSortMethodId()
+		return toDoListRepository.getToDoListSortMethodIdFlow()
 	}
 }

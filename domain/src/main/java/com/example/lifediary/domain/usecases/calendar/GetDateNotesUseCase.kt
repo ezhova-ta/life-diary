@@ -9,6 +9,6 @@ class GetDateNotesUseCase @Inject constructor(
 	private val noteRepository: DateNoteRepository
 ) {
 	operator fun invoke(): Flow<List<DateNote>> {
-		return noteRepository.getAllNotes()
+		return noteRepository.getFlowAllNotes()
 	}
 }
