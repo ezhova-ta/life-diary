@@ -105,7 +105,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun setupSaveDataButton() {
-        binding.saveDataLink.setOnClickListener { onSaveDataClick() }
+        binding.exportDataLink.setOnClickListener { onSaveDataClick() }
     }
 
     private fun onSaveDataClick() {

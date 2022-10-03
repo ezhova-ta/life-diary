@@ -72,7 +72,7 @@
     <string name="clear_notes_in_calendar">Clear calendar notes</string>
     <string name="clear_to_do_lists">Clear to-do lists</string>
     <string name="backup">Backup</string>
-    <string name="save_application_data">Save application data</string>
+    <string name="export_data">Export data</string>
     <string name="all_calendar_notes_will_be_cleared">All notes in the calendar will be cleared</string>
     <string name="all_to_do_lists_will_be_cleared">All to-do lists on the calendar will be cleared</string>
     <string name="text_copied">Text copied</string>
