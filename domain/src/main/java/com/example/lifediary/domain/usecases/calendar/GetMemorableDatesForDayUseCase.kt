@@ -10,6 +10,6 @@ class GetMemorableDatesForDayUseCase @Inject constructor(
 	private val memorableDatesRepository: MemorableDatesRepository
 ) {
 	operator fun invoke(day: Day): Flow<List<MemorableDate>> {
-		return memorableDatesRepository.getDates(day)
+		return memorableDatesRepository.getFlowDates(day)
 	}
 }

@@ -11,6 +11,6 @@ class GetSortedMemorableDatesUseCase @Inject constructor(
 	private val memorableDatesRepository: MemorableDatesRepository
 ) {
 	operator fun invoke(): Flow<List<MemorableDate>> {
-		return memorableDatesRepository.getDates().map { it.sortBasedToday() }
+		return memorableDatesRepository.getFlowDates().map { it.sortBasedToday() }
 	}
 }

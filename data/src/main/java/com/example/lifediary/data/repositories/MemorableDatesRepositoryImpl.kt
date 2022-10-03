@@ -16,12 +16,16 @@ import javax.inject.Singleton
 class MemorableDatesRepositoryImpl @Inject constructor(
     private val localDataSource: MemorableDatesLocalDataSource
 ) : MemorableDatesRepository {
-    override fun getDates(): Flow<List<MemorableDate>> {
+    override fun getFlowDates(): Flow<List<MemorableDate>> {
+        return localDataSource.getFlowDates().toDomain()
+    }
+
+    override suspend fun getDates(): List<MemorableDate> {
         return localDataSource.getDates().toDomain()
     }
 
-    override fun getDates(day: Day): Flow<List<MemorableDate>> {
-        return localDataSource.getDates(day.dayNumber, day.monthNumber).toDomain()
+    override fun getFlowDates(day: Day): Flow<List<MemorableDate>> {
+        return localDataSource.getFlowDates(day.dayNumber, day.monthNumber).toDomain()
     }
 
     private fun Flow<List<MemorableDateEntity>>.toDomain(): Flow<List<MemorableDate>> {

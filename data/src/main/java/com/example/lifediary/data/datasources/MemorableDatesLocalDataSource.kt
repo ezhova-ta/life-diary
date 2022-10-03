@@ -8,11 +8,15 @@ import javax.inject.Singleton
 
 @Singleton
 class MemorableDatesLocalDataSource @Inject constructor(private val dao: MemorableDateDao) {
-    fun getDates(): Flow<List<MemorableDateEntity>> {
+    fun getFlowDates(): Flow<List<MemorableDateEntity>> {
         return dao.getFlowAll()
     }
 
-    fun getDates(dayNumber: Int, monthNumber: Int): Flow<List<MemorableDateEntity>> {
+    fun getDates(): List<MemorableDateEntity> {
+        return dao.getAll()
+    }
+
+    fun getFlowDates(dayNumber: Int, monthNumber: Int): Flow<List<MemorableDateEntity>> {
         return dao.getFlowAll(dayNumber, monthNumber)
     }
 

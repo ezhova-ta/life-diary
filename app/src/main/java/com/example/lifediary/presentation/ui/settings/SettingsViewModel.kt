@@ -1,9 +1,11 @@
 package com.example.lifediary.presentation.ui.settings
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.example.lifediary.R
+import com.example.lifediary.data.BackupFileManager
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.SETTINGS_VIEW_MODEL_SCOPE
@@ -31,6 +33,7 @@ class SettingsViewModel : BaseViewModel() {
     @Inject lateinit var setWomanSectionEnabledUseCase: SetWomanSectionEnabledUseCase
     @Inject lateinit var clearAllDateNotesUseCase: ClearAllDateNotesUseCase
     @Inject lateinit var clearAllToDoListsUseCase: ClearAllToDoListsUseCase
+    @Inject lateinit var backupFileManager: BackupFileManager
 
     val isShoppingListSectionEnabled by lazy { getShoppingListSectionEnabledUseCase().asLiveData() }
     val isPostAddressesSectionEnabled by lazy { getPostAddressesSectionEnabledUseCase().asLiveData() }
@@ -44,6 +47,9 @@ class SettingsViewModel : BaseViewModel() {
     private val _showClearToDoListsConfirmationDialog = MutableLiveData(false)
     val showClearToDoListsConfirmationDialog: LiveData<Boolean>
         get() = _showClearToDoListsConfirmationDialog
+
+    private val _isProgressVisible = MutableLiveData(false)
+    val isBackupProgressVisible get() = _isProgressVisible
 
     init {
         bindScope()
@@ -170,6 +176,22 @@ class SettingsViewModel : BaseViewModel() {
 
     fun onClearToDoListsCancelled() {
         _showClearToDoListsConfirmationDialog.value = false
+    }
+
+    fun onBackupFileCreated(fileUri: Uri) {
+        _isProgressVisible.value = true
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // TODO Inappropriate blocking method call
+                backupFileManager.writeDataToBackupFile(fileUri)
+                showMessage(Text.TextResource(R.string.data_exported_successfully))
+            } catch (e: Exception) {
+                showMessage(Text.TextResource(R.string.error_try_again_later))
+            } finally {
+                _isProgressVisible.postValue(false)
+            }
+        }
     }
 
     override fun onCleared() {

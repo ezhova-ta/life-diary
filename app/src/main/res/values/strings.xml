@@ -73,6 +73,9 @@
     <string name="clear_to_do_lists">Clear to-do lists</string>
     <string name="backup">Backup</string>
     <string name="export_data">Export data</string>
+    <string name="import_data">Import data</string>
+    <string name="data_exported_successfully">Data exported successfully</string>
+    <string name="exporting_data_message">Exporting data…\nPlease don\'t close the application</string>
     <string name="all_calendar_notes_will_be_cleared">All notes in the calendar will be cleared</string>
     <string name="all_to_do_lists_will_be_cleared">All to-do lists on the calendar will be cleared</string>
     <string name="text_copied">Text copied</string>
