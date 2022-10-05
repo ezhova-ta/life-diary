@@ -178,7 +178,8 @@ class SettingsViewModel : BaseViewModel() {
         _showClearToDoListsConfirmationDialog.value = false
     }
 
-    fun onBackupFileCreated(fileUri: Uri) {
+    fun onBackupFileCreated(fileUri: Uri?) {
+        fileUri ?: return
         _isProgressVisible.value = true
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -194,7 +195,8 @@ class SettingsViewModel : BaseViewModel() {
         }
     }
 
-    fun onBackupFilePicked(fileUri: Uri) {
+    fun onBackupFilePicked(fileUri: Uri?) {
+        fileUri ?: return
         _isProgressVisible.value = true
 
         CoroutineScope(Dispatchers.IO).launch {
