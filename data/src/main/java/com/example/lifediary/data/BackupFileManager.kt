@@ -23,7 +23,8 @@ class BackupFileManager @Inject constructor(
 	private val shoppingListRepository: ShoppingListRepository,
 	private val postAddressRepository: PostAddressRepository,
 	private val memorableDatesRepository: MemorableDatesRepository,
-	private val womanSectionRepository: WomanSectionRepository
+	private val womanSectionRepository: WomanSectionRepository,
+	private val weatherRepository: WeatherRepository
 
 ) {
 	@Throws(FileNotFoundException::class, IOException::class)
@@ -40,13 +41,14 @@ class BackupFileManager @Inject constructor(
 
 	private suspend fun getApplicationData(): BackupData {
 		return BackupData(
-			mainNotesRepository.getAllNotes(),
-			dateNoteRepository.getAllNotes(),
-			toDoListRepository.getAllToDoLists(),
-			shoppingListRepository.getShoppingList(),
-			postAddressRepository.getAllAddresses(),
-			memorableDatesRepository.getDates(),
-			womanSectionRepository.getAllMenstruationPeriods()
+			mainNotes = mainNotesRepository.getAllNotes(),
+			dateNotes = dateNoteRepository.getAllNotes(),
+			toDoLists = toDoListRepository.getAllToDoLists(),
+			shoppingList = shoppingListRepository.getShoppingList(),
+			postAddresses = postAddressRepository.getAllAddresses(),
+			memorableDates = memorableDatesRepository.getDates(),
+			menstruationPeriods = womanSectionRepository.getAllMenstruationPeriods(),
+			location = weatherRepository.getLocation()
 		)
 	}
 
@@ -86,6 +88,7 @@ class BackupFileManager @Inject constructor(
 			postAddressRepository.addAllAddresses(postAddresses)
 			memorableDatesRepository.addAllDates(memorableDates)
 			womanSectionRepository.addAllMenstruationPeriods(menstruationPeriods)
+			location?.let { weatherRepository.saveLocation(it) }
 		}
 	}
 }

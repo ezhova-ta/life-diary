@@ -7,5 +7,6 @@ data class BackupData(
 	val shoppingList: List<ShoppingListItem>,
 	val postAddresses: List<PostAddress>,
 	val memorableDates: List<MemorableDate>,
-	val menstruationPeriods: List<MenstruationPeriod>
+	val menstruationPeriods: List<MenstruationPeriod>,
+	val location: Location?
 )
