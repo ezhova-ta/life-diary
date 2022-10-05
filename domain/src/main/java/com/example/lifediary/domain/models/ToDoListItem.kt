@@ -4,7 +4,7 @@ import com.example.lifediary.domain.utils.CalendarBuilder
 import java.util.*
 
 data class ToDoListItem(
-	val id: Long? = null,
+	var id: Long? = null,
 	var text: String,
 	val day: Day,
 	var isDone: Boolean = false,

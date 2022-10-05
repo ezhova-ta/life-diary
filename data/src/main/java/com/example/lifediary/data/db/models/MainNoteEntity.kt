@@ -1,13 +1,13 @@
 package com.example.lifediary.data.db.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.example.lifediary.data.db.converters.CalendarConverter
 import java.util.*
 
-@Entity(tableName = "main_note")
+@Entity(
+    tableName = "main_note",
+    indices = [Index(value = ["text"], unique = true)]
+)
 @TypeConverters(CalendarConverter::class)
 data class MainNoteEntity(
     @PrimaryKey

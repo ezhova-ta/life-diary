@@ -2,17 +2,15 @@ package com.example.lifediary.presentation.ui.calendar.date.note
 
 import androidx.lifecycle.*
 import com.example.lifediary.R
-import com.example.lifediary.domain.models.DateNote
-import com.example.lifediary.domain.models.Day
-import com.example.lifediary.presentation.models.Text
-import com.example.lifediary.di.DiScopes
 import com.example.lifediary.di.DiScopes.ADD_EDIT_DATE_NOTE_VIEW_MODEL_SCOPE
 import com.example.lifediary.di.DiScopes.APP_SCOPE
 import com.example.lifediary.di.DiScopes.MAIN_ACTIVITY_VIEW_MODEL_SCOPE
+import com.example.lifediary.domain.models.DateNote
+import com.example.lifediary.domain.models.Day
 import com.example.lifediary.domain.usecases.calendar.AddDateNoteByTextUseCase
 import com.example.lifediary.domain.usecases.calendar.GetDateNoteLiveDataUseCase
 import com.example.lifediary.domain.usecases.calendar.GetDateNoteUseCase
-import com.example.lifediary.domain.usecases.calendar.UpdateDateNoteUseCase
+import com.example.lifediary.presentation.models.Text
 import com.example.lifediary.presentation.ui.BaseViewModel
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +25,6 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	@Inject lateinit var getDateNoteLiveDataUseCase: GetDateNoteLiveDataUseCase
 	@Inject lateinit var getDateNoteUseCase: GetDateNoteUseCase
 	@Inject lateinit var addDateNoteByTextUseCase: AddDateNoteByTextUseCase
-	@Inject lateinit var updateDateNoteUseCase: UpdateDateNoteUseCase
 
 	val isAddButtonVisible by lazy { getDateNoteLiveDataUseCase(day).map { it == null }.asLiveData() }
 	val noteText = MutableLiveData("")
@@ -75,15 +72,7 @@ class AddEditDateNoteViewModel(private val day: Day) : BaseViewModel() {
 	private fun saveNote(text: String) {
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				val note = existingNote
-
-				if(note == null) {
-					addDateNoteByTextUseCase(text, day)
-				} else {
-					note.text = text
-					updateDateNoteUseCase(note)
-				}
-
+				addDateNoteByTextUseCase(text, day)
 				router.exit()
 			} catch(e: Exception) {
 				showMessage(Text.TextResource(R.string.failed_to_save))

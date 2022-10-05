@@ -60,8 +60,20 @@ class BackupFileManager @Inject constructor(
 		context.contentResolver.openInputStream(fileUri)?.use { inputStream ->
 			InputStreamReader(inputStream).use { inputStreamReader ->
 				val backupData = Gson().fromJson(inputStreamReader, BackupData::class.java)
-				saveApplicationData(backupData)
+				saveApplicationData(backupData.nullifyIdentifiers())
 			}
+		}
+	}
+
+	private fun BackupData.nullifyIdentifiers(): BackupData {
+		return apply {
+			mainNotes.forEach { mainNote -> mainNote.id = null }
+			dateNotes.forEach { dateNote -> dateNote.id = null }
+			toDoLists.forEach { toDoListItem -> toDoListItem.id = null }
+			shoppingList.forEach { shoppingListItem -> shoppingListItem.id = null }
+			postAddresses.forEach { postAddress -> postAddress.id = null }
+			memorableDates.forEach { memorableDate -> memorableDate.id = null }
+			menstruationPeriods.forEach { menstruationPeriod -> menstruationPeriod.id = null }
 		}
 	}
 

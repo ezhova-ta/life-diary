@@ -2,9 +2,13 @@ package com.example.lifediary.data.db.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "note")
+@Entity(
+    tableName = "note",
+    indices = [Index(value = ["day", "month", "year"], unique = true)]
+)
 data class DateNoteEntity(
     @PrimaryKey
     val id: Long?,
