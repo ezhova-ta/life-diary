@@ -2,12 +2,15 @@ package com.example.lifediary.data
 
 import android.content.Context
 import android.net.Uri
+import com.example.lifediary.domain.models.BackupData
 import com.example.lifediary.domain.repositories.*
 import com.google.gson.Gson
+import com.google.gson.JsonIOException
+import com.google.gson.JsonSyntaxException
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.PrintStream
+import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,49 +26,54 @@ class BackupFileManager @Inject constructor(
 	private val womanSectionRepository: WomanSectionRepository
 
 ) {
-	private companion object {
-		const val BACKUP_JSON_KEY_MAIN_NOTES = "mainNotes"
-		const val BACKUP_JSON_KEY_DATE_NOTES = "dateNotes"
-		const val BACKUP_JSON_KEY_TO_DO_LISTS = "toDoLists"
-		const val BACKUP_JSON_KEY_SHOPPING_LIST = "shoppingList"
-		const val BACKUP_JSON_KEY_POST_ADDRESSES = "postAddresses"
-		const val BACKUP_JSON_KEY_MEMORABLE_DATES = "memorableDates"
-		const val BACKUP_JSON_KEY_MENSTRUATION_PERIODS = "menstruationPeriods"
-	}
-
 	@Throws(FileNotFoundException::class, IOException::class)
-	suspend fun writeDataToBackupFile(fileUri: Uri) {
-		val data = getApplicationData()
+	suspend fun exportDataToBackupFile(fileUri: Uri) {
+		val backupData = getApplicationData()
 
 		// TODO Inappropriate blocking method call
 		context.contentResolver.openFileDescriptor(fileUri, "w")?.use {
 			FileOutputStream(it.fileDescriptor).use { fileOutputStream ->
-				fileOutputStream.write(data.toByteArray())
+				fileOutputStream.write(backupData.toByteArray())
 			}
 		}
 	}
 
-	private suspend fun getApplicationData(): Map<String, Any> {
-		val mainNotes = mainNotesRepository.getAllNotes()
-		val dateNotes = dateNoteRepository.getAllNotes()
-		val toDoLists = toDoListRepository.getAllToDoLists()
-		val shoppingList = shoppingListRepository.getShoppingList()
-		val postAddresses = postAddressRepository.getAllAddresses()
-		val memorableDates = memorableDatesRepository.getDates()
-		val menstruationPeriods = womanSectionRepository.getAllMenstruationPeriods()
-
-		return mapOf(
-			Pair(BACKUP_JSON_KEY_MAIN_NOTES, mainNotes),
-			Pair(BACKUP_JSON_KEY_DATE_NOTES, dateNotes),
-			Pair(BACKUP_JSON_KEY_TO_DO_LISTS, toDoLists),
-			Pair(BACKUP_JSON_KEY_SHOPPING_LIST, shoppingList),
-			Pair(BACKUP_JSON_KEY_POST_ADDRESSES, postAddresses),
-			Pair(BACKUP_JSON_KEY_MEMORABLE_DATES, memorableDates),
-			Pair(BACKUP_JSON_KEY_MENSTRUATION_PERIODS, menstruationPeriods)
+	private suspend fun getApplicationData(): BackupData {
+		return BackupData(
+			mainNotesRepository.getAllNotes(),
+			dateNoteRepository.getAllNotes(),
+			toDoListRepository.getAllToDoLists(),
+			shoppingListRepository.getShoppingList(),
+			postAddressRepository.getAllAddresses(),
+			memorableDatesRepository.getDates(),
+			womanSectionRepository.getAllMenstruationPeriods()
 		)
 	}
 
-	private fun Map<String, Any>.toByteArray(): ByteArray {
+	private fun BackupData.toByteArray(): ByteArray {
 		return Gson().toJson(this).toByteArray()
+	}
+
+	@Throws(FileNotFoundException::class, JsonSyntaxException::class, JsonIOException::class)
+	suspend fun importDataFromBackupFile(fileUri: Uri) {
+		// TODO Inappropriate blocking method call
+		context.contentResolver.openInputStream(fileUri)?.use { inputStream ->
+			InputStreamReader(inputStream).use { inputStreamReader ->
+				val backupData = Gson().fromJson(inputStreamReader, BackupData::class.java)
+				saveApplicationData(backupData)
+			}
+		}
+	}
+
+	private suspend fun saveApplicationData(backupData: BackupData) {
+		with(backupData) {
+			mainNotesRepository.addNotes(mainNotes)
+			dateNoteRepository.addAllNotes(dateNotes)
+			toDoListRepository.addToDoList(toDoLists)
+			shoppingListRepository.addShoppingList(shoppingList)
+			postAddressRepository.addAllAddresses(postAddresses)
+			memorableDatesRepository.addAllDates(memorableDates)
+			womanSectionRepository.addAllMenstruationPeriods(menstruationPeriods)
+		}
 	}
 }

@@ -43,6 +43,14 @@ class MainNotesRepositoryImpl @Inject constructor(
         localDataSource.addNote(MainNote(text = text).toEntity())
     }
 
+    override suspend fun addNotes(items: List<MainNote>) {
+        localDataSource.addNotes(items.toEntity())
+    }
+
+    private fun List<MainNote>.toEntity(): List<MainNoteEntity> {
+        return map { domain -> domain.toEntity() }
+    }
+
     override suspend fun updateNote(item: MainNote) {
         localDataSource.updateNote(item.toEntity())
     }

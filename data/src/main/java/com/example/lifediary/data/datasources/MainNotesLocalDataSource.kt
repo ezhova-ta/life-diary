@@ -32,6 +32,10 @@ class MainNotesLocalDataSource @Inject constructor(
         dao.insert(item)
     }
 
+    suspend fun addNotes(items: List<MainNoteEntity>) {
+        dao.insertAll(items)
+    }
+
     suspend fun updateNote(item: MainNoteEntity) {
         dao.update(item)
     }

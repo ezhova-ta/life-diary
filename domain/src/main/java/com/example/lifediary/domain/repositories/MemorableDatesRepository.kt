@@ -10,6 +10,7 @@ interface MemorableDatesRepository {
 	fun getFlowDates(day: Day): Flow<List<MemorableDate>>
 	suspend fun getDate(id: Long): MemorableDate?
 	suspend fun addDate(item: MemorableDate)
+	suspend fun addAllDates(items: List<MemorableDate>)
 	suspend fun updateDate(item: MemorableDate)
 	suspend fun clearDates()
 	suspend fun deleteDate(id: Long)

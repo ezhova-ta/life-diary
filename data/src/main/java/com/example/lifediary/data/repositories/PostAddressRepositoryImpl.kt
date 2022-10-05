@@ -35,6 +35,14 @@ class PostAddressRepositoryImpl @Inject constructor(
         localDataSource.addAddress(address.toEntity())
     }
 
+    override suspend fun addAllAddresses(addresses: List<PostAddress>) {
+        localDataSource.addAllAddresses(addresses.toEntity())
+    }
+
+    private fun List<PostAddress>.toEntity(): List<PostAddressEntity> {
+        return map { domain -> domain.toEntity() }
+    }
+
     override suspend fun updateAddress(address: PostAddress) {
         localDataSource.updateAddress(address.toEntity())
     }

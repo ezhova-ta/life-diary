@@ -20,6 +20,10 @@ class PostAddressLocalDataSource @Inject constructor(private val dao: PostAddres
         dao.insert(address)
     }
 
+    suspend fun addAllAddresses(addresses: List<PostAddressEntity>) {
+        dao.insertAll(addresses)
+    }
+
     suspend fun updateAddress(address: PostAddressEntity) {
         dao.update(address)
     }

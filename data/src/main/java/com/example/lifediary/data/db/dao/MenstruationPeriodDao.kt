@@ -18,6 +18,9 @@ interface MenstruationPeriodDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: MenstruationPeriodEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(items: List<MenstruationPeriodEntity>)
+
     @Query("DELETE FROM menstruation_dates WHERE id = :id")
     suspend fun delete(id: Long)
 

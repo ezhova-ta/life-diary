@@ -39,6 +39,14 @@ class ShoppingListRepositoryImpl @Inject constructor(
         localDataSource.addShoppingListItem(item.toEntity())
     }
 
+    override suspend fun addShoppingList(list: List<ShoppingListItem>) {
+        localDataSource.addShoppingList(list.toEntity())
+    }
+
+    private fun List<ShoppingListItem>.toEntity(): List<ShoppingListItemEntity> {
+        return map { domain -> domain.toEntity() }
+    }
+
     override suspend fun clearShoppingList() {
         localDataSource.clearShoppingList()
     }

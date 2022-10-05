@@ -10,6 +10,7 @@ interface DateNoteRepository {
 	fun getFlowAllNotes(): Flow<List<DateNote>>
 	suspend fun getAllNotes(): List<DateNote>
 	suspend fun addNote(text: String, day: Day)
+	suspend fun addAllNotes(notes: List<DateNote>)
 	suspend fun updateNote(note: DateNote)
 	suspend fun deleteNote(id: Long)
 	suspend fun clearAllNotes()

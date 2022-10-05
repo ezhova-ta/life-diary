@@ -21,6 +21,9 @@ interface DateNoteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note: DateNoteEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(notes: List<DateNoteEntity>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(note: DateNoteEntity)
 

@@ -18,6 +18,9 @@ interface ShoppingListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: ShoppingListItemEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(items: List<ShoppingListItemEntity>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: ShoppingListItemEntity)
 

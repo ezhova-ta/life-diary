@@ -12,6 +12,7 @@ interface ToDoListRepository {
 	fun getToDoListSortMethodIdFlow(): Flow<Int?>
 	suspend fun getToDoListItem(id: Long) : ToDoListItem?
 	suspend fun addToDoListItem(item: ToDoListItem)
+	suspend fun addToDoList(list: List<ToDoListItem>)
 	suspend fun clearToDoList(day: Day)
 	suspend fun inverseListItemIsDone(id: Long)
 	suspend fun enableListItemNotification(id: Long, time: Calendar)

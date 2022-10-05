@@ -3,6 +3,8 @@ package com.example.lifediary.data.datasources
 import com.example.lifediary.data.CommonDataStoreManager
 import com.example.lifediary.data.db.dao.ToDoListDao
 import com.example.lifediary.data.db.models.ToDoListItemEntity
+import com.example.lifediary.data.repositories.mappers.db.ToDoListItemEntityMapper.toEntity
+import com.example.lifediary.domain.models.ToDoListItem
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 import javax.inject.Inject
@@ -35,6 +37,10 @@ class ToDoListLocalDataSource @Inject constructor(
 
 	suspend fun addToDoListItem(item: ToDoListItemEntity) {
 		dao.insert(item)
+	}
+
+	suspend fun addToDoList(list: List<ToDoListItemEntity>) {
+		dao.insertAll(list)
 	}
 
 	suspend fun clearToDoList(dayNumber: Int, monthNumber: Int, year: Int) {

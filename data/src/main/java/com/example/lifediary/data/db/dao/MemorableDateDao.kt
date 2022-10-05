@@ -21,6 +21,9 @@ interface MemorableDateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: MemorableDateEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(items: List<MemorableDateEntity>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: MemorableDateEntity)
 

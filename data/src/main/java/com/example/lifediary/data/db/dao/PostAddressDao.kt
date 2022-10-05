@@ -15,6 +15,9 @@ interface PostAddressDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(address: PostAddressEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(addresses: List<PostAddressEntity>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(address: PostAddressEntity)
 

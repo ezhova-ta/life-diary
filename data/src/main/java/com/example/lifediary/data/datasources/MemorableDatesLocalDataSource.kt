@@ -28,6 +28,10 @@ class MemorableDatesLocalDataSource @Inject constructor(private val dao: Memorab
         dao.insert(item)
     }
 
+    suspend fun addAllDates(items: List<MemorableDateEntity>) {
+        dao.insertAll(items)
+    }
+
     suspend fun updateDate(item: MemorableDateEntity) {
         dao.update(item)
     }

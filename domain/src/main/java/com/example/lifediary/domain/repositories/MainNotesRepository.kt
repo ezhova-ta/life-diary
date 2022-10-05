@@ -9,6 +9,7 @@ interface MainNotesRepository {
 	fun getSortMethodId(): Flow<Int?>
 	suspend fun getNote(id: Long): MainNote?
 	suspend fun addNote(text: String)
+	suspend fun addNotes(items: List<MainNote>)
 	suspend fun updateNote(item: MainNote)
 	suspend fun clearNotes()
 	suspend fun deleteNote(id: Long)

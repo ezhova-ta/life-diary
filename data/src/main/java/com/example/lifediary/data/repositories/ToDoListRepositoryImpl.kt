@@ -49,6 +49,14 @@ class ToDoListRepositoryImpl @Inject constructor(
 		localDataSource.addToDoListItem(item.toEntity())
 	}
 
+	override suspend fun addToDoList(list: List<ToDoListItem>) {
+		localDataSource.addToDoList(list.toEntity())
+	}
+
+	private fun List<ToDoListItem>.toEntity(): List<ToDoListItemEntity> {
+		return map { domain -> domain.toEntity() }
+	}
+
 	override suspend fun clearToDoList(day: Day) {
 		localDataSource.disableNotificationsFor(day.dayNumber, day.monthNumber, day.year)
 		localDataSource.clearToDoList(day.dayNumber, day.monthNumber, day.year)

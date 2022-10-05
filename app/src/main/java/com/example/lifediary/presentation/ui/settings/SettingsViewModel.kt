@@ -49,7 +49,7 @@ class SettingsViewModel : BaseViewModel() {
         get() = _showClearToDoListsConfirmationDialog
 
     private val _isProgressVisible = MutableLiveData(false)
-    val isBackupProgressVisible get() = _isProgressVisible
+    val isProgressVisible get() = _isProgressVisible
 
     init {
         bindScope()
@@ -184,9 +184,25 @@ class SettingsViewModel : BaseViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // TODO Inappropriate blocking method call
-                backupFileManager.writeDataToBackupFile(fileUri)
+                backupFileManager.exportDataToBackupFile(fileUri)
                 showMessage(Text.TextResource(R.string.data_exported_successfully))
-            } catch (e: Exception) {
+            } catch(e: Exception) {
+                showMessage(Text.TextResource(R.string.error_try_again_later))
+            } finally {
+                _isProgressVisible.postValue(false)
+            }
+        }
+    }
+
+    fun onBackupFilePicked(fileUri: Uri) {
+        _isProgressVisible.value = true
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // TODO Inappropriate blocking method call
+                backupFileManager.importDataFromBackupFile(fileUri)
+                showMessage(Text.TextResource(R.string.data_imported_successfully))
+            } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             } finally {
                 _isProgressVisible.postValue(false)

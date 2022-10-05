@@ -43,6 +43,14 @@ class WomanSectionRepositoryImpl @Inject constructor(
         localDataSource.addMenstruationPeriod(period.toEntity())
     }
 
+    override suspend fun addAllMenstruationPeriods(periods: List<MenstruationPeriod>) {
+        localDataSource.addAllMenstruationPeriods(periods.toEntity())
+    }
+
+    private fun List<MenstruationPeriod>.toEntity(): List<MenstruationPeriodEntity> {
+        return map { domain -> domain.toEntity() }
+    }
+
     override suspend fun deleteMenstruationPeriod(id: Long) {
         localDataSource.deleteMenstruationPeriod(id)
     }

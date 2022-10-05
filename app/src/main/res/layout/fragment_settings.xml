@@ -173,7 +173,7 @@
             android:text="@string/import_data" />
 
         <ProgressBar
-            android:id="@+id/backupProgressView"
+            android:id="@+id/progressView"
             style="@style/ProgressBar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -181,7 +181,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_gravity="center_horizontal"
             android:indeterminateTint="@color/app_green"
-            app:booleanVisibility="@{viewModel.isBackupProgressVisible()}"/>
+            app:booleanVisibility="@{viewModel.isProgressVisible()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

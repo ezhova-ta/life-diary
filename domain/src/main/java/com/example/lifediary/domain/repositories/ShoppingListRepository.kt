@@ -8,6 +8,7 @@ interface ShoppingListRepository {
 	suspend fun getShoppingList(): List<ShoppingListItem>
 	fun getShoppingListSortMethodId(): Flow<Int?>
 	suspend fun addShoppingListItem(item: ShoppingListItem)
+	suspend fun addShoppingList(list: List<ShoppingListItem>)
 	suspend fun clearShoppingList()
 	suspend fun inverseShoppingListItemPriority(id: Long)
 	suspend fun inverseShoppingListItemCrossedOut(id: Long)

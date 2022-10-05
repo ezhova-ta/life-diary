@@ -72,6 +72,7 @@
     <string name="export_data">Экспортировать данные</string>
     <string name="import_data">Импортировать данные</string>
     <string name="data_exported_successfully">Данные успешно экспортированы</string>
+    <string name="data_imported_successfully">Данные успешно импортированы</string>
     <string name="exporting_data_message">Экспорт данных…\nПожалуйста, не закрывайте приложение</string>
     <string name="all_calendar_notes_will_be_cleared">Все заметки в календаре будут очищены</string>
     <string name="all_to_do_lists_will_be_cleared">Все списки дел в календаре будут очищены</string>

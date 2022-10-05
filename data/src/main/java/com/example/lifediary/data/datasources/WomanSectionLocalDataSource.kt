@@ -32,6 +32,10 @@ class WomanSectionLocalDataSource @Inject constructor(
         dao.insert(period)
     }
 
+    suspend fun addAllMenstruationPeriods(periods: List<MenstruationPeriodEntity>) {
+        dao.insertAll(periods)
+    }
+
     suspend fun deleteMenstruationPeriod(id: Long) {
         dao.delete(id)
     }

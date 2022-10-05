@@ -28,6 +28,10 @@ class DateNoteLocalDataSource @Inject constructor(private val dao: DateNoteDao) 
         dao.insert(note)
     }
 
+    suspend fun addAllNotes(notes: List<DateNoteEntity>) {
+        dao.insertAll(notes)
+    }
+
     suspend fun updateNote(note: DateNoteEntity) {
         dao.update(note)
     }

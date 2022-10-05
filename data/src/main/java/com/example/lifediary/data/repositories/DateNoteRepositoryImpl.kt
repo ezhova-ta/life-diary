@@ -46,6 +46,14 @@ class DateNoteRepositoryImpl @Inject constructor(
         localDataSource.addNote(DateNote(text = text, day = day).toEntity())
     }
 
+    override suspend fun addAllNotes(notes: List<DateNote>) {
+        localDataSource.addAllNotes(notes.toEntity())
+    }
+
+    private fun List<DateNote>.toEntity(): List<DateNoteEntity> {
+        return map { domain -> domain.toEntity() }
+    }
+
     override suspend fun updateNote(note: DateNote) {
         localDataSource.updateNote(note.toEntity())
     }

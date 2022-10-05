@@ -9,6 +9,7 @@ interface WomanSectionRepository {
 	fun getDurationOfMenstrualCycleFlow(): Flow<Int>
 	fun getDurationOfMenstruationPeriodFlow(): Flow<Int>
 	suspend fun addMenstruationPeriod(period: MenstruationPeriod)
+	suspend fun addAllMenstruationPeriods(periods: List<MenstruationPeriod>)
 	suspend fun deleteMenstruationPeriod(id: Long)
 	suspend fun clearMenstruationPeriodList()
 	suspend fun setDurationOfMenstrualCycle(value: Int)

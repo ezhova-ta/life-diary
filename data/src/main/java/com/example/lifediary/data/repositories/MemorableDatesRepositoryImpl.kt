@@ -44,6 +44,14 @@ class MemorableDatesRepositoryImpl @Inject constructor(
         localDataSource.addDate(item.toEntity())
     }
 
+    override suspend fun addAllDates(items: List<MemorableDate>) {
+        localDataSource.addAllDates(items.toEntity())
+    }
+
+    private fun List<MemorableDate>.toEntity(): List<MemorableDateEntity> {
+        return map { domain -> domain.toEntity() }
+    }
+
     override suspend fun updateDate(item: MemorableDate) {
         localDataSource.updateDate(item.toEntity())
     }

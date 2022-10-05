@@ -18,6 +18,9 @@ interface MainNotesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: MainNoteEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(items: List<MainNoteEntity>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(item: MainNoteEntity)
 

@@ -1,6 +1,5 @@
 package com.example.lifediary.presentation.ui.settings
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,9 +20,15 @@ class SettingsFragment : BaseFragment() {
         ActivityResultContracts.CreateDocument()
     ) { fileUri -> viewModel.onBackupFileCreated(fileUri) }
 
+    private val requestReadBackupFile = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { fileUri -> viewModel.onBackupFilePicked(fileUri) }
+
     companion object {
         private const val BACKUP_FILE_NAME = "life_diary_backup"
         private const val BACKUP_FILE_EXTENSION = "json"
+        // TODO Why is application/json type not working?
+        private const val BACKUP_FILE_MIME_TYPE = "*/*"
 
         fun getInstance(): Fragment {
             return SettingsFragment()
@@ -109,7 +114,8 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun onImportDataClick() {
-        TODO("Do not implemented yet")
+        val backupFileMimeTypes = arrayOf(BACKUP_FILE_MIME_TYPE)
+        requestReadBackupFile.launch(backupFileMimeTypes)
     }
 
     override fun onDestroyView() {

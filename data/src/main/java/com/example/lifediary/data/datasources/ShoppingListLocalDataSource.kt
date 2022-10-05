@@ -28,6 +28,10 @@ class ShoppingListLocalDataSource @Inject constructor(
         dao.insert(item)
     }
 
+    suspend fun addShoppingList(list: List<ShoppingListItemEntity>) {
+        dao.insertAll(list)
+    }
+
     suspend fun clearShoppingList() {
         dao.deleteAll()
     }
