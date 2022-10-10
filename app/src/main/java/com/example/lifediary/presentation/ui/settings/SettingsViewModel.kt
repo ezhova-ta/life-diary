@@ -181,12 +181,15 @@ class SettingsViewModel : BaseViewModel() {
     fun onBackupFileCreated(fileUri: Uri?) {
         fileUri ?: return
         _isProgressVisible.value = true
+        val mutex = Mutex()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // TODO Inappropriate blocking method call
-                backupFileManager.exportDataToBackupFile(fileUri)
-                showMessage(Text.TextResource(R.string.data_exported_successfully))
+                mutex.withLock {
+                    backupFileManager.exportDataToBackupFile(fileUri)
+                    showMessage(Text.TextResource(R.string.data_exported_successfully))
+                }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             } finally {
@@ -198,12 +201,15 @@ class SettingsViewModel : BaseViewModel() {
     fun onBackupFilePicked(fileUri: Uri?) {
         fileUri ?: return
         _isProgressVisible.value = true
+        val mutex = Mutex()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // TODO Inappropriate blocking method call
-                backupFileManager.importDataFromBackupFile(fileUri)
-                showMessage(Text.TextResource(R.string.data_imported_successfully))
+                mutex.withLock {
+                    backupFileManager.importDataFromBackupFile(fileUri)
+                    showMessage(Text.TextResource(R.string.data_imported_successfully))
+                }
             } catch(e: Exception) {
                 showMessage(Text.TextResource(R.string.error_try_again_later))
             } finally {
