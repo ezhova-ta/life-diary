@@ -26,13 +26,13 @@ android {
         debug {
             debuggable true
             buildConfigField "String", "WEATHER_API_BASE_URL", "\"http://api.weatherapi.com/v1/\""
-            buildConfigField "String", "WEATHER_API_KEY", "\"55f0f60bae7a4fc6a70153802221210\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"206dfda88fc943b2b4e52218222610\""
         }
 
         demo {
             debuggable false
             buildConfigField "String", "WEATHER_API_BASE_URL", "\"http://api.weatherapi.com/v1/\""
-            buildConfigField "String", "WEATHER_API_KEY", "\"55f0f60bae7a4fc6a70153802221210\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"206dfda88fc943b2b4e52218222610\""
         }
 
         release {
@@ -40,7 +40,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "WEATHER_API_BASE_URL", "\"http://api.weatherapi.com/v1/\""
-            buildConfigField "String", "WEATHER_API_KEY", "\"55f0f60bae7a4fc6a70153802221210\""
+            buildConfigField "String", "WEATHER_API_KEY", "\"206dfda88fc943b2b4e52218222610\""
         }
     }
     compileOptions {
